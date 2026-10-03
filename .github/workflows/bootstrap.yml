@@ -1,0 +1,69 @@
+name: bootstrap
+
+# Manual. Generates the android/ and ios/ folders with the official Flutter template,
+# resolves pubspec.lock, and commits both back to main. Safe to run again:
+# existing platform folders are never overwritten.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  LOG: ${{ github.workspace }}/ci.log
+
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Generate platform folders
+        run: |
+          flutter --version 2>&1 | tee -a "$LOG"
+          if [ -d app/android ] || [ -d app/ios ]; then
+            echo "platform folders already exist; skipping flutter create" | tee -a "$LOG"
+          else
+            flutter create --org com.zdmgold --project-name roehens --platforms=ios,android "$RUNNER_TEMP/scaffold" 2>&1 | tee -a "$LOG"
+            cp -a "$RUNNER_TEMP/scaffold/android" app/android
+            cp -a "$RUNNER_TEMP/scaffold/ios" app/ios
+            cp -a "$RUNNER_TEMP/scaffold/.metadata" app/.metadata
+          fi
+
+      - name: Resolve dependencies
+        working-directory: app
+        run: flutter pub get 2>&1 | tee -a "$LOG"
+
+      - name: Analyze
+        working-directory: app
+        run: flutter analyze 2>&1 | tee -a "$LOG"
+
+      - name: Commit and push
+        run: |
+          git config user.name "helpfavourv1"
+          git config user.email "314438714+helpfavourv1@users.noreply.github.com"
+          git add app
+          if git diff --cached --quiet; then
+            echo "nothing to commit" | tee -a "$LOG"
+          else
+            git commit -m "P0: platform scaffold and dependency lock (bootstrap workflow)" 2>&1 | tee -a "$LOG"
+            git push origin HEAD:main 2>&1 | tee -a "$LOG"
+          fi
+
+      - name: Publish log
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: sh tool/ci_publish_log.sh "$LOG" bootstrap

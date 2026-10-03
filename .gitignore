@@ -1,0 +1,44 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+app/build/
+coverage/
+*.iml
+.idea/
+.vscode/
+*.log
+*.swp
+.DS_Store
+
+# Android
+app/android/.gradle/
+app/android/local.properties
+app/android/key.properties
+app/android/**/GeneratedPluginRegistrant.*
+*.jks
+*.keystore
+*.p12
+captures/
+symbols/
+
+# iOS
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Generated.xcconfig
+app/ios/Flutter/flutter_export_environment.sh
+app/ios/Flutter/ephemeral/
+app/ios/**/xcuserdata/
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Secrets and local material (never committed)
+*.b64
+*-keystore-base64.txt
+.env
+.env.*

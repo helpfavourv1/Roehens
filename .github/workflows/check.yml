@@ -1,0 +1,73 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+env:
+  LOG: ${{ github.workspace }}/ci.log
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version 2>&1 | tee -a "$LOG"
+
+      - name: Resolve dependencies
+        working-directory: app
+        run: |
+          echo "== pub get" | tee -a "$LOG"
+          if [ -f pubspec.lock ]; then
+            flutter pub get --enforce-lockfile 2>&1 | tee -a "$LOG"
+          else
+            flutter pub get 2>&1 | tee -a "$LOG"
+          fi
+
+      - name: Analyze
+        working-directory: app
+        run: |
+          echo "== analyze" | tee -a "$LOG"
+          flutter analyze 2>&1 | tee -a "$LOG"
+
+      - name: Guard
+        run: |
+          echo "== guard" | tee -a "$LOG"
+          sh tool/guard.sh 2>&1 | tee -a "$LOG"
+
+      - name: Test
+        working-directory: app
+        run: |
+          echo "== test" | tee -a "$LOG"
+          if [ -d test ]; then
+            flutter test 2>&1 | tee -a "$LOG"
+          else
+            echo "no tests in this batch" | tee -a "$LOG"
+          fi
+
+      - name: Publish log
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: sh tool/ci_publish_log.sh "$LOG" check
