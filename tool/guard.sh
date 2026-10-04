@@ -64,7 +64,7 @@ dart_grep '(EdgeInsets\.[A-Za-z]+|SizedBox|BorderRadius\.[A-Za-z]+)\(([^)]*[^A-Z
 dart_grep 'EdgeInsets\.only\([^)]*(left|right)[[:space:]]*:' $LIB | check "EdgeInsets.only(left/right) (use EdgeInsetsDirectional)"
 dart_grep 'Alignment\.(centerLeft|centerRight)' $LIB | check "Alignment.centerLeft/centerRight (use AlignmentDirectional)"
 dart_grep 'TextDirection\.rtl' $LIB | check "TextDirection.rtl hard-coded"
-dart_grep 'TextDirection\.ltr' $LIB | grep -vE '/(ltr_text|app_text_field|help_code_block)\.dart:' | check "TextDirection.ltr outside the IP/URL/Mono widgets"
+dart_grep 'TextDirection\.ltr' $LIB | grep -vE '/(ltr_text|app_text_field|help_code_block|app_icon)\.dart:' | check "TextDirection.ltr outside the IP/URL/Mono widgets"
 
 # state management
 dart_grep "(^|${ID})setState\\(" $LIB | check "setState( is not allowed (ValueNotifier providers only)"

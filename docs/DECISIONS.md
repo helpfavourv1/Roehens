@@ -40,3 +40,11 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 4. **Formatters.** `date_formatter.dart` returns an `AgeSpan` (number plus unit) so the widget layer can localize it with plural rules; `intl` is added with the localization batch (P6B).
 5. **Token freeze.** Tokens are frozen at the end of this batch (C8.2). Later changes need an entry here.
 6. **Lockfile refresh.** The `check` workflow now refreshes `pubspec.lock` when `pubspec.yaml` changed and commits it back, because dependency resolution cannot run in the agent's environment. This replaces `--enforce-lockfile`.
+
+## Icons (batch P1B)
+
+1. **Phosphor only, no Tabler.** `phosphor_flutter` 2.1.0 (MIT) has a suitable glyph for every R1 icon, so Tabler is not a dependency (it is a gap-filler by specification). A later release that finds a gap adds it with a reason in `ICON_MAP.md`.
+2. **Own icon widget.** The package's `PhosphorIcon` widget imports the Material library, so `AppIcon` is built on the core `Icon` widget and draws the duotone secondary layer itself.
+3. **Mirroring.** Every Phosphor glyph mirrors in right-to-left layouts by default. `AppIcon` forces left-to-right for all icons except `chevronLeft`, `chevronRight`, `back` and `forward`, so PTZ arrows, zoom and every other icon keep their orientation. `app_icon.dart` is therefore on the guard's list of files allowed to use `TextDirection.ltr`.
+4. **R1 names only.** The monitoring and recording icons (bell, motion, mask, timeline, gallery, record, stop, storage, schedule, clip) are added by the batch of the release that needs them.
+5. **Packages and licenses.** `phosphor_flutter` 2.1.0, MIT. Its notice reaches the licenses screen through Flutter's `LicenseRegistry` (the package ships a LICENSE file).
