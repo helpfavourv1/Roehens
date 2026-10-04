@@ -16,7 +16,7 @@ Living document. The identifier is immutable after the first release. No passwor
 | GitHub secrets (signing) | `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD` | set in GitHub (2026-10-03) |
 | GitHub secrets (spike streams) | `SPIKE_RTSP_URL`, `SPIKE_MJPEG_URL`. Values held by the owner. RTSP: H.265/HEVC Main, 2592x1944, 25 fps, PCM mu-law audio. MJPEG: `multipart/x-mixed-replace` | set in GitHub (2026-10-04) |
 | Cheapest Android test device | Model code `25028RN03A`, Android 15, about 3.7 GiB RAM | done |
-| iPhone/iPad test device | none stated yet | open |
+| iPhone/iPad test device | none available (owner, 2026-10-04). iOS is verified by compile and TestFlight build only until a device is borrowed | done |
 | AdMob | Google's published sample (test) App IDs and banner units until real units exist. Android sample IDs confirmed against Google's documentation; iOS sample IDs to be confirmed against Google's live page in batch P2F | in progress |
 | IAP product ID (ad-free) | `com.zdmgold.roehens.adfree` (non-consumable) | not yet created in a store |
 | Apple Multicast Networking entitlement | Request to be filed by the owner; build flag `IOS_DISCOVERY_MODE=subnet_sweep_only` until granted | open |
