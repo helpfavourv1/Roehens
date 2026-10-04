@@ -178,6 +178,13 @@ class _SpikeHomeState extends State<_SpikeHome> {
   void initState() {
     super.initState();
     _probes = <_Probe>[
+      // Not a camera: proves the engine itself plays, decodes and records even
+      // when no camera address is reachable.
+      _Probe(
+        label: 'engine-check-https',
+        url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        isRtsp: false,
+      ),
       _Probe(label: 'rtsp-yours', url: _rtspUrl, isRtsp: true),
       _Probe(label: 'mjpeg-yours', url: _mjpegUrl, isRtsp: false),
       _Probe(label: 'rtsp-public', url: _publicRtspUrl, isRtsp: true),
