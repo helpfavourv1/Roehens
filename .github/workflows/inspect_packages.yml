@@ -1,0 +1,53 @@
+name: inspect_packages
+
+# Manual. Resolves dependencies and publishes the layout and glyph names of the
+# icon packages to the ci-logs branch, so glyph identifiers are taken from the
+# installed source and never guessed (specification C4).
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  LOG: ${{ github.workspace }}/ci.log
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Resolve
+        working-directory: app
+        run: flutter pub get 2>&1 | tail -5 | tee -a "$LOG"
+
+      - name: Inspect phosphor_flutter
+        run: |
+          DIR=$(python3 -c "import json;d=json.load(open('app/.dart_tool/package_config.json'));print([p['rootUri'] for p in d['packages'] if p['name']=='phosphor_flutter'][0].replace('file://',''))")
+          echo "== dir $DIR" | tee -a "$LOG"
+          { echo "== version"; grep -E '^(version|name|license)' "$DIR/pubspec.yaml"; ls "$DIR"; echo "== pubspec fonts"; sed -n '/^flutter:/,$p' "$DIR/pubspec.yaml"; echo "== lib"; ls "$DIR/lib" "$DIR/lib/src"; echo "== main export"; cat "$DIR/lib/phosphor_flutter.dart"; echo "== class heads"; grep -hE '^(class|abstract class|final class)|fontFamily|fontPackage' "$DIR"/lib/src/*.dart | sort | uniq -c | head -40; echo "== sample lines"; grep -hE 'static const' "$DIR/lib/src/phosphor_icons_bold.dart" | head -5; } 2>&1 | tee -a "$LOG"
+          echo "== BOLD NAMES" | tee -a "$LOG"
+          grep -hoE 'IconData [a-zA-Z0-9_]+' "$DIR/lib/src/phosphor_icons_bold.dart" | awk '{print $2}' | tr '\n' ' ' | fold -w 200 | tee -a "$LOG"
+          echo | tee -a "$LOG"
+          echo "== FILL count / DUOTONE sample" | tee -a "$LOG"
+          grep -c 'IconData' "$DIR/lib/src/phosphor_icons_fill.dart" 2>&1 | tee -a "$LOG"
+          grep -hE 'IconData|PhosphorDuotoneIconData' "$DIR/lib/src/phosphor_icons_duotone.dart" 2>&1 | head -3 | tee -a "$LOG"
+
+      - name: Publish log
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: sh tool/ci_publish_log.sh "$LOG" inspect_packages
