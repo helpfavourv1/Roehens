@@ -22,7 +22,7 @@ Every choice that deviates from, or fills in, the specification is recorded here
 6. **Repository visibility.** Public, as the spec requires. Actions minutes are unlimited on public repositories.
 7. **AdMob.** Google's published sample App IDs and sample banner units are used wherever an ID is needed until real units exist, so the app can never crash at launch on a missing or malformed App ID. Real IDs replace them before the first store release.
 8. **Lint set.** `flutter_lints` plus five extra rules, with strict-casts, strict-inference and strict-raw-types.
-9. **Localization config.** `app/l10n.yaml` exists from P0; `generate: true` is switched on in `pubspec.yaml` in batch P6B together with the first ARB files.
+9. **Localization config.** `app/l10n.yaml` is added in batch P6B together with `generate: true` and the first ARB files. It was removed from P0 because Flutter's build runs the localization step whenever the file exists and fails while `generate` is off (found by the first real Android build).
 
 ## Player engine
 

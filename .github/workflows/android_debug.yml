@@ -34,6 +34,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Probe the spike streams
+        id: probe
         env:
           SPIKE_RTSP_URL: ${{ secrets.SPIKE_RTSP_URL }}
           SPIKE_MJPEG_URL: ${{ secrets.SPIKE_MJPEG_URL }}
@@ -65,7 +66,9 @@ jobs:
             -t "${{ inputs.entrypoint }}" \
             --target-platform "${{ inputs.abi }}" \
             --dart-define=SPIKE_RTSP_URL="$SPIKE_RTSP_URL" \
-            --dart-define=SPIKE_MJPEG_URL="$SPIKE_MJPEG_URL" 2>&1 | tail -60 | tee -a "$LOG"
+            --dart-define=SPIKE_MJPEG_URL="$SPIKE_MJPEG_URL" \
+            --dart-define=SPIKE_PUBLIC_RTSP_URL="${{ steps.probe.outputs.public_rtsp }}" \
+            --dart-define=SPIKE_PUBLIC_MJPEG_URL="${{ steps.probe.outputs.public_mjpeg }}" 2>&1 | tail -60 | tee -a "$LOG"
           ls -la build/app/outputs/flutter-apk/ | tee -a "$LOG"
 
       - name: Upload APK

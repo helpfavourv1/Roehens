@@ -20,6 +20,8 @@ import 'package:roehens/ui/tokens/spacing_tokens.dart';
 
 const String _rtspUrl = String.fromEnvironment('SPIKE_RTSP_URL');
 const String _mjpegUrl = String.fromEnvironment('SPIKE_MJPEG_URL');
+const String _publicRtspUrl = String.fromEnvironment('SPIKE_PUBLIC_RTSP_URL');
+const String _publicMjpegUrl = String.fromEnvironment('SPIKE_PUBLIC_MJPEG_URL');
 const MethodChannel _pipChannel = MethodChannel('roehens/pip');
 
 void main() {
@@ -169,23 +171,28 @@ class _SpikeHome extends StatefulWidget {
 }
 
 class _SpikeHomeState extends State<_SpikeHome> {
-  late final _Probe _rtsp;
-  late final _Probe _mjpeg;
+  late final List<_Probe> _probes;
   final ValueNotifier<String> _pipResult = ValueNotifier<String>('PiP: not tried');
 
   @override
   void initState() {
     super.initState();
-    _rtsp = _Probe(label: 'rtsp', url: _rtspUrl, isRtsp: true);
-    _mjpeg = _Probe(label: 'mjpeg', url: _mjpegUrl, isRtsp: false);
-    unawaited(_rtsp.run());
-    unawaited(_mjpeg.run());
+    _probes = <_Probe>[
+      _Probe(label: 'rtsp-yours', url: _rtspUrl, isRtsp: true),
+      _Probe(label: 'mjpeg-yours', url: _mjpegUrl, isRtsp: false),
+      _Probe(label: 'rtsp-public', url: _publicRtspUrl, isRtsp: true),
+      _Probe(label: 'mjpeg-public', url: _publicMjpegUrl, isRtsp: false),
+    ];
+    for (final _Probe probe in _probes) {
+      unawaited(probe.run());
+    }
   }
 
   @override
   void dispose() {
-    unawaited(_rtsp.player.dispose());
-    unawaited(_mjpeg.player.dispose());
+    for (final _Probe probe in _probes) {
+      unawaited(probe.player.dispose());
+    }
     _pipResult.dispose();
     super.dispose();
   }
@@ -215,8 +222,19 @@ class _SpikeHomeState extends State<_SpikeHome> {
                 'Roehens player spike',
                 style: TextStyle(color: colors.textPrimary, fontWeight: FontWeight.w600),
               ),
-              Expanded(child: _ProbeView(probe: _rtsp, colors: colors)),
-              Expanded(child: _ProbeView(probe: _mjpeg, colors: colors)),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      for (final _Probe probe in _probes)
+                        SizedBox(
+                          height: 190,
+                          child: _ProbeView(probe: probe, colors: colors),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
               GestureDetector(
                 onTap: _tryPip,
                 child: ColoredBox(
