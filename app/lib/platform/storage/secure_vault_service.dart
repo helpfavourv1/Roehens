@@ -15,15 +15,14 @@ import 'package:roehens/core/models/camera.dart';
 /// the value is kept in memory so the current session still works. Nothing is
 /// ever logged except the operation name.
 class SecureVaultService implements SecureVaultContract {
-  SecureVaultService({FlutterSecureStorage? storage, LoggerContract? logger})
+  SecureVaultService({FlutterSecureStorage? storage, this._logger})
       : _storage = storage ??
             const FlutterSecureStorage(
               aOptions: AndroidOptions(encryptedSharedPreferences: true),
               iOptions: IOSOptions(
                 accessibility: KeychainAccessibility.first_unlock_this_device,
               ),
-            ),
-        _logger = logger;
+            );
 
   final FlutterSecureStorage _storage;
   final LoggerContract? _logger;

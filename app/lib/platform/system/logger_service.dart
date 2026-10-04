@@ -10,10 +10,9 @@ import 'package:roehens/core/contracts/logger_contract.dart';
 /// masked before a message is stored.
 class LoggerService implements LoggerContract {
   LoggerService({
-    ClockContract clock = const SystemClock(),
-    int capacity = Limits.logRingSize,
-  })  : _clock = clock,
-        _capacity = capacity;
+    this._clock = const SystemClock(),
+    this._capacity = Limits.logRingSize,
+  });
 
   final ClockContract _clock;
   final int _capacity;

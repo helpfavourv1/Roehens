@@ -18,14 +18,11 @@ class DeletedCamera {
 /// vault holds the credentials, and this class keeps the two in step.
 class CameraRepository {
   CameraRepository({
-    required StorageContract storage,
-    required SecureVaultContract vault,
-    ClockContract clock = const SystemClock(),
+    required this._storage,
+    required this._vault,
+    this._clock = const SystemClock(),
     String Function()? idGenerator,
-  })  : _storage = storage,
-        _vault = vault,
-        _clock = clock,
-        _idGenerator = idGenerator ?? generateCameraId;
+  }) : _idGenerator = idGenerator ?? generateCameraId;
 
   final StorageContract _storage;
   final SecureVaultContract _vault;

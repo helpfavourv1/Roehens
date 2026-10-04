@@ -8,9 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// are kept in memory for the session and [isDegraded] is set so the app shows
 /// its persistence warning. No call throws.
 class SharedPrefsKeyValueStore implements KeyValueStore {
-  SharedPrefsKeyValueStore({SharedPreferencesAsync? prefs, LoggerContract? logger})
-      : _prefs = prefs ?? SharedPreferencesAsync(),
-        _logger = logger;
+  SharedPrefsKeyValueStore({SharedPreferencesAsync? prefs, this._logger})
+      : _prefs = prefs ?? SharedPreferencesAsync();
 
   final SharedPreferencesAsync _prefs;
   final LoggerContract? _logger;

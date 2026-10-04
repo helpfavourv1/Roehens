@@ -53,16 +53,12 @@ class DowngradeRefusedException implements Exception {
 /// so the app shows a warning. No call throws.
 class DatabaseService implements StorageContract {
   DatabaseService({
-    DatabaseFactory? factory,
-    String? path,
+    this._factory,
+    this._path,
     MigrationRegistry? registry,
-    LoggerContract? logger,
-    ClockContract clock = const SystemClock(),
-  })  : _factory = factory,
-        _path = path,
-        _registry = registry ?? MigrationRegistry.standard(),
-        _logger = logger,
-        _clock = clock;
+    this._logger,
+    this._clock = const SystemClock(),
+  }) : _registry = registry ?? MigrationRegistry.standard();
 
   static const String _fileName = 'roehens.db';
 
