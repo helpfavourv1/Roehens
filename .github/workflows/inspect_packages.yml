@@ -37,13 +37,18 @@ jobs:
         run: |
           DIR=$(python3 -c "import json;d=json.load(open('app/.dart_tool/package_config.json'));print([p['rootUri'] for p in d['packages'] if p['name']=='phosphor_flutter'][0].replace('file://',''))")
           echo "== dir $DIR" | tee -a "$LOG"
-          { echo "== version"; grep -E '^(version|name|license)' "$DIR/pubspec.yaml"; ls "$DIR"; echo "== pubspec fonts"; sed -n '/^flutter:/,$p' "$DIR/pubspec.yaml"; echo "== lib"; ls "$DIR/lib" "$DIR/lib/src"; echo "== main export"; cat "$DIR/lib/phosphor_flutter.dart"; echo "== class heads"; grep -hE '^(class|abstract class|final class)|fontFamily|fontPackage' "$DIR"/lib/src/*.dart | sort | uniq -c | head -40; echo "== sample lines"; grep -hE 'static const' "$DIR/lib/src/phosphor_icons_bold.dart" | head -5; } 2>&1 | tee -a "$LOG"
+          grep -E '^version' "$DIR/pubspec.yaml" | tee -a "$LOG"
           echo "== BOLD NAMES" | tee -a "$LOG"
-          grep -hoE 'IconData [a-zA-Z0-9_]+' "$DIR/lib/src/phosphor_icons_bold.dart" | awk '{print $2}' | tr '\n' ' ' | fold -w 200 | tee -a "$LOG"
+          grep -hoE 'static const [a-zA-Z0-9_]+' "$DIR/lib/src/phosphor_icons_bold.dart" | awk '{print $3}' | tr '\n' ' ' | fold -w 200 | tee -a "$LOG"
           echo | tee -a "$LOG"
-          echo "== FILL count / DUOTONE sample" | tee -a "$LOG"
-          grep -c 'IconData' "$DIR/lib/src/phosphor_icons_fill.dart" 2>&1 | tee -a "$LOG"
-          grep -hE 'IconData|PhosphorDuotoneIconData' "$DIR/lib/src/phosphor_icons_duotone.dart" 2>&1 | head -3 | tee -a "$LOG"
+          echo "== counts" | tee -a "$LOG"
+          for w in bold fill duotone; do echo "$w $(grep -c 'static const' "$DIR/lib/src/phosphor_icons_$w.dart")" | tee -a "$LOG"; done
+          echo "== duotone sample" | tee -a "$LOG"
+          grep -hE 'static const' "$DIR/lib/src/phosphor_icons_duotone.dart" | sed -n '1,2p' | tee -a "$LOG"
+          echo "== PhosphorIcon widget" | tee -a "$LOG"
+          cat "$DIR/lib/src/phosphor_icon.dart" | tee -a "$LOG"
+          echo "== icon data" | tee -a "$LOG"
+          cat "$DIR/lib/src/phosphor_icon_data.dart" | tee -a "$LOG"
 
       - name: Publish log
         if: always()
