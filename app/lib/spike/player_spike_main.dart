@@ -258,7 +258,7 @@ class _ProbeView extends StatelessWidget {
           flex: 5,
           child: ColoredBox(
             color: colors.videoBackdrop,
-            child: Video(controller: probe.controller, controls: NoVideoControls),
+            child: Video(controller: probe.controller, controls: null),
           ),
         ),
         Expanded(
