@@ -43,8 +43,9 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 
 ## Icons (batch P1B)
 
-1. **Phosphor only, no Tabler.** `phosphor_flutter` 2.1.0 (MIT) has a suitable glyph for every R1 icon, so Tabler is not a dependency (it is a gap-filler by specification). A later release that finds a gap adds it with a reason in `ICON_MAP.md`.
-2. **Own icon widget.** The package's `PhosphorIcon` widget imports the Material library, so `AppIcon` is built on the core `Icon` widget and draws the duotone secondary layer itself.
-3. **Mirroring.** Every Phosphor glyph mirrors in right-to-left layouts by default. `AppIcon` forces left-to-right for all icons except `chevronLeft`, `chevronRight`, `back` and `forward`, so PTZ arrows, zoom and every other icon keep their orientation. `app_icon.dart` is therefore on the guard's list of files allowed to use `TextDirection.ltr`.
-4. **R1 names only.** The monitoring and recording icons (bell, motion, mask, timeline, gallery, record, stop, storage, schedule, clip) are added by the batch of the release that needs them.
-5. **Packages and licenses.** `phosphor_flutter` 2.1.0, MIT. Its notice reaches the licenses screen through Flutter's `LicenseRegistry` (the package ships a LICENSE file).
+1. **Phosphor fonts bundled, no icon package.** `phosphor_flutter` 2.1.0 (and upstream `main`) fails to compile on Flutter 3.47: it extends `IconData`, now a final class. The package is dropped. The MIT-licensed Bold, Fill and Duotone fonts and their glyph code points from tag `v2.1.0` are bundled as assets (`assets/fonts`), with source checksums in `ICON_MAP.md`. Glyph tables are generated once from upstream and live in `app_icons.dart` as compile-time constants, which release builds need for icon-font tree shaking.
+2. **No Tabler.** Phosphor has a suitable glyph for every R1 icon. Tabler is a gap-filler by specification and is not used. A later release that finds a gap adds it with a reason in `ICON_MAP.md`.
+3. **Own icon widget.** `AppIcon` is built on the core `Icon` widget and draws the duotone secondary layer itself.
+4. **Mirroring.** Every Phosphor glyph is flagged to mirror in right-to-left layouts. `AppIcon` forces left-to-right for all icons except `chevronLeft`, `chevronRight`, `back` and `forward`, so PTZ arrows, zoom and every other icon keep their orientation. `app_icon.dart` is on the guard's list of files allowed to use `TextDirection.ltr`.
+5. **R1 names only.** The monitoring and recording icons are added by the batch of the release that needs them.
+6. **License.** Phosphor Icons, MIT. The notice is registered through `LicenseRegistry` and appears on the licenses screen.

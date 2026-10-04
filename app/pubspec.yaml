@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  phosphor_flutter: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +18,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: false
+
+  assets:
+    - assets/fonts/LICENSE-phosphor.txt
+
+  fonts:
+    - family: PhosphorBold
+      fonts:
+        - asset: assets/fonts/Phosphor-Bold.ttf
+    - family: PhosphorFill
+      fonts:
+        - asset: assets/fonts/Phosphor-Fill.ttf
+    - family: PhosphorDuotone
+      fonts:
+        - asset: assets/fonts/Phosphor-Duotone.ttf

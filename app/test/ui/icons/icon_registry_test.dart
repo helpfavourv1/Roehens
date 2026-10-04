@@ -37,7 +37,18 @@ void main() {
     for (final AppIconName name in AppIconName.values) {
       expect(AppIcons.layers(name, AppIconWeight.bold).secondary, isNull);
       expect(AppIcons.layers(name, AppIconWeight.fill).secondary, isNull);
-      expect(AppIcons.layers(name, AppIconWeight.duotone).secondary, isNotNull);
+      final AppIconLayers duotone = AppIcons.layers(name, AppIconWeight.duotone);
+      expect(duotone.secondary, isNotNull);
+      expect(duotone.secondary!.codePoint, isNot(duotone.primary.codePoint));
+    }
+  });
+
+  test('glyphs come from the bundled fonts, not from a package', () {
+    for (final AppIconName name in AppIconName.values) {
+      expect(
+        AppIcons.layers(name, AppIconWeight.bold).primary.fontPackage,
+        isNull,
+      );
     }
   });
 
