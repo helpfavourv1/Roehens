@@ -39,16 +39,10 @@ jobs:
           echo "== dir $DIR" | tee -a "$LOG"
           grep -E '^version' "$DIR/pubspec.yaml" | tee -a "$LOG"
           echo "== BOLD NAMES" | tee -a "$LOG"
-          grep -hoE 'static const [a-zA-Z0-9_]+' "$DIR/lib/src/phosphor_icons_bold.dart" | awk '{print $3}' | tr '\n' ' ' | fold -w 200 | tee -a "$LOG"
+          grep -hoE 'static const [a-zA-Z0-9_]+' "$DIR/lib/src/phosphor_icons_bold.dart" | awk '{print $3}' | tee -a "$LOG"
           echo | tee -a "$LOG"
           echo "== counts" | tee -a "$LOG"
           for w in bold fill duotone; do echo "$w $(grep -c 'static const' "$DIR/lib/src/phosphor_icons_$w.dart")" | tee -a "$LOG"; done
-          echo "== duotone sample" | tee -a "$LOG"
-          grep -hE 'static const' "$DIR/lib/src/phosphor_icons_duotone.dart" | sed -n '1,2p' | tee -a "$LOG"
-          echo "== PhosphorIcon widget" | tee -a "$LOG"
-          cat "$DIR/lib/src/phosphor_icon.dart" | tee -a "$LOG"
-          echo "== icon data" | tee -a "$LOG"
-          cat "$DIR/lib/src/phosphor_icon_data.dart" | tee -a "$LOG"
 
       - name: Publish log
         if: always()
