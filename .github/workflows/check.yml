@@ -25,6 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: System SQLite for database tests
+        run: sudo apt-get install -y libsqlite3-dev > /dev/null
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.47.6'
