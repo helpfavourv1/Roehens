@@ -55,6 +55,11 @@ class ErrorMapper {
     return AppError(classifyMessage(message), detail: message);
   }
 
+  // A status code stands alone: not part of a longer number, a host name or an
+  // IP address octet.
+  static final RegExp _authCode = RegExp(r'(^|[^0-9a-z.])(401|403)($|[^0-9a-z.])');
+  static final RegExp _notFoundCode = RegExp(r'(^|[^0-9a-z.])404($|[^0-9a-z.])');
+
   /// Classifies [message] by well-known phrases. DNS failures are checked before
   /// "not found" so an unknown host is not reported as a wrong path.
   static ErrorClass classifyMessage(
@@ -66,7 +71,8 @@ class ErrorMapper {
       return phrases.any(text.contains);
     }
 
-    if (has(<String>['401', '403', 'unauthorized', 'forbidden', 'authentication'])) {
+    if (_authCode.hasMatch(text) ||
+        has(<String>['unauthorized', 'forbidden', 'authentication'])) {
       return ErrorClass.authFailed;
     }
     if (has(<String>[
@@ -77,7 +83,8 @@ class ErrorMapper {
     ])) {
       return ErrorClass.networkUnreachable;
     }
-    if (has(<String>['404', 'not found', 'no such stream'])) {
+    if (_notFoundCode.hasMatch(text) ||
+        has(<String>['not found', 'no such stream'])) {
       return ErrorClass.pathNotFound;
     }
     if (has(<String>[
