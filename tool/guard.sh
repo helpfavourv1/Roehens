@@ -104,7 +104,8 @@ if [ -z "$FILES" ]; then
 fi
 if [ -n "$FILES" ]; then
   echo "$FILES" | xargs grep -nIE 'github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|BEGIN [A-Z ]*PRIVATE KEY|MIIK[A-Za-z0-9+/]{60,}|rtsp://[^/@[:space:]]+:[^@[:space:]]+@' 2>/dev/null | check_raw "credential-like string in a tracked file"
-  echo "$FILES" | grep -E '\.(dart|kts|gradle|properties|yaml|yml|json|xml|plist|sh)$' \
+  # Test fixtures use fake values, so app/test is exempt from this generic rule only.
+  echo "$FILES" | grep -E '\.(dart|kts|gradle|properties|yaml|yml|json|xml|plist|sh)$' | grep -v '^app/test/' \
     | xargs grep -nIiE "(password|passwd|secret|token|apikey|api_key)[[:space:]]*[:=][[:space:]]*[\"'][^\"'\$]{6,}[\"']" 2>/dev/null | check_raw "hard-coded secret assignment in a tracked file"
 fi
 
