@@ -31,3 +31,12 @@ Not yet decided. Decided at checkpoint CP1 (after batch P2B) from the spike resu
 ## Dependencies and licenses
 
 No third-party runtime dependency has been added yet. Each addition is logged here with version, maintenance status and license class.
+
+## Design tokens (batch P1A)
+
+1. **Two light-theme color adjustments.** With the specified values, hint text (`textTertiary`, `#667080`) on input fields (`bgTertiary`) measured 4.34:1 and accent text (`accent`, `#2F6FE0`) on the scaffold measured 4.34:1, both below the 4.5:1 AA threshold the specification requires. Changed to `textTertiary` `#636D7D` (4.54:1 on `bgTertiary`) and `accent` `#2F6CDD` (4.50:1 on `bgPrimary`; `borderFocus` follows the accent). The dark theme needed no change. `token_values_test.dart` enforces these ratios.
+2. **No `ThemeExtension`.** `ThemeExtension` belongs to the Material library, which is leaving the SDK (see Process decision 5). Tokens are provided by an `InheritedWidget` (`AppTokens`) and read with `context.tokens`, `context.colors` and `context.type`.
+3. **Spacing names.** `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`, `xxxl` (the specification's `2xs`, `2xl`, `3xl`), because Dart identifiers cannot start with a digit and the guard flags digits in layout constructors.
+4. **Formatters.** `date_formatter.dart` returns an `AgeSpan` (number plus unit) so the widget layer can localize it with plural rules; `intl` is added with the localization batch (P6B).
+5. **Token freeze.** Tokens are frozen at the end of this batch (C8.2). Later changes need an entry here.
+6. **Lockfile refresh.** The `check` workflow now refreshes `pubspec.lock` when `pubspec.yaml` changed and commits it back, because dependency resolution cannot run in the agent's environment. This replaces `--enforce-lockfile`.

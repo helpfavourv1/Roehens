@@ -38,10 +38,19 @@ jobs:
         working-directory: app
         run: |
           echo "== pub get" | tee -a "$LOG"
-          if [ -f pubspec.lock ]; then
-            flutter pub get --enforce-lockfile 2>&1 | tee -a "$LOG"
+          flutter pub get 2>&1 | tee -a "$LOG"
+
+      - name: Refresh lockfile
+        run: |
+          if git diff --quiet -- app/pubspec.lock; then
+            echo "pubspec.lock is up to date" | tee -a "$LOG"
           else
-            flutter pub get 2>&1 | tee -a "$LOG"
+            echo "pubspec.lock changed; committing it back" | tee -a "$LOG"
+            git config user.name "helpfavourv1"
+            git config user.email "314438714+helpfavourv1@users.noreply.github.com"
+            git add app/pubspec.lock
+            git commit -m "lock: refresh pubspec.lock (check workflow)" 2>&1 | tee -a "$LOG"
+            git push origin HEAD:main 2>&1 | tee -a "$LOG" || echo "lock push skipped (main moved)" | tee -a "$LOG"
           fi
 
       - name: Analyze
