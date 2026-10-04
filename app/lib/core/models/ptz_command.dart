@@ -20,8 +20,7 @@ class PtzCommand {
     required this.tilt,
     required this.zoom,
     required this.speed,
-    this.presetToken,
-  });
+  }) : presetToken = null;
 
   /// Move while held: positive pan is right, positive tilt is up, positive zoom
   /// zooms in.
