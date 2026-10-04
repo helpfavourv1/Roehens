@@ -1,0 +1,83 @@
+name: android_debug
+
+# Manual. Builds a debug APK for sideload testing. For the player spike, set
+# entrypoint to lib/spike/player_spike_main.dart; for the app, lib/main.dart.
+# The spike stream addresses come from repository secrets and exist only inside
+# the APK that is built here.
+
+on:
+  workflow_dispatch:
+    inputs:
+      entrypoint:
+        description: Dart entrypoint
+        required: true
+        default: lib/main.dart
+      abi:
+        description: Target platform (android-arm64 for a phone, android-arm,android-arm64,android-x64 for all)
+        required: true
+        default: android-arm64
+
+permissions:
+  contents: write
+
+env:
+  LOG: ${{ github.workspace }}/ci.log
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Probe the spike streams
+        env:
+          SPIKE_RTSP_URL: ${{ secrets.SPIKE_RTSP_URL }}
+          SPIKE_MJPEG_URL: ${{ secrets.SPIKE_MJPEG_URL }}
+        run: python3 tool/probe_streams.py 2>&1 | tee -a "$LOG"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: app
+        run: flutter pub get 2>&1 | tail -3 | tee -a "$LOG"
+
+      - name: Build debug APK
+        working-directory: app
+        env:
+          SPIKE_RTSP_URL: ${{ secrets.SPIKE_RTSP_URL }}
+          SPIKE_MJPEG_URL: ${{ secrets.SPIKE_MJPEG_URL }}
+        run: |
+          echo "== build ${{ inputs.entrypoint }} (${{ inputs.abi }})" | tee -a "$LOG"
+          flutter build apk --debug \
+            -t "${{ inputs.entrypoint }}" \
+            --target-platform "${{ inputs.abi }}" \
+            --dart-define=SPIKE_RTSP_URL="$SPIKE_RTSP_URL" \
+            --dart-define=SPIKE_MJPEG_URL="$SPIKE_MJPEG_URL" 2>&1 | tail -60 | tee -a "$LOG"
+          ls -la build/app/outputs/flutter-apk/ | tee -a "$LOG"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: roehens-debug-apk
+          path: app/build/app/outputs/flutter-apk/app-debug.apk
+          retention-days: 7
+
+      - name: Publish log
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: sh tool/ci_publish_log.sh "$LOG" android_debug
