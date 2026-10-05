@@ -24,9 +24,36 @@ Every choice that deviates from, or fills in, the specification is recorded here
 8. **Lint set.** `flutter_lints` plus five extra rules, with strict-casts, strict-inference and strict-raw-types.
 9. **Localization config.** `app/l10n.yaml` is added in batch P6B together with `generate: true` and the first ARB files. It was removed from P0 because Flutter's build runs the localization step whenever the file exists and fails while `generate` is off (found by the first real Android build).
 
-## Player engine
+## Player engine (checkpoint CP1)
 
-Not yet decided. Decided at checkpoint CP1 (after batch P2B) from the spike results, with the license finding, cleartext/ATS findings and the four capability findings recorded here.
+**Engine: `media_kit` 1.2.6 with `media_kit_video` 2.0.1 and `media_kit_libs_video` 1.0.7, behind `PlayerContract`.** On Android it bundles libmpv from `media-kit/libmpv-android-video-build` release v1.1.7, flavor `default`. On iOS it uses the `ios-universal-video-default` xcframeworks.
+
+**License.** Both default flavors build FFmpeg without GPL (the Android script passes `--disable-gpl`; the Darwin README lists FFmpeg as LGPL-2.1 with GPL and nonfree omitted). The GPL `encodersgpl` flavor is not used and must never be selected. libmpv and FFmpeg are dynamically linked; LGPL notices go on the licenses screen and the build flavor is pinned. `media_kit` itself is MIT.
+
+**Maintenance.** Active (commits through August 2026, libmpv builds updated September 2026). An open issue asks about project status and release plans, so the engine stays behind the contract.
+
+**Device findings (Redmi `25028RN03A`, Android 15 / SDK 35, low-RAM device, debug build, mobile data, 8 streams opened at once):**
+
+| Finding | Result |
+|---|---|
+| Builds on Flutter 3.47.6 with sqflite, secure storage and shared preferences | yes |
+| HTTPS H.264 test video | plays |
+| RTSP over TCP, H.265 5 MP (2592x1944) with PCM mu-law audio | plays (live; camera clock matched). Software decoding: hardware HEVC configuration failed on this device. Audio underruns and A/V desync warnings. First frame 15.6 s, then 6.4 s on a second run |
+| RTSP over TCP, H.264 720p | plays with hardware decoding (`mediacodec-copy`). First frame 13.1 s on a distant server |
+| MJPEG over HTTP (multipart) | **does not work with the stock build**: decode errors on every multipart stream tried |
+| Frame access (still image of the playing stream) | yes: `Player.screenshot` returned data for both RTSP streams |
+| Stream to file without re-encoding | **no with the stock build**: "Output format not found" |
+| Picture-in-picture | **device does not support it** (`lowRam=true`, `pipFeature=false`) |
+
+**Cause of the two failures, confirmed in the build script `buildscripts/flavors/default.sh`:** the default flavor passes `--disable-muxers` and enables no muxer, and it enables the `mjpeg*` demuxers but not `mpjpeg` (the multipart format cameras send over HTTP). It also enables no `udp` protocol, so RTSP over UDP is unavailable in the stock build.
+
+**Decisions.**
+1. **MJPEG over HTTP and HTTP snapshots are implemented in Dart** (own HTTP client, multipart parser, Flutter image decoding), not through the player engine. Same behavior on both platforms, no dependency on FFmpeg build flags, and decoded frames are available for later motion detection.
+2. **RTSP uses media_kit.** R1 ships RTSP over TCP with the stock build. A custom libmpv flavor (fork of the Android build scripts, built in CI, LGPL components only) adds the `udp` protocol for RTSP over UDP and muxers for clips and recording. It is scheduled as its own batch before the R1 end gate if UDP stays in R1, and is required before R3.
+3. **Picture-in-picture leaves R1.** The only available Android device reports no PiP support, so the feature cannot be tested. The tiny Android hook in `MainActivity.kt` stays; no PiP screen, setting or button is built until a PiP-capable device exists.
+4. **Hardware HEVC.** The 5 MP main stream decodes in software on this device and cannot be shown smoothly. The grid uses substreams by design; fullscreen on a low-end phone may need a lower-resolution stream. Retest with `hwdec=mediacodec-copy` forced and with the camera's substream.
+5. **Timings are not conclusive.** The first-frame times were measured with eight parallel connections over mobile data. The target (under 3 s) needs a LAN camera and sequential tests.
+6. **Logs are shared.** The player's log callback delivers messages from every player to every tile, so per-tile logs cannot be attributed. The next spike runs one stream at a time.
 
 ## Dependencies and licenses
 
