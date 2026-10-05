@@ -79,7 +79,7 @@ void main() {
   group('parts without Content-Length', () {
     final Uint8List stream = concat(<Uint8List>[
       for (final Uint8List f in frames) part(f, withLength: false),
-      ascii.encode('--frame--\r\n') as Uint8List,
+      ascii.encode('--frame--\r\n'),
     ]);
     for (final int size in chunkSizes) {
       test('chunks of $size bytes', () {
@@ -126,7 +126,7 @@ void main() {
   test('junk before the first part is skipped', () {
     final MjpegStreamParser parser = MjpegStreamParser(boundary: 'frame');
     final Uint8List stream = concat(<Uint8List>[
-      ascii.encode('HTTP noise \x00\x01 more noise\r\n') as Uint8List,
+      ascii.encode('HTTP noise \x00\x01 more noise\r\n'),
       for (final Uint8List f in frames.take(3)) part(f),
     ]);
     expectFrames(feed(parser, stream, 5), frames.take(3).toList());
