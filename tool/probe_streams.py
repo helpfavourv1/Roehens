@@ -108,7 +108,6 @@ def main():
         probe_http(mjpeg)
     else:
         print("SPIKE_MJPEG_URL is not set")
-    pick_public()
     return 0
 
 

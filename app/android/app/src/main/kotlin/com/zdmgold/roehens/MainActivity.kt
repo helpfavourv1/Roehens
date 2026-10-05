@@ -16,6 +16,7 @@ class MainActivity : FlutterActivity() {
                 when (call.method) {
                     "isSupported" -> result.success(isPipSupported())
                     "enter" -> result.success(enterPip())
+                    "info" -> result.success(deviceInfo())
                     else -> result.notImplemented()
                 }
             }
@@ -24,6 +25,13 @@ class MainActivity : FlutterActivity() {
     private fun isPipSupported(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
             packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
+    }
+
+    private fun deviceInfo(): String {
+        val activityManager = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager
+        return "sdk=${Build.VERSION.SDK_INT} model=${Build.MODEL} " +
+            "lowRam=${activityManager.isLowRamDevice} " +
+            "pipFeature=${packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)}"
     }
 
     private fun enterPip(): Boolean {

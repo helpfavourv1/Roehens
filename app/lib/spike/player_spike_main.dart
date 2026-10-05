@@ -20,8 +20,7 @@ import 'package:roehens/ui/tokens/spacing_tokens.dart';
 
 const String _rtspUrl = String.fromEnvironment('SPIKE_RTSP_URL');
 const String _mjpegUrl = String.fromEnvironment('SPIKE_MJPEG_URL');
-const String _publicRtspUrl = String.fromEnvironment('SPIKE_PUBLIC_RTSP_URL');
-const String _publicMjpegUrl = String.fromEnvironment('SPIKE_PUBLIC_MJPEG_URL');
+const String _extraUrls = String.fromEnvironment('SPIKE_EXTRA_URLS');
 const MethodChannel _pipChannel = MethodChannel('roehens/pip');
 
 void main() {
@@ -101,7 +100,7 @@ class _Probe {
 
     int logged = 0;
     player.stream.log.listen((PlayerLog log) {
-      if (logged < 14) {
+      if (logged < 40) {
         logged++;
         _add('mpv ${log.level}/${log.prefix}: ${log.text.trim()}');
       }
@@ -116,7 +115,7 @@ class _Probe {
       }
     });
 
-    _add('opening (${isRtsp ? 'RTSP over TCP' : 'MJPEG over HTTP'})');
+    _add('opening (${isRtsp ? 'RTSP over TCP' : 'HTTP'})');
     await player.open(Media(url));
     try {
       await firstFrame.future.timeout(const Duration(seconds: 20));
@@ -132,6 +131,9 @@ class _Probe {
     _add('hardware decoder: ${await _prop(native, 'hwdec-current')}');
     _add('frame rate: ${await _prop(native, 'estimated-vf-fps')}');
     _add('bitrate (bits/s): ${await _prop(native, 'video-bitrate')}');
+    _add('requested hwdec: ${await _prop(native, 'hwdec')}');
+    _add('dropped by decoder: ${await _prop(native, 'decoder-frame-drop-count')}');
+    _add('dropped by output: ${await _prop(native, 'frame-drop-count')}');
 
     try {
       final Uint8List? shot = await player.screenshot();
@@ -177,6 +179,11 @@ class _SpikeHomeState extends State<_SpikeHome> {
   @override
   void initState() {
     super.initState();
+    final List<String> extras = _extraUrls
+        .split(',')
+        .map((String u) => u.trim())
+        .where((String u) => u.isNotEmpty)
+        .toList();
     _probes = <_Probe>[
       // Not a camera: proves the engine itself plays, decodes and records even
       // when no camera address is reachable.
@@ -187,8 +194,12 @@ class _SpikeHomeState extends State<_SpikeHome> {
       ),
       _Probe(label: 'rtsp-yours', url: _rtspUrl, isRtsp: true),
       _Probe(label: 'mjpeg-yours', url: _mjpegUrl, isRtsp: false),
-      _Probe(label: 'rtsp-public', url: _publicRtspUrl, isRtsp: true),
-      _Probe(label: 'mjpeg-public', url: _publicMjpegUrl, isRtsp: false),
+      for (int i = 0; i < extras.length; i++)
+        _Probe(
+          label: 'extra-${i + 1}-${extras[i].startsWith('rtsp') ? 'rtsp' : 'http'}',
+          url: extras[i],
+          isRtsp: extras[i].startsWith('rtsp'),
+        ),
     ];
     for (final _Probe probe in _probes) {
       unawaited(probe.run());
@@ -207,8 +218,9 @@ class _SpikeHomeState extends State<_SpikeHome> {
   Future<void> _tryPip() async {
     try {
       final bool? supported = await _pipChannel.invokeMethod<bool>('isSupported');
+      final String? info = await _pipChannel.invokeMethod<String>('info');
       final bool? entered = await _pipChannel.invokeMethod<bool>('enter');
-      _pipResult.value = 'PiP: supported=$supported entered=$entered';
+      _pipResult.value = 'PiP: supported=$supported entered=$entered\n$info';
     } catch (error) {
       _pipResult.value = 'PiP: failed ($error)';
     }
@@ -234,10 +246,7 @@ class _SpikeHomeState extends State<_SpikeHome> {
                   child: Column(
                     children: <Widget>[
                       for (final _Probe probe in _probes)
-                        SizedBox(
-                          height: 190,
-                          child: _ProbeView(probe: probe, colors: colors),
-                        ),
+                        _ProbeView(probe: probe, colors: colors),
                     ],
                   ),
                 ),
@@ -277,30 +286,29 @@ class _ProbeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          flex: 5,
-          child: ColoredBox(
-            color: colors.videoBackdrop,
-            child: Video(controller: probe.controller, controls: null),
+    return Padding(
+      padding: AppSpacing.verticalSm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          SizedBox(
+            height: 170,
+            child: ColoredBox(
+              color: colors.videoBackdrop,
+              child: Video(controller: probe.controller, controls: null),
+            ),
           ),
-        ),
-        Expanded(
-          flex: 6,
-          child: ValueListenableBuilder<List<String>>(
+          ValueListenableBuilder<List<String>>(
             valueListenable: probe.lines,
             builder: (BuildContext c, List<String> lines, Widget? w) {
-              return SingleChildScrollView(
-                child: Text(
-                  '${probe.label.toUpperCase()}\n${lines.join('\n')}',
-                  style: TextStyle(color: colors.textSecondary, fontSize: 10),
-                ),
+              return Text(
+                '${probe.label.toUpperCase()}\n${lines.join('\n')}',
+                style: TextStyle(color: colors.textSecondary, fontSize: 10),
               );
             },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
