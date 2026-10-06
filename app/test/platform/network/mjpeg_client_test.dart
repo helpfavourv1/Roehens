@@ -199,7 +199,7 @@ void main() {
     await subscription.cancel();
 
     // A closed HttpClient refuses new requests.
-    await expectLater(created.getUrl(uri), throwsStateError);
+    expect(() => created.getUrl(uri), throwsStateError);
   });
 
   group('single images', () {
