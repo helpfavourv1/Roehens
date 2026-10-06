@@ -12,9 +12,10 @@ class StreamUrlUtils {
     if (credentials.isEmpty) {
       return uri;
     }
-    return uri.replace(
-      userInfo: '${credentials.username}:${credentials.password}',
-    );
+    // Uri.replace does not encode user-info, so each part is encoded here.
+    final String user = Uri.encodeComponent(credentials.username);
+    final String password = Uri.encodeComponent(credentials.password);
+    return uri.replace(userInfo: '$user:$password');
   }
 
   /// The RTSP transport to force, or null to let the engine choose.

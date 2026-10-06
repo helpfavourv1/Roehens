@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:async';
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 import 'package:roehens/core/contracts/player_contract.dart';
 import 'package:roehens/core/errors/app_error.dart';
@@ -41,12 +44,18 @@ class MjpegSession implements PlayerSessionContract, FrameCapturable {
 
   @override
   Future<void> open(PlayerSource source) async {
-    await _cancel();
     if (_disposed) {
       return;
     }
+    // Show "connecting" at once; the old stream is cancelled right after.
+    final StreamSubscription<Uint8List>? previous = _subscription;
+    _subscription = null;
     final int generation = ++_generation;
     _state.value = const PlayerConnecting();
+    await previous?.cancel();
+    if (_disposed || generation != _generation) {
+      return;
+    }
     _subscription = _client
         .frames(source.uri, credentials: source.credentials)
         .listen(

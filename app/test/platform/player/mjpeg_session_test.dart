@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/core/contracts/player_contract.dart';
 import 'package:roehens/core/errors/error_class.dart';
@@ -53,7 +54,9 @@ void main() {
     await opening;
 
     await waitUntil(() => session.state.value is PlayerPlaying);
-    await waitUntil(() => session.latestFrame.value == frames.last);
+    await waitUntil(
+      () => listEquals(session.latestFrame.value, frames.last),
+    );
     expect(session.videoSize.value, const VideoSize(640, 480));
     expect(await session.captureFrame(), frames.last);
   });
@@ -140,7 +143,9 @@ void main() {
 
     await session.open(sourceFor(good));
     await waitUntil(() => session.state.value is PlayerPlaying);
-    await waitUntil(() => session.latestFrame.value == frames.last);
+    await waitUntil(
+      () => listEquals(session.latestFrame.value, frames.last),
+    );
   });
 
   test('the view handle is the frame notifier', () {
