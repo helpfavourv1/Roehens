@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
-
 import 'package:flutter/foundation.dart';
 import 'package:media_kit/media_kit.dart' hide PlayerState;
 import 'package:media_kit_video/media_kit_video.dart';
@@ -9,7 +7,6 @@ import 'package:roehens/core/contracts/logger_contract.dart';
 import 'package:roehens/core/contracts/player_contract.dart';
 import 'package:roehens/core/errors/app_error.dart';
 import 'package:roehens/core/errors/error_class.dart';
-import 'package:roehens/core/errors/error_mapper.dart';
 import 'package:roehens/core/models/player_state.dart';
 import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/core/services/stream_url_utils.dart';
