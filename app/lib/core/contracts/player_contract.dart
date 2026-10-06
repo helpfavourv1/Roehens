@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/models/player_state.dart';
@@ -19,6 +21,26 @@ class PlayerSource {
   final StreamTransport transport;
   final CameraCredentials credentials;
   final bool lowLatency;
+
+  @override
+  bool operator ==(Object other) {
+    return other is PlayerSource &&
+        other.uri == uri &&
+        other.protocol == protocol &&
+        other.transport == transport &&
+        other.credentials == credentials &&
+        other.lowLatency == lowLatency;
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(uri, protocol, transport, credentials, lowLatency);
+}
+
+/// A session that can hand over a still image of what it is showing now.
+abstract interface class FrameCapturable {
+  /// JPEG bytes of the current frame, or null when nothing is playing.
+  Future<Uint8List?> captureFrame();
 }
 
 /// Pixel size of the decoded video.
