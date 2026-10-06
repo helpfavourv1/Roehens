@@ -21,14 +21,11 @@ class PooledSession {
     required this.key,
     required this.source,
     required this.session,
-    required ReconnectPolicy policy,
-    required ClockContract clock,
-    required ErrorMapper mapper,
-    LoggerContract? logger,
-  })  : _policy = policy,
-        _clock = clock,
-        _mapper = mapper,
-        _logger = logger;
+    required this._policy,
+    required this._clock,
+    required this._mapper,
+    this._logger,
+  });
 
   final String key;
   final PlayerSource source;

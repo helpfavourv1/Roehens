@@ -22,13 +22,15 @@ class FrameCaptureService implements SnapshotContract {
   @override
   Future<Result<SnapshotImage>> capture(String cameraId) async {
     final PlayerSessionContract? session = pool.sessionFor(cameraId)?.session;
-    if (session is! FrameCapturable) {
+    final FrameCapturable? capturable =
+        session is FrameCapturable ? session : null;
+    if (session == null || capturable == null) {
       return const Err<SnapshotImage>(
         AppError(ErrorClass.unsupportedMedia, detail: 'camera is not playing'),
       );
     }
     try {
-      final Uint8List? bytes = await session.captureFrame();
+      final Uint8List? bytes = await capturable.captureFrame();
       if (bytes == null || bytes.isEmpty) {
         return const Err<SnapshotImage>(
           AppError(ErrorClass.unsupportedMedia, detail: 'no frame available'),

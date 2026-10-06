@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
-
 import 'package:flutter/foundation.dart';
 import 'package:roehens/core/contracts/player_contract.dart';
 import 'package:roehens/core/errors/app_error.dart';
@@ -14,9 +12,8 @@ import 'package:roehens/platform/network/mjpeg_client.dart';
 /// the video engine. [viewHandle] is a [ValueListenable] of the latest JPEG
 /// frame; the video view draws whatever it currently holds.
 class MjpegSession implements PlayerSessionContract, FrameCapturable {
-  MjpegSession({MjpegClient? client, ErrorMapper mapper = const ErrorMapper()})
-      : _client = client ?? MjpegClient(),
-        _mapper = mapper;
+  MjpegSession({MjpegClient? client, this._mapper = const ErrorMapper()})
+      : _client = client ?? MjpegClient();
 
   final MjpegClient _client;
   final ErrorMapper _mapper;
