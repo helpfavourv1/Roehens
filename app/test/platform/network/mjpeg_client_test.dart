@@ -166,8 +166,7 @@ void main() {
     expect((error! as AppError).errorClass, ErrorClass.networkUnreachable);
   });
 
-  test('cancelling the subscription closes the connection', () async {
-    final Completer<void> serverNoticed = Completer<void>();
+  test('cancelling the subscription closes the HTTP client', () async {
     final Uri uri = await serve((HttpRequest r) async {
       final HttpResponse response = r.response;
       response.bufferOutput = false;
@@ -175,37 +174,32 @@ void main() {
         HttpHeaders.contentTypeHeader,
         'multipart/x-mixed-replace; boundary=frame',
       );
-      unawaited(
-        response.done.then<void>(
-          (Object? _) {
-            if (!serverNoticed.isCompleted) {
-              serverNoticed.complete();
-            }
-          },
-          onError: (Object _) {
-            if (!serverNoticed.isCompleted) {
-              serverNoticed.complete();
-            }
-          },
-        ),
-      );
-      for (int i = 0; i < 400 && !serverNoticed.isCompleted; i++) {
+      for (int i = 0; i < 250; i++) {
         response.add(multipartPart(frames[i % frames.length]));
         await response.flush();
         await Future<void>.delayed(const Duration(milliseconds: 20));
       }
+      await response.close();
     });
 
+    late HttpClient created;
+    final MjpegClient client =
+        MjpegClient(clientFactory: () => created = HttpClient());
     final Completer<void> first = Completer<void>();
     final StreamSubscription<Uint8List> subscription =
-        MjpegClient().frames(uri).listen((Uint8List frame) {
+        client.frames(uri).listen((Uint8List frame) {
       if (!first.isCompleted) {
         first.complete();
       }
     });
-    await first.future.timeout(const Duration(seconds: 5));
+    await first.future.timeout(
+      const Duration(seconds: 5),
+      onTimeout: () => fail('no frame arrived'),
+    );
     await subscription.cancel();
-    await serverNoticed.future.timeout(const Duration(seconds: 5));
+
+    // A closed HttpClient refuses new requests.
+    await expectLater(created.getUrl(uri), throwsStateError);
   });
 
   group('single images', () {

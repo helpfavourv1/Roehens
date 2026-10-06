@@ -21,7 +21,8 @@ class MjpegClient {
     this.connectTimeout = const Duration(seconds: 8),
     this.idleTimeout = const Duration(seconds: 10),
     this.errorMapper = const ErrorMapper(),
-  });
+    HttpClient Function()? clientFactory,
+  }) : _clientFactory = clientFactory ?? HttpClient.new;
 
   /// How long to wait for the connection and the response headers.
   final Duration connectTimeout;
@@ -30,6 +31,7 @@ class MjpegClient {
   final Duration idleTimeout;
 
   final ErrorMapper errorMapper;
+  final HttpClient Function() _clientFactory;
 
   /// JPEG frames of the stream at [uri], until the server closes it or the
   /// caller cancels. Cancelling closes the connection.
@@ -84,7 +86,7 @@ class MjpegClient {
   }
 
   HttpClient _newClient(CameraCredentials credentials) {
-    final HttpClient client = HttpClient()..connectionTimeout = connectTimeout;
+    final HttpClient client = _clientFactory()..connectionTimeout = connectTimeout;
     if (!credentials.isEmpty) {
       client.authenticate = (Uri url, String scheme, String? realm) async {
         final HttpClientCredentials secret = scheme.toLowerCase() == 'digest'
