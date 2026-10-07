@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope">
+  <s:Body>
+    <tds:GetDeviceInformationResponse xmlns:tds="http://www.onvif.org/ver10/device/wsdl">
+      <tds:Manufacturer>Example Cameras Ltd</tds:Manufacturer>
+      <tds:Model>IPC-5MP-H265</tds:Model>
+      <tds:FirmwareVersion>V5.3.1 build 250101</tds:FirmwareVersion>
+      <tds:SerialNumber>EX2025A1B2C3</tds:SerialNumber>
+      <tds:HardwareId>1.0</tds:HardwareId>
+    </tds:GetDeviceInformationResponse>
+  </s:Body>
+</s:Envelope>

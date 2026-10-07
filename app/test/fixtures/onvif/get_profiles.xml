@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope">
+  <s:Body>
+    <trt:GetProfilesResponse xmlns:trt="http://www.onvif.org/ver10/media/wsdl" xmlns:tt="http://www.onvif.org/ver10/schema">
+      <trt:Profiles fixed="true" token="profile_1">
+        <tt:Name>MainStream</tt:Name>
+        <tt:VideoSourceConfiguration token="vsc_1">
+          <tt:Name>VideoSource</tt:Name>
+          <tt:SourceToken>vs_1</tt:SourceToken>
+          <tt:Bounds x="0" y="0" width="2592" height="1944"/>
+        </tt:VideoSourceConfiguration>
+        <tt:VideoEncoderConfiguration token="vec_1">
+          <tt:Name>MainEncoder</tt:Name>
+          <tt:Encoding>H265</tt:Encoding>
+          <tt:Resolution><tt:Width>2592</tt:Width><tt:Height>1944</tt:Height></tt:Resolution>
+          <tt:Quality>5</tt:Quality>
+          <tt:RateControl>
+            <tt:FrameRateLimit>25</tt:FrameRateLimit>
+            <tt:EncodingInterval>1</tt:EncodingInterval>
+            <tt:BitrateLimit>4096</tt:BitrateLimit>
+          </tt:RateControl>
+        </tt:VideoEncoderConfiguration>
+        <tt:PTZConfiguration token="ptz_1"><tt:Name>PTZ</tt:Name></tt:PTZConfiguration>
+      </trt:Profiles>
+      <trt:Profiles fixed="true" token="profile_2">
+        <tt:Name>SubStream</tt:Name>
+        <tt:VideoEncoderConfiguration token="vec_2">
+          <tt:Name>SubEncoder</tt:Name>
+          <tt:Encoding>H264</tt:Encoding>
+          <tt:Resolution><tt:Width>640</tt:Width><tt:Height>360</tt:Height></tt:Resolution>
+          <tt:Quality>3</tt:Quality>
+          <tt:RateControl>
+            <tt:FrameRateLimit>15</tt:FrameRateLimit>
+            <tt:EncodingInterval>1</tt:EncodingInterval>
+            <tt:BitrateLimit>512</tt:BitrateLimit>
+          </tt:RateControl>
+        </tt:VideoEncoderConfiguration>
+      </trt:Profiles>
+    </trt:GetProfilesResponse>
+  </s:Body>
+</s:Envelope>

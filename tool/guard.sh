@@ -80,7 +80,7 @@ dart_grep "import ${Q}package:[a-z_]*(phosphor|tabler)[a-z_]*/" $LIB | grep -v '
 
 # layer rule: core has no dart:io and no plugin imports
 dart_grep "^import ${Q}" $LIB/core \
-  | grep -vE "import ${Q}(dart:(async|convert|math|typed_data|collection)${Q}|package:(roehens|xml|intl|meta|collection|characters)/|package:flutter/foundation\\.dart${Q}|[^:'\"]+\\.dart${Q})" \
+  | grep -vE "import ${Q}(dart:(async|convert|math|typed_data|collection)${Q}|package:(roehens|xml|crypto|intl|meta|collection|characters)/|package:flutter/foundation\\.dart${Q}|[^:'\"]+\\.dart${Q})" \
   | check "lib/core imports dart:io or a plugin"
 
 # hard-coded user-facing strings in screens and widgets (heuristic)
