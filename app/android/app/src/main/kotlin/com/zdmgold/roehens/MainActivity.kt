@@ -9,8 +9,13 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
+    private var networkChannel: MulticastLockChannel? = null
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        networkChannel = MulticastLockChannel(this).also {
+            it.register(flutterEngine.dartExecutor.binaryMessenger)
+        }
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, PIP_CHANNEL)
             .setMethodCallHandler { call, result ->
                 when (call.method) {
@@ -20,6 +25,11 @@ class MainActivity : FlutterActivity() {
                     else -> result.notImplemented()
                 }
             }
+    }
+
+    override fun onDestroy() {
+        networkChannel?.release()
+        super.onDestroy()
     }
 
     private fun isPipSupported(): Boolean {
