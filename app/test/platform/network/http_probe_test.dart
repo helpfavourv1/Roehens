@@ -71,6 +71,22 @@ void main() {
     expect(rejected.statusCode, 401);
   });
 
+  test('wrong credentials give a 401 quickly', () async {
+    final Uri uri = await serveLocal((HttpRequest r) async {
+      r.response.statusCode = HttpStatus.unauthorized;
+      r.response.headers.set(HttpHeaders.wwwAuthenticateHeader, 'Basic realm="cam"');
+      await r.response.close();
+    });
+    final Stopwatch clock = Stopwatch()..start();
+    final HttpProbeResult result = (await HttpProbe().get(
+      uri,
+      credentials: const CameraCredentials(username: 'admin', password: 'wrong'),
+    ))
+        .valueOrNull!;
+    expect(result.statusCode, 401);
+    expect(clock.elapsedMilliseconds, lessThan(3000));
+  });
+
   test('an unreachable host is a network error', () async {
     final HttpServer closed =
         await HttpServer.bind(InternetAddress.loopbackIPv4, 0);

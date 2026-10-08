@@ -116,6 +116,27 @@ void main() {
     expect((error! as AppError).errorClass, ErrorClass.authFailed);
   });
 
+  test('wrong credentials fail fast instead of retrying until a timeout', () async {
+    final Uri uri = await serve((HttpRequest r) async {
+      r.response.statusCode = HttpStatus.unauthorized;
+      r.response.headers.set(
+        HttpHeaders.wwwAuthenticateHeader,
+        'Basic realm="cam"',
+      );
+      await r.response.close();
+    });
+    final Stopwatch clock = Stopwatch()..start();
+    final (List<Uint8List> got, Object? error) = await collect(
+      MjpegClient(connectTimeout: const Duration(seconds: 8)).frames(
+        uri,
+        credentials: const CameraCredentials(username: 'admin', password: 'wrong'),
+      ),
+    );
+    expect(got, isEmpty);
+    expect((error! as AppError).errorClass, ErrorClass.authFailed);
+    expect(clock.elapsedMilliseconds, lessThan(3000));
+  });
+
   test('HTTP statuses map to the documented error classes', () async {
     for (final (int status, ErrorClass expected) in <(int, ErrorClass)>[
       (HttpStatus.notFound, ErrorClass.pathNotFound),

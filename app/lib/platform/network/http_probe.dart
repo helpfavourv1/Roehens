@@ -5,6 +5,7 @@ import 'package:roehens/core/errors/app_error.dart';
 import 'package:roehens/core/errors/error_mapper.dart';
 import 'package:roehens/core/errors/result.dart';
 import 'package:roehens/core/models/camera.dart';
+import 'package:roehens/platform/network/http_credentials.dart';
 
 /// What an HTTP address answered, without reading the body.
 class HttpProbeResult {
@@ -46,24 +47,7 @@ class HttpProbe {
   }) async {
     final Stopwatch clock = Stopwatch()..start();
     final HttpClient client = HttpClient()..connectionTimeout = timeout;
-    if (!credentials.isEmpty) {
-      client.authenticate = (Uri url, String scheme, String? realm) async {
-        client.addCredentials(
-          url,
-          realm ?? '',
-          scheme.toLowerCase() == 'digest'
-              ? HttpClientDigestCredentials(
-                  credentials.username,
-                  credentials.password,
-                )
-              : HttpClientBasicCredentials(
-                  credentials.username,
-                  credentials.password,
-                ),
-        );
-        return true;
-      };
-    }
+    answerChallengeOnce(client, credentials);
     try {
       final HttpClientRequest request = await client.getUrl(uri).timeout(timeout);
       final HttpClientResponse response = await request.close().timeout(timeout);

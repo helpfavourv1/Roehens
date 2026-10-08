@@ -7,6 +7,7 @@ import 'package:roehens/core/errors/error_class.dart';
 import 'package:roehens/core/errors/error_mapper.dart';
 import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/services/mjpeg_stream_parser.dart';
+import 'package:roehens/platform/network/http_credentials.dart';
 
 /// HTTP client for MJPEG cameras and single-image snapshot addresses.
 ///
@@ -87,21 +88,7 @@ class MjpegClient {
 
   HttpClient _newClient(CameraCredentials credentials) {
     final HttpClient client = _clientFactory()..connectionTimeout = connectTimeout;
-    if (!credentials.isEmpty) {
-      client.authenticate = (Uri url, String scheme, String? realm) async {
-        final HttpClientCredentials secret = scheme.toLowerCase() == 'digest'
-            ? HttpClientDigestCredentials(
-                credentials.username,
-                credentials.password,
-              )
-            : HttpClientBasicCredentials(
-                credentials.username,
-                credentials.password,
-              );
-        client.addCredentials(url, realm ?? '', secret);
-        return true;
-      };
-    }
+    answerChallengeOnce(client, credentials);
     return client;
   }
 

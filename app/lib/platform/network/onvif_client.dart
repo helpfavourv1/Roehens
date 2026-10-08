@@ -11,6 +11,7 @@ import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/models/ptz_command.dart';
 import 'package:roehens/core/services/onvif_message_builder.dart';
 import 'package:roehens/core/services/onvif_response_parser.dart';
+import 'package:roehens/platform/network/http_credentials.dart';
 
 /// Everything learned about a camera by [OnvifClient.connect].
 class OnvifDevice {
@@ -70,24 +71,7 @@ class OnvifClient {
     CameraCredentials credentials = CameraCredentials.none,
   }) async {
     final HttpClient client = _clientFactory()..connectionTimeout = timeout;
-    if (!credentials.isEmpty) {
-      client.authenticate = (Uri url, String scheme, String? realm) async {
-        client.addCredentials(
-          url,
-          realm ?? '',
-          scheme.toLowerCase() == 'digest'
-              ? HttpClientDigestCredentials(
-                  credentials.username,
-                  credentials.password,
-                )
-              : HttpClientBasicCredentials(
-                  credentials.username,
-                  credentials.password,
-                ),
-        );
-        return true;
-      };
-    }
+    answerChallengeOnce(client, credentials);
     try {
       final HttpClientRequest request = await client.postUrl(service).timeout(timeout);
       request.headers.contentType =
