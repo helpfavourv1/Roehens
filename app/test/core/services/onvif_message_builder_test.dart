@@ -161,4 +161,9 @@ void main() {
       expect(find(document, 'PresetToken').innerText, '9');
     });
   });
+
+  test('GetCapabilities asks for every category', () {
+    final XmlDocument document = XmlDocument.parse(builder.getCapabilities());
+    expect(find(document, 'Category').innerText, 'All');
+  });
 }

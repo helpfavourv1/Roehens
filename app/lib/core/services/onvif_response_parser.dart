@@ -48,6 +48,40 @@ class OnvifProfile {
   int get pixels => (width ?? 0) * (height ?? 0);
 }
 
+/// Where a device's other services live. Null when it does not offer one.
+class OnvifServices {
+  const OnvifServices({this.media, this.ptz});
+
+  final Uri? media;
+  final Uri? ptz;
+}
+
+/// The profile to use for the main stream (most pixels) and for the substream
+/// (fewest pixels, only when it is clearly smaller).
+({OnvifProfile? main, OnvifProfile? sub}) selectMainAndSub(
+  List<OnvifProfile> profiles,
+) {
+  if (profiles.isEmpty) {
+    return (main: null, sub: null);
+  }
+  OnvifProfile main = profiles.first;
+  for (final OnvifProfile profile in profiles) {
+    if (profile.pixels > main.pixels) {
+      main = profile;
+    }
+  }
+  OnvifProfile? sub;
+  for (final OnvifProfile profile in profiles) {
+    if (profile.token == main.token || profile.pixels >= main.pixels) {
+      continue;
+    }
+    if (sub == null || profile.pixels < sub.pixels) {
+      sub = profile;
+    }
+  }
+  return (main: main, sub: sub);
+}
+
 /// Turns SOAP responses into values or classified errors. Never throws.
 class OnvifResponseParser {
   const OnvifResponseParser();
@@ -66,6 +100,25 @@ class OnvifResponseParser {
           serialNumber: _text(response, 'SerialNumber'),
           hardwareId: _text(response, 'HardwareId'),
         ),
+      );
+    });
+  }
+
+  Result<OnvifServices> parseServices(String text) {
+    return _parse<OnvifServices>(text, (XmlElement root) {
+      final XmlElement? capabilities = _first(root, 'Capabilities');
+      if (capabilities == null) {
+        return _unexpected<OnvifServices>();
+      }
+      Uri? address(String service) {
+        final XmlElement? element = _first(capabilities, service);
+        final String text = element == null ? '' : _text(element, 'XAddr');
+        final Uri? uri = Uri.tryParse(text);
+        return uri == null || uri.host.isEmpty ? null : uri;
+      }
+
+      return Ok<OnvifServices>(
+        OnvifServices(media: address('Media'), ptz: address('PTZ')),
       );
     });
   }

@@ -161,4 +161,64 @@ void main() {
       expect(parser.parseAcknowledgement(ok).isOk, isTrue);
     });
   });
+
+  group('services', () {
+    test('media and PTZ addresses are read', () {
+      final OnvifServices services =
+          parser.parseServices(fixture('capabilities.xml')).valueOrNull!;
+      expect(services.media!.path, '/onvif/media_service');
+      expect(services.ptz!.path, '/onvif/ptz_service');
+    });
+
+    test('a service the camera does not offer is null', () {
+      final String text = fixture('capabilities.xml')
+          .replaceAll(RegExp(r'<tt:PTZ>.*?</tt:PTZ>', dotAll: true), '');
+      final OnvifServices services = parser.parseServices(text).valueOrNull!;
+      expect(services.media, isNotNull);
+      expect(services.ptz, isNull);
+    });
+
+    test('a response without capabilities is unexpected', () {
+      expect(parser.parseServices(fixture('stream_uri.xml')).isErr, isTrue);
+    });
+  });
+
+  group('main and substream selection', () {
+    final List<OnvifProfile> profiles =
+        const OnvifResponseParser().parseProfiles(fixture('get_profiles.xml')).valueOrNull!;
+
+    test('the largest picture is main and the smallest is the substream', () {
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(profiles);
+      expect(pick.main!.token, 'profile_1');
+      expect(pick.sub!.token, 'profile_2');
+    });
+
+    test('the order of the profiles does not matter', () {
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick =
+          selectMainAndSub(profiles.reversed.toList());
+      expect(pick.main!.token, 'profile_1');
+      expect(pick.sub!.token, 'profile_2');
+    });
+
+    test('a single profile has no substream', () {
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick =
+          selectMainAndSub(<OnvifProfile>[profiles.first]);
+      expect(pick.main!.token, 'profile_1');
+      expect(pick.sub, isNull);
+    });
+
+    test('profiles of equal size have no substream', () {
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(<OnvifProfile>[
+        const OnvifProfile(token: 'a', name: 'a', width: 640, height: 360),
+        const OnvifProfile(token: 'b', name: 'b', width: 640, height: 360),
+      ]);
+      expect(pick.sub, isNull);
+    });
+
+    test('nothing in gives nothing out', () {
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(<OnvifProfile>[]);
+      expect(pick.main, isNull);
+      expect(pick.sub, isNull);
+    });
+  });
 }

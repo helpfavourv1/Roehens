@@ -118,6 +118,14 @@ class OnvifMessageBuilder {
     return envelope('<tds:GetDeviceInformation/>', auth: auth);
   }
 
+  /// Asks the device where its media and PTZ services live.
+  String getCapabilities({OnvifAuth? auth}) {
+    return envelope(
+      '<tds:GetCapabilities><tds:Category>All</tds:Category></tds:GetCapabilities>',
+      auth: auth,
+    );
+  }
+
   String getProfiles({OnvifAuth? auth}) {
     return envelope('<trt:GetProfiles/>', auth: auth);
   }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope">
+  <s:Body>
+    <tds:GetCapabilitiesResponse xmlns:tds="http://www.onvif.org/ver10/device/wsdl" xmlns:tt="http://www.onvif.org/ver10/schema">
+      <tds:Capabilities>
+        <tt:Device><tt:XAddr>http://192.168.1.64:8080/onvif/device_service</tt:XAddr></tt:Device>
+        <tt:Media><tt:XAddr>http://10.99.0.5:8080/onvif/media_service</tt:XAddr></tt:Media>
+        <tt:PTZ><tt:XAddr>http://10.99.0.5:8080/onvif/ptz_service</tt:XAddr></tt:PTZ>
+      </tds:Capabilities>
+    </tds:GetCapabilitiesResponse>
+  </s:Body>
+</s:Envelope>
