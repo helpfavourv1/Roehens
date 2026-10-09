@@ -64,6 +64,20 @@ void main() {
     });
   });
 
+  group('isValidHost', () {
+    test('accepts names and addresses', () {
+      for (final String host in <String>['192.168.1.5', 'cam.local', 'my-cam_2', 'fe80::1']) {
+        expect(UrlBuilder.isValidHost(host), isTrue, reason: host);
+      }
+    });
+
+    test('rejects what cannot be a host', () {
+      for (final String host in <String>['', 'a b', 'a/b', 'cam@x', 'a?b', 'a#b']) {
+        expect(UrlBuilder.isValidHost(host), isFalse, reason: host);
+      }
+    });
+  });
+
   group('normalizePath', () {
     test('adds the missing slash and keeps queries', () {
       expect(UrlBuilder.normalizePath('stream0'), '/stream0');

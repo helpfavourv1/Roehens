@@ -35,6 +35,13 @@ class UrlBuilder {
     return <String>[for (final String t in templates) expand(t, channel: channel)];
   }
 
+  /// A host name, an IPv4 address or an IPv6 address: letters, digits, dots,
+  /// hyphens, underscores and (for IPv6) colons. Anything else, such as spaces
+  /// or slashes, cannot be a camera address.
+  static bool isValidHost(String host) {
+    return host.isNotEmpty && RegExp(r'^[A-Za-z0-9._:-]+$').hasMatch(host);
+  }
+
   /// A path with a leading slash. A query string is kept.
   static String normalizePath(String path) {
     final String trimmed = path.trim();
@@ -50,7 +57,7 @@ class UrlBuilder {
   /// and falls back to the main stream when a camera has none.
   static Uri? streamUri(Camera camera, {StreamKind kind = StreamKind.main}) {
     final String host = camera.host.trim().replaceAll(RegExp(r'^\[|\]$'), '');
-    if (host.isEmpty || camera.port < 1 || camera.port > 65535) {
+    if (!isValidHost(host) || camera.port < 1 || camera.port > 65535) {
       return null;
     }
     final String raw = normalizePath(

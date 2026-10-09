@@ -46,6 +46,10 @@ class RtspUrlNormalizer {
       text = 'rtsp://$text';
       assumed = true;
     }
+    // Dart reads an explicit ":0" port as no port at all; refuse it here.
+    if (RegExp(r'://[^/?#]*:0+(?=[/?#]|$)').hasMatch(text)) {
+      return _error(ErrorClass.pathNotFound, 'port is out of range');
+    }
     final Uri uri;
     try {
       uri = Uri.parse(text);
@@ -63,6 +67,9 @@ class RtspUrlNormalizer {
     final String host = uri.host.toLowerCase();
     if (host.isEmpty) {
       return _error(ErrorClass.pathNotFound, 'address has no host');
+    }
+    if (!RegExp(r'^[a-z0-9._:-]+$').hasMatch(host)) {
+      return _error(ErrorClass.pathNotFound, 'host name is not valid');
     }
 
     final bool isRtsp = scheme == 'rtsp';
