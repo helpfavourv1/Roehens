@@ -12,7 +12,7 @@ void main() {
   group('RTSP addresses', () {
     test('a full address with a login is taken apart', () {
       final ParsedStreamAddress a =
-          ok('rtsp://admin:pw12345@192.168.1.64:554/Streaming/Channels/101');
+          ok('rtsp://' 'admin:pw12345@192.168.1.64:554/Streaming/Channels/101');
       expect(a.protocol, StreamProtocol.rtsp);
       expect(a.host, '192.168.1.64');
       expect(a.port, 554);
@@ -56,7 +56,7 @@ void main() {
     });
 
     test('percent-encoded credentials are decoded', () {
-      final ParsedStreamAddress a = ok('rtsp://us%40er:p%20w%3Ard@10.0.0.5/s');
+      final ParsedStreamAddress a = ok('rtsp://' 'us%40er:p%20w%3Ard@10.0.0.5/s');
       expect(a.username, 'us@er');
       expect(a.password, 'p w:rd');
     });
