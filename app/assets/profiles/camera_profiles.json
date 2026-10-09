@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "brands": [
+    {
+      "id": "generic_stream0",
+      "displayName": "Generic (stream0 / stream1)",
+      "defaultPorts": [
+        554
+      ],
+      "mainPathTemplates": [
+        "/stream0"
+      ],
+      "subPathTemplates": [
+        "/stream1"
+      ],
+      "mjpegTemplates": [],
+      "snapshotTemplates": [],
+      "notes": "Used by many low-cost H.265 cameras. The main path /stream0 was confirmed on a real camera; the substream /stream1 is the usual pair.",
+      "verified": true
+    },
+    {
+      "id": "generic_rtsp",
+      "displayName": "Generic RTSP",
+      "defaultPorts": [
+        554
+      ],
+      "mainPathTemplates": [
+        "/stream1",
+        "/live",
+        "/h264",
+        "/1",
+        "/live/ch0",
+        "/ch0"
+      ],
+      "subPathTemplates": [
+        "/stream2",
+        "/live/ch1",
+        "/ch1"
+      ],
+      "mjpegTemplates": [],
+      "snapshotTemplates": [],
+      "notes": "Common paths tried by unbranded cameras. Check the manual for the exact path.",
+      "verified": false
+    },
+    {
+      "id": "generic_mjpeg",
+      "displayName": "Generic MJPEG over HTTP",
+      "defaultPorts": [
+        80,
+        8080
+      ],
+      "mainPathTemplates": [],
+      "subPathTemplates": [],
+      "mjpegTemplates": [
+        "/mjpg/video.mjpg",
+        "/video.mjpg",
+        "/videostream.cgi",
+        "/axis-cgi/mjpg/video.cgi",
+        "/cgi-bin/mjpeg"
+      ],
+      "snapshotTemplates": [
+        "/snapshot.jpg",
+        "/image.jpg",
+        "/jpg/image.jpg",
+        "/cgi-bin/snapshot.cgi"
+      ],
+      "notes": "Cameras that send motion JPEG over HTTP. Paths and ports vary by model.",
+      "verified": false
+    },
+    {
+      "id": "hikvision",
+      "displayName": "Hikvision",
+      "defaultPorts": [
+        554,
+        80,
+        8000
+      ],
+      "mainPathTemplates": [
+        "/Streaming/Channels/{channel}01",
+        "/h264/ch{channel}/main/av_stream"
+      ],
+      "subPathTemplates": [
+        "/Streaming/Channels/{channel}02",
+        "/h264/ch{channel}/sub/av_stream"
+      ],
+      "mjpegTemplates": [],
+      "snapshotTemplates": [
+        "/ISAPI/Streaming/channels/{channel}01/picture"
+      ],
+      "notes": "Many resold brands (for example Annke, Ezviz, Swann, Night Owl) use the same paths.",
+      "verified": false
+    },
+    {
+      "id": "dahua",
+      "displayName": "Dahua",
+      "defaultPorts": [
+        554,
+        80,
+        37777
+      ],
+      "mainPathTemplates": [
+        "/cam/realmonitor?channel={channel}&subtype=0"
+      ],
+      "subPathTemplates": [
+        "/cam/realmonitor?channel={channel}&subtype=1"
+      ],
+      "mjpegTemplates": [
+        "/cgi-bin/mjpg/video.cgi?channel={channel}&subtype=1"
+      ],
+      "snapshotTemplates": [
+        "/cgi-bin/snapshot.cgi?channel={channel}"
+      ],
+      "notes": "Many resold brands (for example Lorex, Amcrest, Imou) use the same paths.",
+      "verified": false
+    },
+    {
+      "id": "amcrest",
+      "displayName": "Amcrest",
+      "defaultPorts": [
+        554,
+        80,
+        37777
+      ],
+      "mainPathTemplates": [
+        "/cam/realmonitor?channel={channel}&subtype=0"
+      ],
+      "subPathTemplates": [
+        "/cam/realmonitor?channel={channel}&subtype=1"
+      ],
+      "mjpegTemplates": [
+        "/cgi-bin/mjpg/video.cgi?channel={channel}&subtype=1"
+      ],
+      "snapshotTemplates": [
+        "/cgi-bin/snapshot.cgi?channel={channel}"
+      ],
+      "notes": "Uses the Dahua paths.",
+      "verified": false
+    },
+    {
+      "id": "reolink",
+      "displayName": "Reolink",
+      "defaultPorts": [
+        554,
+        80
+      ],
+      "mainPathTemplates": [
+        "/h264Preview_{channel2}_main",
+        "/Preview_{channel2}_main"
+      ],
+      "subPathTemplates": [
+        "/h264Preview_{channel2}_sub",
+        "/Preview_{channel2}_sub"
+      ],
+      "mjpegTemplates": [],
+      "snapshotTemplates": [],
+      "notes": "RTSP and ONVIF must be switched on in the camera's network settings.",
+      "verified": false
+    },
+    {
+      "id": "tapo",
+      "displayName": "TP-Link Tapo",
+      "defaultPorts": [
+        554,
+        2020
+      ],
+      "mainPathTemplates": [
+        "/stream1"
+      ],
+      "subPathTemplates": [
+        "/stream2"
+      ],
+      "mjpegTemplates": [],
+      "snapshotTemplates": [],
+      "notes": "Create a camera account in the Tapo app (Advanced Settings, Camera Account) and use it here.",
+      "verified": false
+    },
+    {
+      "id": "axis",
+      "displayName": "Axis",
+      "defaultPorts": [
+        554,
+        80
+      ],
+      "mainPathTemplates": [
+        "/axis-media/media.amp"
+      ],
+      "subPathTemplates": [
+        "/axis-media/media.amp?resolution=640x360"
+      ],
+      "mjpegTemplates": [
+        "/axis-cgi/mjpg/video.cgi"
+      ],
+      "snapshotTemplates": [
+        "/axis-cgi/jpg/image.cgi"
+      ],
+      "notes": "Resolution options of the substream depend on the model.",
+      "verified": false
+    },
+    {
+      "id": "foscam",
+      "displayName": "Foscam",
+      "defaultPorts": [
+        554,
+        88
+      ],
+      "mainPathTemplates": [
+        "/videoMain"
+      ],
+      "subPathTemplates": [
+        "/videoSub"
+      ],
+      "mjpegTemplates": [
+        "/cgi-bin/CGIStream.cgi?cmd=GetMJStream"
+      ],
+      "snapshotTemplates": [
+        "/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2"
+      ],
+      "notes": "Older models use port 88 for HTTP and need the RTSP port enabled in settings.",
+      "verified": false
+    },
+    {
+      "id": "uniview",
+      "displayName": "Uniview",
+      "defaultPorts": [
+        554,
+        80
+      ],
+      "mainPathTemplates": [
+        "/unicast/c{channel}/s0/live"
+      ],
+      "subPathTemplates": [
+        "/unicast/c{channel}/s1/live"
+      ],
+      "mjpegTemplates": [],
+      "snapshotTemplates": [],
+      "notes": null,
+      "verified": false
+    },
+    {
+      "id": "vivotek",
+      "displayName": "Vivotek",
+      "defaultPorts": [
+        554,
+        80
+      ],
+      "mainPathTemplates": [
+        "/live.sdp"
+      ],
+      "subPathTemplates": [
+        "/live2.sdp"
+      ],
+      "mjpegTemplates": [
+        "/video.mjpg"
+      ],
+      "snapshotTemplates": [
+        "/cgi-bin/viewer/video.jpg"
+      ],
+      "notes": null,
+      "verified": false
+    },
+    {
+      "id": "wyze",
+      "displayName": "Wyze (RTSP firmware)",
+      "defaultPorts": [
+        554
+      ],
+      "mainPathTemplates": [
+        "/live"
+      ],
+      "subPathTemplates": [],
+      "mjpegTemplates": [],
+      "snapshotTemplates": [],
+      "notes": "Only works with the separate RTSP firmware from Wyze.",
+      "verified": false
+    }
+  ]
+}
