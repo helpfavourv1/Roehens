@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:roehens/core/constants/limits.dart';
 import 'package:roehens/core/contracts/clock_contract.dart';
 import 'package:roehens/core/contracts/logger_contract.dart';
+import 'package:roehens/core/services/redactor.dart';
 
 /// Local ring-buffer log. Nothing is written to disk or uploaded; the person can
 /// attach the buffer to a feedback mail. Credentials embedded in URLs are
@@ -18,15 +19,8 @@ class LoggerService implements LoggerContract {
   final int _capacity;
   final ListQueue<LogEntry> _buffer = ListQueue<LogEntry>();
 
-  static final RegExp _urlCredentials = RegExp(r'([A-Za-z][A-Za-z0-9+.-]*://)[^/@\s]+:[^/@\s]+@');
-
   /// Masks `user:password@` in any URL inside [text].
-  static String redact(String text) {
-    return text.replaceAllMapped(
-      _urlCredentials,
-      (Match m) => '${m.group(1)}***@',
-    );
-  }
+  static String redact(String text) => Redactor.redactUrls(text);
 
   @override
   void log(
