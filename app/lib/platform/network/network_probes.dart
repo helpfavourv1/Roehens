@@ -13,9 +13,8 @@ import 'package:roehens/platform/network/rtsp_probe.dart';
 class NetworkProbes implements ConnectivityProbes {
   NetworkProbes({
     this.timeout = const Duration(seconds: 6),
-    ErrorMapper errorMapper = const ErrorMapper(),
-  })  : _errorMapper = errorMapper,
-        _rtsp = RtspProbe(timeout: timeout),
+    this._errorMapper = const ErrorMapper(),
+  })  : _rtsp = RtspProbe(timeout: timeout),
         _http = HttpProbe(timeout: timeout);
 
   final Duration timeout;
