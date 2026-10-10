@@ -1,0 +1,512 @@
+workflow: check
+run: 38038768634
+sha: a0ec78c2b49a984b2fcc180962b4938445b3146d
+job status: success
+
+Flutter 3.47.6 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 5fc346839b (9 days ago) • 2026-09-30 15:02:49 -0700
+Engine • hash b8c8d3d8d5d0095127057f8a29ca8cc53da2167c (revision 692136cb65) (10 days ago) • 2026-09-30 00:56:59.000Z
+Tools • Dart 3.13.5 • DevTools 2.60.0
+== pub get
+Resolving dependencies...
+Downloading packages...
+  dbus 0.7.15 (0.8.0 available)
+  flutter_secure_storage 9.2.4 (11.2.0 available)
+  flutter_secure_storage_linux 1.2.3 (3.0.3 available)
+  flutter_secure_storage_macos 3.1.3 (4.0.0 available)
+  flutter_secure_storage_platform_interface 1.1.2 (2.1.1 available)
+  flutter_secure_storage_web 1.2.1 (2.1.1 available)
+  flutter_secure_storage_windows 3.1.2 (4.2.2 available)
+  jni_flutter 1.0.3 (1.0.4+1 available)
+  js 0.6.7 (0.7.2 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  package_info_plus 9.0.1 (10.2.2 available)
+  package_info_plus_platform_interface 3.2.1 (4.1.0 available)
+  shared_preferences 2.5.5 (2.5.6 available)
+  sqflite 2.4.4 (2.4.4+1 available)
+  sqflite_common 2.5.13 (2.5.13+1 available)
+  test_api 0.7.12 (0.7.15 available)
+  wakelock_plus 1.5.2 (1.8.1 available)
+  win32 5.15.0 (6.4.0 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies!
+19 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+pubspec.lock is up to date
+== analyze
+Resolving dependencies...
+Downloading packages...
+  archive 4.3.0 (4.4.0 available)
+  dbus 0.7.15 (0.8.0 available)
+  flutter_secure_storage 9.2.4 (11.2.0 available)
+  flutter_secure_storage_linux 1.2.3 (3.0.3 available)
+  flutter_secure_storage_macos 3.1.3 (4.0.0 available)
+  flutter_secure_storage_platform_interface 1.1.2 (2.1.1 available)
+  flutter_secure_storage_web 1.2.1 (2.1.1 available)
+  flutter_secure_storage_windows 3.1.2 (4.2.2 available)
+  jni_flutter 1.0.3 (1.0.4+1 available)
+  js 0.6.7 (0.7.2 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  package_info_plus 9.0.1 (10.2.2 available)
+  package_info_plus_platform_interface 3.2.1 (4.1.0 available)
+  shared_preferences 2.5.5 (2.5.6 available)
+  sqflite 2.4.4 (2.4.4+1 available)
+  sqflite_common 2.5.13 (2.5.13+1 available)
+  test_api 0.7.12 (0.7.15 available)
+  wakelock_plus 1.5.2 (1.8.1 available)
+  win32 5.15.0 (6.4.0 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies!
+20 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing app...                                                
+No issues found! (ran in 12.2s)
+== guard
+guard: all rules passed
+== test
+Resolving dependencies...
+Downloading packages...
+  archive 4.3.0 (4.4.0 available)
+  dbus 0.7.15 (0.8.0 available)
+  flutter_secure_storage 9.2.4 (11.2.0 available)
+  flutter_secure_storage_linux 1.2.3 (3.0.3 available)
+  flutter_secure_storage_macos 3.1.3 (4.0.0 available)
+  flutter_secure_storage_platform_interface 1.1.2 (2.1.1 available)
+  flutter_secure_storage_web 1.2.1 (2.1.1 available)
+  flutter_secure_storage_windows 3.1.2 (4.2.2 available)
+  jni_flutter 1.0.3 (1.0.4+1 available)
+  js 0.6.7 (0.7.2 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  package_info_plus 9.0.1 (10.2.2 available)
+  package_info_plus_platform_interface 3.2.1 (4.1.0 available)
+  shared_preferences 2.5.5 (2.5.6 available)
+  sqflite 2.4.4 (2.4.4+1 available)
+  sqflite_common 2.5.13 (2.5.13+1 available)
+  test_api 0.7.12 (0.7.15 available)
+  wakelock_plus 1.5.2 (1.8.1 available)
+  win32 5.15.0 (6.4.0 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies!
+20 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+
+::group::✅ Passing tests
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_font_bundle_test.dart: the font manifest contains every icon weight in use
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: every semantic name has a mapping
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: no two semantic names share a glyph
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: each weight resolves to its own font family
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: only duotone icons carry a secondary layer
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: glyphs come from the bundled fonts, not from a package
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: only directional icons mirror in right-to-left layouts
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) body text on the surfaces it sits on
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) tertiary text on cards, scaffold and inputs
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) label on the accent fill and accent text on the scaffold
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) status colors on cards
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) stream status tokens alias the status colors
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) body text on the surfaces it sits on
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) tertiary text on cards, scaffold and inputs
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) label on the accent fill and accent text on the scaffold
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) status colors on cards
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) stream status tokens alias the status colors
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: video backdrop is identical in both themes
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography script factors follow the specification
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography line height is multiplied by the script factor
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography uppercase applies only to cased scripts
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography changing numbers use tabular figures
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "RTSP/1.0 401 Unauthorized" is ErrorClass.authFailed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "HTTP 403 Forbidden" is ErrorClass.authFailed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Authentication failed" is ErrorClass.authFailed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "RTSP/1.0 404 Not Found" is ErrorClass.pathNotFound
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Unsupported codec: hevc" is ErrorClass.unsupportedMedia
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Invalid data found when processing input" is ErrorClass.unsupportedMedia
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Connection reset by peer" is ErrorClass.streamDropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Broken pipe" is ErrorClass.streamDropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Connection refused" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Operation timed out" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "No route to host" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Failed host lookup: 'cam.local'" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification status codes inside hosts, ports and addresses are not statuses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification an unknown message uses the fallback
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: statuses map to the documented classes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: exceptions an AppError passes through unchanged
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: exceptions a timeout is a network problem
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: exceptions an unknown exception is fatal and keeps its detail
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: error classes every class has a distinct localization key
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: error classes only transient classes retry on their own
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: error classes authentication and path errors are not retriable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: Result Ok carries a value
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: Result Err carries an error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: the password digest matches the WS-Security reference value
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope a signed request carries a UsernameToken with digest and nonce
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope the time offset moves the signed timestamp
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope a fresh random nonce is used each time
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope without credentials the request is unsigned
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope special characters in the username are escaped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests every request is well-formed XML
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests GetStreamUri asks for RTSP and names the profile
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests a profile token is escaped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests continuous move carries the velocities
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests each command kind produces its own request
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests stop halts both pan-tilt and zoom
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests a preset request names the preset
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: GetCapabilities asks for every category
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: expand fills every placeholder
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: expand a template without placeholders is unchanged
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: expand a query with several placeholders is expanded
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: pathsFor each kind lists its own paths
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: isValidHost accepts names and addresses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: isValidHost rejects what cannot be a host
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: normalizePath adds the missing slash and keeps queries
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri an RTSP camera gives an rtsp address with its port
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri the substream is used when asked and when the camera has one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri an HTTP camera gives an http address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri a query string stays a query string
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri a path without a slash gets one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri host names and IPv6 hosts are accepted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri no address is built from unusable settings
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri credentials never appear in the address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: withCredentials empty credentials leave the address alone
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: withCredentials credentials go into the user-info part and the rest is kept
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: withCredentials special characters are percent-encoded and survive a round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: rtspTransportOption tcp is always tcp
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: rtspTransportOption without UDP support udp and auto fall back to tcp
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: rtspTransportOption with UDP support udp is honored and auto lets the engine choose
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: reads the size from the frame header
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: segments before the frame header are skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: anything that is not a JPEG gives null
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: a truncated header gives null instead of throwing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: a zero size is rejected
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 1 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 3 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 17 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 512 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 100000 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 1 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 3 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 17 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 512 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 100000 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: bare line feeds instead of CRLF are accepted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a boundary declared with leading dashes still matches
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a quoted boundary value is unquoted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: the boundary is found in the stream when none is declared
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: junk before the first part is skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a part that is not a JPEG is dropped and the next one still parses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a truncated JPEG is dropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: an oversize part is skipped and the stream recovers
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: reset forgets a half-received part
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: boundaryFromContentType handles the usual headers
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: tiles beyond the decoder budget become posters, in screen order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: the plan keeps the input order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: the focused tile always plays and uses the main stream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: a focused tile plays even with a budget of zero
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: grid tiles use the substream when the camera has one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: substreams can be switched off
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: snapshot cameras cost nothing and are always live
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: only HTTP cameras refresh their poster
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: memory pressure with a focused tile leaves only that tile live
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: memory pressure in the grid halves the budget but keeps one tile
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: a focused id that is not on screen is ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: nothing on screen gives an empty plan
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: budgets match the specification
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: device information
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: profiles both profiles are read with their stream details
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: profiles a profile without a token is skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: profiles a profile with no video configuration still lists
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: stream address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: clock offset a camera ahead of us has a positive offset
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: clock offset a camera behind us has a negative offset
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: clock offset a response without a time is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses not authorized becomes an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses other faults are reported as the camera refusing the request
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses a fault is found whatever the request was
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses malformed XML never throws
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses a response to a different request is unexpected
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses an empty successful reply is a good acknowledgement
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: services media and PTZ addresses are read
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: services a service the camera does not offer is null
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: services a response without capabilities is unexpected
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection the largest picture is main and the smallest is the substream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection the order of the profiles does not matter
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection a single profile has no substream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection profiles of equal size have no substream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection nothing in gives nothing out
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: challenge is parsed from the header
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: challenge unquoted values and any letter case are accepted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: challenge anything else is not a challenge
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response matches the RFC 2617 example
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response without qop the older RFC 2069 form is used
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response the nonce count is counted in hex with eight digits
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response a random client nonce differs between calls
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: basic encodes user and password
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: answer prefers Digest over Basic
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: answer falls back to Basic
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: answer offers nothing when the server asks for something else
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe message is well-formed and asks for network video transmitters
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match a real-looking reply becomes a discovery result
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match the port defaults to 80 when the address has none
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match an IPv4 address is preferred over other addresses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match a reply without a usable address is ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match anything else is ignored without throwing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match a device name without a scope is simply absent
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: a healthy RTSP camera passes every step
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: the address handed to the probes carries no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a host name that does not exist
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a number address skips the name lookup
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a host name is looked up first
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a closed port
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try enabling RTSP is only suggested for RTSP cameras
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a wrong login
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a wrong path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a transport the camera refuses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a camera that answers with a server error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a probe that cannot complete
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try no picture appears
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try an address that cannot be built
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras an MJPEG stream passes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a still-image address passes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a web page instead of a stream is a wrong path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a login rejection
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a missing page
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps without a picture check the last step is skipped and the test passes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps progress reports every step and ends with a final answer for each
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps a failed run still leaves no step pending
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps each step that ran reports how long it took
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: delays follow 1, 2, 4, 8, then 15 seconds
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: it gives up after ten attempts
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: jitter stays within 20 percent of the base delay
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: jitter actually varies the delay
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: thirty seconds of healthy playback forgives earlier failures
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: a manual retry starts the schedule again
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a full address with a login is taken apart
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses the default port is 554
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses an address without a scheme is treated as RTSP
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses just a host gives the root path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses surrounding spaces and an upper-case scheme and host are tolerated
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a query string is kept in the path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a fragment is dropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses percent-encoded credentials are decoded
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a login without a password has an empty password
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses an address with no login has no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses an IPv6 host in brackets is understood
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses a stream address is MJPEG
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses the default HTTP port is 80
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses a still-image address is polled as a snapshot
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses a stream address that mentions an image stays MJPEG
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used empty input
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used encrypted schemes are not supported
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used other schemes are not supported
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used a missing host
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used a port out of range
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used garbage never throws
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database is valid and not empty
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database is sorted by name, ignoring case
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database every brand has an id, a name, ports and at least one path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database every path starts with a slash and carries no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database only placeholders the builder knows are used
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database only the confirmed generic entry is marked verified
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database the famous brands are present
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups byId finds a brand and returns null for an unknown one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups search ignores case and matches inside the name
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups grouping uses the first letter
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups grouping respects the search text
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing a newer file format is refused
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing duplicate ids are refused
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing something that is not an object is refused
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing optional lists may be missing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: isPrivateIpv4 accepts the three private ranges
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: isPrivateIpv4 rejects everything else
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress picks the Wi-Fi address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress mobile data and tunnels never count
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress Wi-Fi wins over an unknown interface regardless of order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress an unknown interface is used when there is nothing better
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress Apple interface names are recognized
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress public and link-local addresses are skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress no interfaces gives nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: guessGateway is the first host of the /24
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: guessGateway is null for an address that is not private
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: describes the app, the device and the settings
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: cameras are described by type only
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: hostKind tells private, public, hostname and IPv6 apart
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: credentials in log lines are masked
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: only the newest log lines are kept
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: active remote switches are listed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: Redactor masks every login in a text
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: Redactor leaves text without logins alone
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: adding assigns id, position and timestamps and stores credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: a camera without credentials writes nothing to the vault
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: credentials are rolled back when the camera cannot be saved
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: a failed credential write stops the add
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: loading returns display order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: a storage failure while loading is reported
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: updating bumps the timestamp and leaves credentials alone by default
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: updating can replace or remove credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: delete returns camera and credentials, and restore puts them back
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: deleting an unknown camera is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: reorder writes the new positions
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: credentialsFor returns none when nothing is stored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: delete all clears cameras and credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: velocityFor a continuous command is scaled by its speed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: velocityFor other command kinds ask for no movement
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: velocityFor speed outside 0..1 cannot push a velocity past the limits
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad the centre and the dead zone do not move the camera
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad the edge of the pad is full speed in that direction
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad moving the finger up tilts up
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad past the edge is capped and speed rises smoothly
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad a diagonal keeps both directions and never exceeds full speed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad a pad with no size does nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: throttling helpers quantize rounds to the step
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: throttling helpers only a meaningful change is worth sending
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: every supported size has columns times rows equal to the size
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: an unsupported size falls back to a single tile
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: page count rounds up and is at least one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: survives a JSON round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: copyWith can clear the auto-cycle override
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: defaults follow the specification
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: survives a JSON round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: missing keys fall back to defaults and unknown keys are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: copyWith can clear the language back to the system language
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: survives a JSON round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: JSON never contains credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: optional fields default when absent
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: copyWith changes only what it is given and can clear optionals
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: credentials are redacted in text and compare by value
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: generated ids are version 4 UUIDs and differ
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions reconcile opens one session per wanted key
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions keys that are no longer wanted are disposed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions an unchanged source is not restarted
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions a changed source replaces the session
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions release disposes one session and stops wanting it
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions new sessions start one stagger apart
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions disposeAll disposes every session
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions a session that cannot be opened ends in an error, not a crash
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting a dropped stream reconnects and returns to playing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting the tile keeps saying reconnecting while the engine reconnects
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting an error that retrying cannot fix is shown and not retried
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting after the attempts run out the tile waits for a manual retry
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting long healthy playback forgives earlier failures
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting a short healthy spell does not forgive failures
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: app lifecycle pause disposes everything except the kept session
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: app lifecycle while paused, reconcile only remembers what is wanted
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: app lifecycle resume recreates the remembered sessions
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture returns the current frame of a playing camera
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture a camera that is not playing gives an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture a session without a current frame gives an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture a session that cannot capture gives an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: hostsOf lists the other 253 addresses of the /24
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: hostsOf an address that is not dotted IPv4 gives nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan reports exactly the open host and port pairs
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan tries every host on every port and never the phone itself
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan the commonest ports are tried first
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan never runs more connections at once than the limit
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan progress only goes up and ends at one
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan cancelling stops further connection attempts
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan a connector that throws counts as closed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan an invalid local address finishes at once with nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: streams every frame in order and ends when the server closes
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: answers a Basic authentication challenge
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: wrong or missing credentials are reported as an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: wrong credentials fail fast instead of retrying until a timeout
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: HTTP statuses map to the documented error classes
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: a stalled stream is reported as dropped after the idle timeout
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: an unreachable host is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: cancelling the subscription closes the HTTP client
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: single images a snapshot address returns one JPEG
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: single images a snapshot that is not a complete JPEG is unsupported media
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: single images a stream address that serves one image yields one frame
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo uses the real gateway when the phone reports one
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo guesses the gateway when the phone cannot say
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo is null when the phone is not on a local network
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo is null when the interfaces cannot be read
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes a connection or a refusal means the network is reachable
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes no route to host means access is blocked
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes a timeout or an unknown error proves nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes outcomes map to permission states
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service Android needs no permission
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service iOS probes the gateway and remembers the answer
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service iOS reports granted when the network answers
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service iOS without a local network cannot tell
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: goes from connecting to playing and exposes frame and size
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: there is no frame before the first one arrives
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: a server that closes the stream is reported as dropped
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: wrong credentials are an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: localhost resolves and a nonsense name does not
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: a listening port connects and a closed one is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: an RTSP answer is converted with its codecs
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: an HTTP answer is converted with its content type
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: probe failures come back as errors
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: stop ends the stream and later frames are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: reads status, content type and server without the body
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: an image address is recognized
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: a missing page is reported as a status, not an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: a Basic challenge is answered with the credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: wrong credentials give a 401 quickly
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: an unreachable host is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: an open camera answers with its codecs
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: the request line carries no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a Digest challenge is answered correctly
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a Basic challenge is answered with Basic
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: wrong credentials end as an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a login is required but none was given
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a wrong path is reported as not found
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: nothing listening is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a camera that never answers times out
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a camera that hangs up without answering is a dropped stream
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: on Android the calls go to the native side
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: off Android nothing is called and the answers are empty
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: a native failure is swallowed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: a missing native side is swallowed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: finds a device that answers and reports it once
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: the same session can be opened again after a failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: the view handle is the frame notifier
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: replies that are not ONVIF are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect learns the clock, device, services and profiles
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect the clock request is unsigned and the others are signed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect signatures use the camera clock, not ours
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a camera that cannot report its services still connects
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a camera whose clock cannot be read still connects
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect wrong credentials end as an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a plain HTTP login rejection is an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a camera with no profiles is reported
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect an unreachable camera is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls stream address for a profile
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls a PTZ command is acknowledged
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls a PTZ command the camera refuses is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls an empty answer is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: silence ends cleanly after the timeout
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: cancelling ends the probe early
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory opens cleanly and is not degraded
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: the shipped registry starts at version 1 and is contiguous
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: pending lists only the migrations after a version
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory saves, updates, orders and deletes cameras
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: a gap, a duplicate or a wrong start is rejected
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: an empty registry has version 0
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory a camera round trips through the database unchanged
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory updating a camera keeps its stream profiles, deleting removes them
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory layouts round trip and delete
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory delete all empties every table
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, on disk data survives closing and reopening
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, on disk a database from a newer app is refused and left untouched
+error DowngradeRefusedException(99 -> 1) during open, closing...
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, on disk a damaged file is moved aside and a clean database is started
+error SqfliteFfiException(sqlite_error: 26, , SqliteException(26): while selecting from statement, file is not a database, file is not a database (code 26)
+  Causing statement: PRAGMA user_version}) DatabaseException(SqliteException(26): while selecting from statement, file is not a database, file is not a database (code 26)
+  Causing statement: PRAGMA user_version) sql 'PRAGMA user_version' {details: {database: {path: /tmp/roehens_db_testYRTKKG/broken.db, id: 12, readOnly: false, singleInstance: true}}} during open, closing...
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/logger_service_test.dart: credentials inside URLs are masked
+2026-10-04T12:00:00.000Z info [player] opening rtsp://***@10.0.0.5/stream0 now
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/logger_service_test.dart: the buffer keeps only the newest entries
+2026-10-04T12:00:00.000Z info [t] message 0
+2026-10-04T12:00:00.000Z info [t] message 1
+2026-10-04T12:00:00.000Z info [t] message 2
+2026-10-04T12:00:00.000Z info [t] message 3
+2026-10-04T12:00:00.000Z info [t] message 4
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/logger_service_test.dart: errors and levels are recorded and the buffer can be cleared
+2026-10-04T12:00:00.000Z error [db] failed | error: Bad state: boom
+::endgroup::
+
+🎉 400 tests passed.
