@@ -45,6 +45,9 @@ class Limits {
   static const int maxPort = 65535;
   static const int maxCameraNameLength = 64;
 
+  // Banner ad slot (C8.4): the reserved height never exceeds this.
+  static const double bannerMaxHeight = 100;
+
   // Remote flags (D7).
   static const Duration flagsTimeout = Duration(seconds: 4);
   static const Duration flagsRecheck = Duration(hours: 6);

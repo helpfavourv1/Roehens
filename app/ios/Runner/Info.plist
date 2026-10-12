@@ -66,5 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>to find cameras on your home network and stream their video</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier is used to show ads that are more relevant to you.</string>
 </dict>
 </plist>

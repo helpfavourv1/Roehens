@@ -1,3 +1,4 @@
+import 'package:roehens/core/errors/app_error.dart';
 import 'package:roehens/core/errors/result.dart';
 import 'package:roehens/core/models/entitlement.dart';
 
@@ -23,6 +24,10 @@ abstract interface class PurchaseContract {
 
   /// Entitlement changes: after a purchase, a restore, or a refund.
   Stream<Entitlement> get entitlementChanges;
+
+  /// Purchases that failed after they were started. A cancelled purchase is not
+  /// a failure and is not reported here.
+  Stream<AppError> get failures;
 
   /// What the store reports for this account.
   Future<Result<Entitlement>> currentEntitlement();

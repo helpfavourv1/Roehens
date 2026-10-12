@@ -10,8 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  app_tracking_transparency: ^2.0.6
   crypto: ^3.0.6
   flutter_secure_storage: ^9.2.4
+  google_mobile_ads: ^9.1.0
+  in_app_purchase: ^3.2.0
+  in_app_review: ^2.0.10
   media_kit: ^1.2.6
   media_kit_libs_video: ^1.0.7
   media_kit_video: ^2.0.1
