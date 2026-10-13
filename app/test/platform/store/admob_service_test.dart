@@ -12,7 +12,7 @@ class FakeAdsBackend implements AdsBackend {
   bool returnNull = false;
   final List<String> unitIds = <String>[];
   final List<int> widths = <int>[];
-  final List<_Banner> banners = <_Banner>[];
+  final List<FakeBanner> banners = <FakeBanner>[];
   Completer<void>? hold;
 
   @override
@@ -37,14 +37,14 @@ class FakeAdsBackend implements AdsBackend {
     if (returnNull) {
       return null;
     }
-    final _Banner banner = _Banner(nextHeight);
+    final FakeBanner banner = FakeBanner(nextHeight);
     banners.add(banner);
     return LoadedBanner(height: banner.height, view: banner, dispose: banner.dispose);
   }
 }
 
-class _Banner {
-  _Banner(this.height);
+class FakeBanner {
+  FakeBanner(this.height);
 
   final double height;
   bool disposed = false;
@@ -101,7 +101,7 @@ void main() {
   test('a failed load collapses the slot and releases the old banner', () async {
     await service.initialize();
     await service.loadBanner(widthDp: 360);
-    final _Banner first = backend.banners.single;
+    final FakeBanner first = backend.banners.single;
 
     backend.returnNull = true;
     await service.loadBanner(widthDp: 360);
@@ -136,7 +136,7 @@ void main() {
     final Completer<void> gate = backend.hold!;
     backend.hold = null;
     await service.loadBanner(widthDp: 400); // newer request finishes first
-    final _Banner newer = backend.banners.single;
+    final FakeBanner newer = backend.banners.single;
 
     gate.complete();
     await slow;
@@ -145,13 +145,13 @@ void main() {
     expect(service.bannerView, same(newer));
     expect(newer.disposed, isFalse);
     // The stale banner was released.
-    expect(backend.banners.where((_Banner b) => b.disposed).length, 1);
+    expect(backend.banners.where((FakeBanner b) => b.disposed).length, 1);
   });
 
   test('disposing collapses the slot and ignores a load still in flight', () async {
     await service.initialize();
     await service.loadBanner(widthDp: 360);
-    final _Banner shown = backend.banners.single;
+    final FakeBanner shown = backend.banners.single;
 
     backend.hold = Completer<void>();
     final Future<void> inFlight = service.loadBanner(widthDp: 360);

@@ -39,6 +39,10 @@ class GoogleAdsBackend implements AdsBackend {
     required String unitId,
     required int widthDp,
   }) async {
+    // The replacement, getLargeAnchoredAdaptiveBannerAdSize, returns banners up
+    // to 15% of the screen height, which can exceed the 100 dp slot and would
+    // clip the ad. The older method stays until the slot design changes.
+    // ignore: deprecated_member_use
     final ads.AnchoredAdaptiveBannerAdSize? size = await ads.AdSize
         .getCurrentOrientationAnchoredAdaptiveBannerAdSize(widthDp);
     if (size == null) {
@@ -63,7 +67,7 @@ class GoogleAdsBackend implements AdsBackend {
           }
         },
         onAdFailedToLoad: (ads.Ad ad, ads.LoadAdError error) {
-          ad.dispose();
+          unawaited(ad.dispose());
           if (!done.isCompleted) {
             done.complete(null);
           }

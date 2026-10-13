@@ -76,3 +76,11 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 4. **Mirroring.** Every Phosphor glyph is flagged to mirror in right-to-left layouts. `AppIcon` forces left-to-right for all icons except `chevronLeft`, `chevronRight`, `back` and `forward`, so PTZ arrows, zoom and every other icon keep their orientation. `app_icon.dart` is on the guard's list of files allowed to use `TextDirection.ltr`.
 5. **R1 names only.** The monitoring and recording icons are added by the batch of the release that needs them.
 6. **License.** Phosphor Icons, MIT. The notice is registered through `LicenseRegistry` and appears on the licenses screen.
+
+## Store services (batch P2F)
+
+1. **Packages.** `google_mobile_ads` 9.1.0 (Apache-2.0), `in_app_purchase` 3.x and `in_app_review` 2.x (BSD-3-Clause), `app_tracking_transparency` 2.x (MIT). All sit behind the contracts in `lib/core/contracts` and are imported only from `lib/platform/store`; the logic around each SDK is tested through a small backend interface, so only a thin wrapper touches the real SDK.
+2. **Sample AdMob IDs.** Google's published sample app and banner IDs are used everywhere (Android app `~3347511713`, iOS app `~1458002511`, banner `/6300978111` and `/2934735716`, all read from Google's own plugin repository). The app IDs are in `AndroidManifest.xml` and `Info.plist`, because the SDK crashes at launch without one. `StoreConfig.usesTestAds` stays true until real units are created.
+3. **Banner size.** The older `getCurrentOrientationAnchoredAdaptiveBannerAdSize` is kept on purpose (marked with an `ignore` and a comment). Its replacement can return banners up to 15% of the screen height, which could exceed the 100 dp slot and clip the ad.
+4. **Tracking and local network strings.** `NSUserTrackingUsageDescription` and `NSLocalNetworkUsageDescription` were added to `Info.plist` in English now, because iOS stops the app when it asks for either without the string. They are localized in batches P7E-P7H.
+5. **PurchaseContract.** Gained `failures`, a stream of purchases that failed after starting. A cancelled purchase is not a failure and is silent.
