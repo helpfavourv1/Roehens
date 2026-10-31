@@ -6,10 +6,9 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 /// change anything are skipped.
 class ScreenWakeService implements ScreenWakeContract {
   ScreenWakeService({
-    required LoggerContract logger,
+    required this._logger,
     Future<void> Function({required bool enable})? backend,
-  })  : _logger = logger,
-        _backend = backend ?? _plugin;
+  }) : _backend = backend ?? _plugin;
 
   static const String _tag = 'wake';
 

@@ -59,8 +59,7 @@ class ImportOutcome {
 /// Reads a camera export file and saves its cameras. Imported cameras have no
 /// credentials; the person adds them on the camera's edit screen.
 class CameraImportService {
-  CameraImportService({required CameraRepository repository})
-      : _repository = repository;
+  CameraImportService({required this._repository});
 
   final CameraRepository _repository;
 

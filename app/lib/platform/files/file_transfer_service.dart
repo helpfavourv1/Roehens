@@ -7,11 +7,7 @@ import 'package:roehens/platform/files/share_service.dart';
 
 /// The share sheet and the file picker behind one contract.
 class FileTransferService implements FileTransferContract {
-  FileTransferService({
-    required ShareService share,
-    required FilePickerService picker,
-  })  : _share = share,
-        _picker = picker;
+  FileTransferService({required this._share, required this._picker});
 
   final ShareService _share;
   final FilePickerService _picker;

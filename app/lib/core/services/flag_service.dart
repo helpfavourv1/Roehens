@@ -18,15 +18,12 @@ typedef FlagsFetcher = Future<String> Function(Uri url, Duration timeout);
 /// fetch keeps the cache, and no cache means everything on.
 class FlagService implements FlagsContract {
   FlagService({
-    required KeyValueStore store,
-    required FlagsFetcher fetcher,
-    required ClockContract clock,
-    required LoggerContract logger,
+    required this._store,
+    required this._fetcher,
+    required this._clock,
+    required this._logger,
     this.url,
-  })  : _store = store,
-        _fetcher = fetcher,
-        _clock = clock,
-        _logger = logger;
+  });
 
   static const String _tag = 'flags';
 

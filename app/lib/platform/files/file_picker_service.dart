@@ -12,7 +12,7 @@ import 'package:roehens/core/errors/result.dart';
 /// providers label a .json file as plain binary; the import service checks the
 /// content, not the name.
 class FilePickerService {
-  FilePickerService({required LoggerContract logger}) : _logger = logger;
+  FilePickerService({required this._logger});
 
   static const String _tag = 'file_picker';
 
@@ -25,7 +25,7 @@ class FilePickerService {
       if (file == null) {
         return const Ok<PickedFile?>(null);
       }
-      if (file.size > Limits.maxImportBytes) {
+      if (await file.length() > Limits.maxImportBytes) {
         return const Err<PickedFile?>(
           AppError(ErrorClass.invalidFile, detail: 'file too large'),
         );

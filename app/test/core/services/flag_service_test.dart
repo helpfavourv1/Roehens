@@ -31,7 +31,7 @@ void main() {
       clock: clock,
       logger: FakeLogger(),
       url: flagsUrl ?? url,
-      fetcher: (Uri _, Duration __) {
+      fetcher: (_, _) {
         fetchCount++;
         return fetch();
       },
@@ -103,7 +103,7 @@ void main() {
       store: store,
       clock: clock,
       logger: FakeLogger(),
-      fetcher: (Uri _, Duration __) async {
+      fetcher: (_, _) async {
         fetchCount++;
         return flagsJson();
       },

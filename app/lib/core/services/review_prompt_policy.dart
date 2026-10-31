@@ -70,11 +70,7 @@ class RatingState {
 /// Decides when the store rating prompt may appear. Frequency-capped, and
 /// never after an error. The store still decides whether it shows.
 class ReviewPromptPolicy {
-  ReviewPromptPolicy({
-    required KeyValueStore store,
-    required ClockContract clock,
-  })  : _store = store,
-        _clock = clock;
+  ReviewPromptPolicy({required this._store, required this._clock});
 
   final KeyValueStore _store;
   final ClockContract _clock;

@@ -10,7 +10,7 @@ import 'package:share_plus/share_plus.dart';
 /// Opens the system share sheet with a file made from bytes. Needs no storage
 /// permission: the plugin hands the file to the share sheet itself.
 class ShareService {
-  ShareService({required LoggerContract logger}) : _logger = logger;
+  ShareService({required this._logger});
 
   static const String _tag = 'share';
 

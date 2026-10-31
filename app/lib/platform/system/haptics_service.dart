@@ -5,7 +5,7 @@ import 'package:roehens/core/contracts/device_contract.dart';
 /// needed. [isEnabled] is read on every call, so the setting takes effect at
 /// once.
 class HapticsService implements HapticsContract {
-  HapticsService({required bool Function() isEnabled}) : _isEnabled = isEnabled;
+  HapticsService({required this._isEnabled});
 
   final bool Function() _isEnabled;
 

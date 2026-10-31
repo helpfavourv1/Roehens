@@ -25,9 +25,9 @@ class ExportFile {
 /// record does not carry them, and the vault is not read here.
 class CameraExportService {
   CameraExportService({
-    ClockContract clock = const SystemClock(),
+    this._clock = const SystemClock(),
     this.appVersion,
-  }) : _clock = clock;
+  });
 
   static const String mimeType = 'application/json';
 

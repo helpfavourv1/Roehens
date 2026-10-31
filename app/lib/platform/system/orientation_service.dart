@@ -4,7 +4,7 @@ import 'package:roehens/core/contracts/logger_contract.dart';
 
 /// Orientation and system bars through the platform channel.
 class OrientationService implements OrientationContract {
-  OrientationService({required LoggerContract logger}) : _logger = logger;
+  OrientationService({required this._logger});
 
   static const String _tag = 'orientation';
 
