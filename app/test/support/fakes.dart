@@ -196,3 +196,28 @@ class FakeVault implements SecureVaultContract {
     return const Ok<void>(null);
   }
 }
+
+class FakeKeyValueStore implements KeyValueStore {
+  final Map<String, String> values = <String, String>{};
+
+  @override
+  Future<Result<String?>> getString(String key) async => Ok<String?>(values[key]);
+
+  @override
+  Future<Result<void>> setString(String key, String value) async {
+    values[key] = value;
+    return const Ok<void>(null);
+  }
+
+  @override
+  Future<Result<void>> remove(String key) async {
+    values.remove(key);
+    return const Ok<void>(null);
+  }
+
+  @override
+  Future<Result<void>> clear() async {
+    values.clear();
+    return const Ok<void>(null);
+  }
+}

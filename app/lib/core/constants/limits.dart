@@ -52,6 +52,20 @@ class Limits {
   static const Duration flagsTimeout = Duration(seconds: 4);
   static const Duration flagsRecheck = Duration(hours: 6);
 
+  static const Duration flagsResumeMinInterval = Duration(minutes: 5);
+  static const int flagsMaxBytes = 65536;
+
+  // Camera list import.
+  static const int maxImportBytes = 1048576;
+  static const int maxImportCameras = 200;
+
+  // Rating prompt policy (frequency cap).
+  static const int ratingMinDaysSinceFirstLaunch = 3;
+  static const int ratingMinViewingSessions = 5;
+  static const int ratingMinDaysBetweenPrompts = 120;
+  static const int ratingMaxPrompts = 3;
+  static const Duration ratingQuietAfterError = Duration(hours: 24);
+
   // Undo after delete (A3).
   static const Duration undoWindow = Duration(seconds: 8);
 

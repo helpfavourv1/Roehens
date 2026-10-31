@@ -84,3 +84,14 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 3. **Banner size.** The older `getCurrentOrientationAnchoredAdaptiveBannerAdSize` is kept on purpose (marked with an `ignore` and a comment). Its replacement can return banners up to 15% of the screen height, which could exceed the 100 dp slot and clip the ad.
 4. **Tracking and local network strings.** `NSUserTrackingUsageDescription` and `NSLocalNetworkUsageDescription` were added to `Info.plist` in English now, because iOS stops the app when it asks for either without the string. They are localized in batches P7E-P7H.
 5. **PurchaseContract.** Gained `failures`, a stream of purchases that failed after starting. A cancelled purchase is not a failure and is silent.
+
+## Files, system and transfer services (batch P2G)
+
+1. **Packages.** `share_plus` 13.x (BSD-3-Clause), `file_picker` 12.x (MIT) and `wakelock_plus` 1.x (BSD-3-Clause), each used only from `lib/platform`. Haptics and orientation use Flutter's own platform calls, so they add no dependency. Compile and test results on Flutter 3.47.6 are read from CI.
+2. **Device contracts.** `lib/core/contracts/device_contract.dart` adds `HapticsContract`, `ScreenWakeContract` and `OrientationContract`, so providers in `core` can use these services without importing `platform`. This is one file beyond the specification's list.
+3. **File transfer.** `ShareService` and `FilePickerService` are the specified files; `FileTransferService` joins them behind the existing `FileTransferContract`. The share sheet anchors at the screen center so it cannot fail on iPad.
+4. **File picker accepts any file type.** Some providers label a `.json` file as plain binary, which a JSON-only filter would hide. The import service checks the content instead.
+5. **Two error classes added.** `invalidFile` (a chosen file is not a Roehens camera list, is empty, or exceeds 1 MB) and `transferFailed` (share sheet or picker failed; manual retry). Both have message keys for the localization batch.
+6. **Import.** Imported cameras never carry credentials. A camera matches a saved one by id or by protocol, host, port and path. The person picks skip, replace or duplicate; replace keeps the saved camera's id, position and credentials. One bad entry does not stop the rest, and invalid entries are counted for the preview. Limits: 1 MB and 200 cameras.
+7. **Flags.** `FlagService` fetches only over https, only when a flags URL is configured, and serves the cache or the defaults otherwise. The URL stays unset until the website is hosted (open item for the owner). Re-check: every six hours, and on resume at most once every five minutes.
+8. **Rating prompt policy.** Due when: first launch at least 3 days ago; at least 5 viewing sessions (counted once per app start); no error this session and none in the last 24 hours; at least 120 days since the last prompt; at most 3 prompts in total. All numbers are in `Limits`.

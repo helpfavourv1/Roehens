@@ -70,6 +70,20 @@ enum ErrorClass {
     autoRetry: false,
   ),
 
+  /// A file chosen for import is not a Roehens camera list, or is too large.
+  invalidFile(
+    messageKey: 'errorInvalidFile',
+    retriable: false,
+    autoRetry: false,
+  ),
+
+  /// The share sheet or file picker failed to open.
+  transferFailed(
+    messageKey: 'errorTransferFailed',
+    retriable: true,
+    autoRetry: false,
+  ),
+
   /// Anything unhandled.
   fatal(messageKey: 'errorFatal', retriable: false, autoRetry: false);
 
