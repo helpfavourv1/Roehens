@@ -18,7 +18,7 @@ class SecureVaultService implements SecureVaultContract {
   SecureVaultService({FlutterSecureStorage? storage, this._logger})
       : _storage = storage ??
             const FlutterSecureStorage(
-              aOptions: AndroidOptions(encryptedSharedPreferences: true),
+              aOptions: AndroidOptions(),
               iOptions: IOSOptions(
                 accessibility: KeychainAccessibility.first_unlock_this_device,
               ),
