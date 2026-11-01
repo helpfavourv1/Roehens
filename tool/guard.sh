@@ -63,7 +63,7 @@ dart_grep '(EdgeInsets\.[A-Za-z]+|SizedBox|BorderRadius\.[A-Za-z]+)\(([^)]*[^A-Z
 # C1.16 right-to-left safety
 dart_grep 'EdgeInsets\.only\([^)]*(left|right)[[:space:]]*:' $LIB | check "EdgeInsets.only(left/right) (use EdgeInsetsDirectional)"
 dart_grep 'Alignment\.(centerLeft|centerRight)' $LIB | check "Alignment.centerLeft/centerRight (use AlignmentDirectional)"
-dart_grep 'TextDirection\.rtl' $LIB | check "TextDirection.rtl hard-coded"
+dart_grep 'TextDirection\.rtl' $LIB | grep -v '/utils/context_extensions.dart:' | check "TextDirection.rtl hard-coded (read it with context.isRtl)"
 dart_grep 'TextDirection\.ltr' $LIB | grep -vE '/(ltr_text|app_text_field|help_code_block|app_icon)\.dart:' | check "TextDirection.ltr outside the IP/URL/Mono widgets"
 
 # state management
