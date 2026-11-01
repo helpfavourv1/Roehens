@@ -27,6 +27,22 @@ class AppSizes {
   static const double iconPtz = 28;
   static const double iconHero = 48;
 
+  /// Controls (component library).
+  static const double rowMinHeight = 56;
+  static const double chipHeight = 32;
+  static const double badgeHeight = 20;
+  static const double segmentedHeight = 40;
+  static const double switchTrackWidth = 52;
+  static const double switchTrackHeight = 32;
+  static const double switchThumb = 26;
+  static const double switchThumbInset = 3;
+  static const double spinner = 20;
+  static const double spinnerStroke = 2.5;
+  static const double progressBarHeight = 4;
+  static const double inputBorder = 1.5;
+  static const double focusRing = 2;
+  static const double selectionHandle = 20;
+
   /// Below this tile width the status pill shows its icon only and a tap opens
   /// a sheet with the full message (D5).
   static const double tileIconOnlyWidth = 120;
