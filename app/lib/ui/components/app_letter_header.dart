@@ -3,8 +3,8 @@ import 'package:roehens/ui/tokens/size_tokens.dart';
 import 'package:roehens/ui/tokens/spacing_tokens.dart';
 import 'package:roehens/utils/context_extensions.dart';
 
-/// A letter that heads an alphabetical group. Use [AppLetterHeader.sliver] in a
-/// scrolling list so it stays pinned at the top while its group scrolls.
+/// A letter that heads an alphabetical group. Use [AppLetterHeader.group] in a
+/// scrolling list so the letter stays pinned while its group scrolls.
 class AppLetterHeader extends StatelessWidget {
   const AppLetterHeader(this.letter, {super.key});
 
@@ -14,6 +14,12 @@ class AppLetterHeader extends StatelessWidget {
       pinned: true,
       delegate: _LetterHeaderDelegate(letter),
     );
+  }
+
+  /// A letter and the sliver under it as one group. The header stays pinned
+  /// while its group scrolls, and the next group's header pushes it away.
+  static Widget group({required String letter, required Widget sliver}) {
+    return SliverMainAxisGroup(slivers: <Widget>[AppLetterHeader.sliver(letter), sliver]);
   }
 
   static const double height = AppSizes.rowMinHeight / 2 + AppSpacing.xs;

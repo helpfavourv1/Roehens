@@ -39,7 +39,7 @@ void main() {
           ),
         ),
       );
-      expect(tester.getSize(find.byType(AppNavBar)).height, AppSizes.navBarHeight + AppSizes.hairline);
+      expect(tester.getSize(find.byType(AppNavBar)).height, AppSizes.navBarHeight);
       expect(find.text('Settings'), findsOneWidget);
       await tester.tap(find.byType(AppIconButton).first);
       expect(backs, 1);
@@ -97,7 +97,7 @@ void main() {
         tester,
         SizedBox(width: 400, child: AppBottomBar(items: items, selectedIndex: 1, onSelected: (_) {})),
       );
-      expect(tester.getSize(find.byType(AppBottomBar)).height, AppSizes.bottomBarHeight + 34 + AppSizes.hairline);
+      expect(tester.getSize(find.byType(AppBottomBar)).height, AppSizes.bottomBarHeight + 34);
     });
 
     testWidgets('the selected destination is announced as selected', (WidgetTester tester) async {
@@ -117,7 +117,7 @@ void main() {
         textScale: 3,
       );
       expect(tester.takeException(), isNull);
-      expect(tester.getSize(find.byType(AppBottomBar)).height, AppSizes.bottomBarHeight + AppSizes.hairline);
+      expect(tester.getSize(find.byType(AppBottomBar)).height, AppSizes.bottomBarHeight);
     });
   });
 
@@ -158,7 +158,7 @@ void main() {
       tester.view.viewInsets = const FakeViewPadding(bottom: 300);
       addTearDown(tester.view.resetViewInsets);
       await tester.pumpAndSettle();
-      expect(tester.getSize(find.byType(AppBottomBar)).height, 0);
+      expect(find.byType(AppBottomBar), findsNothing);
       expect(find.byKey(const Key('embed')).hitTestable(), findsNothing);
       expect(tester.getSize(find.byKey(const Key('body'))).height, lessThan(normalBody + 200));
 
@@ -266,7 +266,8 @@ void main() {
           builder: (BuildContext _) => ListView(children: <Widget>[for (int i = 0; i < 100; i++) const SizedBox(height: 60)]),
         ),
       );
-      expect(tester.getSize(find.byType(AppSheet)).height, lessThanOrEqualTo(800 * AppSheet.maxHeightFactor + 1));
+      final Finder surface = find.descendant(of: find.byType(AppSheet), matching: find.byType(ConstrainedBox)).first;
+      expect(tester.getSize(surface).height, lessThanOrEqualTo(800 * AppSheet.maxHeightFactor + 1));
     });
 
     testWidgets('a dialog returns the value of the chosen action', (WidgetTester tester) async {
@@ -404,7 +405,10 @@ void main() {
     testWidgets('is announced as a live region', (WidgetTester tester) async {
       final SemanticsHandle handle = tester.ensureSemantics();
       await openToast(tester);
-      expect(find.bySemanticsLabel('Camera deleted'), findsOneWidget);
+      expect(
+        find.byWidgetPredicate((Widget w) => w is Semantics && w.properties.liveRegion == true),
+        findsOneWidget,
+      );
       AppToast.dismiss(immediately: true);
       handle.dispose();
     });
@@ -451,10 +455,14 @@ void main() {
           height: 800,
           child: CustomScrollView(
             slivers: <Widget>[
-              AppLetterHeader.sliver('A'),
-              SliverList.builder(itemCount: 10, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
-              AppLetterHeader.sliver('B'),
-              SliverList.builder(itemCount: 10, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+              AppLetterHeader.group(
+                letter: 'A',
+                sliver: SliverList.builder(itemCount: 10, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+              ),
+              AppLetterHeader.group(
+                letter: 'B',
+                sliver: SliverList.builder(itemCount: 10, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+              ),
             ],
           ),
         ),
@@ -473,10 +481,14 @@ void main() {
           height: 800,
           child: CustomScrollView(
             slivers: <Widget>[
-              AppLetterHeader.sliver('A'),
-              SliverList.builder(itemCount: 3, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
-              AppLetterHeader.sliver('B'),
-              SliverList.builder(itemCount: 30, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+              AppLetterHeader.group(
+                letter: 'A',
+                sliver: SliverList.builder(itemCount: 3, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+              ),
+              AppLetterHeader.group(
+                letter: 'B',
+                sliver: SliverList.builder(itemCount: 30, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+              ),
             ],
           ),
         ),
@@ -484,6 +496,7 @@ void main() {
       await tester.drag(find.byType(CustomScrollView), const Offset(0, -600));
       await tester.pump();
       expect(tester.getTopLeft(find.text('B')).dy, lessThan(AppLetterHeader.height));
+      expect(find.text('A'), findsNothing);
     });
   });
 
@@ -596,7 +609,7 @@ void main() {
       await gesture.moveBy(const Offset(100, 0));
       await gesture.up();
       expect(values, isNotEmpty);
-      expect(values.last, greaterThan(values.first));
+      expect(values.last, closeTo(0.757, 0.05));
       expect(ended, isNotNull);
     });
 

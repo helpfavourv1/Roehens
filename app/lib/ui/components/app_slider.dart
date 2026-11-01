@@ -18,7 +18,7 @@ class AppSlider extends StatelessWidget {
     this.max = 1,
     this.divisions,
     this.onChangeEnd,
-    this.valueLabel,
+    this.labelBuilder,
   });
 
   final double value;
@@ -26,8 +26,9 @@ class AppSlider extends StatelessWidget {
   final ValueChanged<double>? onChangeEnd;
   final String semanticLabel;
 
-  /// Spoken value, for example "4 hours". Defaults to the percentage.
-  final String? valueLabel;
+  /// Spoken value for a position, for example "4 hours". Defaults to the
+  /// percentage of the range.
+  final String Function(double value)? labelBuilder;
   final double min;
   final double max;
 
@@ -47,6 +48,14 @@ class AppSlider extends StatelessWidget {
   }
 
   double get _step => (max - min) / (divisions ?? 20);
+
+  String _label(double at) {
+    final String Function(double)? builder = labelBuilder;
+    if (builder != null) {
+      return builder(at);
+    }
+    return '${(((at - min) / (max - min)).clamp(0, 1) * 100).round()}%';
+  }
 
   void _move(double next) {
     final double clamped = next.clamp(min, max);
@@ -76,8 +85,9 @@ class AppSlider extends StatelessWidget {
           slider: true,
           enabled: enabled,
           label: semanticLabel,
-          value: valueLabel ?? '${(_fraction * 100).round()}%',
-          increasedValue: valueLabel,
+          value: _label(value),
+          increasedValue: _label((value + _step).clamp(min, max)),
+          decreasedValue: _label((value - _step).clamp(min, max)),
           onIncrease: enabled ? () => _move(value + _step) : null,
           onDecrease: enabled ? () => _move(value - _step) : null,
           child: Focus(
