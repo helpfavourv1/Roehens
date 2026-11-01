@@ -116,3 +116,13 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 4. **Text fields without Material.** `AppTextField` uses `EditableText` with in-repo selection handles. The cut/copy/paste menu is the system's own (`SystemContextMenu`), which is already in the person's language; where the system cannot show it, no menu appears. Whether paste works on the test phone is a checkpoint A1 question.
 5. **The tokens must sit above the navigator.** Selection handles, menus and toasts are drawn in the overlay, so the app shell (P6A) wraps `AppTokens` around the whole navigator through the app's `builder`, not inside a page.
 6. **Test font.** The widget-test font draws every character as a full square, so large-text tests use a tall surface.
+
+## Component library 2 (batch P4B)
+
+1. **Direction is read in one place.** `context.isRtl` (in `lib/utils/context_extensions.dart`) is the only code that compares against `TextDirection.rtl`. The guard still bans the constant everywhere else, so nothing can force a direction.
+2. **Modal surfaces share one route.** `AppModalRoute` (in `app_page_route.dart`) serves sheets and dialogs: a scrim, dismissal by tapping outside, Escape or the back gesture, 400 ms slide-up for sheets and 200 ms fade for dialogs, and no motion at all when reduced motion is on. A dialog can be made non-dismissible.
+3. **Toasts.** One at a time, drawn in the overlay above the bottom bar (or above the keyboard). The action is a pill; the Undo toast uses the 8-second undo window.
+4. **Bottom stack.** `AppScaffold` collapses the embed (ad slot) and the bottom bar together under the keyboard and brings them back when it closes. The bottom bar paints the safe-area inset itself, so its fill reaches the screen edge.
+5. **Alphabetical lists.** Use `AppLetterHeader.group`: a plain pinned header stacks under the previous letter in Flutter, and the group form makes the next letter push the previous one away.
+6. **Slider.** Announces its current value and the next step up and down. Callers can give a spoken label for a value (for example "4 hours"); the default is the percentage.
+7. **Text scale caps.** Bottom bar labels stop growing at 130% (`context.clampedTextScaler`), because the bar has a fixed height.
