@@ -107,3 +107,12 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 6. **Discovery.** A device found by both ONVIF and the sweep is listed once, with the ONVIF details. The `discovery` kill switch and a refused local-network permission each have their own status. Timeout 20 seconds (D9).
 7. **Auto-cycle.** Runs only while enabled, the app is in the foreground and Live or Fullscreen is showing. A touch restarts the wait. The layout's interval overrides the global one.
 8. **Languages.** `lib/core/constants/languages.dart` lists the 24 launch languages with native names and right-to-left flags.
+
+## Component library 1 (batch P4A)
+
+1. **Size tokens added** for the controls (switch, chip, badge, segmented control, spinner, input border, focus ring, selection handle). Colors, type, spacing, radius and motion are unchanged.
+2. **No `setState`.** The guard bans it, so components keep local state (pressed, focused, concealed) in `ValueNotifier`s.
+3. **One tap target.** `AppPressable` gives opacity (or tint) feedback, Enter/Space activation, a focus ring and button semantics. A semantic label replaces the child's own text so it is not read twice.
+4. **Text fields without Material.** `AppTextField` uses `EditableText` with in-repo selection handles. The cut/copy/paste menu is the system's own (`SystemContextMenu`), which is already in the person's language; where the system cannot show it, no menu appears. Whether paste works on the test phone is a checkpoint A1 question.
+5. **The tokens must sit above the navigator.** Selection handles, menus and toasts are drawn in the overlay, so the app shell (P6A) wraps `AppTokens` around the whole navigator through the app's `builder`, not inside a page.
+6. **Test font.** The widget-test font draws every character as a full square, so large-text tests use a tall surface.
