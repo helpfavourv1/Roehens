@@ -249,7 +249,7 @@ void main() {
     });
 
     testWidgets('the thumb sits at the end, and mirrors in right-to-left', (WidgetTester tester) async {
-      Future<double> thumbCenter(TextDirection direction) async {
+      Future<double> thumbOffsetFromCenter(TextDirection direction) async {
         await pumpApp(
           tester,
           AppSwitch(value: true, onChanged: (_) {}, semanticLabel: 's'),
@@ -259,13 +259,11 @@ void main() {
         final Finder thumb = find.byWidgetPredicate(
           (Widget w) => w is SizedBox && w.width == AppSizes.switchThumb - AppSizes.hairline * 4,
         );
-        return tester.getCenter(thumb).dx;
+        return tester.getCenter(thumb).dx - tester.getCenter(find.byType(AppSwitch)).dx;
       }
 
-      final double ltr = await thumbCenter(TextDirection.ltr);
-      final double rtl = await thumbCenter(TextDirection.rtl);
-      expect(ltr, greaterThan(200));
-      expect(rtl, lessThan(200));
+      expect(await thumbOffsetFromCenter(TextDirection.ltr), greaterThan(0));
+      expect(await thumbOffsetFromCenter(TextDirection.rtl), lessThan(0));
     });
 
     testWidgets('disabled does nothing', (WidgetTester tester) async {

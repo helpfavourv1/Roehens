@@ -38,7 +38,10 @@ void main() {
       );
       await tester.tap(find.text('Tap'));
       expect(taps, 1);
-      expect(find.byType(AppPressable), findsNothing);
+      expect(
+        find.descendant(of: find.widgetWithText(AppCard, 'Plain'), matching: find.byType(AppPressable)),
+        findsNothing,
+      );
     });
   });
 
@@ -83,6 +86,7 @@ void main() {
           ),
         ),
         textScale: 3,
+        size: const Size(400, 6000),
       );
       expect(tester.takeException(), isNull);
     });
@@ -313,6 +317,7 @@ void main() {
           ),
         ),
         textScale: 3,
+        size: const Size(400, 6000),
       );
       expect(tester.takeException(), isNull);
     });

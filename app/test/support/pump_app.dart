@@ -27,20 +27,22 @@ Future<void> pumpApp(
               builder(c),
         );
       },
-      home: Directionality(
-        textDirection: direction,
-        child: MediaQuery.withClampedTextScaling(
-          minScaleFactor: textScale,
-          maxScaleFactor: textScale,
-          child: AppTokens(
-            data: AppTokensData.resolve(brightness: brightness),
-            child: Align(
-              alignment: AlignmentDirectional.topStart,
-              child: child,
+      builder: (BuildContext context, Widget? child) {
+        // The tokens sit above the navigator, so overlays (selection handles,
+        // menus, toasts) can read them too.
+        return Directionality(
+          textDirection: direction,
+          child: MediaQuery.withClampedTextScaling(
+            minScaleFactor: textScale,
+            maxScaleFactor: textScale,
+            child: AppTokens(
+              data: AppTokensData.resolve(brightness: brightness),
+              child: child!,
             ),
           ),
-        ),
-      ),
+        );
+      },
+      home: Align(alignment: AlignmentDirectional.topStart, child: child),
     ),
   );
 }
