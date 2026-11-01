@@ -50,7 +50,7 @@ class AppScaffold extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if (navBar != null) navBar!,
+            ?navBar,
             Expanded(child: body),
             if (hasBottomStack)
               AnimatedSize(
@@ -63,8 +63,8 @@ class AppScaffold extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          if (bottomEmbed != null) bottomEmbed!,
-                          if (bottomBar != null) bottomBar!,
+                          ?bottomEmbed,
+                          ?bottomBar,
                         ],
                       ),
               ),
