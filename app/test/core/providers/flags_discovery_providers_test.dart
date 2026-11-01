@@ -122,7 +122,11 @@ void main() {
       discovery.controller.add(const DiscoveryFound(sweepHit));
       discovery.controller.add(const DiscoveryFound(onvifHit));
       discovery.controller.add(const DiscoveryFound(sweepHit));
-      await waitUntil(() => provider.value.results.first.source == DiscoverySource.onvif);
+      await waitUntil(
+        () =>
+            provider.value.results.isNotEmpty &&
+            provider.value.results.first.source == DiscoverySource.onvif,
+      );
 
       expect(provider.value.results, hasLength(1));
       expect(provider.value.results.single.name, 'Porch');
