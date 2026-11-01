@@ -10,14 +10,15 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
     private var networkChannel: MulticastLockChannel? = null
+    private var pipChannel: MethodChannel? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         networkChannel = MulticastLockChannel(this).also {
             it.register(flutterEngine.dartExecutor.binaryMessenger)
         }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, PIP_CHANNEL)
-            .setMethodCallHandler { call, result ->
+        pipChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, PIP_CHANNEL)
+        pipChannel?.setMethodCallHandler { call, result ->
                 when (call.method) {
                     "isSupported" -> result.success(isPipSupported())
                     "enter" -> result.success(enterPip())
@@ -25,6 +26,14 @@ class MainActivity : FlutterActivity() {
                     else -> result.notImplemented()
                 }
             }
+    }
+
+    override fun onPictureInPictureModeChanged(
+        isInPictureInPictureMode: Boolean,
+        newConfig: android.content.res.Configuration
+    ) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
+        pipChannel?.invokeMethod("pipChanged", isInPictureInPictureMode)
     }
 
     override fun onDestroy() {

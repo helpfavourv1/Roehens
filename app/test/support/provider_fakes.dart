@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:roehens/core/contracts/ad_contract.dart';
+import 'package:roehens/core/contracts/consent_contract.dart';
 import 'package:roehens/core/contracts/discovery_contract.dart';
 import 'package:roehens/core/contracts/flags_contract.dart';
 import 'package:roehens/core/contracts/permission_contract.dart';
@@ -108,4 +110,68 @@ class FakePermission implements PermissionContract {
 
   @override
   Future<bool> openAppSettings() async => true;
+}
+
+class FakeAd implements AdContract {
+  final ValueNotifier<double> height = ValueNotifier<double>(0);
+  Object? view;
+  int initializeCalls = 0;
+  int disposeCalls = 0;
+  final List<int> loadedWidths = <int>[];
+
+  /// Height and view a successful load produces.
+  double nextHeight = 60;
+
+  @override
+  Future<void> initialize() async => initializeCalls++;
+
+  @override
+  ValueListenable<double> get bannerHeight => height;
+
+  @override
+  Future<void> loadBanner({required int widthDp}) async {
+    loadedWidths.add(widthDp);
+    view = Object();
+    height.value = nextHeight;
+  }
+
+  @override
+  Object? get bannerView => view;
+
+  @override
+  void disposeBanner() {
+    disposeCalls++;
+    view = null;
+    height.value = 0;
+  }
+}
+
+class FakeConsent implements ConsentContract {
+  FakeConsent({this.canRequest = true});
+
+  bool canRequest;
+  int gatherCalls = 0;
+  bool throwOnGather = false;
+
+  @override
+  ConsentStatus get status =>
+      canRequest ? ConsentStatus.obtained : ConsentStatus.unknown;
+
+  @override
+  bool get canRequestAds => canRequest;
+
+  @override
+  Future<ConsentStatus> gatherConsent() async {
+    gatherCalls++;
+    if (throwOnGather) {
+      throw StateError('consent form crashed');
+    }
+    return status;
+  }
+
+  @override
+  Future<bool> get privacyOptionsRequired async => false;
+
+  @override
+  Future<void> showPrivacyOptions() async {}
 }
