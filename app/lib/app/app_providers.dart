@@ -12,7 +12,6 @@ import 'package:roehens/core/contracts/permission_contract.dart';
 import 'package:roehens/core/contracts/purchase_contract.dart';
 import 'package:roehens/core/contracts/secure_vault_contract.dart';
 import 'package:roehens/core/contracts/storage_contract.dart';
-import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/providers/ad_state_provider.dart';
 import 'package:roehens/core/providers/auto_cycle_provider.dart';
 import 'package:roehens/core/providers/cameras_provider.dart';
@@ -136,8 +135,8 @@ class AppProviders {
     required this.frameCapture,
     required this.gridPlanner,
     required this.iosDiscoveryMode,
-    required List<Future<void> Function()> ownedResources,
-  }) : _ownedResources = ownedResources;
+    required this._ownedResources,
+  });
 
   final LoggerContract logger;
   final ClockContract clock;
