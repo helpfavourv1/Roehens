@@ -96,3 +96,14 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 7. **Flags.** `FlagService` fetches only over https, only when a flags URL is configured, and serves the cache or the defaults otherwise. The URL stays unset until the website is hosted (open item for the owner). Re-check: every six hours, and on resume at most once every five minutes.
 8. **Rating prompt policy.** Due when: first launch at least 3 days ago; at least 5 viewing sessions (counted once per app start); no error this session and none in the last 24 hours; at least 120 days since the last prompt; at most 3 prompts in total. All numbers are in `Limits`.
 9. **Secure storage 11.x.** `share_plus` 13 and `flutter_secure_storage` 9.2.4 could not be resolved together (their Windows-only dependencies disagree on `win32`). The vault package moved to 11.x. Its Android implementation no longer uses `encryptedSharedPreferences` (deprecated upstream); it now keeps its own keystore-backed encryption, which is the default. The app has no released installs, so no stored data needs migrating. The vault tests and the next device build are the check.
+
+## Providers (batch P3A)
+
+1. **Guard: `dart:ui` allowed in `core`.** It is the engine's own library (it defines `Locale`), not a plugin and not `dart:io`. The layer rule still forbids `dart:io` and plugin imports.
+2. **`SafeValueNotifier`.** Every provider extends it, so a storage call that finishes after the provider was disposed cannot throw.
+3. **Derived providers.** `ThemeProvider` and `LocaleProvider` follow `SettingsProvider`, so settings stay the one source of truth.
+4. **Entitlement.** The cached ad-free answer applies at once; the store's answer replaces it, including a downgrade after a refund. If the store cannot be reached the cache stays. Where billing is unsupported the app stays free and the cache is cleared.
+5. **Layouts.** The camera order lives in the active layout; cameras the layout does not know are placed last. The current page is session state and is not saved. Default layout: 4 tiles.
+6. **Discovery.** A device found by both ONVIF and the sweep is listed once, with the ONVIF details. The `discovery` kill switch and a refused local-network permission each have their own status. Timeout 20 seconds (D9).
+7. **Auto-cycle.** Runs only while enabled, the app is in the foreground and Live or Fullscreen is showing. A touch restarts the wait. The layout's interval overrides the global one.
+8. **Languages.** `lib/core/constants/languages.dart` lists the 24 launch languages with native names and right-to-left flags.

@@ -35,6 +35,7 @@ class Limits {
   static const List<int> sweepPorts = <int>[80, 554, 8000, 8080, 8554];
   static const int sweepConcurrency = 48;
   static const Duration sweepConnectTimeout = Duration(milliseconds: 400);
+  static const Duration discoveryTimeout = Duration(seconds: 20);
   static const String wsDiscoveryAddress = '239.255.255.250';
   static const int wsDiscoveryPort = 3702;
 
