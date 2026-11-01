@@ -243,7 +243,7 @@ void main() {
       );
       expect(
         tester.getSemantics(find.bySemanticsLabel('Haptics')),
-        containsSemantics(hasToggledState: true, isToggled: true),
+        isSemantics(hasToggledState: true, isToggled: true),
       );
       handle.dispose();
     });
