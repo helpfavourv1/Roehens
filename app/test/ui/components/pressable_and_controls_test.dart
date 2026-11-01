@@ -241,8 +241,10 @@ void main() {
         tester,
         AppSwitch(value: true, onChanged: (_) {}, semanticLabel: 'Haptics'),
       );
-      final SemanticsNode node = tester.getSemantics(find.bySemanticsLabel('Haptics'));
-      expect(node.flagsCollection.isToggled, isNotNull);
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Haptics')),
+        containsSemantics(hasToggledState: true, isToggled: true),
+      );
       handle.dispose();
     });
 
