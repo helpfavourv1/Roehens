@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:roehens/core/models/app_settings.dart';
 import 'package:roehens/core/providers/safe_notifier.dart';
 import 'package:roehens/core/providers/settings_provider.dart';

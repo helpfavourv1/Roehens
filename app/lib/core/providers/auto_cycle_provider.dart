@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:roehens/core/constants/limits.dart';
 import 'package:roehens/core/models/app_settings.dart';
 import 'package:roehens/core/models/grid_layout.dart';

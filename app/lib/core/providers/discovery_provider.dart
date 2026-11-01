@@ -64,9 +64,8 @@ class DiscoveryProvider extends SafeValueNotifier<DiscoveryState> {
     required this._discovery,
     required this._flags,
     required this._logger,
-    PermissionContract? permission,
-  })  : _permission = permission,
-        super(const DiscoveryState());
+    this._permission,
+  }) : super(const DiscoveryState());
 
   static const String _tag = 'discovery';
 
