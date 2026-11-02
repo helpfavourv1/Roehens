@@ -53,6 +53,7 @@ class StreamStatusPill extends StatefulWidget {
     required this.status,
     required this.label,
     this.iconOnly = false,
+    this.expandHitArea = true,
     this.onTap,
   });
 
@@ -61,6 +62,10 @@ class StreamStatusPill extends StatefulWidget {
   /// The status in words, already translated. Always the spoken label too.
   final String label;
   final bool iconOnly;
+
+  /// Grows the tap area of an icon-only pill to 48x48. A tile too small for
+  /// that turns it off and relies on the tile's own tap instead.
+  final bool expandHitArea;
   final VoidCallback? onTap;
 
   @override
@@ -154,7 +159,9 @@ class _StreamStatusPillState extends State<StreamStatusPill>
       onTap: widget.onTap,
       borderRadius: AppRadius.allPill,
       semanticLabel: widget.label,
-      minHitSize: widget.iconOnly ? const Size.square(AppSizes.touchTarget) : null,
+      minHitSize: widget.iconOnly && widget.expandHitArea
+          ? const Size.square(AppSizes.touchTarget)
+          : null,
       child: pill,
     );
   }

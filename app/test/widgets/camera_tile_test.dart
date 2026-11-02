@@ -140,6 +140,14 @@ void main() {
       expect(find.text('1920x1080'), findsNothing);
     });
 
+    testWidgets('the smallest tiles of a 16-up grid fit their overlay', (WidgetTester tester) async {
+      await pumpApp(
+        tester,
+        SizedBox(width: 97, height: 97 / AppSizes.tileAspectRatio, child: tile(onStatusTap: () {})),
+      );
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('the icon-only status opens its message when tapped', (WidgetTester tester) async {
       int taps = 0;
       await pumpApp(tester, sized(tile(onStatusTap: () => taps++), width: 100));

@@ -32,13 +32,16 @@ class CameraTileOverlay extends StatelessWidget {
   /// False hides the name plate (the setting "show overlay labels").
   final bool showLabels;
 
-  /// A narrow tile: the plate shows the name only.
+  /// A narrow tile: the plate shows the name only, in small fixed-size type.
   final bool compact;
 
   @override
   Widget build(BuildContext context) {
-    final TextScaler scaler =
-        context.clampedTextScaler(max: AppSizes.tileOverlayMaxTextScale);
+    // A narrow tile has no room to grow: small type, fixed size.
+    final TextScaler scaler = compact
+        ? TextScaler.noScaling
+        : context.clampedTextScaler(max: AppSizes.tileOverlayMaxTextScale);
+    final TextStyle nameStyle = compact ? context.type.caption : context.type.callout;
     final Color white = context.colors.onVideoText;
     final bool hasPlate = showLabels;
     return Padding(
@@ -90,7 +93,7 @@ class CameraTileOverlay extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textScaler: scaler,
-                        style: context.type.callout.copyWith(color: white),
+                        style: nameStyle.copyWith(color: white),
                       ),
                     ),
                     if (resolutionLabel != null && !compact) ...<Widget>[

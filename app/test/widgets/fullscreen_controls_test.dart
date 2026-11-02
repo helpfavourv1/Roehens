@@ -89,13 +89,13 @@ void main() {
   testWidgets('any touch restarts the wait and reports activity', (WidgetTester tester) async {
     await pump(tester);
     await tester.pump(const Duration(seconds: 2));
+    // Finger down on the picture, not released, so it is not a tap.
     final TestGesture gesture = await tester.startGesture(const Offset(200, 400));
-    await gesture.up();
     expect(activity, greaterThan(0));
     await tester.pump(const Duration(seconds: 2));
     expect(controlsOpacity(tester), 1);
-    await tester.pump(const Duration(seconds: 2));
-    await tester.pump(const Duration(milliseconds: 250));
+    await gesture.cancel();
+    await tester.pump(const Duration(seconds: 4));
   });
 
   testWidgets('with a screen reader on, the controls stay', (WidgetTester tester) async {
