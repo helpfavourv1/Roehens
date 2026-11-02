@@ -37,6 +37,9 @@ class AppMotion {
   /// Lowest opacity of the live-pulse loop.
   static const double pulseMinOpacity = 0.45;
 
+  /// How bright the snapshot flash starts.
+  static const double flashPeakOpacity = 0.7;
+
   /// Returns [Duration.zero] when the person asked to reduce motion.
   static Duration resolve(Duration duration, {required bool reduceMotion}) {
     return reduceMotion ? Duration.zero : duration;

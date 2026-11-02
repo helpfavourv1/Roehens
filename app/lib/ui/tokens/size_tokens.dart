@@ -43,6 +43,12 @@ class AppSizes {
   static const double focusRing = 2;
   static const double selectionHandle = 20;
 
+  /// Video tiles are 16:9.
+  static const double tileAspectRatio = 16 / 9;
+
+  /// The draggable thumb on the PTZ pad.
+  static const double ptzThumb = 48;
+
   /// Below this tile width the status pill shows its icon only and a tap opens
   /// a sheet with the full message (D5).
   static const double tileIconOnlyWidth = 120;
