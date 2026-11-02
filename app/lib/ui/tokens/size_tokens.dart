@@ -43,6 +43,9 @@ class AppSizes {
   static const double focusRing = 2;
   static const double selectionHandle = 20;
 
+  /// Reading width for centered content (onboarding, rationale, empty states).
+  static const double contentMaxWidth = 360;
+
   /// Video tiles are 16:9.
   static const double tileAspectRatio = 16 / 9;
 
