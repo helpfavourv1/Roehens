@@ -126,3 +126,12 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 5. **Alphabetical lists.** Use `AppLetterHeader.group`: a plain pinned header stacks under the previous letter in Flutter, and the group form makes the next letter push the previous one away.
 6. **Slider.** Announces its current value and the next step up and down. Callers can give a spoken label for a value (for example "4 hours"); the default is the percentage.
 7. **Text scale caps.** Bottom bar labels stop growing at 130% (`context.clampedTextScaler`), because the bar has a fixed height.
+
+## Viewer widgets (batch P4C)
+
+1. **Tiles take what they show as parameters.** `CameraTile` gets the video view as a widget, the poster as bytes, and every word already translated. Widgets never import `platform/`, so the shell (P5A) builds the video view from the session's handle; a `VideoSurface` for that lives in `platform/player` and is added with the Live screen.
+2. **Narrow tiles (under 120).** The status becomes an icon, and the name plate uses small fixed-size type. The status icon keeps its visual size as its tap area, because a 48 px pill cannot fit in a 97 x 55 tile of a 16-up grid; the tile's own tap is the large target. The screen should let a tap on an errored narrow tile open the status sheet.
+3. **Grid.** Tiles are 16:9, share the width equally, and the block is centered in the remaining height. Empty slots are not drawn. If the rows do not fit, the grid scrolls.
+4. **Fullscreen controls.** Fade after three seconds, return on a tap on the picture, stay on while a screen reader is on, and any touch (including a drag on the PTZ pad) restarts the wait and reports activity to auto-cycle. Escape closes.
+5. **PTZ pad.** Dead zone 15 percent, speed rising to full at the edge, values rounded to 0.1 and sent only when they change by 0.05. Lifting the finger sends stop. Arrow keys move at 80 percent while held. Zoom buttons act while held; a screen-reader activation pulses for 0.4 seconds. Arrows are physical and do not mirror in right-to-left layouts.
+6. **`LtrText`** (in `ui/components`) is the one widget for technical values that must stay left-to-right.
