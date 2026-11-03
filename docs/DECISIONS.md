@@ -135,3 +135,14 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 4. **Fullscreen controls.** Fade after three seconds, return on a tap on the picture, stay on while a screen reader is on, and any touch (including a drag on the PTZ pad) restarts the wait and reports activity to auto-cycle. Escape closes.
 5. **PTZ pad.** Dead zone 15 percent, speed rising to full at the edge, values rounded to 0.1 and sent only when they change by 0.05. Lifting the finger sends stop. Arrow keys move at 80 percent while held. Zoom buttons act while held; a screen-reader activation pulses for 0.4 seconds. Arrows are physical and do not mirror in right-to-left layouts.
 6. **`LtrText`** (in `ui/components`) is the one widget for technical values that must stay left-to-right.
+
+## Setup and system widgets (batch P4D)
+
+1. **Words come in as parameters.** The connection test panel takes a labels object with functions for stage names, status words and elapsed time, plus the diagnosis and suggestions already translated. Stage details (which may name hosts) are never shown.
+2. **Swipe to delete never removes the row itself.** `CameraListRow` asks for the delete and snaps back; the list removes the row when the camera is really gone, so a failed delete leaves it in place, and Undo restores it. The swipe direction follows the reading direction.
+3. **Brand picker** groups by first letter with sticky headers (`AppLetterHeader.group`); names that do not start with a cased letter go under `#`, last. The search field is the first item of the list, so it scrolls away.
+4. **Ad slot** is built exactly to C8.4: SDK height capped at 100, 8 above and below, a hairline on top, nothing when absent, 200 ms size animation. It receives the SDK's banner as an opaque object and a builder from the platform layer.
+5. **Persistence banner** has two forms, a warning with one action and the "update the app" error. It collapses to nothing when storage is healthy.
+6. **Error boundary** shows the full-screen fallback only for `ErrorClass.fatal` errors reported by the global handler's `fatalError`. Retry is expected to clear it.
+7. **Discovery rows** put the "found by" badge under the address, so it wraps with the text at large sizes instead of overflowing.
+8. **Right-to-left test** runs once for each of Arabic, Persian, Urdu and Hebrew and checks the nav bar, bottom bar, segments, rows, grid and the left-to-right fields.
