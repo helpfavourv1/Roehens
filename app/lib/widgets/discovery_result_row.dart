@@ -61,11 +61,13 @@ class DiscoveryResultRow extends StatelessWidget {
                     if (subtitle != null)
                       Text(subtitle!, style: context.type.footnote.copyWith(color: context.colors.textSecondary)),
                     LtrText(address, style: context.type.mono.copyWith(color: context.colors.textSecondary)),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(top: AppSpacing.xs),
+                      child: AppBadge(sourceLabel),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(width: AppSpacing.sm),
-              AppBadge(sourceLabel),
               const SizedBox(width: AppSpacing.xs),
               AppIcon(
                 AppIconName.chevronRight,

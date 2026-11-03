@@ -240,7 +240,7 @@ void main() {
 
     testWidgets('typing filters the list and shows an empty state when nothing matches', (WidgetTester tester) async {
       await pumpPicker(tester);
-      await tester.enterText(find.byType(EditableText), 'rei');
+      await tester.enterText(find.byType(EditableText), 'reo');
       await tester.pump();
       expect(find.text('Axis'), findsNothing);
       expect(find.text('Reolink'), findsOneWidget);

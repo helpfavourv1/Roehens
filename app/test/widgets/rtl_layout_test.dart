@@ -48,11 +48,12 @@ void main() {
           ]),
           direction: TextDirection.rtl,
         );
-        final Iterable<Directionality> boxes = tester
-            .widgetList<Directionality>(find.descendant(of: find.byType(AppIcon), matching: find.byType(Directionality)));
+        final List<Icon> icons = tester.widgetList<Icon>(find.byType(Icon)).toList();
         expect(AppIconName.chevronRight.mirrorsInRtl, isTrue);
         expect(AppIconName.ptzArrowRight.mirrorsInRtl, isFalse);
-        expect(boxes, isNotEmpty);
+        // A mirrored icon follows the layout; a physical one is pinned.
+        expect(icons.first.textDirection, isNull);
+        expect(icons.last.textDirection, TextDirection.ltr);
       });
 
       testWidgets('an address field stays left-to-right', (WidgetTester tester) async {
