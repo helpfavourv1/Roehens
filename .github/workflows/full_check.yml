@@ -1,0 +1,142 @@
+name: full_check
+
+# Manual. The extended check run before a build is handed over for testing: it
+# repeats the push check and adds everything that is too slow or too wide for
+# every push (formatting, coverage, licenses, dependency state, the whole-repo
+# static audit). It changes nothing in the repository.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  LOG: ${{ github.workspace }}/ci.log
+
+jobs:
+  full:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: System SQLite for database tests
+        run: sudo apt-get install -y libsqlite3-dev > /dev/null
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Versions
+        run: |
+          echo "== versions" | tee -a "$LOG"
+          flutter --version 2>&1 | tee -a "$LOG"
+          python3 --version 2>&1 | tee -a "$LOG"
+
+      - name: Static audit (no Flutter needed)
+        id: audit
+        continue-on-error: true
+        run: |
+          echo "== static audit" | tee -a "$LOG"
+          python3 tool/static_audit.py 2>&1 | tee -a "$LOG"
+
+      - name: Resolve dependencies
+        working-directory: app
+        run: |
+          echo "== pub get" | tee -a "$LOG"
+          flutter pub get 2>&1 | tail -5 | tee -a "$LOG"
+
+      - name: Lockfile matches the committed one
+        id: lock
+        continue-on-error: true
+        run: |
+          echo "== lockfile" | tee -a "$LOG"
+          git diff --exit-code -- app/pubspec.lock 2>&1 | head -40 | tee -a "$LOG"
+
+      - name: Analyze
+        id: analyze
+        continue-on-error: true
+        working-directory: app
+        run: |
+          echo "== analyze" | tee -a "$LOG"
+          flutter analyze 2>&1 | tee -a "$LOG"
+
+      - name: Guard
+        id: guard
+        continue-on-error: true
+        run: |
+          echo "== guard" | tee -a "$LOG"
+          sh tool/guard.sh 2>&1 | tee -a "$LOG"
+
+      - name: Guard in release mode (reports what still blocks a release)
+        continue-on-error: true
+        run: |
+          echo "== guard --release (information)" | tee -a "$LOG"
+          sh tool/guard.sh --release 2>&1 | tee -a "$LOG" || true
+
+      - name: Formatting (information)
+        continue-on-error: true
+        working-directory: app
+        run: |
+          echo "== dart format (information)" | tee -a "$LOG"
+          dart format --output=none --set-exit-if-changed lib test 2>&1 | tail -15 | tee -a "$LOG" || true
+
+      - name: Tests with coverage
+        id: tests
+        continue-on-error: true
+        working-directory: app
+        run: |
+          echo "== test" | tee -a "$LOG"
+          flutter test --coverage --reporter expanded 2>&1 | tail -n 40 | tee -a "$LOG"
+
+      - name: Coverage report
+        continue-on-error: true
+        run: python3 tool/coverage_report.py app/coverage/lcov.info 2>&1 | tee -a "$LOG"
+
+      - name: Licenses
+        id: licenses
+        continue-on-error: true
+        run: |
+          echo "== licenses" | tee -a "$LOG"
+          sh tool/license_audit.sh 2>&1 | tee -a "$LOG"
+
+      - name: Dependency state (information)
+        continue-on-error: true
+        working-directory: app
+        run: |
+          echo "== pub outdated (information)" | tee -a "$LOG"
+          flutter pub outdated --no-dev-dependencies 2>&1 | tail -30 | tee -a "$LOG" || true
+
+      - name: Verdict
+        if: always()
+        run: |
+          {
+            echo "== verdict"
+            echo "static audit: ${{ steps.audit.outcome }}"
+            echo "lockfile:     ${{ steps.lock.outcome }}"
+            echo "analyze:      ${{ steps.analyze.outcome }}"
+            echo "guard:        ${{ steps.guard.outcome }}"
+            echo "tests:        ${{ steps.tests.outcome }}"
+            echo "licenses:     ${{ steps.licenses.outcome }}"
+          } | tee -a "$LOG"
+          for s in audit lock analyze guard tests licenses; do :; done
+          if [ "${{ steps.audit.outcome }}" != success ] || [ "${{ steps.analyze.outcome }}" != success ] || \
+             [ "${{ steps.guard.outcome }}" != success ] || [ "${{ steps.tests.outcome }}" != success ] || \
+             [ "${{ steps.licenses.outcome }}" != success ]; then
+            echo "VERDICT: FAIL" | tee -a "$LOG"
+            exit 1
+          fi
+          echo "VERDICT: PASS" | tee -a "$LOG"
+
+      - name: Publish log
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: sh tool/ci_publish_log.sh "$LOG" full_check
