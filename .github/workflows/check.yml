@@ -56,6 +56,21 @@ jobs:
             git push origin HEAD:main 2>&1 | tee -a "$LOG" || echo "lock push skipped (main moved)" | tee -a "$LOG"
           fi
 
+      - name: Format
+        run: |
+          echo "== format" | tee -a "$LOG"
+          (cd app && dart format lib test 2>&1 | tail -3 | tee -a "$LOG")
+          if git diff --quiet -- app/lib app/test; then
+            echo "code is already formatted" | tee -a "$LOG"
+          else
+            echo "formatting changed files; committing them back" | tee -a "$LOG"
+            git config user.name "helpfavourv1"
+            git config user.email "314438714+helpfavourv1@users.noreply.github.com"
+            git add app/lib app/test
+            git commit -m "format: dart format (check workflow)" 2>&1 | tail -2 | tee -a "$LOG"
+            git push origin HEAD:main 2>&1 | tail -2 | tee -a "$LOG" || echo "format push skipped (main moved)" | tee -a "$LOG"
+          fi
+
       - name: Analyze
         working-directory: app
         run: |

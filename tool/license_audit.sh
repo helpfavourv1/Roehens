@@ -17,14 +17,16 @@ base = os.path.dirname(config_path)
 
 def classify(text):
     t = re.sub(r'\s+', ' ', text)
+    # The MPL text names the GPL family as "Secondary Licenses", so it has to be
+    # recognized before the GNU checks.
+    if re.search(r'Mozilla Public License', t, re.I):
+        return 'MPL-2.0'
     if re.search(r'GNU AFFERO GENERAL PUBLIC', t, re.I):
         return 'AGPL'
     if re.search(r'GNU LESSER GENERAL PUBLIC', t, re.I):
         return 'LGPL'
     if re.search(r'GNU GENERAL PUBLIC LICENSE', t, re.I):
         return 'GPL'
-    if re.search(r'Mozilla Public License', t, re.I):
-        return 'MPL-2.0'
     if re.search(r'Apache License', t, re.I):
         return 'Apache-2.0'
     if re.search(r'Permission to use, copy, modify, and/or distribute', t, re.I):
@@ -37,7 +39,8 @@ def classify(text):
         return 'Unlicense'
     return 'UNKNOWN'
 
-ALLOWED = {'MIT', 'BSD', 'Apache-2.0', 'ISC', 'MPL-2.0', 'Unlicense'}
+ALLOWED = {'MIT', 'BSD', 'Apache-2.0', 'ISC', 'MPL-2.0', 'Unlicense', 'Flutter SDK (BSD)'}
+FLUTTER_SDK = {'flutter', 'flutter_test', 'flutter_web_plugins', 'flutter_localizations', 'sky_engine'}
 rows = []
 for pkg in sorted(config['packages'], key=lambda p: p['name']):
     name = pkg['name']
@@ -51,7 +54,10 @@ for pkg in sorted(config['packages'], key=lambda p: p['name']):
             if re.match(r'(LICEN[CS]E|COPYING|UNLICENSE)', cand, re.I) and os.path.isfile(os.path.join(path, cand)):
                 found = os.path.join(path, cand)
                 break
-    kind = classify(open(found, errors='replace').read()) if found else 'NO LICENSE FILE'
+    if name in FLUTTER_SDK and not found:
+        kind = 'Flutter SDK (BSD)'
+    else:
+        kind = classify(open(found, errors='replace').read()) if found else 'NO LICENSE FILE'
     rows.append((name, kind))
 
 width = max(len(n) for n, _ in rows)

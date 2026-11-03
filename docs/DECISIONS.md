@@ -146,3 +146,13 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 6. **Error boundary** shows the full-screen fallback only for `ErrorClass.fatal` errors reported by the global handler's `fatalError`. Retry is expected to clear it.
 7. **Discovery rows** put the "found by" badge under the address, so it wraps with the text at large sizes instead of overflowing.
 8. **Right-to-left test** runs once for each of Arabic, Persian, Urdu and Hebrew and checks the nav bar, bottom bar, segments, rows, grid and the left-to-right fields.
+
+## Extended check and hardening before the first visual build (batch P4E)
+
+1. **Three levels of check.** (a) Every push: format, analyze, guard, tests (`check`). (b) On demand, before a build is handed over: `full_check` repeats those and adds coverage, the license audit, dependency state, the formatting report, the lockfile comparison and `tool/static_audit.py` (a whole-repository audit that needs no Flutter SDK). (c) The APK build itself.
+2. **`tool/static_audit.py`** checks: every import resolves; the layer rules; declared versus used packages; asset files exist; no TODO/`setState`/`print`; balanced brackets; secrets and spike-stream hosts anywhere in tracked files; Android permissions against the capability matrix; native channel names match on both sides; workflows are manual (only `check` may run on push) and pin one Flutter version; every library file is reached by a test.
+3. **Formatting is automatic.** The `check` workflow runs `dart format` and commits any change back, like the lockfile refresh. A push made by the workflow does not start another run, so the same run checks the formatted tree. Wait for the check to finish before editing, so the next pull includes the format commit.
+4. **License audit** (`tool/license_audit.sh`, started early from P8). It reads each resolved package's license file and fails on GPL or AGPL. The MPL text names the GPL family as "secondary licenses", so MPL is recognized first; the first run misread `dbus` (MPL-2.0, Linux-only, never in a phone build) as AGPL. Flutter SDK packages without a license file are listed as BSD.
+5. **Android backups are off** (`allowBackup=false` plus `data_extraction_rules.xml`), as the specification requires; the first audit found them still on.
+6. **Coverage gaps found and closed:** the key-value store and the credential vault were at 0 percent; five models had no JSON round-trip test; formatters, async helpers, the error handler, the theme builder and the icon license had no tests.
+7. **Not covered by automated tests, by design:** `player_session.dart` (needs the native player), `ptz_service.dart` (needs a real ONVIF camera), and the store SDK adapters (need a store account). They are proven on the phone.
