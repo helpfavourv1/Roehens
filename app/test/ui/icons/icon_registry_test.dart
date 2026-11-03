@@ -10,8 +10,10 @@ void main() {
   test('no two semantic names share a glyph', () {
     final Set<int> codePoints = <int>{};
     for (final AppIconName name in AppIconName.values) {
-      final int codePoint =
-          AppIcons.layers(name, AppIconWeight.bold).primary.codePoint;
+      final int codePoint = AppIcons.layers(
+        name,
+        AppIconWeight.bold,
+      ).primary.codePoint;
       expect(codePoints.add(codePoint), isTrue, reason: '$name reuses a glyph');
     }
   });
@@ -37,7 +39,10 @@ void main() {
     for (final AppIconName name in AppIconName.values) {
       expect(AppIcons.layers(name, AppIconWeight.bold).secondary, isNull);
       expect(AppIcons.layers(name, AppIconWeight.fill).secondary, isNull);
-      final AppIconLayers duotone = AppIcons.layers(name, AppIconWeight.duotone);
+      final AppIconLayers duotone = AppIcons.layers(
+        name,
+        AppIconWeight.duotone,
+      );
       expect(duotone.secondary, isNotNull);
       expect(duotone.secondary!.codePoint, isNot(duotone.primary.codePoint));
     }

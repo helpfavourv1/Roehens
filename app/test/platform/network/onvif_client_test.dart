@@ -12,12 +12,16 @@ import 'package:roehens/platform/network/onvif_client.dart';
 import '../../support/fakes.dart';
 import '../../support/local_http.dart';
 
-String fixture(String name) => File('test/fixtures/onvif/$name').readAsStringSync();
+String fixture(String name) =>
+    File('test/fixtures/onvif/$name').readAsStringSync();
 
-const CameraCredentials login =
-    CameraCredentials(username: 'admin', password: 'pw12345');
+const CameraCredentials login = CameraCredentials(
+  username: 'admin',
+  password: 'pw12345',
+);
 
-String timeResponse(int hour) => '<s:Envelope xmlns:s="x"><s:Body>'
+String timeResponse(int hour) =>
+    '<s:Envelope xmlns:s="x"><s:Body>'
     '<tds:GetSystemDateAndTimeResponse xmlns:tds="y" xmlns:tt="z">'
     '<tds:SystemDateAndTime><tt:UTCDateTime>'
     '<tt:Time><tt:Hour>$hour</tt:Hour><tt:Minute>0</tt:Minute><tt:Second>0</tt:Second></tt:Time>'
@@ -25,10 +29,12 @@ String timeResponse(int hour) => '<s:Envelope xmlns:s="x"><s:Body>'
     '</tt:UTCDateTime></tds:SystemDateAndTime>'
     '</tds:GetSystemDateAndTimeResponse></s:Body></s:Envelope>';
 
-const String ack = '<s:Envelope xmlns:s="x"><s:Body>'
+const String ack =
+    '<s:Envelope xmlns:s="x"><s:Body>'
     '<tptz:ContinuousMoveResponse xmlns:tptz="y"/></s:Body></s:Envelope>';
 
-String fault(String code, String reason) => '<s:Envelope xmlns:s="x"><s:Body>'
+String fault(String code, String reason) =>
+    '<s:Envelope xmlns:s="x"><s:Body>'
     '<s:Fault><s:Code><s:Value>s:Sender</s:Value>'
     '<s:Subcode><s:Value>$code</s:Value></s:Subcode></s:Code>'
     '<s:Reason><s:Text>$reason</s:Text></s:Reason></s:Fault></s:Body></s:Envelope>';
@@ -50,7 +56,10 @@ Future<(Uri, List<String>)> serveOnvif({
       'GetStreamUri',
       'ContinuousMove',
     ];
-    final String action = actions.firstWhere(body.contains, orElse: () => 'Unknown');
+    final String action = actions.firstWhere(
+      body.contains,
+      orElse: () => 'Unknown',
+    );
     (int, String) answer;
     if (overrides.containsKey(action)) {
       answer = overrides[action]!;
@@ -63,7 +72,8 @@ Future<(Uri, List<String>)> serveOnvif({
         case 'GetCapabilities':
           answer = (
             200,
-            fixture('capabilities.xml').replaceAll('10.99.0.5:8080', '10.99.0.5:${base.port}'),
+            fixture('capabilities.xml')
+                .replaceAll('10.99.0.5:8080', '10.99.0.5:${base.port}'),
           );
         case 'GetProfiles':
           answer = (200, fixture('get_profiles.xml'));
@@ -104,10 +114,16 @@ void main() {
   group('connect', () {
     test('learns the clock, device, services and profiles', () async {
       final (Uri service, List<String> requests) = await serveOnvif();
-      final OnvifDevice device = (await client.connect(service, login)).valueOrNull!;
+      final OnvifDevice device = (await client.connect(
+        service,
+        login,
+      )).valueOrNull!;
 
       expect(device.info.model, 'IPC-5MP-H265');
-      expect(device.profiles.map((OnvifProfile p) => p.token), <String>['profile_1', 'profile_2']);
+      expect(device.profiles.map((OnvifProfile p) => p.token), <String>[
+        'profile_1',
+        'profile_2',
+      ]);
       expect(device.clockOffset, const Duration(hours: 2));
       expect(device.ptzService, isNotNull);
       expect(device.ptzService!.path, '/onvif/ptz_service');
@@ -139,7 +155,10 @@ void main() {
       final (Uri service, List<String> requests) = await serveOnvif();
       await client.connect(service, login);
       // Our clock says 12:00, the camera says 14:00.
-      expect(requests[1], contains('<wsu:Created>2026-10-05T14:00:00Z</wsu:Created>'));
+      expect(
+        requests[1],
+        contains('<wsu:Created>2026-10-05T14:00:00Z</wsu:Created>'),
+      );
     });
 
     test('a camera that cannot report its services still connects', () async {
@@ -148,7 +167,10 @@ void main() {
           'GetCapabilities': (400, fault('ter:ActionNotSupported', 'no')),
         },
       );
-      final OnvifDevice device = (await client.connect(service, login)).valueOrNull!;
+      final OnvifDevice device = (await client.connect(
+        service,
+        login,
+      )).valueOrNull!;
       expect(device.mediaService, service);
       expect(device.ptzService, isNull);
       expect(requests.map(actionOf).last, 'GetProfiles');
@@ -160,7 +182,10 @@ void main() {
           'GetSystemDateAndTime': (500, fault('ter:Action', 'no clock')),
         },
       );
-      final OnvifDevice device = (await client.connect(service, login)).valueOrNull!;
+      final OnvifDevice device = (await client.connect(
+        service,
+        login,
+      )).valueOrNull!;
       expect(device.clockOffset, Duration.zero);
       expect(requests.length, 4);
     });
@@ -168,7 +193,10 @@ void main() {
     test('wrong credentials end as an authentication failure', () async {
       final (Uri service, _) = await serveOnvif(
         overrides: <String, (int, String)>{
-          'GetDeviceInformation': (400, fault('ter:NotAuthorized', 'Sender not Authorized')),
+          'GetDeviceInformation': (
+            400,
+            fault('ter:NotAuthorized', 'Sender not Authorized'),
+          ),
         },
       );
       final Result<OnvifDevice> result = await client.connect(service, login);
@@ -179,10 +207,12 @@ void main() {
       final Uri service = (await serveLocal((HttpRequest r) async {
         await utf8.decodeStream(r);
         r.response.statusCode = HttpStatus.unauthorized;
-        r.response.headers.set(HttpHeaders.wwwAuthenticateHeader, 'Basic realm="cam"');
+        r.response.headers.set(
+          HttpHeaders.wwwAuthenticateHeader,
+          'Basic realm="cam"',
+        );
         await r.response.close();
-      }))
-          .replace(path: '/onvif/device_service');
+      })).replace(path: '/onvif/device_service');
       final Result<OnvifDevice> result = await client.connect(service, login);
       expect(result.errorOrNull!.errorClass, ErrorClass.authFailed);
     });
@@ -202,8 +232,10 @@ void main() {
     });
 
     test('an unreachable camera is a network error', () async {
-      final HttpServer closed =
-          await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      final HttpServer closed = await HttpServer.bind(
+        InternetAddress.loopbackIPv4,
+        0,
+      );
       final int port = closed.port;
       await closed.close(force: true);
       final Result<OnvifDevice> result = await client.connect(
@@ -217,11 +249,17 @@ void main() {
   group('single calls', () {
     test('stream address for a profile', () async {
       final (Uri service, List<String> requests) = await serveOnvif();
-      final Uri uri =
-          (await client.streamUri(service, 'profile_2', login)).valueOrNull!;
+      final Uri uri = (await client.streamUri(
+        service,
+        'profile_2',
+        login,
+      )).valueOrNull!;
       expect(uri.scheme, 'rtsp');
       expect(uri.path, '/Streaming/Channels/101');
-      expect(requests.single, contains('<trt:ProfileToken>profile_2</trt:ProfileToken>'));
+      expect(
+        requests.single,
+        contains('<trt:ProfileToken>profile_2</trt:ProfileToken>'),
+      );
     });
 
     test('a PTZ command is acknowledged', () async {
@@ -255,8 +293,7 @@ void main() {
       final Uri service = (await serveLocal((HttpRequest r) async {
         await utf8.decodeStream(r);
         await r.response.close();
-      }))
-          .replace(path: '/onvif/device_service');
+      })).replace(path: '/onvif/device_service');
       expect((await client.deviceInfo(service, login)).isErr, isTrue);
     });
   });

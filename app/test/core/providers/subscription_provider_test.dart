@@ -43,16 +43,19 @@ void main() {
     provider.dispose();
   });
 
-  test('the store answer unlocks ad-free and is cached with a timestamp', () async {
-    purchase.current = owned;
-    final SubscriptionProvider provider = build();
-    await provider.init();
+  test(
+    'the store answer unlocks ad-free and is cached with a timestamp',
+    () async {
+      purchase.current = owned;
+      final SubscriptionProvider provider = build();
+      await provider.init();
 
-    expect(provider.isAdFree, isTrue);
-    expect(provider.value.verifiedAt, clock.time);
-    expect(store.values[StorageKeys.entitlement], isNotNull);
-    provider.dispose();
-  });
+      expect(provider.isAdFree, isTrue);
+      expect(provider.value.verifiedAt, clock.time);
+      expect(store.values[StorageKeys.entitlement], isNotNull);
+      provider.dispose();
+    },
+  );
 
   test('the cache applies when the store cannot be reached', () async {
     store.values[StorageKeys.entitlement] = jsonEncode(owned.toJson());

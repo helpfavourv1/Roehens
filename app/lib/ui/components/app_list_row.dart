@@ -47,8 +47,8 @@ class AppListRow extends StatelessWidget {
     final Color leadingColor = destructive
         ? colors.error
         : selected
-            ? colors.accent
-            : colors.textSecondary;
+        ? colors.accent
+        : colors.textSecondary;
     final bool tappable = onTap != null || onLongPress != null;
 
     Widget? end = trailing;
@@ -61,7 +61,9 @@ class AppListRow extends StatelessWidget {
     }
 
     final Widget row = ColoredBox(
-      color: selected ? colors.accentWash : colors.bgSecondary.withValues(alpha: 0),
+      color: selected
+          ? colors.accentWash
+          : colors.bgSecondary.withValues(alpha: 0),
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: AppSizes.rowMinHeight),
         child: Padding(
@@ -92,8 +94,9 @@ class AppListRow extends StatelessWidget {
                     if (subtitle != null)
                       Text(
                         subtitle!,
-                        style: context.type.footnote
-                            .copyWith(color: colors.textSecondary),
+                        style: context.type.footnote.copyWith(
+                          color: colors.textSecondary,
+                        ),
                       ),
                   ],
                 ),

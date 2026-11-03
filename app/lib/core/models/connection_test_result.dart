@@ -74,8 +74,8 @@ class ConnectionTestResult {
 
   @override
   int get hashCode => Object.hash(
-        Object.hashAll(stages),
-        error,
-        Object.hashAll(suggestionKeys),
-      );
+    Object.hashAll(stages),
+    error,
+    Object.hashAll(suggestionKeys),
+  );
 }

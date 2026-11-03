@@ -95,7 +95,11 @@ class CameraTile extends StatelessWidget {
                 if (still != null)
                   Opacity(
                     opacity: AppMotion.pressedOpacity,
-                    child: Image.memory(still, fit: BoxFit.contain, gaplessPlayback: true),
+                    child: Image.memory(
+                      still,
+                      fit: BoxFit.contain,
+                      gaplessPlayback: true,
+                    ),
                   ),
                 if (video != null)
                   AnimatedOpacity(

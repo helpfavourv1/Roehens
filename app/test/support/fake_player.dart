@@ -4,8 +4,9 @@ import 'package:roehens/core/models/player_state.dart';
 
 /// A session the test drives by hand with [emit].
 class FakePlayerSession implements PlayerSessionContract, FrameCapturable {
-  final ValueNotifier<PlayerState> _state =
-      ValueNotifier<PlayerState>(const PlayerIdle());
+  final ValueNotifier<PlayerState> _state = ValueNotifier<PlayerState>(
+    const PlayerIdle(),
+  );
   final ValueNotifier<VideoSize?> _size = ValueNotifier<VideoSize?>(null);
 
   final List<PlayerSource> opened = <PlayerSource>[];
@@ -59,8 +60,9 @@ class FakePlayerSession implements PlayerSessionContract, FrameCapturable {
 
 /// A session that cannot produce still frames.
 class NonCapturableSession implements PlayerSessionContract {
-  final ValueNotifier<PlayerState> _state =
-      ValueNotifier<PlayerState>(const PlayerIdle());
+  final ValueNotifier<PlayerState> _state = ValueNotifier<PlayerState>(
+    const PlayerIdle(),
+  );
   final ValueNotifier<VideoSize?> _size = ValueNotifier<VideoSize?>(null);
 
   @override

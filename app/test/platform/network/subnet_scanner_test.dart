@@ -36,10 +36,7 @@ void main() {
             open.contains('$host:$port'),
       );
       final List<OpenPort> found = await scanner.scan('192.168.1.20').toList();
-      expect(
-        found.map((OpenPort p) => p.toString()).toSet(),
-        open,
-      );
+      expect(found.map((OpenPort p) => p.toString()).toSet(), open);
     });
 
     test('tries every host on every port and never the phone itself', () async {
@@ -115,12 +112,13 @@ void main() {
         },
       );
       final Completer<void> first = Completer<void>();
-      final StreamSubscription<OpenPort> subscription =
-          scanner.scan('192.168.1.20').listen((OpenPort p) {
-        if (!first.isCompleted) {
-          first.complete();
-        }
-      });
+      final StreamSubscription<OpenPort> subscription = scanner
+          .scan('192.168.1.20')
+          .listen((OpenPort p) {
+            if (!first.isCompleted) {
+              first.complete();
+            }
+          });
       await first.future;
       await subscription.cancel();
       final int atCancel = attempts;
@@ -144,8 +142,9 @@ void main() {
       final SubnetScanner scanner = SubnetScanner(
         connector: (String host, int port, Duration timeout) async => true,
       );
-      final List<OpenPort> found =
-          await scanner.scan('not an ip', onProgress: (double f) => last = f).toList();
+      final List<OpenPort> found = await scanner
+          .scan('not an ip', onProgress: (double f) => last = f)
+          .toList();
       expect(found, isEmpty);
       expect(last, 1.0);
     });

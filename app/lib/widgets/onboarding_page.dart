@@ -33,17 +33,23 @@ class OnboardingPage extends StatelessWidget {
     final AppColors colors = context.colors;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints box) {
-        final double heroBox = box.hasBoundedHeight ? box.maxHeight / 3 : AppSizes.iconHero * 3;
+        final double heroBox = box.hasBoundedHeight
+            ? box.maxHeight / 3
+            : AppSizes.iconHero * 3;
         return SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           padding: AppSpacing.allLg,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minHeight: box.hasBoundedHeight ? box.maxHeight - AppSpacing.lg * 2 : 0,
+              minHeight: box.hasBoundedHeight
+                  ? box.maxHeight - AppSpacing.lg * 2
+                  : 0,
             ),
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: AppSizes.contentMaxWidth),
+                constraints: const BoxConstraints(
+                  maxWidth: AppSizes.contentMaxWidth,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,7 +59,10 @@ class OnboardingPage extends StatelessWidget {
                       const SizedBox(height: AppSpacing.xl),
                     ],
                     SizedBox(
-                      height: heroBox.clamp(AppSizes.iconHero, AppSizes.iconHero * 2),
+                      height: heroBox.clamp(
+                        AppSizes.iconHero,
+                        AppSizes.iconHero * 2,
+                      ),
                       child: Center(
                         child: AppIcon(
                           icon,
@@ -70,20 +79,26 @@ class OnboardingPage extends StatelessWidget {
                       child: Text(
                         title,
                         textAlign: TextAlign.center,
-                        style: context.type.headline.copyWith(color: colors.textPrimary),
+                        style: context.type.headline.copyWith(
+                          color: colors.textPrimary,
+                        ),
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       message,
                       textAlign: TextAlign.center,
-                      style: context.type.body.copyWith(color: colors.textSecondary),
+                      style: context.type.body.copyWith(
+                        color: colors.textSecondary,
+                      ),
                     ),
                     if (points.isNotEmpty) ...<Widget>[
                       const SizedBox(height: AppSpacing.lg),
                       for (final String point in points)
                         Padding(
-                          padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
+                          padding: const EdgeInsetsDirectional.only(
+                            bottom: AppSpacing.sm,
+                          ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -96,7 +111,9 @@ class OnboardingPage extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   point,
-                                  style: context.type.body.copyWith(color: colors.textPrimary),
+                                  style: context.type.body.copyWith(
+                                    color: colors.textPrimary,
+                                  ),
                                 ),
                               ),
                             ],

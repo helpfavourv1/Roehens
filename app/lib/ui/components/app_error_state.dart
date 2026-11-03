@@ -56,19 +56,27 @@ class AppErrorState extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: context.type.title2.copyWith(color: context.colors.textPrimary),
+                  style: context.type.title2.copyWith(
+                    color: context.colors.textPrimary,
+                  ),
                 ),
                 if (message != null) ...<Widget>[
                   const SizedBox(height: AppSpacing.sm),
                   Text(
                     message!,
                     textAlign: TextAlign.center,
-                    style: context.type.body.copyWith(color: context.colors.textSecondary),
+                    style: context.type.body.copyWith(
+                      color: context.colors.textSecondary,
+                    ),
                   ),
                 ],
                 if (primaryLabel != null && onPrimary != null) ...<Widget>[
                   const SizedBox(height: AppSpacing.lg),
-                  AppButton(label: primaryLabel!, onPressed: onPrimary, expand: true),
+                  AppButton(
+                    label: primaryLabel!,
+                    onPressed: onPrimary,
+                    expand: true,
+                  ),
                 ],
                 if (secondaryLabel != null && onSecondary != null) ...<Widget>[
                   const SizedBox(height: AppSpacing.sm),

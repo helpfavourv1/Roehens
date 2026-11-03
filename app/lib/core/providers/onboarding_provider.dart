@@ -22,8 +22,8 @@ class OnboardingProvider extends SafeValueNotifier<OnboardingState> {
       value.needsOnboarding(AppConstants.onboardingVersion);
 
   Future<void> load() async {
-    final String? raw =
-        (await _store.getString(StorageKeys.onboarding)).valueOrNull;
+    final String? raw = (await _store.getString(StorageKeys.onboarding))
+        .valueOrNull;
     if (raw != null) {
       try {
         final Object? decoded = jsonDecode(raw);

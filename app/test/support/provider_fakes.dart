@@ -68,8 +68,9 @@ class FakePurchase implements PurchaseContract {
 }
 
 class FakeFlags implements FlagsContract {
-  final ValueNotifier<RemoteFlags> notifier =
-      ValueNotifier<RemoteFlags>(RemoteFlags.defaults);
+  final ValueNotifier<RemoteFlags> notifier = ValueNotifier<RemoteFlags>(
+    RemoteFlags.defaults,
+  );
   int refreshCalls = 0;
 
   @override

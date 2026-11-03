@@ -51,7 +51,10 @@ class AppDialog extends StatelessWidget {
               color: tokens.colors.bgElevated,
               borderRadius: AppRadius.allLg,
               boxShadow: tokens.elevation.sheet,
-              border: Border.all(color: tokens.colors.borderSubtle, width: AppSizes.hairline),
+              border: Border.all(
+                color: tokens.colors.borderSubtle,
+                width: AppSizes.hairline,
+              ),
             ),
             child: Padding(
               padding: AppSpacing.allMd,
@@ -64,14 +67,18 @@ class AppDialog extends StatelessWidget {
                       header: true,
                       child: Text(
                         title,
-                        style: context.type.title2.copyWith(color: tokens.colors.textPrimary),
+                        style: context.type.title2.copyWith(
+                          color: tokens.colors.textPrimary,
+                        ),
                       ),
                     ),
                     if (message != null) ...<Widget>[
                       const SizedBox(height: AppSpacing.sm),
                       Text(
                         message!,
-                        style: context.type.body.copyWith(color: tokens.colors.textSecondary),
+                        style: context.type.body.copyWith(
+                          color: tokens.colors.textSecondary,
+                        ),
                       ),
                     ],
                     if (content != null) ...<Widget>[

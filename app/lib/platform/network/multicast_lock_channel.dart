@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 /// other platforms every method returns its "nothing" value without a call.
 class MulticastLockChannel {
   MulticastLockChannel({MethodChannel? channel, bool? isAndroid})
-      : _channel = channel ?? const MethodChannel('roehens/network'),
-        _isAndroid = isAndroid ?? Platform.isAndroid;
+    : _channel = channel ?? const MethodChannel('roehens/network'),
+      _isAndroid = isAndroid ?? Platform.isAndroid;
 
   final MethodChannel _channel;
   final bool _isAndroid;

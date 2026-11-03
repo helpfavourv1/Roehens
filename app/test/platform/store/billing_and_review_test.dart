@@ -59,7 +59,11 @@ class FakeBillingBackend implements BillingBackend {
 
 const String productId = 'com.zdmgold.roehens.adfree';
 
-PurchaseEvent event(PurchaseEventKind kind, {String id = productId, String? message}) {
+PurchaseEvent event(
+  PurchaseEventKind kind, {
+  String id = productId,
+  String? message,
+}) {
   return PurchaseEvent(productId: id, kind: kind, message: message);
 }
 
@@ -122,7 +126,10 @@ void main() {
       expect(none.isSupported, isFalse);
       expect((await none.currentEntitlement()).valueOrNull!.isAdFree, isFalse);
       expect((await none.loadProduct()).valueOrNull, isNull);
-      expect((await none.buy()).errorOrNull!.errorClass, ErrorClass.purchaseFailed);
+      expect(
+        (await none.buy()).errorOrNull!.errorClass,
+        ErrorClass.purchaseFailed,
+      );
       expect((await none.restore()).isErr, isTrue);
       expect(backend.buys, 0);
       await none.dispose();
@@ -151,7 +158,10 @@ void main() {
 
       test('a store that throws is an error, not a crash', () async {
         backend.loadError = StateError('boom');
-        expect((await service.loadProduct()).errorOrNull!.errorClass, ErrorClass.purchaseFailed);
+        expect(
+          (await service.loadProduct()).errorOrNull!.errorClass,
+          ErrorClass.purchaseFailed,
+        );
       });
 
       test('buying starts the flow', () async {
@@ -161,7 +171,10 @@ void main() {
 
       test('a flow that cannot start is an error', () async {
         backend.startsPurchase = false;
-        expect((await service.buy()).errorOrNull!.errorClass, ErrorClass.purchaseFailed);
+        expect(
+          (await service.buy()).errorOrNull!.errorClass,
+          ErrorClass.purchaseFailed,
+        );
       });
     });
 
@@ -184,7 +197,9 @@ void main() {
       test('other products are ignored', () async {
         final List<Entitlement> seen = <Entitlement>[];
         service.entitlementChanges.listen(seen.add);
-        backend.controller.add(event(PurchaseEventKind.purchased, id: 'something.else'));
+        backend.controller.add(
+          event(PurchaseEventKind.purchased, id: 'something.else'),
+        );
         await Future<void>.delayed(const Duration(milliseconds: 20));
         expect(seen, isEmpty);
       });
@@ -201,7 +216,9 @@ void main() {
 
       test('a failed purchase is reported', () async {
         final Future<AppError> next = service.failures.first;
-        backend.controller.add(event(PurchaseEventKind.failed, message: 'card declined'));
+        backend.controller.add(
+          event(PurchaseEventKind.failed, message: 'card declined'),
+        );
         final AppError error = await next;
         expect(error.errorClass, ErrorClass.purchaseFailed);
         expect(error.detail, 'card declined');
@@ -210,14 +227,16 @@ void main() {
 
     group('current entitlement', () {
       test('is free when the store has nothing to restore', () async {
-        final Entitlement entitlement = (await service.currentEntitlement()).valueOrNull!;
+        final Entitlement entitlement =
+            (await service.currentEntitlement()).valueOrNull!;
         expect(entitlement.isAdFree, isFalse);
         expect(backend.restores, 1);
       });
 
       test('picks up a purchase the store restores', () async {
         backend.onRestore = event(PurchaseEventKind.restored);
-        final Entitlement entitlement = (await service.currentEntitlement()).valueOrNull!;
+        final Entitlement entitlement =
+            (await service.currentEntitlement()).valueOrNull!;
         expect(entitlement.isAdFree, isTrue);
         expect(entitlement.source, EntitlementSource.restore);
       });
@@ -225,7 +244,10 @@ void main() {
       test('once ad-free it answers without asking the store again', () async {
         backend.controller.add(event(PurchaseEventKind.purchased));
         await Future<void>.delayed(const Duration(milliseconds: 20));
-        expect((await service.currentEntitlement()).valueOrNull!.isAdFree, isTrue);
+        expect(
+          (await service.currentEntitlement()).valueOrNull!.isAdFree,
+          isTrue,
+        );
         expect(backend.restores, 0);
       });
     });
@@ -242,42 +264,59 @@ void main() {
     setUp(() => backend = FakeReviewBackend());
 
     test('the prompt is requested when available', () async {
-      await ReviewService(config: StoreConfig.googlePlay, backend: backend).requestReview();
+      await ReviewService(
+        config: StoreConfig.googlePlay,
+        backend: backend,
+      ).requestReview();
       expect(backend.requests, 1);
     });
 
     test('no prompt when the store says it is unavailable', () async {
       backend.available = false;
-      await ReviewService(config: StoreConfig.googlePlay, backend: backend).requestReview();
+      await ReviewService(
+        config: StoreConfig.googlePlay,
+        backend: backend,
+      ).requestReview();
       expect(backend.requests, 0);
     });
 
     test('a failing store never throws', () async {
       backend.error = StateError('boom');
-      final ReviewService service =
-          ReviewService(config: StoreConfig.googlePlay, backend: backend);
+      final ReviewService service = ReviewService(
+        config: StoreConfig.googlePlay,
+        backend: backend,
+      );
       expect(await service.isAvailable, isFalse);
       await service.requestReview();
       await service.openStoreListing();
     });
 
     test('Google Play opens the listing without an App Store ID', () async {
-      await ReviewService(config: StoreConfig.googlePlay, backend: backend).openStoreListing();
+      await ReviewService(
+        config: StoreConfig.googlePlay,
+        backend: backend,
+      ).openStoreListing();
       expect(backend.opened, <String?>[null]);
     });
 
-    test('the App Store listing needs its ID and is skipped until it is known', () async {
-      await ReviewService(config: StoreConfig.appStore, backend: backend).openStoreListing();
-      expect(backend.opened, isEmpty);
+    test(
+      'the App Store listing needs its ID and is skipped until it is known',
+      () async {
+        await ReviewService(
+          config: StoreConfig.appStore,
+          backend: backend,
+        ).openStoreListing();
+        expect(backend.opened, isEmpty);
 
-      const StoreConfig known = StoreConfig(
-        storeName: StoreName.appStore,
-        iapSupported: true,
-        bannerUnitId: 'x',
-        appStoreId: '123456789',
-      );
-      await ReviewService(config: known, backend: backend).openStoreListing();
-      expect(backend.opened, <String?>['123456789']);
-    });
+        const StoreConfig known = StoreConfig(
+          storeName: StoreName.appStore,
+          iapSupported: true,
+          bannerUnitId: 'x',
+          appStoreId: '123456789',
+        );
+        await ReviewService(config: known, backend: backend).openStoreListing();
+        expect(backend.opened, <String?>['123456789']);
+      },
+    );
   });
 }

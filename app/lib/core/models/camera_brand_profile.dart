@@ -25,9 +25,10 @@ class CameraBrandProfile {
     return CameraBrandProfile(
       id: json['id']! as String,
       displayName: json['displayName']! as String,
-      defaultPorts: (json['defaultPorts'] as List<Object?>? ?? const <Object?>[])
-          .map((Object? item) => item! as int)
-          .toList(),
+      defaultPorts:
+          (json['defaultPorts'] as List<Object?>? ?? const <Object?>[])
+              .map((Object? item) => item! as int)
+              .toList(),
       mainPathTemplates: _strings(json['mainPathTemplates']),
       subPathTemplates: _strings(json['subPathTemplates']),
       mjpegTemplates: _strings(json['mjpegTemplates']),
@@ -81,14 +82,14 @@ class CameraBrandProfile {
 
   @override
   int get hashCode => Object.hash(
-        id,
-        displayName,
-        Object.hashAll(defaultPorts),
-        Object.hashAll(mainPathTemplates),
-        Object.hashAll(subPathTemplates),
-        Object.hashAll(mjpegTemplates),
-        Object.hashAll(snapshotTemplates),
-        notes,
-        verified,
-      );
+    id,
+    displayName,
+    Object.hashAll(defaultPorts),
+    Object.hashAll(mainPathTemplates),
+    Object.hashAll(subPathTemplates),
+    Object.hashAll(mjpegTemplates),
+    Object.hashAll(snapshotTemplates),
+    notes,
+    verified,
+  );
 }

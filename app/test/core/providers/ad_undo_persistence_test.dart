@@ -82,13 +82,16 @@ void main() {
       expect(ad.loadedWidths, isEmpty);
     });
 
-    test('a crash in the consent form leaves ads off and the app running', () async {
-      await build();
-      consent.throwOnGather = true;
-      consent.canRequest = false;
-      await state.start();
-      expect(state.value.isVisible, isFalse);
-    });
+    test(
+      'a crash in the consent form leaves ads off and the app running',
+      () async {
+        await build();
+        consent.throwOnGather = true;
+        consent.canRequest = false;
+        await state.start();
+        expect(state.value.isVisible, isFalse);
+      },
+    );
 
     test('collapses off the Live screen and returns on it', () async {
       await build();
@@ -131,22 +134,25 @@ void main() {
       expect(ad.loadedWidths, <int>[360, 720]);
     });
 
-    test('the ad-free unlock removes the banner and never starts the SDK', () async {
-      await build();
-      purchase.current = const Entitlement(
-        tier: EntitlementTier.adFree,
-        source: EntitlementSource.purchase,
-      );
-      await subscription.init();
-      await state.start();
-      state
-        ..setAvailableWidth(360)
-        ..setLive(live: true);
-      await Future<void>.delayed(const Duration(milliseconds: 20));
+    test(
+      'the ad-free unlock removes the banner and never starts the SDK',
+      () async {
+        await build();
+        purchase.current = const Entitlement(
+          tier: EntitlementTier.adFree,
+          source: EntitlementSource.purchase,
+        );
+        await subscription.init();
+        await state.start();
+        state
+          ..setAvailableWidth(360)
+          ..setLive(live: true);
+        await Future<void>.delayed(const Duration(milliseconds: 20));
 
-      expect(state.value.isVisible, isFalse);
-      expect(ad.initializeCalls, 0);
-    });
+        expect(state.value.isVisible, isFalse);
+        expect(ad.initializeCalls, 0);
+      },
+    );
 
     test('buying the unlock while a banner shows removes it', () async {
       await build();
@@ -166,23 +172,25 @@ void main() {
       expect(ad.disposeCalls, greaterThan(0));
     });
 
-    test('the ads kill switch removes the banner, and lifting it brings it back',
-        () async {
-      await build();
-      await state.start();
-      state
-        ..setAvailableWidth(360)
-        ..setLive(live: true);
-      await waitUntil(() => state.value.isVisible);
+    test(
+      'the ads kill switch removes the banner, and lifting it brings it back',
+      () async {
+        await build();
+        await state.start();
+        state
+          ..setAvailableWidth(360)
+          ..setLive(live: true);
+        await waitUntil(() => state.value.isVisible);
 
-      flagSource.notifier.value = const RemoteFlags(
-        killSwitches: <String, bool>{'ads': true},
-      );
-      await waitUntil(() => !state.value.isVisible);
+        flagSource.notifier.value = const RemoteFlags(
+          killSwitches: <String, bool>{'ads': true},
+        );
+        await waitUntil(() => !state.value.isVisible);
 
-      flagSource.notifier.value = RemoteFlags.defaults;
-      await waitUntil(() => state.value.isVisible);
-    });
+        flagSource.notifier.value = RemoteFlags.defaults;
+        await waitUntil(() => state.value.isVisible);
+      },
+    );
 
     test('no fill leaves the slot collapsed', () async {
       await build();
@@ -295,8 +303,9 @@ void main() {
     });
 
     test('works with no sources', () {
-      final PersistenceHealthProvider health =
-          PersistenceHealthProvider(sources: const <ValueListenable<bool>>[]);
+      final PersistenceHealthProvider health = PersistenceHealthProvider(
+        sources: const <ValueListenable<bool>>[],
+      );
       expect(health.value, PersistenceIssue.none);
       health.dispose();
     });

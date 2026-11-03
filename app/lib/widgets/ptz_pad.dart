@@ -64,8 +64,11 @@ class _PtzPadState extends State<PtzPad> {
   static const double _keyboardSpeed = 0.8;
 
   final ValueNotifier<Offset> _thumb = ValueNotifier<Offset>(Offset.zero);
-  final ValueNotifier<PtzVelocity> _active =
-      ValueNotifier<PtzVelocity>((pan: 0, tilt: 0, zoom: 0));
+  final ValueNotifier<PtzVelocity> _active = ValueNotifier<PtzVelocity>((
+    pan: 0,
+    tilt: 0,
+    zoom: 0,
+  ));
   final Set<LogicalKeyboardKey> _keys = <LogicalKeyboardKey>{};
   PtzVelocity _lastSent = (pan: 0, tilt: 0, zoom: 0);
 
@@ -81,11 +84,12 @@ class _PtzPadState extends State<PtzPad> {
   void _drag(Offset local) {
     final double dx = local.dx - _radius;
     final double dy = local.dy - _radius;
-    final ({double pan, double tilt}) raw = PtzMath.fromPad(dx: dx, dy: dy, radius: _radius);
-    _send(
-      PtzMath.quantize(raw.pan),
-      PtzMath.quantize(raw.tilt),
+    final ({double pan, double tilt}) raw = PtzMath.fromPad(
+      dx: dx,
+      dy: dy,
+      radius: _radius,
     );
+    _send(PtzMath.quantize(raw.pan), PtzMath.quantize(raw.tilt));
     final double reach = _radius - AppSizes.ptzThumb / 2;
     final double length = Offset(dx, dy).distance;
     _thumb.value = length <= reach || length == 0
@@ -138,9 +142,11 @@ class _PtzPadState extends State<PtzPad> {
     } else {
       _keys.add(key);
     }
-    final double pan = (_keys.contains(LogicalKeyboardKey.arrowRight) ? 1 : 0) -
+    final double pan =
+        (_keys.contains(LogicalKeyboardKey.arrowRight) ? 1 : 0) -
         (_keys.contains(LogicalKeyboardKey.arrowLeft) ? 1 : 0);
-    final double tilt = (_keys.contains(LogicalKeyboardKey.arrowUp) ? 1 : 0) -
+    final double tilt =
+        (_keys.contains(LogicalKeyboardKey.arrowUp) ? 1 : 0) -
         (_keys.contains(LogicalKeyboardKey.arrowDown) ? 1 : 0);
     _send(pan * _keyboardSpeed, tilt * _keyboardSpeed);
     return KeyEventResult.handled;
@@ -161,8 +167,12 @@ class _PtzPadState extends State<PtzPad> {
             onKeyEvent: _onKey,
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onPanDown: widget.enabled ? (DragDownDetails d) => _drag(d.localPosition) : null,
-              onPanUpdate: widget.enabled ? (DragUpdateDetails d) => _drag(d.localPosition) : null,
+              onPanDown: widget.enabled
+                  ? (DragDownDetails d) => _drag(d.localPosition)
+                  : null,
+              onPanUpdate: widget.enabled
+                  ? (DragUpdateDetails d) => _drag(d.localPosition)
+                  : null,
               onPanEnd: widget.enabled ? (_) => _release() : null,
               onPanCancel: widget.enabled ? _release : null,
               child: SizedBox.square(
@@ -171,51 +181,91 @@ class _PtzPadState extends State<PtzPad> {
                   decoration: BoxDecoration(
                     color: colors.bgElevated,
                     shape: BoxShape.circle,
-                    border: Border.all(color: colors.borderStrong, width: AppSizes.hairline * 2),
+                    border: Border.all(
+                      color: colors.borderStrong,
+                      width: AppSizes.hairline * 2,
+                    ),
                   ),
                   child: ValueListenableBuilder<PtzVelocity>(
                     valueListenable: _active,
-                    builder: (BuildContext context, PtzVelocity velocity, Widget? _) {
-                      return Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          _arrow(AppIconName.ptzArrowUp, Alignment.topCenter, velocity.tilt > 0, colors),
-                          _arrow(AppIconName.ptzArrowDown, Alignment.bottomCenter, velocity.tilt < 0, colors),
-                          _arrow(AppIconName.ptzArrowLeft, const Alignment(-1, 0), velocity.pan < 0, colors),
-                          _arrow(AppIconName.ptzArrowRight, const Alignment(1, 0), velocity.pan > 0, colors),
-                          ValueListenableBuilder<Offset>(
-                            valueListenable: _thumb,
-                            builder: (BuildContext context, Offset offset, Widget? _) {
-                              return Transform.translate(
-                                offset: offset,
-                                child: SizedBox.square(
-                                  dimension: AppSizes.ptzThumb,
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: offset == Offset.zero ? colors.bgTertiary : colors.accentWash,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: offset == Offset.zero ? colors.borderStrong : colors.accent,
-                                        width: AppSizes.hairline * 2,
-                                      ),
-                                    ),
-                                    child: offset == Offset.zero
-                                        ? Center(
-                                            child: AppIconButton(
-                                              icon: AppIconName.ptzHome,
-                                              semanticLabel: widget.labels.home,
-                                              onPressed: widget.enabled ? widget.onHome : null,
+                    builder:
+                        (
+                          BuildContext context,
+                          PtzVelocity velocity,
+                          Widget? _,
+                        ) {
+                          return Stack(
+                            alignment: Alignment.center,
+                            children: <Widget>[
+                              _arrow(
+                                AppIconName.ptzArrowUp,
+                                Alignment.topCenter,
+                                velocity.tilt > 0,
+                                colors,
+                              ),
+                              _arrow(
+                                AppIconName.ptzArrowDown,
+                                Alignment.bottomCenter,
+                                velocity.tilt < 0,
+                                colors,
+                              ),
+                              _arrow(
+                                AppIconName.ptzArrowLeft,
+                                const Alignment(-1, 0),
+                                velocity.pan < 0,
+                                colors,
+                              ),
+                              _arrow(
+                                AppIconName.ptzArrowRight,
+                                const Alignment(1, 0),
+                                velocity.pan > 0,
+                                colors,
+                              ),
+                              ValueListenableBuilder<Offset>(
+                                valueListenable: _thumb,
+                                builder:
+                                    (
+                                      BuildContext context,
+                                      Offset offset,
+                                      Widget? _,
+                                    ) {
+                                      return Transform.translate(
+                                        offset: offset,
+                                        child: SizedBox.square(
+                                          dimension: AppSizes.ptzThumb,
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                              color: offset == Offset.zero
+                                                  ? colors.bgTertiary
+                                                  : colors.accentWash,
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: offset == Offset.zero
+                                                    ? colors.borderStrong
+                                                    : colors.accent,
+                                                width: AppSizes.hairline * 2,
+                                              ),
                                             ),
-                                          )
-                                        : null,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
+                                            child: offset == Offset.zero
+                                                ? Center(
+                                                    child: AppIconButton(
+                                                      icon: AppIconName.ptzHome,
+                                                      semanticLabel:
+                                                          widget.labels.home,
+                                                      onPressed: widget.enabled
+                                                          ? widget.onHome
+                                                          : null,
+                                                    ),
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                              ),
+                            ],
+                          );
+                        },
                   ),
                 ),
               ),
@@ -247,7 +297,12 @@ class _PtzPadState extends State<PtzPad> {
     );
   }
 
-  Widget _arrow(AppIconName icon, Alignment alignment, bool active, AppColors colors) {
+  Widget _arrow(
+    AppIconName icon,
+    Alignment alignment,
+    bool active,
+    AppColors colors,
+  ) {
     return Align(
       alignment: alignment,
       child: Padding(

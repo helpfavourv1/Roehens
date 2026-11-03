@@ -24,7 +24,10 @@ class FakeAdsBackend implements AdsBackend {
   }
 
   @override
-  Future<LoadedBanner?> loadBanner({required String unitId, required int widthDp}) async {
+  Future<LoadedBanner?> loadBanner({
+    required String unitId,
+    required int widthDp,
+  }) async {
     unitIds.add(unitId);
     widths.add(widthDp);
     final Completer<void>? gate = hold;
@@ -39,7 +42,11 @@ class FakeAdsBackend implements AdsBackend {
     }
     final FakeBanner banner = FakeBanner(nextHeight);
     banners.add(banner);
-    return LoadedBanner(height: banner.height, view: banner, dispose: banner.dispose);
+    return LoadedBanner(
+      height: banner.height,
+      view: banner,
+      dispose: banner.dispose,
+    );
   }
 }
 
@@ -98,17 +105,20 @@ void main() {
     expect(service.bannerHeight.value, 100);
   });
 
-  test('a failed load collapses the slot and releases the old banner', () async {
-    await service.initialize();
-    await service.loadBanner(widthDp: 360);
-    final FakeBanner first = backend.banners.single;
+  test(
+    'a failed load collapses the slot and releases the old banner',
+    () async {
+      await service.initialize();
+      await service.loadBanner(widthDp: 360);
+      final FakeBanner first = backend.banners.single;
 
-    backend.returnNull = true;
-    await service.loadBanner(widthDp: 360);
-    expect(service.bannerHeight.value, 0);
-    expect(service.bannerView, isNull);
-    expect(first.disposed, isTrue);
-  });
+      backend.returnNull = true;
+      await service.loadBanner(widthDp: 360);
+      expect(service.bannerHeight.value, 0);
+      expect(service.bannerView, isNull);
+      expect(first.disposed, isTrue);
+    },
+  );
 
   test('a backend that throws collapses the slot without throwing', () async {
     await service.initialize();
@@ -141,31 +151,37 @@ void main() {
     gate.complete();
     await slow;
     expect(backend.banners.length, 2);
-    expect(backend.banners.first.disposed, isFalse); // the newer one is not first in the list
+    expect(
+      backend.banners.first.disposed,
+      isFalse,
+    ); // the newer one is not first in the list
     expect(service.bannerView, same(newer));
     expect(newer.disposed, isFalse);
     // The stale banner was released.
     expect(backend.banners.where((FakeBanner b) => b.disposed).length, 1);
   });
 
-  test('disposing collapses the slot and ignores a load still in flight', () async {
-    await service.initialize();
-    await service.loadBanner(widthDp: 360);
-    final FakeBanner shown = backend.banners.single;
+  test(
+    'disposing collapses the slot and ignores a load still in flight',
+    () async {
+      await service.initialize();
+      await service.loadBanner(widthDp: 360);
+      final FakeBanner shown = backend.banners.single;
 
-    backend.hold = Completer<void>();
-    final Future<void> inFlight = service.loadBanner(widthDp: 360);
-    await Future<void>.delayed(Duration.zero);
-    service.disposeBanner();
-    expect(service.bannerHeight.value, 0);
-    expect(shown.disposed, isTrue);
+      backend.hold = Completer<void>();
+      final Future<void> inFlight = service.loadBanner(widthDp: 360);
+      await Future<void>.delayed(Duration.zero);
+      service.disposeBanner();
+      expect(service.bannerHeight.value, 0);
+      expect(shown.disposed, isTrue);
 
-    backend.hold!.complete();
-    await inFlight;
-    expect(service.bannerHeight.value, 0);
-    expect(service.bannerView, isNull);
-    expect(backend.banners.last.disposed, isTrue);
-  });
+      backend.hold!.complete();
+      await inFlight;
+      expect(service.bannerHeight.value, 0);
+      expect(service.bannerView, isNull);
+      expect(backend.banners.last.disposed, isTrue);
+    },
+  );
 
   test('a width of zero is ignored', () async {
     await service.initialize();
@@ -176,7 +192,9 @@ void main() {
   test('listeners hear height changes', () async {
     await service.initialize();
     final List<double> heights = <double>[];
-    service.bannerHeight.addListener(() => heights.add(service.bannerHeight.value));
+    service.bannerHeight.addListener(
+      () => heights.add(service.bannerHeight.value),
+    );
     await service.loadBanner(widthDp: 360);
     service.disposeBanner();
     expect(heights, <double>[60, 0]);

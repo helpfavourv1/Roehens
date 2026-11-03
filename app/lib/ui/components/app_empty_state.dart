@@ -48,7 +48,9 @@ class AppEmptyState extends StatelessWidget {
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: context.type.title2.copyWith(color: context.colors.textPrimary),
+                  style: context.type.title2.copyWith(
+                    color: context.colors.textPrimary,
+                  ),
                 ),
               ),
               if (message != null) ...<Widget>[
@@ -56,7 +58,9 @@ class AppEmptyState extends StatelessWidget {
                 Text(
                   message!,
                   textAlign: TextAlign.center,
-                  style: context.type.body.copyWith(color: context.colors.textSecondary),
+                  style: context.type.body.copyWith(
+                    color: context.colors.textSecondary,
+                  ),
                 ),
               ],
               if (actionLabel != null && onAction != null) ...<Widget>[

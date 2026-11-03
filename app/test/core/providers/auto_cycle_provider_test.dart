@@ -34,7 +34,9 @@ void main() {
   late AutoCycleProvider provider;
 
   _ManualTimer? active() {
-    final Iterable<_ManualTimer> live = timers.where((_ManualTimer t) => t.isActive);
+    final Iterable<_ManualTimer> live = timers.where(
+      (_ManualTimer t) => t.isActive,
+    );
     return live.isEmpty ? null : live.last;
   }
 
@@ -136,7 +138,10 @@ void main() {
 
     expect(AutoCycleProvider.effectiveSeconds(settings, plain), 30);
     expect(
-      AutoCycleProvider.effectiveSeconds(settings, plain.copyWith(autoCycleSeconds: 5)),
+      AutoCycleProvider.effectiveSeconds(
+        settings,
+        plain.copyWith(autoCycleSeconds: 5),
+      ),
       5,
     );
   });

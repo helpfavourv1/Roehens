@@ -50,16 +50,25 @@ class BrandPicker extends StatefulWidget {
     String query,
   ) {
     final String needle = query.trim().toLowerCase();
-    final List<CameraBrandProfile> matching = <CameraBrandProfile>[
-      for (final CameraBrandProfile b in brands)
-        if (needle.isEmpty || b.displayName.toLowerCase().contains(needle)) b,
-    ]..sort(
-        (CameraBrandProfile a, CameraBrandProfile b) =>
-            a.displayName.toLowerCase().compareTo(b.displayName.toLowerCase()),
-      );
-    final Map<String, List<CameraBrandProfile>> byLetter = <String, List<CameraBrandProfile>>{};
+    final List<CameraBrandProfile> matching =
+        <CameraBrandProfile>[
+          for (final CameraBrandProfile b in brands)
+            if (needle.isEmpty || b.displayName.toLowerCase().contains(needle))
+              b,
+        ]..sort(
+          (CameraBrandProfile a, CameraBrandProfile b) => a.displayName
+              .toLowerCase()
+              .compareTo(b.displayName.toLowerCase()),
+        );
+    final Map<String, List<CameraBrandProfile>> byLetter =
+        <String, List<CameraBrandProfile>>{};
     for (final CameraBrandProfile brand in matching) {
-      byLetter.putIfAbsent(letterFor(brand.displayName), () => <CameraBrandProfile>[]).add(brand);
+      byLetter
+          .putIfAbsent(
+            letterFor(brand.displayName),
+            () => <CameraBrandProfile>[],
+          )
+          .add(brand);
     }
     final List<String> letters = byLetter.keys.toList()
       ..sort((String a, String b) {
@@ -72,7 +81,8 @@ class BrandPicker extends StatefulWidget {
         return a.compareTo(b);
       });
     return <MapEntry<String, List<CameraBrandProfile>>>[
-      for (final String letter in letters) MapEntry<String, List<CameraBrandProfile>>(letter, byLetter[letter]!),
+      for (final String letter in letters)
+        MapEntry<String, List<CameraBrandProfile>>(letter, byLetter[letter]!),
     ];
   }
 
@@ -123,7 +133,8 @@ class _BrandPickerState extends State<BrandPicker> {
             }
             return SliverMainAxisGroup(
               slivers: <Widget>[
-                for (final MapEntry<String, List<CameraBrandProfile>> entry in groups)
+                for (final MapEntry<String, List<CameraBrandProfile>> entry
+                    in groups)
                   AppLetterHeader.group(
                     letter: entry.key,
                     sliver: SliverList.builder(
@@ -134,10 +145,15 @@ class _BrandPickerState extends State<BrandPicker> {
                           title: brand.displayName,
                           selected: brand.id == widget.selectedId,
                           onTap: () => widget.onSelected(brand),
-                          trailing: brand.verified && widget.verifiedLabel != null
-                              ? AppBadge(widget.verifiedLabel!, tone: AppBadgeTone.success)
+                          trailing:
+                              brand.verified && widget.verifiedLabel != null
+                              ? AppBadge(
+                                  widget.verifiedLabel!,
+                                  tone: AppBadgeTone.success,
+                                )
                               : null,
-                          showChevron: !(brand.verified && widget.verifiedLabel != null),
+                          showChevron:
+                              !(brand.verified && widget.verifiedLabel != null),
                         );
                       },
                     ),

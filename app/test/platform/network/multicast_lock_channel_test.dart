@@ -33,8 +33,10 @@ void main() {
           return null;
       }
     });
-    final MulticastLockChannel network =
-        MulticastLockChannel(channel: channel, isAndroid: true);
+    final MulticastLockChannel network = MulticastLockChannel(
+      channel: channel,
+      isAndroid: true,
+    );
     expect(await network.acquire(), isTrue);
     expect(await network.gateway(), '192.168.1.254');
     expect(await network.openAppSettings(), isTrue);
@@ -52,8 +54,10 @@ void main() {
       calls.add(call.method);
       return true;
     });
-    final MulticastLockChannel network =
-        MulticastLockChannel(channel: channel, isAndroid: false);
+    final MulticastLockChannel network = MulticastLockChannel(
+      channel: channel,
+      isAndroid: false,
+    );
     expect(await network.acquire(), isFalse);
     expect(await network.gateway(), isNull);
     expect(await network.openAppSettings(), isFalse);
@@ -65,8 +69,10 @@ void main() {
     mock((MethodCall call) async {
       throw PlatformException(code: 'boom');
     });
-    final MulticastLockChannel network =
-        MulticastLockChannel(channel: channel, isAndroid: true);
+    final MulticastLockChannel network = MulticastLockChannel(
+      channel: channel,
+      isAndroid: true,
+    );
     expect(await network.acquire(), isFalse);
     expect(await network.gateway(), isNull);
     expect(await network.openAppSettings(), isFalse);
@@ -75,8 +81,10 @@ void main() {
 
   test('a missing native side is swallowed', () async {
     mock((MethodCall call) async => throw MissingPluginException());
-    final MulticastLockChannel network =
-        MulticastLockChannel(channel: channel, isAndroid: true);
+    final MulticastLockChannel network = MulticastLockChannel(
+      channel: channel,
+      isAndroid: true,
+    );
     expect(await network.acquire(), isFalse);
     expect(await network.gateway(), isNull);
   });

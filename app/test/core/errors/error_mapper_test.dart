@@ -51,7 +51,10 @@ void main() {
         ErrorClass.networkUnreachable,
       );
       expect(
-        ErrorMapper.classifyMessage('something odd', fallback: ErrorClass.fatal),
+        ErrorMapper.classifyMessage(
+          'something odd',
+          fallback: ErrorClass.fatal,
+        ),
         ErrorClass.fatal,
       );
     });
@@ -89,8 +92,9 @@ void main() {
 
   group('error classes', () {
     test('every class has a distinct localization key', () {
-      final Set<String> keys =
-          ErrorClass.values.map((ErrorClass c) => c.messageKey).toSet();
+      final Set<String> keys = ErrorClass.values
+          .map((ErrorClass c) => c.messageKey)
+          .toSet();
       expect(keys.length, ErrorClass.values.length);
     });
 

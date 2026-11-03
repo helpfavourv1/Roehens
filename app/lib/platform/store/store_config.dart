@@ -19,7 +19,8 @@ class StoreConfig {
 
   /// Google's published sample ad unit IDs. They always serve test ads. They are
   /// replaced by the real IDs before the first store release.
-  static const String testBannerAndroid = 'ca-app-pub-3940256099942544/6300978111';
+  static const String testBannerAndroid =
+      'ca-app-pub-3940256099942544/6300978111';
   static const String testBannerIos = 'ca-app-pub-3940256099942544/2934735716';
 
   static const StoreConfig googlePlay = StoreConfig(

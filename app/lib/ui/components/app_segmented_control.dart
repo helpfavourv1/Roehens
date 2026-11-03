@@ -45,11 +45,13 @@ class AppSegmentedControl<T> extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               for (final AppSegment<T> segment in segments)
-                Expanded(child: _Segment<T>(
-                  segment: segment,
-                  isSelected: segment.value == selected,
-                  onTap: () => onChanged(segment.value),
-                )),
+                Expanded(
+                  child: _Segment<T>(
+                    segment: segment,
+                    isSelected: segment.value == selected,
+                    onTap: () => onChanged(segment.value),
+                  ),
+                ),
             ],
           ),
         ),
@@ -80,14 +82,18 @@ class _Segment<T> extends StatelessWidget {
       selected: isSelected,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected ? colors.bgElevated : colors.bgTertiary.withValues(alpha: 0),
+          color: isSelected
+              ? colors.bgElevated
+              : colors.bgTertiary.withValues(alpha: 0),
           borderRadius: AppRadius.allSm,
           border: isSelected
               ? Border.all(color: colors.borderSubtle, width: AppSizes.hairline)
               : null,
         ),
         child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: AppSizes.segmentedHeight),
+          constraints: const BoxConstraints(
+            minHeight: AppSizes.segmentedHeight,
+          ),
           child: Padding(
             padding: const EdgeInsetsDirectional.symmetric(
               horizontal: AppSpacing.sm,
@@ -101,7 +107,9 @@ class _Segment<T> extends StatelessWidget {
                     segment.icon!,
                     size: AppSizes.iconChipGlyph,
                     color: foreground,
-                    weight: isSelected ? AppIconWeight.fill : AppIconWeight.bold,
+                    weight: isSelected
+                        ? AppIconWeight.fill
+                        : AppIconWeight.bold,
                   ),
                   const SizedBox(width: AppSpacing.xs),
                 ],

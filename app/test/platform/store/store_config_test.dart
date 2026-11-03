@@ -13,7 +13,10 @@ void main() {
   });
 
   test('both stores sell the same ad-free product', () {
-    expect(StoreConfig.googlePlay.adFreeProductId, AppConstants.adFreeProductId);
+    expect(
+      StoreConfig.googlePlay.adFreeProductId,
+      AppConstants.adFreeProductId,
+    );
     expect(StoreConfig.appStore.adFreeProductId, 'com.zdmgold.roehens.adfree');
     expect(StoreConfig.googlePlay.iapSupported, isTrue);
     expect(StoreConfig.appStore.iapSupported, isTrue);

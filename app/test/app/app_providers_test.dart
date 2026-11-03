@@ -21,7 +21,9 @@ void main() {
   late FakeAd ad;
   late AppProviders app;
 
-  Future<void> boot({Map<String, Camera> saved = const <String, Camera>{}}) async {
+  Future<void> boot({
+    Map<String, Camera> saved = const <String, Camera>{},
+  }) async {
     store = FakeKeyValueStore();
     storage = FakeStorage()..cameras.addAll(saved);
     vault = FakeVault();
@@ -45,22 +47,29 @@ void main() {
 
   tearDown(() => app.dispose());
 
-  test('builds every provider and loads local data before the first frame', () async {
-    await boot(saved: <String, Camera>{'a': testCamera(id: 'a', name: 'Porch')});
+  test(
+    'builds every provider and loads local data before the first frame',
+    () async {
+      await boot(
+        saved: <String, Camera>{'a': testCamera(id: 'a', name: 'Porch')},
+      );
 
-    expect(app.cameras.value.isLoaded, isTrue);
-    expect(app.cameras.value.cameras.single.name, 'Porch');
-    expect(app.onboarding.isLoaded, isTrue);
-    expect(app.onboarding.needsOnboarding, isTrue);
-    expect(app.profiles.brands, isNotEmpty);
-    expect(app.persistence.hasIssue, isFalse);
-  });
+      expect(app.cameras.value.isLoaded, isTrue);
+      expect(app.cameras.value.cameras.single.name, 'Porch');
+      expect(app.onboarding.isLoaded, isTrue);
+      expect(app.onboarding.needsOnboarding, isTrue);
+      expect(app.profiles.brands, isNotEmpty);
+      expect(app.persistence.hasIssue, isFalse);
+    },
+  );
 
   test('the layout follows the cameras that exist', () async {
-    await boot(saved: <String, Camera>{
-      'a': testCamera(id: 'a'),
-      'b': testCamera(id: 'b', sortIndex: 1),
-    });
+    await boot(
+      saved: <String, Camera>{
+        'a': testCamera(id: 'a'),
+        'b': testCamera(id: 'b', sortIndex: 1),
+      },
+    );
     await waitUntil(() => app.layout.value.cameraIds.length == 2);
 
     await app.cameras.add(testCamera(name: 'New'), CameraCredentials.none);
@@ -124,22 +133,25 @@ void main() {
     expect(app.subscription.isAdFree, isTrue);
   });
 
-  test('delete all local data empties cameras, credentials and settings', () async {
-    await boot(saved: <String, Camera>{'a': testCamera(id: 'a')});
-    await vault.writeCredentials(
-      'a',
-      const CameraCredentials(username: 'u', password: 'p'),
-    );
-    await app.settings.setThemeMode(AppThemeMode.light);
-    await app.onboarding.complete();
+  test(
+    'delete all local data empties cameras, credentials and settings',
+    () async {
+      await boot(saved: <String, Camera>{'a': testCamera(id: 'a')});
+      await vault.writeCredentials(
+        'a',
+        const CameraCredentials(username: 'u', password: 'p'),
+      );
+      await app.settings.setThemeMode(AppThemeMode.light);
+      await app.onboarding.complete();
 
-    await app.deleteAllLocalData();
+      await app.deleteAllLocalData();
 
-    expect(app.cameras.value.isEmpty, isTrue);
-    expect(vault.entries, isEmpty);
-    expect(app.settings.value, const AppSettings());
-    expect(app.onboarding.needsOnboarding, isTrue);
-  });
+      expect(app.cameras.value.isEmpty, isTrue);
+      expect(vault.entries, isEmpty);
+      expect(app.settings.value, const AppSettings());
+      expect(app.onboarding.needsOnboarding, isTrue);
+    },
+  );
 
   test('a degraded store shows the warning', () async {
     await boot();

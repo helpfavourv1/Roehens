@@ -6,12 +6,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/core/models/discovery_result.dart';
 import 'package:roehens/platform/network/ws_discovery_socket.dart';
 
-String fixture(String name) => File('test/fixtures/onvif/$name').readAsStringSync();
+String fixture(String name) =>
+    File('test/fixtures/onvif/$name').readAsStringSync();
 
 /// A pretend camera: answers every Probe it receives with [reply].
-Future<int> startFakeCamera(String reply, {void Function(String probe)? onProbe}) async {
-  final RawDatagramSocket socket =
-      await RawDatagramSocket.bind(InternetAddress.loopbackIPv4, 0);
+Future<int> startFakeCamera(
+  String reply, {
+  void Function(String probe)? onProbe,
+}) async {
+  final RawDatagramSocket socket = await RawDatagramSocket.bind(
+    InternetAddress.loopbackIPv4,
+    0,
+  );
   addTearDown(socket.close);
   socket.listen((RawSocketEvent event) {
     if (event != RawSocketEvent.read) {
@@ -64,8 +70,10 @@ void main() {
   });
 
   test('silence ends cleanly after the timeout', () async {
-    final RawDatagramSocket silent =
-        await RawDatagramSocket.bind(InternetAddress.loopbackIPv4, 0);
+    final RawDatagramSocket silent = await RawDatagramSocket.bind(
+      InternetAddress.loopbackIPv4,
+      0,
+    );
     addTearDown(silent.close);
     final Stopwatch clock = Stopwatch()..start();
     final List<DiscoveryResult> found = await WsDiscoverySocket(
@@ -81,14 +89,14 @@ void main() {
     final int port = await startFakeCamera(fixture('probe_match.xml'));
     final Stopwatch clock = Stopwatch()..start();
     final Completer<void> first = Completer<void>();
-    final StreamSubscription<DiscoveryResult> subscription = WsDiscoverySocket(
-      targetAddress: '127.0.0.1',
-      targetPort: port,
-    ).probe(timeout: const Duration(seconds: 30)).listen((DiscoveryResult r) {
-      if (!first.isCompleted) {
-        first.complete();
-      }
-    });
+    final StreamSubscription<DiscoveryResult> subscription =
+        WsDiscoverySocket(targetAddress: '127.0.0.1', targetPort: port)
+            .probe(timeout: const Duration(seconds: 30))
+            .listen((DiscoveryResult r) {
+              if (!first.isCompleted) {
+                first.complete();
+              }
+            });
     await first.future.timeout(const Duration(seconds: 5));
     await subscription.cancel();
     expect(clock.elapsed, lessThan(const Duration(seconds: 5)));

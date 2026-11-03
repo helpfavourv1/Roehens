@@ -72,12 +72,12 @@ class DiscoveryResult {
 
   @override
   int get hashCode => Object.hash(
-        host,
-        port,
-        source,
-        name,
-        model,
-        Object.hashAll(scopes),
-        Object.hashAll(xaddrs),
-      );
+    host,
+    port,
+    source,
+    name,
+    model,
+    Object.hashAll(scopes),
+    Object.hashAll(xaddrs),
+  );
 }

@@ -88,7 +88,8 @@ class ReviewPromptPolicy {
     }
     final DateTime? firstLaunch = state.firstLaunchAt;
     if (firstLaunch == null ||
-        now.difference(firstLaunch).inDays < Limits.ratingMinDaysSinceFirstLaunch) {
+        now.difference(firstLaunch).inDays <
+            Limits.ratingMinDaysSinceFirstLaunch) {
       return false;
     }
     if (state.viewingSessions < Limits.ratingMinViewingSessions) {
@@ -99,7 +100,8 @@ class ReviewPromptPolicy {
     }
     final DateTime? lastPrompt = state.lastPromptAt;
     if (lastPrompt != null &&
-        now.difference(lastPrompt).inDays < Limits.ratingMinDaysBetweenPrompts) {
+        now.difference(lastPrompt).inDays <
+            Limits.ratingMinDaysBetweenPrompts) {
       return false;
     }
     final DateTime? lastError = state.lastErrorAt;
@@ -141,7 +143,11 @@ class ReviewPromptPolicy {
 
   Future<bool> shouldPrompt() async {
     final RatingState state = await _load();
-    return isDue(state, _clock.now().toUtc(), errorThisSession: _errorThisSession);
+    return isDue(
+      state,
+      _clock.now().toUtc(),
+      errorThisSession: _errorThisSession,
+    );
   }
 
   /// Call when the prompt was requested.
@@ -160,7 +166,8 @@ class ReviewPromptPolicy {
     if (cached != null) {
       return cached;
     }
-    final String? raw = (await _store.getString(StorageKeys.ratingState)).valueOrNull;
+    final String? raw = (await _store.getString(StorageKeys.ratingState))
+        .valueOrNull;
     RatingState loaded = const RatingState();
     if (raw != null) {
       try {

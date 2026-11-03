@@ -37,7 +37,10 @@ class FakeProbes implements ConnectivityProbes {
   }
 
   @override
-  Future<Result<RtspDescribeResult>> describeRtsp(Uri uri, CameraCredentials c) async {
+  Future<Result<RtspDescribeResult>> describeRtsp(
+    Uri uri,
+    CameraCredentials c,
+  ) async {
     calls.add('rtsp $uri');
     return rtsp;
   }
@@ -49,8 +52,10 @@ class FakeProbes implements ConnectivityProbes {
   }
 }
 
-const CameraCredentials login =
-    CameraCredentials(username: 'admin', password: 'pw12345');
+const CameraCredentials login = CameraCredentials(
+  username: 'admin',
+  password: 'pw12345',
+);
 
 Camera rtspCamera({String host = '192.168.1.64'}) {
   return testCamera().copyWith(host: host, port: 554, mainPath: '/stream0');
@@ -66,7 +71,9 @@ Camera httpCamera() {
 }
 
 Map<TestStage, StageStatus> statuses(ConnectionTestResult r) {
-  return <TestStage, StageStatus>{for (final StageResult s in r.stages) s.stage: s.status};
+  return <TestStage, StageStatus>{
+    for (final StageResult s in r.stages) s.stage: s.status,
+  };
 }
 
 void main() {
@@ -77,7 +84,8 @@ void main() {
     probes = FakeProbes();
     tester = ConnectionTester(
       probes: probes,
-      firstFrame: (Camera c, CameraCredentials cr) async => const Ok<void>(null),
+      firstFrame: (Camera c, CameraCredentials cr) async =>
+          const Ok<void>(null),
     );
   });
 
@@ -94,7 +102,9 @@ void main() {
       TestStage.firstFrame: StageStatus.passed,
     });
     expect(
-      result.stages.firstWhere((StageResult s) => s.stage == TestStage.describe).detail,
+      result.stages
+          .firstWhere((StageResult s) => s.stage == TestStage.describe)
+          .detail,
       'video: H265',
     );
     expect(probes.calls, <String>[
@@ -112,8 +122,10 @@ void main() {
   group('failures stop the test and say what to try', () {
     test('a host name that does not exist', () async {
       probes.dnsOk = false;
-      final ConnectionTestResult result =
-          await tester.run(rtspCamera(host: 'cam.example'), login);
+      final ConnectionTestResult result = await tester.run(
+        rtspCamera(host: 'cam.example'),
+        login,
+      );
       expect(result.passed, isFalse);
       expect(result.error!.errorClass, ErrorClass.networkUnreachable);
       expect(result.suggestionKeys, contains(TestSuggestion.checkHostName));
@@ -137,17 +149,23 @@ void main() {
       final ConnectionTestResult result = await tester.run(rtspCamera(), login);
       expect(statuses(result)[TestStage.tcp], StageStatus.failed);
       expect(statuses(result)[TestStage.auth], StageStatus.skipped);
-      expect(result.suggestionKeys, containsAll(<String>[
-        TestSuggestion.checkPort,
-        TestSuggestion.enableRtsp,
-        TestSuggestion.openTroubleshooter,
-      ]));
+      expect(
+        result.suggestionKeys,
+        containsAll(<String>[
+          TestSuggestion.checkPort,
+          TestSuggestion.enableRtsp,
+          TestSuggestion.openTroubleshooter,
+        ]),
+      );
     });
 
     test('enabling RTSP is only suggested for RTSP cameras', () async {
       probes.tcp = const Err<void>(AppError(ErrorClass.networkUnreachable));
       final ConnectionTestResult result = await tester.run(httpCamera(), login);
-      expect(result.suggestionKeys.contains(TestSuggestion.enableRtsp), isFalse);
+      expect(
+        result.suggestionKeys.contains(TestSuggestion.enableRtsp),
+        isFalse,
+      );
     });
 
     test('a wrong login', () async {
@@ -190,7 +208,9 @@ void main() {
     });
 
     test('a probe that cannot complete', () async {
-      probes.rtsp = const Err<RtspDescribeResult>(AppError(ErrorClass.networkUnreachable));
+      probes.rtsp = const Err<RtspDescribeResult>(
+        AppError(ErrorClass.networkUnreachable),
+      );
       final ConnectionTestResult result = await tester.run(rtspCamera(), login);
       expect(result.passed, isFalse);
       expect(result.error!.errorClass, ErrorClass.networkUnreachable);
@@ -206,15 +226,20 @@ void main() {
       expect(result.passed, isFalse);
       expect(statuses(result)[TestStage.describe], StageStatus.passed);
       expect(statuses(result)[TestStage.firstFrame], StageStatus.failed);
-      expect(result.suggestionKeys, containsAll(<String>[
-        TestSuggestion.trySubstream,
-        TestSuggestion.tryMjpeg,
-      ]));
+      expect(
+        result.suggestionKeys,
+        containsAll(<String>[
+          TestSuggestion.trySubstream,
+          TestSuggestion.tryMjpeg,
+        ]),
+      );
     });
 
     test('an address that cannot be built', () async {
-      final ConnectionTestResult result =
-          await tester.run(rtspCamera(host: 'bad host'), login);
+      final ConnectionTestResult result = await tester.run(
+        rtspCamera(host: 'bad host'),
+        login,
+      );
       expect(result.passed, isFalse);
       expect(result.suggestionKeys, <String>[TestSuggestion.checkHostName]);
       expect(probes.calls, isEmpty);
@@ -258,38 +283,61 @@ void main() {
   });
 
   group('progress and optional steps', () {
-    test('without a picture check the last step is skipped and the test passes', () async {
-      final ConnectionTester noPlayer = ConnectionTester(probes: probes);
-      final ConnectionTestResult result = await noPlayer.run(rtspCamera(), login);
-      expect(statuses(result)[TestStage.firstFrame], StageStatus.skipped);
-      expect(result.passed, isTrue);
-    });
-
-    test('progress reports every step and ends with a final answer for each', () async {
-      final List<List<StageResult>> seen = <List<StageResult>>[];
-      final ConnectionTestResult result =
-          await tester.run(rtspCamera(), login, onProgress: seen.add);
-
-      expect(seen, isNotEmpty);
-      expect(seen.first.length, TestStage.values.length);
-      expect(
-        seen.any((List<StageResult> s) => s.any((StageResult r) => r.status == StageStatus.running)),
-        isTrue,
-      );
-      for (final StageResult stage in seen.last) {
-        expect(
-          stage.status == StageStatus.pending || stage.status == StageStatus.running,
-          isFalse,
-          reason: '${stage.stage} has no final answer',
+    test(
+      'without a picture check the last step is skipped and the test passes',
+      () async {
+        final ConnectionTester noPlayer = ConnectionTester(probes: probes);
+        final ConnectionTestResult result = await noPlayer.run(
+          rtspCamera(),
+          login,
         );
-      }
-      expect(seen.last.map((StageResult s) => s.status), result.stages.map((StageResult s) => s.status));
-    });
+        expect(statuses(result)[TestStage.firstFrame], StageStatus.skipped);
+        expect(result.passed, isTrue);
+      },
+    );
+
+    test(
+      'progress reports every step and ends with a final answer for each',
+      () async {
+        final List<List<StageResult>> seen = <List<StageResult>>[];
+        final ConnectionTestResult result = await tester.run(
+          rtspCamera(),
+          login,
+          onProgress: seen.add,
+        );
+
+        expect(seen, isNotEmpty);
+        expect(seen.first.length, TestStage.values.length);
+        expect(
+          seen.any(
+            (List<StageResult> s) =>
+                s.any((StageResult r) => r.status == StageStatus.running),
+          ),
+          isTrue,
+        );
+        for (final StageResult stage in seen.last) {
+          expect(
+            stage.status == StageStatus.pending ||
+                stage.status == StageStatus.running,
+            isFalse,
+            reason: '${stage.stage} has no final answer',
+          );
+        }
+        expect(
+          seen.last.map((StageResult s) => s.status),
+          result.stages.map((StageResult s) => s.status),
+        );
+      },
+    );
 
     test('a failed run still leaves no step pending', () async {
       probes.dnsOk = false;
       final List<List<StageResult>> seen = <List<StageResult>>[];
-      await tester.run(rtspCamera(host: 'cam.local'), login, onProgress: seen.add);
+      await tester.run(
+        rtspCamera(host: 'cam.local'),
+        login,
+        onProgress: seen.add,
+      );
       for (final StageResult stage in seen.last) {
         expect(stage.status, isNot(StageStatus.pending));
       }
@@ -297,7 +345,9 @@ void main() {
 
     test('each step that ran reports how long it took', () async {
       final ConnectionTestResult result = await tester.run(rtspCamera(), login);
-      final StageResult tcp = result.stages.firstWhere((StageResult s) => s.stage == TestStage.tcp);
+      final StageResult tcp = result.stages.firstWhere(
+        (StageResult s) => s.stage == TestStage.tcp,
+      );
       expect(tcp.elapsedMillis, isNotNull);
     });
   });

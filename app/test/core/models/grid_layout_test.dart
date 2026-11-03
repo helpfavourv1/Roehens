@@ -42,8 +42,11 @@ void main() {
   });
 
   test('copyWith can clear the auto-cycle override', () {
-    final GridLayout layout =
-        GridLayout.forPageSize(id: 'x', pageSize: 4, autoCycleSeconds: 5);
+    final GridLayout layout = GridLayout.forPageSize(
+      id: 'x',
+      pageSize: 4,
+      autoCycleSeconds: 5,
+    );
     expect(layout.copyWith(autoCycleSeconds: null).autoCycleSeconds, isNull);
     expect(layout.copyWith(id: 'y').autoCycleSeconds, 5);
   });

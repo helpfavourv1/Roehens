@@ -14,7 +14,7 @@ import 'package:roehens/core/providers/safe_notifier.dart';
 /// save keeps the new value in memory.
 class SettingsProvider extends SafeValueNotifier<AppSettings> {
   SettingsProvider({required this._store, required this._logger})
-      : super(const AppSettings());
+    : super(const AppSettings());
 
   static const String _tag = 'settings';
 
@@ -24,7 +24,8 @@ class SettingsProvider extends SafeValueNotifier<AppSettings> {
 
   /// Reads the saved settings. A missing or unreadable file means defaults.
   Future<void> load() async {
-    final String? raw = (await _store.getString(StorageKeys.settings)).valueOrNull;
+    final String? raw = (await _store.getString(StorageKeys.settings))
+        .valueOrNull;
     if (raw == null) {
       return;
     }
@@ -34,7 +35,11 @@ class SettingsProvider extends SafeValueNotifier<AppSettings> {
         setIfAlive(normalize(AppSettings.fromJson(decoded)));
       }
     } on Object catch (error) {
-      _logger.warning(_tag, 'saved settings unreadable, using defaults', error: error);
+      _logger.warning(
+        _tag,
+        'saved settings unreadable, using defaults',
+        error: error,
+      );
     }
   }
 

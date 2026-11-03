@@ -22,7 +22,7 @@ class OnvifAuth {
 /// with a WS-Security UsernameToken (password digest) when [OnvifAuth] is given.
 class OnvifMessageBuilder {
   OnvifMessageBuilder({this.clock = const SystemClock(), Random? random})
-      : _random = random ?? Random.secure();
+    : _random = random ?? Random.secure();
 
   final ClockContract clock;
   final Random _random;
@@ -66,12 +66,14 @@ class OnvifMessageBuilder {
   static String _number(double value) => value.toStringAsFixed(3);
 
   String _securityHeader(OnvifAuth auth, Uint8List? nonce, DateTime? created) {
-    final Uint8List nonceBytes = nonce ??
+    final Uint8List nonceBytes =
+        nonce ??
         Uint8List.fromList(
           List<int>.generate(16, (int _) => _random.nextInt(256)),
         );
-    final String createdText =
-        _timestamp(created ?? clock.now().add(auth.timeOffset));
+    final String createdText = _timestamp(
+      created ?? clock.now().add(auth.timeOffset),
+    );
     final String digest = passwordDigest(
       nonce: nonceBytes,
       created: createdText,

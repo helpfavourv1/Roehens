@@ -11,10 +11,7 @@ import 'package:roehens/platform/player/player_pool.dart';
 /// Takes a still image from a camera that is playing right now, by asking its
 /// session for the current frame.
 class FrameCaptureService implements SnapshotContract {
-  FrameCaptureService({
-    required this.pool,
-    this.clock = const SystemClock(),
-  });
+  FrameCaptureService({required this.pool, this.clock = const SystemClock()});
 
   final PlayerPool pool;
   final ClockContract clock;
@@ -23,8 +20,9 @@ class FrameCaptureService implements SnapshotContract {
   Future<Result<SnapshotImage>> capture(String cameraId) async {
     final PlayerSessionContract? session = pool.sessionFor(cameraId)?.session;
     final Object? candidate = session;
-    final FrameCapturable? capturable =
-        candidate is FrameCapturable ? candidate : null;
+    final FrameCapturable? capturable = candidate is FrameCapturable
+        ? candidate
+        : null;
     if (session == null || capturable == null) {
       return const Err<SnapshotImage>(
         AppError(ErrorClass.unsupportedMedia, detail: 'camera is not playing'),
@@ -49,7 +47,10 @@ class FrameCaptureService implements SnapshotContract {
       );
     } catch (error) {
       return Err<SnapshotImage>(
-        AppError(ErrorClass.unsupportedMedia, detail: error.runtimeType.toString()),
+        AppError(
+          ErrorClass.unsupportedMedia,
+          detail: error.runtimeType.toString(),
+        ),
       );
     }
   }

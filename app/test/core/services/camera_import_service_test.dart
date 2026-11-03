@@ -23,7 +23,8 @@ void main() {
     return CameraExportService(clock: FakeClock()).build(cameras).bytes;
   }
 
-  Uint8List jsonBytes(Object value) => Uint8List.fromList(utf8.encode(jsonEncode(value)));
+  Uint8List jsonBytes(Object value) =>
+      Uint8List.fromList(utf8.encode(jsonEncode(value)));
 
   Map<String, Object?> envelope(List<Object?> cameras) {
     return <String, Object?>{
@@ -61,7 +62,8 @@ void main() {
     });
 
     test('rejects a newer schema and an oversized file', () {
-      final Map<String, Object?> newer = envelope(<Object?>[])..['schemaVersion'] = 99;
+      final Map<String, Object?> newer = envelope(<Object?>[])
+        ..['schemaVersion'] = 99;
       expect(
         service.parse(jsonBytes(newer), <Camera>[]).errorOrNull?.errorClass,
         ErrorClass.invalidFile,
@@ -76,14 +78,17 @@ void main() {
     });
 
     test('a file with no usable camera is invalid', () {
-      final Result<ImportPreview> result =
-          service.parse(jsonBytes(envelope(<Object?>[])), <Camera>[]);
+      final Result<ImportPreview> result = service.parse(
+        jsonBytes(envelope(<Object?>[])),
+        <Camera>[],
+      );
       expect(result.errorOrNull?.errorClass, ErrorClass.invalidFile);
     });
 
     test('reads good cameras and counts the bad ones', () {
       final Map<String, Object?> good = testCamera(id: 'g').toJson();
-      final Map<String, Object?> badPort = testCamera(id: 'p').toJson()..['port'] = 0;
+      final Map<String, Object?> badPort = testCamera(id: 'p').toJson()
+        ..['port'] = 0;
       final Map<String, Object?> badHost = testCamera(id: 'h').toJson()
         ..['host'] = 'not a host/';
       final Map<String, Object?> badEnum = testCamera(id: 'e').toJson()
@@ -103,8 +108,10 @@ void main() {
     test('flags a camera that matches a saved one by address', () {
       final Camera saved = testCamera(id: 'saved', host: '192.168.1.50');
       final Camera incoming = testCamera(id: 'other-id', host: '192.168.1.50');
-      final ImportPreview preview =
-          service.parse(fileOf(<Camera>[incoming]), <Camera>[saved]).valueOrNull!;
+      final ImportPreview preview = service.parse(
+        fileOf(<Camera>[incoming]),
+        <Camera>[saved],
+      ).valueOrNull!;
 
       expect(preview.conflictCount, 1);
       expect(preview.items.single.existing, saved);
@@ -113,8 +120,10 @@ void main() {
     test('flags a camera that matches a saved one by id', () {
       final Camera saved = testCamera(id: 'same', host: '192.168.1.50');
       final Camera incoming = testCamera(id: 'same', host: '192.168.1.99');
-      final ImportPreview preview =
-          service.parse(fileOf(<Camera>[incoming]), <Camera>[saved]).valueOrNull!;
+      final ImportPreview preview = service.parse(
+        fileOf(<Camera>[incoming]),
+        <Camera>[saved],
+      ).valueOrNull!;
 
       expect(preview.conflictCount, 1);
     });
@@ -137,21 +146,20 @@ void main() {
       final Camera saved = (await repository.addCamera(
         testCamera(name: 'Old name', host: '10.0.0.5'),
         const CameraCredentials(username: 'admin', password: 'keep-me'),
-      ))
-          .valueOrNull!;
+      )).valueOrNull!;
       final List<Camera> incoming = <Camera>[
         testCamera(id: 'x1', name: 'New name', host: '10.0.0.5'),
         testCamera(id: 'x2', name: 'Fresh', host: '10.0.0.6'),
       ];
-      return service
-          .parse(fileOf(incoming), <Camera>[saved])
-          .valueOrNull!;
+      return service.parse(fileOf(incoming), <Camera>[saved]).valueOrNull!;
     }
 
     test('skip adds new cameras and leaves matches alone', () async {
       final ImportPreview preview = await previewWithConflict();
-      final ImportOutcome outcome =
-          await service.apply(preview, ImportConflictMode.skip);
+      final ImportOutcome outcome = await service.apply(
+        preview,
+        ImportConflictMode.skip,
+      );
 
       expect(outcome.added, 1);
       expect(outcome.skipped, 1);
@@ -163,8 +171,10 @@ void main() {
 
     test('replace updates the match and keeps its credentials', () async {
       final ImportPreview preview = await previewWithConflict();
-      final ImportOutcome outcome =
-          await service.apply(preview, ImportConflictMode.replace);
+      final ImportOutcome outcome = await service.apply(
+        preview,
+        ImportConflictMode.replace,
+      );
 
       expect(outcome.replaced, 1);
       expect(outcome.added, 1);
@@ -176,8 +186,10 @@ void main() {
 
     test('duplicate adds the match as a second camera', () async {
       final ImportPreview preview = await previewWithConflict();
-      final ImportOutcome outcome =
-          await service.apply(preview, ImportConflictMode.duplicate);
+      final ImportOutcome outcome = await service.apply(
+        preview,
+        ImportConflictMode.duplicate,
+      );
 
       expect(outcome.added, 2);
       expect((await repository.loadCameras()).valueOrNull, hasLength(3));

@@ -17,9 +17,9 @@ class AppNavBar extends StatelessWidget {
     this.backLabel,
     this.actions = const <Widget>[],
   }) : assert(
-          onBack == null || backLabel != null,
-          'A back button needs a spoken label.',
-        );
+         onBack == null || backLabel != null,
+         'A back button needs a spoken label.',
+       );
 
   final String? title;
 
@@ -33,7 +33,8 @@ class AppNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget? start = leading ??
+    final Widget? start =
+        leading ??
         (onBack == null
             ? null
             : AppIconButton(
@@ -44,16 +45,24 @@ class AppNavBar extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: context.colors.borderSubtle, width: AppSizes.hairline),
+          bottom: BorderSide(
+            color: context.colors.borderSubtle,
+            width: AppSizes.hairline,
+          ),
         ),
       ),
       child: SizedBox(
         height: AppSizes.navBarHeight,
         child: Padding(
-          padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.sm),
+          padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: AppSpacing.sm,
+          ),
           child: Row(
             children: <Widget>[
-              if (start != null) ...<Widget>[start, const SizedBox(width: AppSpacing.xs)],
+              if (start != null) ...<Widget>[
+                start,
+                const SizedBox(width: AppSpacing.xs),
+              ],
               Expanded(
                 child: title == null
                     ? const SizedBox.shrink()
@@ -67,7 +76,9 @@ class AppNavBar extends StatelessWidget {
                             title!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: context.type.title2.copyWith(color: context.colors.textPrimary),
+                            style: context.type.title2.copyWith(
+                              color: context.colors.textPrimary,
+                            ),
                           ),
                         ),
                       ),

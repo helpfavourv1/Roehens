@@ -63,9 +63,9 @@ class CameraExportBundle {
 
   @override
   int get hashCode => Object.hash(
-        schemaVersion,
-        appVersion,
-        exportedAt,
-        Object.hashAll(cameras),
-      );
+    schemaVersion,
+    appVersion,
+    exportedAt,
+    Object.hashAll(cameras),
+  );
 }

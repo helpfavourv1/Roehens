@@ -5,7 +5,8 @@ import 'package:roehens/core/models/discovery_result.dart';
 import 'package:roehens/core/services/ws_discovery_codec.dart';
 import 'package:xml/xml.dart';
 
-String fixture(String name) => File('test/fixtures/onvif/$name').readAsStringSync();
+String fixture(String name) =>
+    File('test/fixtures/onvif/$name').readAsStringSync();
 
 void main() {
   const WsDiscoveryCodec codec = WsDiscoveryCodec();
@@ -24,8 +25,9 @@ void main() {
 
   group('probe match', () {
     test('a real-looking reply becomes a discovery result', () {
-      final DiscoveryResult result =
-          codec.parseProbeMatch(fixture('probe_match.xml'))!;
+      final DiscoveryResult result = codec.parseProbeMatch(
+        fixture('probe_match.xml'),
+      )!;
       expect(result.host, '192.168.1.64');
       expect(result.port, 8080);
       expect(result.source, DiscoverySource.onvif);
@@ -58,10 +60,8 @@ void main() {
     });
 
     test('a reply without a usable address is ignored', () {
-      final String text = fixture('probe_match.xml').replaceAll(
-        'http://192.168.1.64:8080/onvif/device_service',
-        '',
-      );
+      final String text = fixture('probe_match.xml')
+          .replaceAll('http://192.168.1.64:8080/onvif/device_service', '');
       expect(codec.parseProbeMatch(text), isNull);
     });
 

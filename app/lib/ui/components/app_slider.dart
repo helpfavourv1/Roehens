@@ -42,8 +42,9 @@ class AppSlider extends StatelessWidget {
   double _snap(double fraction) {
     final double clamped = fraction.clamp(0, 1);
     final int? steps = divisions;
-    final double snapped =
-        steps == null ? clamped : (clamped * steps).round() / steps;
+    final double snapped = steps == null
+        ? clamped
+        : (clamped * steps).round() / steps;
     return min + snapped * (max - min);
   }
 
@@ -110,12 +111,16 @@ class AppSlider extends StatelessWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTapDown: enabled
-                  ? (TapDownDetails d) => onChanged!(_snap(fractionAt(d.localPosition.dx)))
+                  ? (TapDownDetails d) =>
+                        onChanged!(_snap(fractionAt(d.localPosition.dx)))
                   : null,
               onHorizontalDragUpdate: enabled
-                  ? (DragUpdateDetails d) => onChanged!(_snap(fractionAt(d.localPosition.dx)))
+                  ? (DragUpdateDetails d) =>
+                        onChanged!(_snap(fractionAt(d.localPosition.dx)))
                   : null,
-              onHorizontalDragEnd: enabled ? (_) => onChangeEnd?.call(value) : null,
+              onHorizontalDragEnd: enabled
+                  ? (_) => onChangeEnd?.call(value)
+                  : null,
               onTapUp: enabled ? (_) => onChangeEnd?.call(value) : null,
               child: SizedBox(
                 height: AppSizes.touchTarget,
@@ -138,12 +143,16 @@ class AppSlider extends StatelessWidget {
                     ),
                     Positioned(
                       left: rtl ? thumbLeft + thumbSize / 2 : thumbSize / 2,
-                      right: rtl ? thumbSize / 2 : travel - thumbLeft + thumbSize / 2,
+                      right: rtl
+                          ? thumbSize / 2
+                          : travel - thumbLeft + thumbSize / 2,
                       child: SizedBox(
                         height: AppSizes.progressBarHeight,
                         child: DecoratedBox(
                           decoration: BoxDecoration(
-                            color: enabled ? colors.accent : colors.textTertiary,
+                            color: enabled
+                                ? colors.accent
+                                : colors.textTertiary,
                             borderRadius: AppRadius.allPill,
                           ),
                         ),

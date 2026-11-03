@@ -49,8 +49,12 @@ class HttpProbe {
     final HttpClient client = HttpClient()..connectionTimeout = timeout;
     answerChallengeOnce(client, credentials);
     try {
-      final HttpClientRequest request = await client.getUrl(uri).timeout(timeout);
-      final HttpClientResponse response = await request.close().timeout(timeout);
+      final HttpClientRequest request = await client
+          .getUrl(uri)
+          .timeout(timeout);
+      final HttpClientResponse response = await request.close().timeout(
+        timeout,
+      );
       final HttpProbeResult result = HttpProbeResult(
         statusCode: response.statusCode,
         contentType: response.headers.contentType?.mimeType,

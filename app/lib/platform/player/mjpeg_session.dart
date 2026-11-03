@@ -14,13 +14,14 @@ import 'package:roehens/platform/network/mjpeg_client.dart';
 /// frame; the video view draws whatever it currently holds.
 class MjpegSession implements PlayerSessionContract, FrameCapturable {
   MjpegSession({MjpegClient? client, this._mapper = const ErrorMapper()})
-      : _client = client ?? MjpegClient();
+    : _client = client ?? MjpegClient();
 
   final MjpegClient _client;
   final ErrorMapper _mapper;
 
-  final ValueNotifier<PlayerState> _state =
-      ValueNotifier<PlayerState>(const PlayerIdle());
+  final ValueNotifier<PlayerState> _state = ValueNotifier<PlayerState>(
+    const PlayerIdle(),
+  );
   final ValueNotifier<VideoSize?> _size = ValueNotifier<VideoSize?>(null);
   final ValueNotifier<Uint8List?> _latest = ValueNotifier<Uint8List?>(null);
 
@@ -57,40 +58,42 @@ class MjpegSession implements PlayerSessionContract, FrameCapturable {
     _subscription = _client
         .frames(source.uri, credentials: source.credentials)
         .listen(
-      (Uint8List frame) {
-        if (generation != _generation || _disposed) {
-          return;
-        }
-        _latest.value = frame;
-        final JpegSize? size = readJpegSize(frame);
-        if (size != null) {
-          final VideoSize next = VideoSize(size.width, size.height);
-          if (_size.value != next) {
-            _size.value = next;
-          }
-        }
-        if (_state.value is! PlayerPlaying) {
-          _state.value = const PlayerPlaying();
-        }
-      },
-      onError: (Object error) {
-        if (generation != _generation || _disposed) {
-          return;
-        }
-        _state.value = PlayerError(
-          error is AppError ? error : _mapper.fromException(error),
+          (Uint8List frame) {
+            if (generation != _generation || _disposed) {
+              return;
+            }
+            _latest.value = frame;
+            final JpegSize? size = readJpegSize(frame);
+            if (size != null) {
+              final VideoSize next = VideoSize(size.width, size.height);
+              if (_size.value != next) {
+                _size.value = next;
+              }
+            }
+            if (_state.value is! PlayerPlaying) {
+              _state.value = const PlayerPlaying();
+            }
+          },
+          onError: (Object error) {
+            if (generation != _generation || _disposed) {
+              return;
+            }
+            _state.value = PlayerError(
+              error is AppError ? error : _mapper.fromException(error),
+            );
+          },
+          onDone: () {
+            if (generation != _generation || _disposed) {
+              return;
+            }
+            if (_state.value is! PlayerError) {
+              _state.value = const PlayerError(
+                AppError(ErrorClass.streamDropped),
+              );
+            }
+          },
+          cancelOnError: true,
         );
-      },
-      onDone: () {
-        if (generation != _generation || _disposed) {
-          return;
-        }
-        if (_state.value is! PlayerError) {
-          _state.value = const PlayerError(AppError(ErrorClass.streamDropped));
-        }
-      },
-      cancelOnError: true,
-    );
   }
 
   @override

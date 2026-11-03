@@ -14,25 +14,40 @@ class LanSelector {
   /// 10.0.0.0/8, 172.16.0.0/12 or 192.168.0.0/16.
   static bool isPrivateIpv4(String address) {
     final List<int?> parts = address.split('.').map(int.tryParse).toList();
-    if (parts.length != 4 || parts.any((int? p) => p == null || p < 0 || p > 255)) {
+    if (parts.length != 4 ||
+        parts.any((int? p) => p == null || p < 0 || p > 255)) {
       return false;
     }
     final int a = parts[0]!;
     final int b = parts[1]!;
-    return a == 10 || (a == 172 && b >= 16 && b <= 31) || (a == 192 && b == 168);
+    return a == 10 ||
+        (a == 172 && b >= 16 && b <= 31) ||
+        (a == 192 && b == 168);
   }
 
   /// Interfaces that carry mobile data or tunnels, never a camera network.
   static bool _isMobileOrTunnel(String name) {
     final String lower = name.toLowerCase();
-    return const <String>['rmnet', 'ccmni', 'pdp', 'tun', 'ppp', 'ipsec', 'utun']
-        .any(lower.startsWith);
+    return const <String>[
+      'rmnet',
+      'ccmni',
+      'pdp',
+      'tun',
+      'ppp',
+      'ipsec',
+      'utun',
+    ].any(lower.startsWith);
   }
 
   static bool _looksLikeWifiOrEthernet(String name) {
     final String lower = name.toLowerCase();
-    return const <String>['wlan', 'wifi', 'eth', 'en0', 'en1']
-        .any(lower.startsWith);
+    return const <String>[
+      'wlan',
+      'wifi',
+      'eth',
+      'en0',
+      'en1',
+    ].any(lower.startsWith);
   }
 
   /// The phone's address on the camera network, or null when it is not on one

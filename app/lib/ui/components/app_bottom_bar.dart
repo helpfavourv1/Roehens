@@ -39,7 +39,10 @@ class AppBottomBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colors.bgSecondary,
         border: Border(
-          top: BorderSide(color: context.colors.borderSubtle, width: AppSizes.hairline),
+          top: BorderSide(
+            color: context.colors.borderSubtle,
+            width: AppSizes.hairline,
+          ),
         ),
       ),
       child: Padding(
@@ -65,7 +68,11 @@ class AppBottomBar extends StatelessWidget {
 }
 
 class _Destination extends StatelessWidget {
-  const _Destination({required this.item, required this.selected, required this.onTap});
+  const _Destination({
+    required this.item,
+    required this.selected,
+    required this.onTap,
+  });
 
   final AppBottomBarItem item;
   final bool selected;
@@ -73,7 +80,9 @@ class _Destination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = selected ? context.colors.accent : context.colors.textTertiary;
+    final Color color = selected
+        ? context.colors.accent
+        : context.colors.textTertiary;
     return AppPressable(
       onTap: onTap,
       semanticLabel: item.label,

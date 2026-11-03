@@ -57,8 +57,12 @@ class ErrorMapper {
 
   // A status code stands alone: not part of a longer number, a host name or an
   // IP address octet.
-  static final RegExp _authCode = RegExp(r'(^|[^0-9a-z.])(401|403)($|[^0-9a-z.])');
-  static final RegExp _notFoundCode = RegExp(r'(^|[^0-9a-z.])404($|[^0-9a-z.])');
+  static final RegExp _authCode = RegExp(
+    r'(^|[^0-9a-z.])(401|403)($|[^0-9a-z.])',
+  );
+  static final RegExp _notFoundCode = RegExp(
+    r'(^|[^0-9a-z.])404($|[^0-9a-z.])',
+  );
 
   /// Classifies [message] by well-known phrases. DNS failures are checked before
   /// "not found" so an unknown host is not reported as a wrong path.

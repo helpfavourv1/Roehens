@@ -109,12 +109,15 @@ void main() {
       expect(service.canRequestAds, isFalse);
     });
 
-    test('a failed update leaves the status unknown but never throws', () async {
-      backend.updateError = StateError('offline');
-      backend.canRequest = false;
-      expect(await service.gatherConsent(), ConsentStatus.unknown);
-      expect(service.canRequestAds, isFalse);
-    });
+    test(
+      'a failed update leaves the status unknown but never throws',
+      () async {
+        backend.updateError = StateError('offline');
+        backend.canRequest = false;
+        expect(await service.gatherConsent(), ConsentStatus.unknown);
+        expect(service.canRequestAds, isFalse);
+      },
+    );
 
     test('earlier consent still allows ads after a failed update', () async {
       backend.updateError = StateError('offline');
@@ -130,22 +133,28 @@ void main() {
       expect(service.canRequestAds, isFalse);
     });
 
-    test('the privacy options entry follows the SDK and survives errors', () async {
-      backend.optionsRequired = true;
-      expect(await service.privacyOptionsRequired, isTrue);
-      backend.optionsError = StateError('x');
-      expect(await service.privacyOptionsRequired, isFalse);
-    });
+    test(
+      'the privacy options entry follows the SDK and survives errors',
+      () async {
+        backend.optionsRequired = true;
+        expect(await service.privacyOptionsRequired, isTrue);
+        backend.optionsError = StateError('x');
+        expect(await service.privacyOptionsRequired, isFalse);
+      },
+    );
 
-    test('showing the privacy options refreshes whether ads are allowed', () async {
-      backend.canRequest = false;
-      await service.gatherConsent();
-      expect(service.canRequestAds, isFalse);
-      backend.canRequest = true;
-      await service.showPrivacyOptions();
-      expect(backend.optionsShown, 1);
-      expect(service.canRequestAds, isTrue);
-    });
+    test(
+      'showing the privacy options refreshes whether ads are allowed',
+      () async {
+        backend.canRequest = false;
+        await service.gatherConsent();
+        expect(service.canRequestAds, isFalse);
+        backend.canRequest = true;
+        await service.showPrivacyOptions();
+        expect(backend.optionsShown, 1);
+        expect(service.canRequestAds, isTrue);
+      },
+    );
   });
 
   group('AttService', () {
@@ -156,7 +165,10 @@ void main() {
     test('Android has nothing to ask', () async {
       final AttService service = AttService(backend: backend, isIos: false);
       expect(await service.currentStatus(), TrackingStatus.notApplicable);
-      expect(await service.requestAuthorization(), TrackingStatus.notApplicable);
+      expect(
+        await service.requestAuthorization(),
+        TrackingStatus.notApplicable,
+      );
       expect(backend.requests, 0);
     });
 
@@ -189,7 +201,10 @@ void main() {
 
       backend.statusError = null;
       backend.requestError = StateError('y');
-      expect(await service.requestAuthorization(), TrackingStatus.notDetermined);
+      expect(
+        await service.requestAuthorization(),
+        TrackingStatus.notDetermined,
+      );
     });
   });
 }

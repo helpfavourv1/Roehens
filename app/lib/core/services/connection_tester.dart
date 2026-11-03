@@ -93,8 +93,9 @@ class ConnectionTester {
   final FirstFrameCheck? firstFrame;
   final ErrorMapper errorMapper;
 
-  static final RegExp _ipLiteral =
-      RegExp(r'^(\d{1,3}(\.\d{1,3}){3}|[0-9a-fA-F:]*:[0-9a-fA-F:]*)$');
+  static final RegExp _ipLiteral = RegExp(
+    r'^(\d{1,3}(\.\d{1,3}){3}|[0-9a-fA-F:]*:[0-9a-fA-F:]*)$',
+  );
 
   Future<ConnectionTestResult> run(
     Camera camera,
@@ -105,9 +106,9 @@ class ConnectionTester {
       for (final TestStage stage in TestStage.values)
         stage: StageResult(stage: stage, status: StageStatus.pending),
     };
-    void publish() => onProgress?.call(
-          <StageResult>[for (final TestStage s in TestStage.values) stages[s]!],
-        );
+    void publish() => onProgress?.call(<StageResult>[
+      for (final TestStage s in TestStage.values) stages[s]!,
+    ]);
 
     void set(TestStage stage, StageStatus status, {String? detail, int? ms}) {
       stages[stage] = StageResult(
@@ -124,12 +125,17 @@ class ConnectionTester {
       for (final TestStage stage in TestStage.values) {
         final StageStatus status = stages[stage]!.status;
         if (status == StageStatus.pending || status == StageStatus.running) {
-          stages[stage] = StageResult(stage: stage, status: StageStatus.skipped);
+          stages[stage] = StageResult(
+            stage: stage,
+            status: StageStatus.skipped,
+          );
         }
       }
       publish();
       return ConnectionTestResult(
-        stages: <StageResult>[for (final TestStage s in TestStage.values) stages[s]!],
+        stages: <StageResult>[
+          for (final TestStage s in TestStage.values) stages[s]!,
+        ],
         error: error,
         suggestionKeys: suggestions,
       );
@@ -153,10 +159,21 @@ class ConnectionTester {
       final Stopwatch clock = Stopwatch()..start();
       final bool found = await probes.resolves(camera.host.trim());
       if (!found) {
-        set(TestStage.dns, StageStatus.failed, detail: 'name not found', ms: clock.elapsedMilliseconds);
+        set(
+          TestStage.dns,
+          StageStatus.failed,
+          detail: 'name not found',
+          ms: clock.elapsedMilliseconds,
+        );
         return finish(
-          const AppError(ErrorClass.networkUnreachable, detail: 'name not found'),
-          const <String>[TestSuggestion.checkHostName, TestSuggestion.checkWifi],
+          const AppError(
+            ErrorClass.networkUnreachable,
+            detail: 'name not found',
+          ),
+          const <String>[
+            TestSuggestion.checkHostName,
+            TestSuggestion.checkWifi,
+          ],
         );
       }
       set(TestStage.dns, StageStatus.passed, ms: clock.elapsedMilliseconds);
@@ -165,18 +182,18 @@ class ConnectionTester {
     // 2. Port.
     set(TestStage.tcp, StageStatus.running);
     final Stopwatch tcpClock = Stopwatch()..start();
-    final Result<void> connected = await probes.tcpConnect(camera.host.trim(), camera.port);
+    final Result<void> connected = await probes.tcpConnect(
+      camera.host.trim(),
+      camera.port,
+    );
     if (connected.errorOrNull != null) {
       set(TestStage.tcp, StageStatus.failed, ms: tcpClock.elapsedMilliseconds);
-      return finish(
-        connected.errorOrNull,
-        <String>[
-          TestSuggestion.checkPort,
-          if (isRtsp) TestSuggestion.enableRtsp,
-          TestSuggestion.checkWifi,
-          TestSuggestion.openTroubleshooter,
-        ],
-      );
+      return finish(connected.errorOrNull, <String>[
+        TestSuggestion.checkPort,
+        if (isRtsp) TestSuggestion.enableRtsp,
+        TestSuggestion.checkWifi,
+        TestSuggestion.openTroubleshooter,
+      ]);
     }
     set(TestStage.tcp, StageStatus.passed, ms: tcpClock.elapsedMilliseconds);
 
@@ -187,13 +204,20 @@ class ConnectionTester {
     String? detail;
     bool contentOk = true;
     if (isRtsp) {
-      final Result<RtspDescribeResult> described = await probes.describeRtsp(uri, credentials);
+      final Result<RtspDescribeResult> described = await probes.describeRtsp(
+        uri,
+        credentials,
+      );
       if (described.errorOrNull != null) {
-        set(TestStage.auth, StageStatus.failed, ms: describeClock.elapsedMilliseconds);
-        return finish(
-          described.errorOrNull,
-          const <String>[TestSuggestion.checkWifi, TestSuggestion.openTroubleshooter],
+        set(
+          TestStage.auth,
+          StageStatus.failed,
+          ms: describeClock.elapsedMilliseconds,
         );
+        return finish(described.errorOrNull, const <String>[
+          TestSuggestion.checkWifi,
+          TestSuggestion.openTroubleshooter,
+        ]);
       }
       final RtspDescribeResult reply = described.valueOrNull!;
       status = reply.statusCode;
@@ -201,13 +225,20 @@ class ConnectionTester {
         detail = 'video: ${reply.videoCodecs.join(', ')}';
       }
     } else {
-      final Result<HttpHeadResult> head = await probes.probeHttp(uri, credentials);
+      final Result<HttpHeadResult> head = await probes.probeHttp(
+        uri,
+        credentials,
+      );
       if (head.errorOrNull != null) {
-        set(TestStage.auth, StageStatus.failed, ms: describeClock.elapsedMilliseconds);
-        return finish(
-          head.errorOrNull,
-          const <String>[TestSuggestion.checkWifi, TestSuggestion.openTroubleshooter],
+        set(
+          TestStage.auth,
+          StageStatus.failed,
+          ms: describeClock.elapsedMilliseconds,
         );
+        return finish(head.errorOrNull, const <String>[
+          TestSuggestion.checkWifi,
+          TestSuggestion.openTroubleshooter,
+        ]);
       }
       status = head.valueOrNull!.statusCode;
       contentOk = head.valueOrNull!.isStreamOrImage;
@@ -216,34 +247,46 @@ class ConnectionTester {
     final int elapsed = describeClock.elapsedMilliseconds;
 
     if (status == 401 || status == 403) {
-      set(TestStage.auth, StageStatus.failed, detail: 'status $status', ms: elapsed);
-      return finish(
-        errorMapper.fromStatus(status),
-        const <String>[TestSuggestion.checkCredentials],
+      set(
+        TestStage.auth,
+        StageStatus.failed,
+        detail: 'status $status',
+        ms: elapsed,
       );
+      return finish(errorMapper.fromStatus(status), const <String>[
+        TestSuggestion.checkCredentials,
+      ]);
     }
     set(TestStage.auth, StageStatus.passed, ms: elapsed);
 
     if (status != 200) {
-      set(TestStage.describe, StageStatus.failed, detail: 'status $status', ms: elapsed);
-      final AppError error = errorMapper.fromStatus(status);
-      return finish(
-        error,
-        <String>[
-          if (error.errorClass == ErrorClass.pathNotFound) TestSuggestion.tryBrandPaths,
-          if (error.errorClass == ErrorClass.unsupportedMedia) ...<String>[
-            TestSuggestion.trySubstream,
-            TestSuggestion.tryMjpeg,
-          ],
-          if (error.errorClass == ErrorClass.networkUnreachable) ...<String>[
-            TestSuggestion.checkPort,
-            TestSuggestion.openTroubleshooter,
-          ],
-        ],
+      set(
+        TestStage.describe,
+        StageStatus.failed,
+        detail: 'status $status',
+        ms: elapsed,
       );
+      final AppError error = errorMapper.fromStatus(status);
+      return finish(error, <String>[
+        if (error.errorClass == ErrorClass.pathNotFound)
+          TestSuggestion.tryBrandPaths,
+        if (error.errorClass == ErrorClass.unsupportedMedia) ...<String>[
+          TestSuggestion.trySubstream,
+          TestSuggestion.tryMjpeg,
+        ],
+        if (error.errorClass == ErrorClass.networkUnreachable) ...<String>[
+          TestSuggestion.checkPort,
+          TestSuggestion.openTroubleshooter,
+        ],
+      ]);
     }
     if (!contentOk) {
-      set(TestStage.describe, StageStatus.failed, detail: detail ?? 'not a video or image', ms: elapsed);
+      set(
+        TestStage.describe,
+        StageStatus.failed,
+        detail: detail ?? 'not a video or image',
+        ms: elapsed,
+      );
       return finish(
         const AppError(
           ErrorClass.pathNotFound,
@@ -264,13 +307,21 @@ class ConnectionTester {
     final Stopwatch frameClock = Stopwatch()..start();
     final Result<void> frame = await check(camera, credentials);
     if (frame.errorOrNull != null) {
-      set(TestStage.firstFrame, StageStatus.failed, ms: frameClock.elapsedMilliseconds);
-      return finish(
-        frame.errorOrNull,
-        const <String>[TestSuggestion.trySubstream, TestSuggestion.tryMjpeg],
+      set(
+        TestStage.firstFrame,
+        StageStatus.failed,
+        ms: frameClock.elapsedMilliseconds,
       );
+      return finish(frame.errorOrNull, const <String>[
+        TestSuggestion.trySubstream,
+        TestSuggestion.tryMjpeg,
+      ]);
     }
-    set(TestStage.firstFrame, StageStatus.passed, ms: frameClock.elapsedMilliseconds);
+    set(
+      TestStage.firstFrame,
+      StageStatus.passed,
+      ms: frameClock.elapsedMilliseconds,
+    );
     return finish(null, const <String>[]);
   }
 }

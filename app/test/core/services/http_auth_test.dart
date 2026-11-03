@@ -82,12 +82,12 @@ void main() {
 
     test('a random client nonce differs between calls', () {
       String once() => HttpAuth.digest(
-            challenge: DigestChallenge.parse(challengeHeader)!,
-            method: 'GET',
-            uri: '/',
-            username: 'u',
-            password: 'p',
-          );
+        challenge: DigestChallenge.parse(challengeHeader)!,
+        method: 'GET',
+        uri: '/',
+        username: 'u',
+        password: 'p',
+      );
       expect(once(), isNot(once()));
     });
   });

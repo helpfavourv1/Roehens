@@ -43,9 +43,10 @@ class _SpikeApp extends StatelessWidget {
         pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) {
           return PageRouteBuilder<T>(
             settings: settings,
-            pageBuilder: (BuildContext c, Animation<double> a, Animation<double> b) {
-              return builder(c);
-            },
+            pageBuilder:
+                (BuildContext c, Animation<double> a, Animation<double> b) {
+                  return builder(c);
+                },
           );
         },
         home: const _SpikeHome(),
@@ -57,9 +58,9 @@ class _SpikeApp extends StatelessWidget {
 /// One stream under test.
 class _Probe {
   _Probe({required this.label, required this.url, required this.isRtsp})
-      : player = Player(
-          configuration: const PlayerConfiguration(logLevel: MPVLogLevel.warn),
-        ) {
+    : player = Player(
+        configuration: const PlayerConfiguration(logLevel: MPVLogLevel.warn),
+      ) {
     controller = VideoController(player);
   }
 
@@ -68,7 +69,9 @@ class _Probe {
   final bool isRtsp;
   final Player player;
   late final VideoController controller;
-  final ValueNotifier<List<String>> lines = ValueNotifier<List<String>>(<String>[]);
+  final ValueNotifier<List<String>> lines = ValueNotifier<List<String>>(
+    <String>[],
+  );
 
   void _add(String text) {
     lines.value = <String>[...lines.value, LoggerService.redact(text)];
@@ -132,7 +135,9 @@ class _Probe {
     _add('frame rate: ${await _prop(native, 'estimated-vf-fps')}');
     _add('bitrate (bits/s): ${await _prop(native, 'video-bitrate')}');
     _add('requested hwdec: ${await _prop(native, 'hwdec')}');
-    _add('dropped by decoder: ${await _prop(native, 'decoder-frame-drop-count')}');
+    _add(
+      'dropped by decoder: ${await _prop(native, 'decoder-frame-drop-count')}',
+    );
     _add('dropped by output: ${await _prop(native, 'frame-drop-count')}');
 
     try {
@@ -174,7 +179,9 @@ class _SpikeHome extends StatefulWidget {
 
 class _SpikeHomeState extends State<_SpikeHome> {
   late final List<_Probe> _probes;
-  final ValueNotifier<String> _pipResult = ValueNotifier<String>('PiP: not tried');
+  final ValueNotifier<String> _pipResult = ValueNotifier<String>(
+    'PiP: not tried',
+  );
 
   @override
   void initState() {
@@ -196,7 +203,8 @@ class _SpikeHomeState extends State<_SpikeHome> {
       _Probe(label: 'mjpeg-yours', url: _mjpegUrl, isRtsp: false),
       for (int i = 0; i < extras.length; i++)
         _Probe(
-          label: 'extra-${i + 1}-${extras[i].startsWith('rtsp') ? 'rtsp' : 'http'}',
+          label:
+              'extra-${i + 1}-${extras[i].startsWith('rtsp') ? 'rtsp' : 'http'}',
           url: extras[i],
           isRtsp: extras[i].startsWith('rtsp'),
         ),
@@ -217,7 +225,9 @@ class _SpikeHomeState extends State<_SpikeHome> {
 
   Future<void> _tryPip() async {
     try {
-      final bool? supported = await _pipChannel.invokeMethod<bool>('isSupported');
+      final bool? supported = await _pipChannel.invokeMethod<bool>(
+        'isSupported',
+      );
       final String? info = await _pipChannel.invokeMethod<String>('info');
       final bool? entered = await _pipChannel.invokeMethod<bool>('enter');
       _pipResult.value = 'PiP: supported=$supported entered=$entered\n$info';
@@ -239,7 +249,10 @@ class _SpikeHomeState extends State<_SpikeHome> {
             children: <Widget>[
               Text(
                 'Roehens player spike',
-                style: TextStyle(color: colors.textPrimary, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: colors.textPrimary,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -267,7 +280,10 @@ class _SpikeHomeState extends State<_SpikeHome> {
               ValueListenableBuilder<String>(
                 valueListenable: _pipResult,
                 builder: (BuildContext c, String value, Widget? w) {
-                  return Text(value, style: TextStyle(color: colors.textSecondary));
+                  return Text(
+                    value,
+                    style: TextStyle(color: colors.textSecondary),
+                  );
                 },
               ),
             ],

@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// its persistence warning. No call throws.
 class SharedPrefsKeyValueStore implements KeyValueStore {
   SharedPrefsKeyValueStore({SharedPreferencesAsync? prefs, this._logger})
-      : _prefs = prefs ?? SharedPreferencesAsync();
+    : _prefs = prefs ?? SharedPreferencesAsync();
 
   final SharedPreferencesAsync _prefs;
   final LoggerContract? _logger;

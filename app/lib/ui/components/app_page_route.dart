@@ -70,7 +70,10 @@ class AppPageRoute<T> extends PageRoute<T> {
         animation: curved,
         builder: (BuildContext context, Widget? child) {
           final double dx = (1 - curved.value) * AppMotion.pushSlideDistance;
-          return Transform.translate(offset: Offset(rtl ? -dx : dx, 0), child: child);
+          return Transform.translate(
+            offset: Offset(rtl ? -dx : dx, 0),
+            child: child,
+          );
         },
         child: child,
       ),
@@ -165,8 +168,10 @@ class AppModalRoute<T> extends PopupRoute<T> {
       return FadeTransition(opacity: curved, child: child);
     }
     return SlideTransition(
-      position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
-          .animate(curved),
+      position: Tween<Offset>(
+        begin: const Offset(0, 1),
+        end: Offset.zero,
+      ).animate(curved),
       child: child,
     );
   }

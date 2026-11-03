@@ -37,8 +37,8 @@ class AppChip extends StatelessWidget {
     final Color foreground = destructive
         ? colors.error
         : selected
-            ? colors.accent
-            : colors.textPrimary;
+        ? colors.accent
+        : colors.textPrimary;
     final Color border = selected ? colors.accent : colors.borderStrong;
 
     final Widget chip = DecoratedBox(

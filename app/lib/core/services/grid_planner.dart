@@ -125,7 +125,11 @@ class GridPlanner {
         TilePlan(
           cameraId: camera.id,
           mode: modes[camera.id]!,
-          streamKind: _kindFor(camera, hasFocus && camera.id == focusedId, preferSubstream),
+          streamKind: _kindFor(
+            camera,
+            hasFocus && camera.id == focusedId,
+            preferSubstream,
+          ),
           refreshPoster:
               modes[camera.id] == TileMode.poster &&
               camera.protocol != StreamProtocol.rtsp,

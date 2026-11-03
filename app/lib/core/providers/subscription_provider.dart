@@ -61,7 +61,10 @@ class SubscriptionProvider extends SafeValueNotifier<Entitlement> {
     if (entitlement != null) {
       await _apply(entitlement);
     } else {
-      _logger.warning(_tag, 'store did not answer, keeping the cached entitlement');
+      _logger.warning(
+        _tag,
+        'store did not answer, keeping the cached entitlement',
+      );
     }
   }
 
@@ -92,8 +95,8 @@ class SubscriptionProvider extends SafeValueNotifier<Entitlement> {
   }
 
   Future<void> _loadCache() async {
-    final String? raw =
-        (await _store.getString(StorageKeys.entitlement)).valueOrNull;
+    final String? raw = (await _store.getString(StorageKeys.entitlement))
+        .valueOrNull;
     if (raw == null) {
       return;
     }
@@ -125,7 +128,10 @@ class SubscriptionProvider extends SafeValueNotifier<Entitlement> {
           )
         : entitlement;
     setIfAlive(stamped);
-    await _store.setString(StorageKeys.entitlement, jsonEncode(stamped.toJson()));
+    await _store.setString(
+      StorageKeys.entitlement,
+      jsonEncode(stamped.toJson()),
+    );
   }
 
   @override

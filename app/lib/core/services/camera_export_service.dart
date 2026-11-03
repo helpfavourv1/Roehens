@@ -24,10 +24,7 @@ class ExportFile {
 /// Writes the camera list as JSON. Credentials are never included: the camera
 /// record does not carry them, and the vault is not read here.
 class CameraExportService {
-  CameraExportService({
-    this._clock = const SystemClock(),
-    this.appVersion,
-  });
+  CameraExportService({this._clock = const SystemClock(), this.appVersion});
 
   static const String mimeType = 'application/json';
 
@@ -41,8 +38,8 @@ class CameraExportService {
       appVersion: appVersion,
       cameras: List<Camera>.unmodifiable(cameras),
     );
-    final String text =
-        const JsonEncoder.withIndent('  ').convert(bundle.toJson());
+    final String text = const JsonEncoder.withIndent('  ')
+        .convert(bundle.toJson());
     return ExportFile(
       fileName: fileNameFor(now),
       bytes: Uint8List.fromList(utf8.encode(text)),
@@ -55,7 +52,8 @@ class CameraExportService {
   static String fileNameFor(DateTime when) {
     String two(int value) => value.toString().padLeft(2, '0');
     final DateTime utc = when.toUtc();
-    final String stamp = '${utc.year.toString().padLeft(4, '0')}'
+    final String stamp =
+        '${utc.year.toString().padLeft(4, '0')}'
         '${two(utc.month)}${two(utc.day)}';
     return 'roehens-cameras-$stamp.${AppConstants.exportFileExtension}';
   }

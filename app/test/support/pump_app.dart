@@ -23,8 +23,11 @@ Future<void> pumpApp(
       pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) {
         return PageRouteBuilder<T>(
           settings: settings,
-          pageBuilder: (BuildContext c, Animation<double> a, Animation<double> s) =>
-              builder(c),
+          pageBuilder: (
+            BuildContext c,
+            Animation<double> a,
+            Animation<double> s,
+          ) => builder(c),
         );
       },
       builder: (BuildContext context, Widget? child) {

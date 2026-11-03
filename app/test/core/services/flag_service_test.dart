@@ -22,10 +22,7 @@ void main() {
     });
   }
 
-  FlagService build({
-    required Future<String> Function() fetch,
-    Uri? flagsUrl,
-  }) {
+  FlagService build({required Future<String> Function() fetch, Uri? flagsUrl}) {
     return FlagService(
       store: store,
       clock: clock,
@@ -50,31 +47,39 @@ void main() {
     expect(service.flags.value.isOff(RemoteFlagKeys.ptz), isFalse);
   });
 
-  test('a fetched file is applied and cached; unknown switches are ignored',
-      () async {
-    final FlagService service =
-        build(fetch: () async => flagsJson(ptzOff: true, message: 'maintenance'));
-    await service.refresh();
+  test(
+    'a fetched file is applied and cached; unknown switches are ignored',
+    () async {
+      final FlagService service = build(
+        fetch: () async => flagsJson(ptzOff: true, message: 'maintenance'),
+      );
+      await service.refresh();
 
-    expect(service.flags.value.isOff(RemoteFlagKeys.ptz), isTrue);
-    expect(service.flags.value.message, 'maintenance');
-    expect(service.flags.value.killSwitches.containsKey('unknownFuture'), isFalse);
-    expect(store.values[StorageKeys.flagsCache], isNotNull);
-    expect(store.values[StorageKeys.flagsFetchedAtMillis], isNotNull);
-  });
+      expect(service.flags.value.isOff(RemoteFlagKeys.ptz), isTrue);
+      expect(service.flags.value.message, 'maintenance');
+      expect(
+        service.flags.value.killSwitches.containsKey('unknownFuture'),
+        isFalse,
+      );
+      expect(store.values[StorageKeys.flagsCache], isNotNull);
+      expect(store.values[StorageKeys.flagsFetchedAtMillis], isNotNull);
+    },
+  );
 
   test('a failed fetch keeps the cached flags', () async {
     store.values[StorageKeys.flagsCache] = flagsJson(ptzOff: true);
-    final FlagService service =
-        build(fetch: () async => throw Exception('offline'));
+    final FlagService service = build(
+      fetch: () async => throw Exception('offline'),
+    );
     await service.refresh();
 
     expect(service.flags.value.isOff(RemoteFlagKeys.ptz), isTrue);
   });
 
   test('a failed fetch with no cache leaves the defaults', () async {
-    final FlagService service =
-        build(fetch: () async => throw Exception('offline'));
+    final FlagService service = build(
+      fetch: () async => throw Exception('offline'),
+    );
     await service.refresh();
 
     expect(service.flags.value, RemoteFlags.defaults);
@@ -82,7 +87,9 @@ void main() {
 
   test('an invalid file is ignored and does not replace the cache', () async {
     store.values[StorageKeys.flagsCache] = flagsJson(ptzOff: true);
-    final FlagService service = build(fetch: () async => '<html>not json</html>');
+    final FlagService service = build(
+      fetch: () async => '<html>not json</html>',
+    );
     await service.refresh();
 
     expect(service.flags.value.isOff(RemoteFlagKeys.ptz), isTrue);
@@ -91,8 +98,9 @@ void main() {
 
   test('a corrupt cache is ignored', () async {
     store.values[StorageKeys.flagsCache] = '{{{';
-    final FlagService service =
-        build(fetch: () async => throw Exception('offline'));
+    final FlagService service = build(
+      fetch: () async => throw Exception('offline'),
+    );
     await service.refresh();
 
     expect(service.flags.value, RemoteFlags.defaults);
@@ -123,24 +131,27 @@ void main() {
     expect(fetchCount, 0);
   });
 
-  test('resume skips a recheck made moments ago, then allows one later',
-      () async {
-    final FlagService service = build(fetch: () async => flagsJson());
-    await service.refresh();
-    expect(fetchCount, 1);
+  test(
+    'resume skips a recheck made moments ago, then allows one later',
+    () async {
+      final FlagService service = build(fetch: () async => flagsJson());
+      await service.refresh();
+      expect(fetchCount, 1);
 
-    clock.advance(const Duration(minutes: 1));
-    await service.onResume();
-    expect(fetchCount, 1);
+      clock.advance(const Duration(minutes: 1));
+      await service.onResume();
+      expect(fetchCount, 1);
 
-    clock.advance(Limits.flagsResumeMinInterval);
-    await service.onResume();
-    expect(fetchCount, 2);
-  });
+      clock.advance(Limits.flagsResumeMinInterval);
+      await service.onResume();
+      expect(fetchCount, 2);
+    },
+  );
 
   test('listeners are told when the flags change', () async {
-    final FlagService service =
-        build(fetch: () async => flagsJson(ptzOff: true));
+    final FlagService service = build(
+      fetch: () async => flagsJson(ptzOff: true),
+    );
     int notifications = 0;
     service.flags.addListener(() => notifications++);
     await service.refresh();

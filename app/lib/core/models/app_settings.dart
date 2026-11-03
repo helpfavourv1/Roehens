@@ -36,11 +36,13 @@ class AppSettings {
           ? defaults.defaultTransport
           : StreamTransport.values.byName(transport),
       gridSubstreamDefault:
-          json['gridSubstreamDefault'] as bool? ?? defaults.gridSubstreamDefault,
+          json['gridSubstreamDefault'] as bool? ??
+          defaults.gridSubstreamDefault,
       keepAwake: json['keepAwake'] as bool? ?? defaults.keepAwake,
       showOverlayLabels:
           json['showOverlayLabels'] as bool? ?? defaults.showOverlayLabels,
-      hapticsEnabled: json['hapticsEnabled'] as bool? ?? defaults.hapticsEnabled,
+      hapticsEnabled:
+          json['hapticsEnabled'] as bool? ?? defaults.hapticsEnabled,
       autoCycleEnabled:
           json['autoCycleEnabled'] as bool? ?? defaults.autoCycleEnabled,
       autoCycleSeconds:
@@ -93,8 +95,9 @@ class AppSettings {
   }) {
     return AppSettings(
       themeMode: themeMode ?? this.themeMode,
-      localeCode:
-          identical(localeCode, _unset) ? this.localeCode : localeCode as String?,
+      localeCode: identical(localeCode, _unset)
+          ? this.localeCode
+          : localeCode as String?,
       defaultTransport: defaultTransport ?? this.defaultTransport,
       gridSubstreamDefault: gridSubstreamDefault ?? this.gridSubstreamDefault,
       keepAwake: keepAwake ?? this.keepAwake,
@@ -123,15 +126,15 @@ class AppSettings {
 
   @override
   int get hashCode => Object.hash(
-        themeMode,
-        localeCode,
-        defaultTransport,
-        gridSubstreamDefault,
-        keepAwake,
-        showOverlayLabels,
-        hapticsEnabled,
-        autoCycleEnabled,
-        autoCycleSeconds,
-        schemaVersion,
-      );
+    themeMode,
+    localeCode,
+    defaultTransport,
+    gridSubstreamDefault,
+    keepAwake,
+    showOverlayLabels,
+    hapticsEnabled,
+    autoCycleEnabled,
+    autoCycleSeconds,
+    schemaVersion,
+  );
 }

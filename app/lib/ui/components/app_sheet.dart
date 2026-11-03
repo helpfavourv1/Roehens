@@ -22,7 +22,8 @@ class AppSheet extends StatelessWidget {
     final AppTokensData tokens = context.tokens;
     final EdgeInsets safe = MediaQuery.paddingOf(context);
     final double keyboard = MediaQuery.viewInsetsOf(context).bottom;
-    final double maxHeight = MediaQuery.sizeOf(context).height * maxHeightFactor;
+    final double maxHeight =
+        MediaQuery.sizeOf(context).height * maxHeightFactor;
     return Align(
       alignment: Alignment.bottomCenter,
       child: ConstrainedBox(
@@ -57,7 +58,9 @@ class AppSheet extends StatelessWidget {
                     ),
                     child: Text(
                       title!,
-                      style: context.type.title2.copyWith(color: tokens.colors.textPrimary),
+                      style: context.type.title2.copyWith(
+                        color: tokens.colors.textPrimary,
+                      ),
                     ),
                   )
                 else
@@ -87,7 +90,8 @@ Future<T?> showAppSheet<T>(
       motion: AppModalMotion.slideUp,
       dismissLabel: dismissLabel,
       reduceMotion: context.reduceMotion,
-      builder: (BuildContext context) => AppSheet(title: title, child: builder(context)),
+      builder: (BuildContext context) =>
+          AppSheet(title: title, child: builder(context)),
     ),
   );
 }

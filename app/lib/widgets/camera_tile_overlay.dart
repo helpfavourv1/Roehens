@@ -41,7 +41,9 @@ class CameraTileOverlay extends StatelessWidget {
     final TextScaler scaler = compact
         ? TextScaler.noScaling
         : context.clampedTextScaler(max: AppSizes.tileOverlayMaxTextScale);
-    final TextStyle nameStyle = compact ? context.type.caption : context.type.callout;
+    final TextStyle nameStyle = compact
+        ? context.type.caption
+        : context.type.callout;
     final Color white = context.colors.onVideoText;
     final bool hasPlate = showLabels;
     return Padding(
@@ -51,7 +53,12 @@ class CameraTileOverlay extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Flexible(child: Align(alignment: AlignmentDirectional.centerStart, child: statusPill)),
+              Flexible(
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: statusPill,
+                ),
+              ),
               if (ageLabel != null)
                 DecoratedBox(
                   decoration: BoxDecoration(

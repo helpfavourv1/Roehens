@@ -26,8 +26,9 @@ class DigestChallenge {
       return null;
     }
     final Map<String, String> fields = <String, String>{};
-    for (final RegExpMatch match in RegExp(r'(\w+)\s*=\s*(?:"([^"]*)"|([^,\s]+))')
-        .allMatches(trimmed.substring(7))) {
+    for (final RegExpMatch match in RegExp(
+      r'(\w+)\s*=\s*(?:"([^"]*)"|([^,\s]+))',
+    ).allMatches(trimmed.substring(7))) {
       fields[match.group(1)!.toLowerCase()] = match.group(2) ?? match.group(3)!;
     }
     final String? realm = fields['realm'];
@@ -56,9 +57,10 @@ class HttpAuth {
 
   static String _randomHex(int bytes) {
     final Random random = Random.secure();
-    return List<int>.generate(bytes, (int _) => random.nextInt(256))
-        .map((int b) => b.toRadixString(16).padLeft(2, '0'))
-        .join();
+    return List<int>.generate(
+      bytes,
+      (int _) => random.nextInt(256),
+    ).map((int b) => b.toRadixString(16).padLeft(2, '0')).join();
   }
 
   /// The Digest response for [method] and [uri]. [cnonce] and [nonceCount] exist

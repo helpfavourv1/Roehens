@@ -8,7 +8,9 @@ void main() {
   test('credentials inside URLs are masked', () {
     final LoggerService logger = LoggerService(clock: FakeClock());
     // Split so the credential guard does not mistake the fixture for a leak.
-    const String url = 'rtsp://' 'admin:hunter22@10.0.0.5/stream0';
+    const String url =
+        'rtsp://'
+        'admin:hunter22@10.0.0.5/stream0';
     logger.info('player', 'opening $url now');
     final String text = logger.dump();
     expect(text.contains('hunter22'), isFalse);

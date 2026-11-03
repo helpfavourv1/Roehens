@@ -15,14 +15,21 @@ import '../../support/pump_app.dart';
 
 void main() {
   group('AppPressable', () {
-    testWidgets('taps call onTap and a disabled one does nothing', (WidgetTester tester) async {
+    testWidgets('taps call onTap and a disabled one does nothing', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
       await pumpApp(
         tester,
         Column(
           children: <Widget>[
-            AppPressable(onTap: () => taps++, child: const SizedBox(key: Key('on'), width: 80, height: 80)),
-            const AppPressable(child: SizedBox(key: Key('off'), width: 80, height: 80)),
+            AppPressable(
+              onTap: () => taps++,
+              child: const SizedBox(key: Key('on'), width: 80, height: 80),
+            ),
+            const AppPressable(
+              child: SizedBox(key: Key('off'), width: 80, height: 80),
+            ),
           ],
         ),
       );
@@ -31,15 +38,23 @@ void main() {
       expect(taps, 1);
     });
 
-    testWidgets('fades while pressed and returns when released', (WidgetTester tester) async {
+    testWidgets('fades while pressed and returns when released', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
-        AppPressable(onTap: () {}, child: const SizedBox(key: Key('t'), width: 80, height: 80)),
+        AppPressable(
+          onTap: () {},
+          child: const SizedBox(key: Key('t'), width: 80, height: 80),
+        ),
       );
-      double opacity() => tester.widget<AnimatedOpacity>(find.byType(AnimatedOpacity)).opacity;
+      double opacity() =>
+          tester.widget<AnimatedOpacity>(find.byType(AnimatedOpacity)).opacity;
 
       expect(opacity(), 1);
-      final TestGesture gesture = await tester.startGesture(tester.getCenter(find.byKey(const Key('t'))));
+      final TestGesture gesture = await tester.startGesture(
+        tester.getCenter(find.byKey(const Key('t'))),
+      );
       await tester.pump();
       expect(opacity(), AppMotion.pressedOpacity);
       await gesture.up();
@@ -50,20 +65,30 @@ void main() {
     testWidgets('never scales', (WidgetTester tester) async {
       await pumpApp(
         tester,
-        AppPressable(onTap: () {}, child: const SizedBox(key: Key('t'), width: 80, height: 80)),
+        AppPressable(
+          onTap: () {},
+          child: const SizedBox(key: Key('t'), width: 80, height: 80),
+        ),
       );
       final Size before = tester.getSize(find.byKey(const Key('t')));
-      final TestGesture gesture = await tester.startGesture(tester.getCenter(find.byKey(const Key('t'))));
+      final TestGesture gesture = await tester.startGesture(
+        tester.getCenter(find.byKey(const Key('t'))),
+      );
       await tester.pump(const Duration(milliseconds: 60));
       expect(tester.getSize(find.byKey(const Key('t'))), before);
       await gesture.up();
     });
 
-    testWidgets('Enter and Space activate the focused element', (WidgetTester tester) async {
+    testWidgets('Enter and Space activate the focused element', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
       await pumpApp(
         tester,
-        AppPressable(onTap: () => taps++, child: const SizedBox(width: 80, height: 80)),
+        AppPressable(
+          onTap: () => taps++,
+          child: const SizedBox(width: 80, height: 80),
+        ),
       );
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pump();
@@ -72,7 +97,9 @@ void main() {
       expect(taps, 2);
     });
 
-    testWidgets('a small child still gets a 48 by 48 hit area', (WidgetTester tester) async {
+    testWidgets('a small child still gets a 48 by 48 hit area', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
       await pumpApp(
         tester,
@@ -87,7 +114,9 @@ void main() {
       expect(taps, 1);
     });
 
-    testWidgets('a semantic label replaces the child text', (WidgetTester tester) async {
+    testWidgets('a semantic label replaces the child text', (
+      WidgetTester tester,
+    ) async {
       final SemanticsHandle handle = tester.ensureSemantics();
       await pumpApp(
         tester,
@@ -103,7 +132,9 @@ void main() {
   });
 
   group('AppButton', () {
-    testWidgets('every kind shows its label and fires', (WidgetTester tester) async {
+    testWidgets('every kind shows its label and fires', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
       await pumpApp(
         tester,
@@ -120,7 +151,9 @@ void main() {
       expect(taps, AppButtonKind.values.length);
     });
 
-    testWidgets('is at least 48 high and expands on request', (WidgetTester tester) async {
+    testWidgets('is at least 48 high and expands on request', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         AppButton(label: 'Save', onPressed: () {}, expand: true),
@@ -130,7 +163,9 @@ void main() {
       expect(size.width, 400);
     });
 
-    testWidgets('disabled and loading buttons ignore taps', (WidgetTester tester) async {
+    testWidgets('disabled and loading buttons ignore taps', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
       await pumpApp(
         tester,
@@ -146,7 +181,9 @@ void main() {
       expect(taps, 0);
     });
 
-    testWidgets('a long label wraps instead of overflowing at large text', (WidgetTester tester) async {
+    testWidgets('a long label wraps instead of overflowing at large text', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         SizedBox(
@@ -164,7 +201,9 @@ void main() {
   });
 
   group('AppIconButton', () {
-    testWidgets('draws a 40 chip inside a 48 hit area', (WidgetTester tester) async {
+    testWidgets('draws a 40 chip inside a 48 hit area', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
       await pumpApp(
         tester,
@@ -174,10 +213,18 @@ void main() {
           onPressed: () => taps++,
         ),
       );
-      expect(tester.getSize(find.byType(AppIconButton)), const Size.square(AppSizes.touchTarget));
-      final Rect chip = tester.getRect(find.byWidgetPredicate(
-        (Widget w) => w is SizedBox && w.width == AppSizes.iconChip && w.height == AppSizes.iconChip,
-      ));
+      expect(
+        tester.getSize(find.byType(AppIconButton)),
+        const Size.square(AppSizes.touchTarget),
+      );
+      final Rect chip = tester.getRect(
+        find.byWidgetPredicate(
+          (Widget w) =>
+              w is SizedBox &&
+              w.width == AppSizes.iconChip &&
+              w.height == AppSizes.iconChip,
+        ),
+      );
       expect(chip.size, const Size.square(AppSizes.iconChip));
       // The outer 4 pixels are still part of the hit area.
       await tester.tapAt(chip.topLeft - const Offset(2, 2));
@@ -188,7 +235,11 @@ void main() {
       final SemanticsHandle handle = tester.ensureSemantics();
       await pumpApp(
         tester,
-        AppIconButton(icon: AppIconName.close, semanticLabel: 'Close', onPressed: () {}),
+        AppIconButton(
+          icon: AppIconName.close,
+          semanticLabel: 'Close',
+          onPressed: () {},
+        ),
       );
       expect(find.bySemanticsLabel('Close'), findsOneWidget);
       handle.dispose();
@@ -196,20 +247,32 @@ void main() {
   });
 
   group('AppChip', () {
-    testWidgets('a chip with onTap is tappable and has a 48 hit area', (WidgetTester tester) async {
+    testWidgets('a chip with onTap is tappable and has a 48 hit area', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
-      await pumpApp(tester, AppChip(label: 'Retry', icon: AppIconName.refresh, onTap: () => taps++));
-      expect(tester.getSize(find.byType(AppChip)).height, greaterThanOrEqualTo(AppSizes.touchTarget));
+      await pumpApp(
+        tester,
+        AppChip(label: 'Retry', icon: AppIconName.refresh, onTap: () => taps++),
+      );
+      expect(
+        tester.getSize(find.byType(AppChip)).height,
+        greaterThanOrEqualTo(AppSizes.touchTarget),
+      );
       await tester.tap(find.text('Retry'));
       expect(taps, 1);
     });
 
-    testWidgets('without onTap it is a plain label', (WidgetTester tester) async {
+    testWidgets('without onTap it is a plain label', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(tester, const AppChip(label: 'Label'));
       expect(find.byType(AppPressable), findsNothing);
     });
 
-    testWidgets('selected and destructive chips build', (WidgetTester tester) async {
+    testWidgets('selected and destructive chips build', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         Column(
@@ -225,17 +288,25 @@ void main() {
   });
 
   group('AppSwitch', () {
-    testWidgets('reports the opposite value when tapped', (WidgetTester tester) async {
+    testWidgets('reports the opposite value when tapped', (
+      WidgetTester tester,
+    ) async {
       bool? received;
       await pumpApp(
         tester,
-        AppSwitch(value: false, onChanged: (bool v) => received = v, semanticLabel: 'Haptics'),
+        AppSwitch(
+          value: false,
+          onChanged: (bool v) => received = v,
+          semanticLabel: 'Haptics',
+        ),
       );
       await tester.tap(find.byType(AppSwitch));
       expect(received, isTrue);
     });
 
-    testWidgets('exposes its state to accessibility', (WidgetTester tester) async {
+    testWidgets('exposes its state to accessibility', (
+      WidgetTester tester,
+    ) async {
       final SemanticsHandle handle = tester.ensureSemantics();
       await pumpApp(
         tester,
@@ -248,7 +319,9 @@ void main() {
       handle.dispose();
     });
 
-    testWidgets('the thumb sits at the end, and mirrors in right-to-left', (WidgetTester tester) async {
+    testWidgets('the thumb sits at the end, and mirrors in right-to-left', (
+      WidgetTester tester,
+    ) async {
       Future<double> thumbOffsetFromCenter(TextDirection direction) async {
         await pumpApp(
           tester,
@@ -257,9 +330,12 @@ void main() {
         );
         await tester.pumpAndSettle();
         final Finder thumb = find.byWidgetPredicate(
-          (Widget w) => w is SizedBox && w.width == AppSizes.switchThumb - AppSizes.hairline * 4,
+          (Widget w) =>
+              w is SizedBox &&
+              w.width == AppSizes.switchThumb - AppSizes.hairline * 4,
         );
-        return tester.getCenter(thumb).dx - tester.getCenter(find.byType(AppSwitch)).dx;
+        return tester.getCenter(thumb).dx -
+            tester.getCenter(find.byType(AppSwitch)).dx;
       }
 
       expect(await thumbOffsetFromCenter(TextDirection.ltr), greaterThan(0));
@@ -267,14 +343,19 @@ void main() {
     });
 
     testWidgets('disabled does nothing', (WidgetTester tester) async {
-      await pumpApp(tester, const AppSwitch(value: false, onChanged: null, semanticLabel: 's'));
+      await pumpApp(
+        tester,
+        const AppSwitch(value: false, onChanged: null, semanticLabel: 's'),
+      );
       await tester.tap(find.byType(AppSwitch));
       expect(tester.takeException(), isNull);
     });
   });
 
   group('AppSegmentedControl', () {
-    testWidgets('selecting a segment reports its value', (WidgetTester tester) async {
+    testWidgets('selecting a segment reports its value', (
+      WidgetTester tester,
+    ) async {
       String? chosen;
       await pumpApp(
         tester,
@@ -295,7 +376,9 @@ void main() {
       expect(chosen, 'c');
     });
 
-    testWidgets('segments are equally wide and tall enough to tap', (WidgetTester tester) async {
+    testWidgets('segments are equally wide and tall enough to tap', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         SizedBox(

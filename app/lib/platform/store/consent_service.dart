@@ -37,12 +37,17 @@ class GoogleConsentBackend implements ConsentBackend {
     await updated.future;
 
     final Completer<void> dismissed = Completer<void>();
-    await ads.ConsentForm.loadAndShowConsentFormIfRequired((ads.FormError? error) {
+    await ads.ConsentForm.loadAndShowConsentFormIfRequired((
+      ads.FormError? error,
+    ) {
       if (!dismissed.isCompleted) {
         dismissed.complete();
       }
     });
-    await dismissed.future.timeout(const Duration(minutes: 10), onTimeout: () {});
+    await dismissed.future.timeout(
+      const Duration(minutes: 10),
+      onTimeout: () {},
+    );
 
     switch (await ads.ConsentInformation.instance.getConsentStatus()) {
       case ads.ConsentStatus.notRequired:
@@ -57,12 +62,15 @@ class GoogleConsentBackend implements ConsentBackend {
   }
 
   @override
-  Future<bool> canRequestAds() => ads.ConsentInformation.instance.canRequestAds();
+  Future<bool> canRequestAds() =>
+      ads.ConsentInformation.instance.canRequestAds();
 
   @override
   Future<bool> privacyOptionsRequired() async {
-    final ads.PrivacyOptionsRequirementStatus status =
-        await ads.ConsentInformation.instance.getPrivacyOptionsRequirementStatus();
+    final ads.PrivacyOptionsRequirementStatus status = await ads
+        .ConsentInformation
+        .instance
+        .getPrivacyOptionsRequirementStatus();
     return status == ads.PrivacyOptionsRequirementStatus.required;
   }
 
@@ -74,7 +82,10 @@ class GoogleConsentBackend implements ConsentBackend {
         dismissed.complete();
       }
     });
-    await dismissed.future.timeout(const Duration(minutes: 10), onTimeout: () {});
+    await dismissed.future.timeout(
+      const Duration(minutes: 10),
+      onTimeout: () {},
+    );
   }
 }
 
@@ -82,7 +93,7 @@ class GoogleConsentBackend implements ConsentBackend {
 /// a failed update leaves the status unknown and never throws.
 class ConsentService implements ConsentContract {
   ConsentService({ConsentBackend? backend, this.logger})
-      : _backend = backend ?? GoogleConsentBackend();
+    : _backend = backend ?? GoogleConsentBackend();
 
   final LoggerContract? logger;
   final ConsentBackend _backend;

@@ -44,7 +44,10 @@ class AppBanner extends StatelessWidget {
         decoration: BoxDecoration(
           color: accent.withValues(alpha: 0.12),
           borderRadius: AppRadius.allMd,
-          border: Border.all(color: accent.withValues(alpha: 0.5), width: AppSizes.hairline),
+          border: Border.all(
+            color: accent.withValues(alpha: 0.5),
+            width: AppSizes.hairline,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsetsDirectional.all(AppSpacing.md),
@@ -57,7 +60,9 @@ class AppBanner extends StatelessWidget {
                 child: ExcludeSemantics(
                   child: Text(
                     message,
-                    style: context.type.body.copyWith(color: colors.textPrimary),
+                    style: context.type.body.copyWith(
+                      color: colors.textPrimary,
+                    ),
                   ),
                 ),
               ),

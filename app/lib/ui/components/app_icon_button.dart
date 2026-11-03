@@ -65,13 +65,18 @@ class AppIconButton extends StatelessWidget {
       child: SizedBox.square(
         dimension: AppSizes.iconChip,
         child: DecoratedBox(
-          decoration: BoxDecoration(color: plate, borderRadius: AppRadius.allMd),
+          decoration: BoxDecoration(
+            color: plate,
+            borderRadius: AppRadius.allMd,
+          ),
           child: Center(
             child: AppIcon(
               icon,
               size: size,
               color: glyph,
-              weight: tone == AppIconButtonTone.selected ? AppIconWeight.fill : weight,
+              weight: tone == AppIconButtonTone.selected
+                  ? AppIconWeight.fill
+                  : weight,
             ),
           ),
         ),

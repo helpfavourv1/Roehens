@@ -19,7 +19,9 @@ class AppLetterHeader extends StatelessWidget {
   /// A letter and the sliver under it as one group. The header stays pinned
   /// while its group scrolls, and the next group's header pushes it away.
   static Widget group({required String letter, required Widget sliver}) {
-    return SliverMainAxisGroup(slivers: <Widget>[AppLetterHeader.sliver(letter), sliver]);
+    return SliverMainAxisGroup(
+      slivers: <Widget>[AppLetterHeader.sliver(letter), sliver],
+    );
   }
 
   static const double height = AppSizes.rowMinHeight / 2 + AppSpacing.xs;
@@ -36,12 +38,16 @@ class AppLetterHeader extends StatelessWidget {
           height: height,
           width: double.infinity,
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.md),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.md,
+            ),
             child: Align(
               alignment: AlignmentDirectional.centerStart,
               child: Text(
                 letter,
-                style: context.type.overline.copyWith(color: context.colors.accent),
+                style: context.type.overline.copyWith(
+                  color: context.colors.accent,
+                ),
               ),
             ),
           ),
@@ -63,10 +69,15 @@ class _LetterHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => AppLetterHeader.height;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return AppLetterHeader(letter);
   }
 
   @override
-  bool shouldRebuild(_LetterHeaderDelegate oldDelegate) => oldDelegate.letter != letter;
+  bool shouldRebuild(_LetterHeaderDelegate oldDelegate) =>
+      oldDelegate.letter != letter;
 }

@@ -23,17 +23,14 @@ void main() {
     ];
     final GridPlan plan = planner.plan(visible: cameras, decoderBudget: 4);
     expect(plan.liveCount, 4);
-    expect(
-      plan.tiles.map((TilePlan t) => t.mode),
-      <TileMode>[
-        TileMode.live,
-        TileMode.live,
-        TileMode.live,
-        TileMode.live,
-        TileMode.poster,
-        TileMode.poster,
-      ],
-    );
+    expect(plan.tiles.map((TilePlan t) => t.mode), <TileMode>[
+      TileMode.live,
+      TileMode.live,
+      TileMode.live,
+      TileMode.live,
+      TileMode.poster,
+      TileMode.poster,
+    ]);
   });
 
   test('the plan keeps the input order', () {
@@ -132,11 +129,15 @@ void main() {
       for (int i = 1; i <= 6; i++) cam('c$i'),
     ];
     expect(
-      planner.plan(visible: cameras, decoderBudget: 4, lowMemory: true).liveCount,
+      planner
+          .plan(visible: cameras, decoderBudget: 4, lowMemory: true)
+          .liveCount,
       2,
     );
     expect(
-      planner.plan(visible: cameras, decoderBudget: 1, lowMemory: true).liveCount,
+      planner
+          .plan(visible: cameras, decoderBudget: 1, lowMemory: true)
+          .liveCount,
       1,
     );
   });

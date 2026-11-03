@@ -7,7 +7,7 @@ import 'package:roehens/core/providers/settings_provider.dart';
 /// The language chosen in the app. Null means "follow the system language".
 class LocaleProvider extends SafeValueNotifier<Locale?> {
   LocaleProvider({required this._settings})
-      : super(localeFromCode(_settings.value.localeCode)) {
+    : super(localeFromCode(_settings.value.localeCode)) {
     _settings.addListener(_sync);
   }
 

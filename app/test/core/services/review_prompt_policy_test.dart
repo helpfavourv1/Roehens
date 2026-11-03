@@ -14,36 +14,57 @@ void main() {
 
   group('isDue', () {
     test('is due once the person has used the app enough', () {
-      expect(ReviewPromptPolicy.isDue(ready, now, errorThisSession: false), isTrue);
+      expect(
+        ReviewPromptPolicy.isDue(ready, now, errorThisSession: false),
+        isTrue,
+      );
     });
 
     test('never after an error in this session', () {
-      expect(ReviewPromptPolicy.isDue(ready, now, errorThisSession: true), isFalse);
+      expect(
+        ReviewPromptPolicy.isDue(ready, now, errorThisSession: true),
+        isFalse,
+      );
     });
 
     test('not within a day of an earlier error', () {
-      final RatingState state =
-          ready.copyWith(lastErrorAt: now.subtract(const Duration(hours: 3)));
-      expect(ReviewPromptPolicy.isDue(state, now, errorThisSession: false), isFalse);
+      final RatingState state = ready.copyWith(
+        lastErrorAt: now.subtract(const Duration(hours: 3)),
+      );
+      expect(
+        ReviewPromptPolicy.isDue(state, now, errorThisSession: false),
+        isFalse,
+      );
     });
 
     test('allowed again after the quiet period', () {
-      final RatingState state =
-          ready.copyWith(lastErrorAt: now.subtract(const Duration(hours: 30)));
-      expect(ReviewPromptPolicy.isDue(state, now, errorThisSession: false), isTrue);
+      final RatingState state = ready.copyWith(
+        lastErrorAt: now.subtract(const Duration(hours: 30)),
+      );
+      expect(
+        ReviewPromptPolicy.isDue(state, now, errorThisSession: false),
+        isTrue,
+      );
     });
 
     test('not before the first days have passed', () {
-      final RatingState state =
-          ready.copyWith(firstLaunchAt: now.subtract(const Duration(days: 1)));
-      expect(ReviewPromptPolicy.isDue(state, now, errorThisSession: false), isFalse);
+      final RatingState state = ready.copyWith(
+        firstLaunchAt: now.subtract(const Duration(days: 1)),
+      );
+      expect(
+        ReviewPromptPolicy.isDue(state, now, errorThisSession: false),
+        isFalse,
+      );
     });
 
     test('not without enough viewing sessions', () {
       final RatingState state = ready.copyWith(
         viewingSessions: Limits.ratingMinViewingSessions - 1,
       );
-      expect(ReviewPromptPolicy.isDue(state, now, errorThisSession: false), isFalse);
+      expect(
+        ReviewPromptPolicy.isDue(state, now, errorThisSession: false),
+        isFalse,
+      );
     });
 
     test('not again within the minimum gap between prompts', () {
@@ -51,16 +72,23 @@ void main() {
         promptCount: 1,
         lastPromptAt: now.subtract(const Duration(days: 30)),
       );
-      expect(ReviewPromptPolicy.isDue(state, now, errorThisSession: false), isFalse);
+      expect(
+        ReviewPromptPolicy.isDue(state, now, errorThisSession: false),
+        isFalse,
+      );
     });
 
     test('again once the gap has passed', () {
       final RatingState state = ready.copyWith(
         promptCount: 1,
-        lastPromptAt:
-            now.subtract(const Duration(days: Limits.ratingMinDaysBetweenPrompts)),
+        lastPromptAt: now.subtract(
+          const Duration(days: Limits.ratingMinDaysBetweenPrompts),
+        ),
       );
-      expect(ReviewPromptPolicy.isDue(state, now, errorThisSession: false), isTrue);
+      expect(
+        ReviewPromptPolicy.isDue(state, now, errorThisSession: false),
+        isTrue,
+      );
     });
 
     test('never beyond the lifetime cap', () {
@@ -68,7 +96,10 @@ void main() {
         promptCount: Limits.ratingMaxPrompts,
         lastPromptAt: now.subtract(const Duration(days: 400)),
       );
-      expect(ReviewPromptPolicy.isDue(state, now, errorThisSession: false), isFalse);
+      expect(
+        ReviewPromptPolicy.isDue(state, now, errorThisSession: false),
+        isFalse,
+      );
     });
 
     test('not without a recorded first launch', () {
@@ -99,22 +130,24 @@ void main() {
       expect(await policy.shouldPrompt(), isFalse);
     });
 
-    test('becomes due after days and enough sessions, and prompting resets it',
-        () async {
-      await policy.recordLaunch();
-      clock.advance(const Duration(days: 10));
-      for (int i = 0; i < Limits.ratingMinViewingSessions; i++) {
-        // A new start of the app for each session.
-        policy = ReviewPolicyFactory.create(store, clock);
+    test(
+      'becomes due after days and enough sessions, and prompting resets it',
+      () async {
         await policy.recordLaunch();
-        await policy.recordViewingSession();
-        await policy.recordViewingSession(); // the same start counts once
-      }
-      expect(await policy.shouldPrompt(), isTrue);
+        clock.advance(const Duration(days: 10));
+        for (int i = 0; i < Limits.ratingMinViewingSessions; i++) {
+          // A new start of the app for each session.
+          policy = ReviewPolicyFactory.create(store, clock);
+          await policy.recordLaunch();
+          await policy.recordViewingSession();
+          await policy.recordViewingSession(); // the same start counts once
+        }
+        expect(await policy.shouldPrompt(), isTrue);
 
-      await policy.markPrompted();
-      expect(await policy.shouldPrompt(), isFalse);
-    });
+        await policy.markPrompted();
+        expect(await policy.shouldPrompt(), isFalse);
+      },
+    );
 
     test('an error in the session blocks the prompt', () async {
       await policy.recordLaunch();
@@ -131,11 +164,14 @@ void main() {
     test('state survives a restart', () async {
       await policy.recordLaunch();
       expect(store.values[StorageKeys.ratingState], isNotNull);
-      final ReviewPromptPolicy restarted = ReviewPolicyFactory.create(store, clock);
-      await restarted.recordLaunch();
-      final RatingState saved = RatingState.fromJson(
-        <String, Object?>{'firstLaunchAtMillis': clock.time.millisecondsSinceEpoch},
+      final ReviewPromptPolicy restarted = ReviewPolicyFactory.create(
+        store,
+        clock,
       );
+      await restarted.recordLaunch();
+      final RatingState saved = RatingState.fromJson(<String, Object?>{
+        'firstLaunchAtMillis': clock.time.millisecondsSinceEpoch,
+      });
       expect(saved.firstLaunchAt, clock.time);
     });
 

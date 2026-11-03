@@ -14,14 +14,13 @@ void main() {
       channel: MulticastLockChannel(isAndroid: false),
       interfaces: () async => address == null
           ? <LanInterface>[]
-          : <LanInterface>[LanInterface('wlan0', <String>[address])],
+          : <LanInterface>[
+              LanInterface('wlan0', <String>[address]),
+            ],
     );
   }
 
-  DiscoveryService build({
-    required LanInfo lan,
-    required Set<String> open,
-  }) {
+  DiscoveryService build({required LanInfo lan, required Set<String> open}) {
     return DiscoveryService(
       lan: lan,
       scanner: SubnetScanner(
@@ -37,17 +36,25 @@ void main() {
   test('reports open camera ports as sweep results, then finishes', () async {
     final DiscoveryService service = build(
       lan: lanAt('192.168.1.20'),
-      open: <String>{'192.168.1.50:554', '192.168.1.50:80', '192.168.1.60:8000'},
+      open: <String>{
+        '192.168.1.50:554',
+        '192.168.1.50:80',
+        '192.168.1.60:8000',
+      },
     );
-    final List<DiscoveryEvent> events =
-        await service.discover(timeout: const Duration(seconds: 10)).toList();
+    final List<DiscoveryEvent> events = await service
+        .discover(timeout: const Duration(seconds: 10))
+        .toList();
 
     final List<DiscoveryResult> found = <DiscoveryResult>[
       for (final DiscoveryEvent e in events)
         if (e is DiscoveryFound) e.result,
     ];
     expect(found, hasLength(3));
-    expect(found.every((DiscoveryResult r) => r.source == DiscoverySource.sweep), isTrue);
+    expect(
+      found.every((DiscoveryResult r) => r.source == DiscoverySource.sweep),
+      isTrue,
+    );
     expect(found.map((DiscoveryResult r) => r.host).toSet(), <String>{
       '192.168.1.50',
       '192.168.1.60',
@@ -56,22 +63,30 @@ void main() {
     expect(events.last, isA<DiscoveryFinished>());
   });
 
-  test('without a local network it finishes at once with nothing found', () async {
-    final DiscoveryService service = build(lan: lanAt(null), open: <String>{});
-    final List<DiscoveryEvent> events =
-        await service.discover(timeout: const Duration(seconds: 10)).toList();
+  test(
+    'without a local network it finishes at once with nothing found',
+    () async {
+      final DiscoveryService service = build(
+        lan: lanAt(null),
+        open: <String>{},
+      );
+      final List<DiscoveryEvent> events = await service
+          .discover(timeout: const Duration(seconds: 10))
+          .toList();
 
-    expect(events.whereType<DiscoveryFound>(), isEmpty);
-    expect(events.last, isA<DiscoveryFinished>());
-  });
+      expect(events.whereType<DiscoveryFound>(), isEmpty);
+      expect(events.last, isA<DiscoveryFinished>());
+    },
+  );
 
   test('cancelling the subscription stops the run', () async {
     final DiscoveryService service = build(
       lan: lanAt('10.0.0.5'),
       open: <String>{},
     );
-    final Stream<DiscoveryEvent> stream =
-        service.discover(timeout: const Duration(seconds: 10));
+    final Stream<DiscoveryEvent> stream = service.discover(
+      timeout: const Duration(seconds: 10),
+    );
     await stream.first;
     // No further work is needed: reaching here without hanging is the check.
   });

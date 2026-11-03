@@ -98,8 +98,9 @@ void main() {
   });
 
   test('a boundary declared with leading dashes still matches', () {
-    final MjpegStreamParser parser =
-        MjpegStreamParser(boundary: '--myboundary');
+    final MjpegStreamParser parser = MjpegStreamParser(
+      boundary: '--myboundary',
+    );
     final Uint8List stream = concat(<Uint8List>[
       for (final Uint8List f in frames) part(f, boundary: 'myboundary'),
     ]);
@@ -132,18 +133,22 @@ void main() {
     expectFrames(feed(parser, stream, 5), frames.take(3).toList());
   });
 
-  test('a part that is not a JPEG is dropped and the next one still parses', () {
-    final Uint8List notAnImage =
-        Uint8List.fromList(ascii.encode('<html>503 busy</html>'));
-    final MjpegStreamParser parser = MjpegStreamParser(boundary: 'frame');
-    final Uint8List stream = concat(<Uint8List>[
-      part(frames[0]),
-      part(notAnImage),
-      part(frames[1]),
-    ]);
-    expectFrames(feed(parser, stream, 9), <Uint8List>[frames[0], frames[1]]);
-    expect(parser.droppedParts, 1);
-  });
+  test(
+    'a part that is not a JPEG is dropped and the next one still parses',
+    () {
+      final Uint8List notAnImage = Uint8List.fromList(
+        ascii.encode('<html>503 busy</html>'),
+      );
+      final MjpegStreamParser parser = MjpegStreamParser(boundary: 'frame');
+      final Uint8List stream = concat(<Uint8List>[
+        part(frames[0]),
+        part(notAnImage),
+        part(frames[1]),
+      ]);
+      expectFrames(feed(parser, stream, 9), <Uint8List>[frames[0], frames[1]]);
+      expect(parser.droppedParts, 1);
+    },
+  );
 
   test('a truncated JPEG is dropped', () {
     final Uint8List cut = frames[0].sublist(0, 120);
@@ -154,8 +159,10 @@ void main() {
   });
 
   test('an oversize part is skipped and the stream recovers', () {
-    final MjpegStreamParser parser =
-        MjpegStreamParser(boundary: 'frame', maxFrameBytes: 1000);
+    final MjpegStreamParser parser = MjpegStreamParser(
+      boundary: 'frame',
+      maxFrameBytes: 1000,
+    );
     final Uint8List stream = concat(<Uint8List>[
       part(jpeg(1, size: 5000)),
       part(frames[0]),

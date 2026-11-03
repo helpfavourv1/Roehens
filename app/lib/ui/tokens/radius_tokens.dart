@@ -20,6 +20,7 @@ class AppRadius {
   static const BorderRadius allPill = BorderRadius.all(Radius.circular(pill));
 
   /// Sheets round their top corners only.
-  static const BorderRadius sheetTop =
-      BorderRadius.vertical(top: Radius.circular(xl));
+  static const BorderRadius sheetTop = BorderRadius.vertical(
+    top: Radius.circular(xl),
+  );
 }

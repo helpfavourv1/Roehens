@@ -40,32 +40,33 @@ class PtzCommand {
   }
 
   const PtzCommand.stop()
-      : kind = PtzCommandKind.stop,
-        pan = 0,
-        tilt = 0,
-        zoom = 0,
-        speed = 0,
-        presetToken = null;
+    : kind = PtzCommandKind.stop,
+      pan = 0,
+      tilt = 0,
+      zoom = 0,
+      speed = 0,
+      presetToken = null;
 
   const PtzCommand.home()
-      : kind = PtzCommandKind.home,
-        pan = 0,
-        tilt = 0,
-        zoom = 0,
-        speed = 0,
-        presetToken = null;
+    : kind = PtzCommandKind.home,
+      pan = 0,
+      tilt = 0,
+      zoom = 0,
+      speed = 0,
+      presetToken = null;
 
   const PtzCommand.preset(String token)
-      : kind = PtzCommandKind.preset,
-        pan = 0,
-        tilt = 0,
-        zoom = 0,
-        speed = 0,
-        presetToken = token;
+    : kind = PtzCommandKind.preset,
+      pan = 0,
+      tilt = 0,
+      zoom = 0,
+      speed = 0,
+      presetToken = token;
 
   factory PtzCommand.fromJson(Map<String, Object?> json) {
-    final PtzCommandKind kind =
-        PtzCommandKind.values.byName(json['kind']! as String);
+    final PtzCommandKind kind = PtzCommandKind.values.byName(
+      json['kind']! as String,
+    );
     switch (kind) {
       case PtzCommandKind.stop:
         return const PtzCommand.stop();

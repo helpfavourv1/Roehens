@@ -68,8 +68,10 @@ class CameraRepository {
     );
 
     if (!credentials.isEmpty) {
-      final Result<void> written =
-          await _vault.writeCredentials(camera.id, credentials);
+      final Result<void> written = await _vault.writeCredentials(
+        camera.id,
+        credentials,
+      );
       if (written.isErr) {
         return Err<Camera>(written.errorOrNull!);
       }
@@ -160,8 +162,9 @@ class CameraRepository {
 
   /// Stored credentials, or [CameraCredentials.none] when there are none.
   Future<Result<CameraCredentials>> credentialsFor(String cameraId) async {
-    final Result<CameraCredentials?> stored =
-        await _vault.readCredentials(cameraId);
+    final Result<CameraCredentials?> stored = await _vault.readCredentials(
+      cameraId,
+    );
     final AppError? error = stored.errorOrNull;
     if (error != null) {
       return Err<CameraCredentials>(error);

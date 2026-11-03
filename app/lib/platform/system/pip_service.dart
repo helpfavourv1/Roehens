@@ -10,8 +10,8 @@ import 'package:roehens/core/contracts/pip_contract.dart';
 /// device: the test phone does not support picture-in-picture.
 class PipService implements PipContract {
   PipService({MethodChannel? channel, bool? isAndroid, this._logger})
-      : _channel = channel ?? const MethodChannel('roehens/pip'),
-        _isAndroid = isAndroid ?? Platform.isAndroid {
+    : _channel = channel ?? const MethodChannel('roehens/pip'),
+      _isAndroid = isAndroid ?? Platform.isAndroid {
     if (_isAndroid) {
       _channel.setMethodCallHandler(_onCall);
     }

@@ -3,7 +3,8 @@ import 'package:roehens/core/errors/error_class.dart';
 import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/core/services/rtsp_url_normalizer.dart';
 
-ParsedStreamAddress ok(String input) => RtspUrlNormalizer.parse(input).valueOrNull!;
+ParsedStreamAddress ok(String input) =>
+    RtspUrlNormalizer.parse(input).valueOrNull!;
 
 ErrorClass? errorOf(String input) =>
     RtspUrlNormalizer.parse(input).errorOrNull?.errorClass;
@@ -11,8 +12,10 @@ ErrorClass? errorOf(String input) =>
 void main() {
   group('RTSP addresses', () {
     test('a full address with a login is taken apart', () {
-      final ParsedStreamAddress a =
-          ok('rtsp://' 'admin:pw12345@192.168.1.64:554/Streaming/Channels/101');
+      final ParsedStreamAddress a = ok(
+        'rtsp://'
+        'admin:pw12345@192.168.1.64:554/Streaming/Channels/101',
+      );
       expect(a.protocol, StreamProtocol.rtsp);
       expect(a.host, '192.168.1.64');
       expect(a.port, 554);
@@ -38,11 +41,14 @@ void main() {
       expect(ok('192.168.1.64').path, '/');
     });
 
-    test('surrounding spaces and an upper-case scheme and host are tolerated', () {
-      final ParsedStreamAddress a = ok('  RTSP://Cam.LOCAL/Stream0  ');
-      expect(a.host, 'cam.local');
-      expect(a.path, '/Stream0');
-    });
+    test(
+      'surrounding spaces and an upper-case scheme and host are tolerated',
+      () {
+        final ParsedStreamAddress a = ok('  RTSP://Cam.LOCAL/Stream0  ');
+        expect(a.host, 'cam.local');
+        expect(a.path, '/Stream0');
+      },
+    );
 
     test('a query string is kept in the path', () {
       expect(
@@ -56,7 +62,10 @@ void main() {
     });
 
     test('percent-encoded credentials are decoded', () {
-      final ParsedStreamAddress a = ok('rtsp://' 'us%40er:p%20w%3Ard@10.0.0.5/s');
+      final ParsedStreamAddress a = ok(
+        'rtsp://'
+        'us%40er:p%20w%3Ard@10.0.0.5/s',
+      );
       expect(a.username, 'us@er');
       expect(a.password, 'p w:rd');
     });
@@ -82,7 +91,9 @@ void main() {
 
   group('HTTP addresses', () {
     test('a stream address is MJPEG', () {
-      final ParsedStreamAddress a = ok('http://10.0.0.5:8080/axis-cgi/mjpg/video.cgi');
+      final ParsedStreamAddress a = ok(
+        'http://10.0.0.5:8080/axis-cgi/mjpg/video.cgi',
+      );
       expect(a.protocol, StreamProtocol.mjpeg);
       expect(a.port, 8080);
     });
@@ -92,13 +103,25 @@ void main() {
     });
 
     test('a still-image address is polled as a snapshot', () {
-      expect(ok('http://10.0.0.5/snapshot.jpg').protocol, StreamProtocol.httpSnapshot);
-      expect(ok('http://10.0.0.5/cgi-bin/snapshot.cgi').protocol, StreamProtocol.httpSnapshot);
-      expect(ok('http://10.0.0.5/jpg/image.jpg').protocol, StreamProtocol.httpSnapshot);
+      expect(
+        ok('http://10.0.0.5/snapshot.jpg').protocol,
+        StreamProtocol.httpSnapshot,
+      );
+      expect(
+        ok('http://10.0.0.5/cgi-bin/snapshot.cgi').protocol,
+        StreamProtocol.httpSnapshot,
+      );
+      expect(
+        ok('http://10.0.0.5/jpg/image.jpg').protocol,
+        StreamProtocol.httpSnapshot,
+      );
     });
 
     test('a stream address that mentions an image stays MJPEG', () {
-      expect(ok('http://10.0.0.5/video/image.mjpg').protocol, StreamProtocol.mjpeg);
+      expect(
+        ok('http://10.0.0.5/video/image.mjpg').protocol,
+        StreamProtocol.mjpeg,
+      );
     });
   });
 
@@ -128,7 +151,12 @@ void main() {
     });
 
     test('garbage never throws', () {
-      for (final String text in <String>['%%%', '://', 'rtsp://[', 'rtsp://a b/c']) {
+      for (final String text in <String>[
+        '%%%',
+        '://',
+        'rtsp://[',
+        'rtsp://a b/c',
+      ]) {
         expect(() => RtspUrlNormalizer.parse(text), returnsNormally);
       }
     });

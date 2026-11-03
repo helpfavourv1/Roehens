@@ -33,15 +33,15 @@ class PersistenceWarningBanner extends StatelessWidget {
         final Widget? banner = switch (current) {
           PersistenceIssue.none => null,
           PersistenceIssue.degraded => AppBanner(
-              message: degradedMessage,
-              tone: AppBannerTone.warning,
-              actionLabel: actionLabel,
-              onAction: onAction,
-            ),
+            message: degradedMessage,
+            tone: AppBannerTone.warning,
+            actionLabel: actionLabel,
+            onAction: onAction,
+          ),
           PersistenceIssue.updateRequired => AppBanner(
-              message: updateMessage,
-              tone: AppBannerTone.error,
-            ),
+            message: updateMessage,
+            tone: AppBannerTone.error,
+          ),
         };
         return AnimatedSize(
           duration: context.motion(AppMotion.adSlot),

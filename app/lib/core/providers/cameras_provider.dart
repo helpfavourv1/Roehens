@@ -45,18 +45,22 @@ class CamerasProvider extends SafeValueNotifier<CamerasState> {
     final Result<List<Camera>> result = await _repository.loadCameras();
     setIfAlive(
       result.fold(
-        (List<Camera> cameras) => CamerasState(cameras: cameras, isLoaded: true),
-        (AppError error) => CamerasState(
-          cameras: value.cameras,
-          isLoaded: true,
-          error: error,
-        ),
+        (List<Camera> cameras) =>
+            CamerasState(cameras: cameras, isLoaded: true),
+        (AppError error) =>
+            CamerasState(cameras: value.cameras, isLoaded: true, error: error),
       ),
     );
   }
 
-  Future<Result<Camera>> add(Camera draft, CameraCredentials credentials) async {
-    final Result<Camera> result = await _repository.addCamera(draft, credentials);
+  Future<Result<Camera>> add(
+    Camera draft,
+    CameraCredentials credentials,
+  ) async {
+    final Result<Camera> result = await _repository.addCamera(
+      draft,
+      credentials,
+    );
     if (result.isOk) {
       await load();
     }
@@ -67,8 +71,10 @@ class CamerasProvider extends SafeValueNotifier<CamerasState> {
     Camera camera, {
     CameraCredentials? credentials,
   }) async {
-    final Result<Camera> result =
-        await _repository.updateCamera(camera, credentials: credentials);
+    final Result<Camera> result = await _repository.updateCamera(
+      camera,
+      credentials: credentials,
+    );
     if (result.isOk) {
       await load();
     }
@@ -109,9 +115,9 @@ class CamerasProvider extends SafeValueNotifier<CamerasState> {
       reordered.add(rest.copyWith(sortIndex: reordered.length));
     }
     setIfAlive(CamerasState(cameras: reordered, isLoaded: true));
-    final Result<void> saved = await _repository.reorder(
-      <String>[for (final Camera c in reordered) c.id],
-    );
+    final Result<void> saved = await _repository.reorder(<String>[
+      for (final Camera c in reordered) c.id,
+    ]);
     if (saved.isErr) {
       await load();
     }

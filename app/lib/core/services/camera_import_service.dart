@@ -118,7 +118,9 @@ class CameraImportService {
         AppError(ErrorClass.invalidFile, detail: 'no usable cameras'),
       );
     }
-    return Ok<ImportPreview>(ImportPreview(items: items, invalidCount: invalid));
+    return Ok<ImportPreview>(
+      ImportPreview(items: items, invalidCount: invalid),
+    );
   }
 
   /// Saves the cameras. A failure on one camera does not stop the rest.

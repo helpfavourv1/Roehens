@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 
 /// Polls [condition] until it holds, or fails the test after [timeout].

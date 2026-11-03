@@ -29,8 +29,9 @@ void main() {
   test('survives a JSON round trip', () {
     final Camera camera = sample();
     final String text = jsonEncode(camera.toJson());
-    final Camera back =
-        Camera.fromJson(jsonDecode(text) as Map<String, Object?>);
+    final Camera back = Camera.fromJson(
+      jsonDecode(text) as Map<String, Object?>,
+    );
     expect(back, camera);
     expect(back.hashCode, camera.hashCode);
   });
@@ -74,14 +75,13 @@ void main() {
   });
 
   test('credentials are redacted in text and compare by value', () {
-    const CameraCredentials a =
-        CameraCredentials(username: 'admin', password: 'secret1');
+    const CameraCredentials a = CameraCredentials(
+      username: 'admin',
+      password: 'secret1',
+    );
     expect(a.toString().contains('secret1'), isFalse);
     expect(a.toString().contains('admin'), isFalse);
-    expect(
-      a,
-      const CameraCredentials(username: 'admin', password: 'secret1'),
-    );
+    expect(a, const CameraCredentials(username: 'admin', password: 'secret1'));
     expect(CameraCredentials.none.isEmpty, isTrue);
     expect(CameraCredentials.fromJson(a.toJson()), a);
   });

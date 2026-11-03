@@ -17,8 +17,9 @@ class UndoProvider extends SafeValueNotifier<DeletedCamera?> {
     required this._restore,
     this.window = Limits.undoWindow,
     TimerFactory? timerFactory,
-  })  : _timerFactory = timerFactory ?? ((Duration d, void Function() f) => Timer(d, f)),
-        super(null);
+  }) : _timerFactory =
+           timerFactory ?? ((Duration d, void Function() f) => Timer(d, f)),
+       super(null);
 
   final RestoreCamera _restore;
   final Duration window;

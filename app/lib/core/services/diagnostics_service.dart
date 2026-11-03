@@ -77,16 +77,18 @@ class DiagnosticsService {
       ..writeln('default transport: ${input.settings.defaultTransport.name}')
       ..writeln('grid substream: ${input.settings.gridSubstreamDefault}')
       ..writeln('keep awake: ${input.settings.keepAwake}')
-      ..writeln('auto-cycle: ${input.settings.autoCycleEnabled} '
-          '(${input.settings.autoCycleSeconds}s)')
+      ..writeln(
+        'auto-cycle: ${input.settings.autoCycleEnabled} '
+        '(${input.settings.autoCycleSeconds}s)',
+      )
       ..writeln()
       ..writeln('[remote switches]')
       ..writeln(
         input.flags.killSwitches.isEmpty
             ? 'none set'
             : input.flags.killSwitches.entries
-                .map((MapEntry<String, bool> e) => '${e.key}=${e.value}')
-                .join(', '),
+                  .map((MapEntry<String, bool> e) => '${e.key}=${e.value}')
+                  .join(', '),
       )
       ..writeln()
       ..writeln('[cameras: ${input.cameras.length}]');

@@ -209,7 +209,8 @@ class AppProviders {
     } else {
       final DatabaseService database = DatabaseService(logger: logger);
       await database.open();
-      downgradeRefused = database.outcome == StorageOpenOutcome.downgradeRefused;
+      downgradeRefused =
+          database.outcome == StorageOpenOutcome.downgradeRefused;
       owned.add(() async => database.dispose());
       storage = database;
     }
@@ -221,12 +222,17 @@ class AppProviders {
       clock: clock,
     );
 
-    final SettingsProvider settings =
-        SettingsProvider(store: keyValue, logger: logger);
+    final SettingsProvider settings = SettingsProvider(
+      store: keyValue,
+      logger: logger,
+    );
     final OnboardingProvider onboarding = OnboardingProvider(store: keyValue);
     final CamerasProvider cameras = CamerasProvider(repository: repository);
-    final LayoutProvider layout =
-        LayoutProvider(storage: storage, store: keyValue, logger: logger);
+    final LayoutProvider layout = LayoutProvider(
+      storage: storage,
+      store: keyValue,
+      logger: logger,
+    );
     await Future.wait(<Future<void>>[
       settings.load(),
       onboarding.load(),
@@ -243,7 +249,8 @@ class AppProviders {
     );
     final FlagsProvider flags = FlagsProvider(flags: flagService);
 
-    final PurchaseContract purchase = overrides.purchase ??
+    final PurchaseContract purchase =
+        overrides.purchase ??
         BillingService(config: storeConfig, clock: clock, logger: logger);
     if (overrides.purchase == null) {
       owned.add(() => (purchase as BillingService).dispose());
@@ -269,13 +276,15 @@ class AppProviders {
 
     final MulticastLockChannel channel = MulticastLockChannel();
     final LanInfo lan = LanInfo(channel: channel);
-    final PermissionContract permission = overrides.permission ??
+    final PermissionContract permission =
+        overrides.permission ??
         LocalNetworkPermissionService(lan: lan, channel: channel);
     const String iosMode = String.fromEnvironment(
       'IOS_DISCOVERY_MODE',
       defaultValue: 'subnet_sweep_only',
     );
-    final DiscoveryContract discoveryContract = overrides.discovery ??
+    final DiscoveryContract discoveryContract =
+        overrides.discovery ??
         DiscoveryService(
           lan: lan,
           scanner: SubnetScanner(),
@@ -379,7 +388,10 @@ class AppProviders {
     void syncAutoCycle() {
       autoCycle.configure(
         enabled: settings.value.autoCycleEnabled,
-        seconds: AutoCycleProvider.effectiveSeconds(settings.value, layout.value),
+        seconds: AutoCycleProvider.effectiveSeconds(
+          settings.value,
+          layout.value,
+        ),
       );
     }
 

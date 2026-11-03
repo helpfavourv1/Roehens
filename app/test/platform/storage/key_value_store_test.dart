@@ -23,7 +23,8 @@ class _FakePrefs implements SharedPreferencesAsync {
       if (failing) {
         return Future<void>.error(StateError('platform store down'));
       }
-      data[invocation.positionalArguments[0] as String] = invocation.positionalArguments[1] as String;
+      data[invocation.positionalArguments[0] as String] =
+          invocation.positionalArguments[1] as String;
       return Future<void>.value();
     }
     if (name == #remove) {
@@ -92,20 +93,26 @@ void main() {
     expect(logger.entries, isNotEmpty);
   });
 
-  test('when reading fails a value written earlier in memory is still found', () async {
-    prefs.failing = true;
-    await store.setString('k', 'v');
-    final Result<String?> read = await store.getString('k');
-    expect(read.valueOrNull, 'v');
-    expect(read.isOk, isTrue);
-  });
+  test(
+    'when reading fails a value written earlier in memory is still found',
+    () async {
+      prefs.failing = true;
+      await store.setString('k', 'v');
+      final Result<String?> read = await store.getString('k');
+      expect(read.valueOrNull, 'v');
+      expect(read.isOk, isTrue);
+    },
+  );
 
-  test('remove and clear never throw when the platform store is down', () async {
-    prefs.failing = true;
-    expect((await store.remove('k')).isOk, isTrue);
-    expect((await store.clear()).isOk, isTrue);
-    expect(store.isDegraded.value, isTrue);
-  });
+  test(
+    'remove and clear never throw when the platform store is down',
+    () async {
+      prefs.failing = true;
+      expect((await store.remove('k')).isOk, isTrue);
+      expect((await store.clear()).isOk, isTrue);
+      expect(store.isDegraded.value, isTrue);
+    },
+  );
 
   test('clear also forgets the in-memory values', () async {
     prefs.failing = true;

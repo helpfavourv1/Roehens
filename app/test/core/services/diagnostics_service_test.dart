@@ -45,14 +45,28 @@ void main() {
   });
 
   test('cameras are described by type only', () {
-    final Camera camera = testCamera(id: 'secret-id', name: 'Bedroom cam', host: '203.0.113.9')
-        .copyWith(mainPath: '/secret/path?token=abc', brandId: 'hikvision', subPath: '/sub');
+    final Camera camera =
+        testCamera(
+          id: 'secret-id',
+          name: 'Bedroom cam',
+          host: '203.0.113.9',
+        ).copyWith(
+          mainPath: '/secret/path?token=abc',
+          brandId: 'hikvision',
+          subPath: '/sub',
+        );
     final String text = service.build(input(cameras: <Camera>[camera]));
     expect(text, contains('[cameras: 1]'));
     expect(text, contains('public-ip'));
     expect(text, contains('brand hikvision'));
     expect(text, contains('substream true'));
-    for (final String leak in <String>['Bedroom', '203.0.113.9', 'secret', 'token', 'abc']) {
+    for (final String leak in <String>[
+      'Bedroom',
+      '203.0.113.9',
+      'secret',
+      'token',
+      'abc',
+    ]) {
       expect(text.contains(leak), isFalse, reason: leak);
     }
   });
@@ -68,7 +82,9 @@ void main() {
   });
 
   test('credentials in log lines are masked', () {
-    const String line = 'opening rtsp://' 'admin:hunter22@10.0.0.5/stream0';
+    const String line =
+        'opening rtsp://'
+        'admin:hunter22@10.0.0.5/stream0';
     final String text = service.build(input(logs: <String>[line]));
     expect(text.contains('hunter22'), isFalse);
     expect(text.contains('admin:'), isFalse);
@@ -77,7 +93,8 @@ void main() {
 
   test('only the newest log lines are kept', () {
     final List<String> logs = <String>[for (int i = 0; i < 500; i++) 'line $i'];
-    final String text = const DiagnosticsService(maxLogLines: 50).build(input(logs: logs));
+    final String text = const DiagnosticsService(maxLogLines: 50)
+        .build(input(logs: logs));
     expect(text, contains('[log: last 50 lines]'));
     expect(text, contains('line 499'));
     expect(text, contains('line 450'));
@@ -86,14 +103,19 @@ void main() {
 
   test('active remote switches are listed', () {
     final String text = service.build(
-      input(flags: const RemoteFlags(killSwitches: <String, bool>{'ads': true})),
+      input(
+        flags: const RemoteFlags(killSwitches: <String, bool>{'ads': true}),
+      ),
     );
     expect(text, contains('ads=true'));
   });
 
   group('Redactor', () {
     test('masks every login in a text', () {
-      const String text = 'a http://' 'u:p@h/x and rtsp://' 'a:b@c/d';
+      const String text =
+          'a http://'
+          'u:p@h/x and rtsp://'
+          'a:b@c/d';
       expect(Redactor.redactUrls(text), 'a http://***@h/x and rtsp://***@c/d');
     });
 

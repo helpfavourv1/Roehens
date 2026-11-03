@@ -59,7 +59,8 @@ class PtzService implements PtzContract {
       credentials,
       clockOffset: connection.device.clockOffset,
     );
-    if (result.isErr && result.errorOrNull?.errorClass != ErrorClass.authFailed) {
+    if (result.isErr &&
+        result.errorOrNull?.errorClass != ErrorClass.authFailed) {
       // The camera may have restarted or changed address; learn it again next time.
       _connections.remove(camera.id);
     }
@@ -84,8 +85,10 @@ class PtzService implements PtzContract {
       port: port,
       path: '/onvif/device_service',
     );
-    final Result<OnvifDevice> device =
-        await _client.connect(deviceService, credentials);
+    final Result<OnvifDevice> device = await _client.connect(
+      deviceService,
+      credentials,
+    );
     final AppError? error = device.errorOrNull;
     if (error != null) {
       return Err<_Connection>(error);
@@ -98,14 +101,15 @@ class PtzService implements PtzContract {
 
 class _Connection {
   _Connection(Camera camera, this.device)
-      : host = camera.host,
-        port = camera.onvifPort;
+    : host = camera.host,
+      port = camera.onvifPort;
 
   final OnvifDevice device;
   final String host;
   final int? port;
 
-  bool matches(Camera camera) => camera.host == host && camera.onvifPort == port;
+  bool matches(Camera camera) =>
+      camera.host == host && camera.onvifPort == port;
 
   /// The profile PTZ commands go to: the first one the camera says has PTZ,
   /// else the first profile.

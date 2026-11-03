@@ -155,8 +155,12 @@ class _FullscreenControlsState extends State<FullscreenControls> {
                           _topRow(context),
                           const Spacer(),
                           if (widget.panel != null)
-                            Align(alignment: AlignmentDirectional.centerEnd, child: widget.panel),
-                          if (widget.panel != null) const SizedBox(height: AppSpacing.sm),
+                            Align(
+                              alignment: AlignmentDirectional.centerEnd,
+                              child: widget.panel,
+                            ),
+                          if (widget.panel != null)
+                            const SizedBox(height: AppSpacing.sm),
                           _bottomRow(),
                         ],
                       ),
@@ -188,7 +192,9 @@ class _FullscreenControlsState extends State<FullscreenControls> {
               widget.title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.type.title2.copyWith(color: context.colors.onVideoText),
+              style: context.type.title2.copyWith(
+                color: context.colors.onVideoText,
+              ),
             ),
           ),
         ),
@@ -196,7 +202,8 @@ class _FullscreenControlsState extends State<FullscreenControls> {
           widget.statusPill!,
           const SizedBox(width: AppSpacing.sm),
         ],
-        for (final FullscreenAction action in widget.topActions) _button(action),
+        for (final FullscreenAction action in widget.topActions)
+          _button(action),
       ],
     );
   }
@@ -217,7 +224,9 @@ class _FullscreenControlsState extends State<FullscreenControls> {
     return AppIconButton(
       icon: action.icon,
       semanticLabel: action.label,
-      tone: action.selected ? AppIconButtonTone.selected : AppIconButtonTone.overVideo,
+      tone: action.selected
+          ? AppIconButtonTone.selected
+          : AppIconButtonTone.overVideo,
       onPressed: action.onPressed,
     );
   }

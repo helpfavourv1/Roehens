@@ -35,8 +35,9 @@ class FlagService implements FlagsContract {
   final FlagsFetcher _fetcher;
   final ClockContract _clock;
   final LoggerContract _logger;
-  final ValueNotifier<RemoteFlags> _flags =
-      ValueNotifier<RemoteFlags>(RemoteFlags.defaults);
+  final ValueNotifier<RemoteFlags> _flags = ValueNotifier<RemoteFlags>(
+    RemoteFlags.defaults,
+  );
 
   Timer? _timer;
   bool _cacheLoaded = false;
@@ -56,7 +57,12 @@ class FlagService implements FlagsContract {
       await _loadCache();
       await _fetch();
     } catch (error, stackTrace) {
-      _logger.error(_tag, 'refresh failed', error: error, stackTrace: stackTrace);
+      _logger.error(
+        _tag,
+        'refresh failed',
+        error: error,
+        stackTrace: stackTrace,
+      );
     } finally {
       _refreshing = false;
     }
@@ -92,7 +98,8 @@ class FlagService implements FlagsContract {
       return;
     }
     _cacheLoaded = true;
-    final String? raw = (await _store.getString(StorageKeys.flagsCache)).valueOrNull;
+    final String? raw = (await _store.getString(StorageKeys.flagsCache))
+        .valueOrNull;
     if (raw == null) {
       return;
     }

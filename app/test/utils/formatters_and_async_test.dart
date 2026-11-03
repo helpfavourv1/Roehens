@@ -10,24 +10,63 @@ void main() {
     final DateTime now = DateTime.utc(2026, 10, 31, 12);
 
     test('uses the largest whole unit', () {
-      expect(DateFormatter.age(now.subtract(const Duration(seconds: 5)), now), const AgeSpan(AgeUnit.seconds, 5));
-      expect(DateFormatter.age(now.subtract(const Duration(seconds: 59)), now), const AgeSpan(AgeUnit.seconds, 59));
-      expect(DateFormatter.age(now.subtract(const Duration(seconds: 60)), now), const AgeSpan(AgeUnit.minutes, 1));
-      expect(DateFormatter.age(now.subtract(const Duration(minutes: 59, seconds: 59)), now), const AgeSpan(AgeUnit.minutes, 59));
-      expect(DateFormatter.age(now.subtract(const Duration(hours: 1)), now), const AgeSpan(AgeUnit.hours, 1));
-      expect(DateFormatter.age(now.subtract(const Duration(hours: 23, minutes: 59)), now), const AgeSpan(AgeUnit.hours, 23));
-      expect(DateFormatter.age(now.subtract(const Duration(days: 1)), now), const AgeSpan(AgeUnit.days, 1));
-      expect(DateFormatter.age(now.subtract(const Duration(days: 40)), now), const AgeSpan(AgeUnit.days, 40));
+      expect(
+        DateFormatter.age(now.subtract(const Duration(seconds: 5)), now),
+        const AgeSpan(AgeUnit.seconds, 5),
+      );
+      expect(
+        DateFormatter.age(now.subtract(const Duration(seconds: 59)), now),
+        const AgeSpan(AgeUnit.seconds, 59),
+      );
+      expect(
+        DateFormatter.age(now.subtract(const Duration(seconds: 60)), now),
+        const AgeSpan(AgeUnit.minutes, 1),
+      );
+      expect(
+        DateFormatter.age(
+          now.subtract(const Duration(minutes: 59, seconds: 59)),
+          now,
+        ),
+        const AgeSpan(AgeUnit.minutes, 59),
+      );
+      expect(
+        DateFormatter.age(now.subtract(const Duration(hours: 1)), now),
+        const AgeSpan(AgeUnit.hours, 1),
+      );
+      expect(
+        DateFormatter.age(
+          now.subtract(const Duration(hours: 23, minutes: 59)),
+          now,
+        ),
+        const AgeSpan(AgeUnit.hours, 23),
+      );
+      expect(
+        DateFormatter.age(now.subtract(const Duration(days: 1)), now),
+        const AgeSpan(AgeUnit.days, 1),
+      );
+      expect(
+        DateFormatter.age(now.subtract(const Duration(days: 40)), now),
+        const AgeSpan(AgeUnit.days, 40),
+      );
     });
 
     test('a time in the future is zero seconds, never negative', () {
-      expect(DateFormatter.age(now.add(const Duration(minutes: 5)), now), const AgeSpan(AgeUnit.seconds, 0));
+      expect(
+        DateFormatter.age(now.add(const Duration(minutes: 5)), now),
+        const AgeSpan(AgeUnit.seconds, 0),
+      );
     });
 
     test('spans compare by value and print readably', () {
       expect(const AgeSpan(AgeUnit.hours, 2), const AgeSpan(AgeUnit.hours, 2));
-      expect(const AgeSpan(AgeUnit.hours, 2).hashCode, const AgeSpan(AgeUnit.hours, 2).hashCode);
-      expect(const AgeSpan(AgeUnit.hours, 2), isNot(const AgeSpan(AgeUnit.days, 2)));
+      expect(
+        const AgeSpan(AgeUnit.hours, 2).hashCode,
+        const AgeSpan(AgeUnit.hours, 2).hashCode,
+      );
+      expect(
+        const AgeSpan(AgeUnit.hours, 2),
+        isNot(const AgeSpan(AgeUnit.days, 2)),
+      );
       expect(const AgeSpan(AgeUnit.hours, 2).toString(), contains('2'));
     });
   });
@@ -102,16 +141,45 @@ void main() {
   });
 
   group('timeouts', () {
-    test('withTimeout gives the value in time and the fallback otherwise', () async {
-      expect(await withTimeout<int>(Future<int>.value(1), const Duration(milliseconds: 50), onTimeout: () => -1), 1);
-      final Completer<int> never = Completer<int>();
-      expect(await withTimeout<int>(never.future, const Duration(milliseconds: 20), onTimeout: () => -1), -1);
-    });
+    test(
+      'withTimeout gives the value in time and the fallback otherwise',
+      () async {
+        expect(
+          await withTimeout<int>(
+            Future<int>.value(1),
+            const Duration(milliseconds: 50),
+            onTimeout: () => -1,
+          ),
+          1,
+        );
+        final Completer<int> never = Completer<int>();
+        expect(
+          await withTimeout<int>(
+            never.future,
+            const Duration(milliseconds: 20),
+            onTimeout: () => -1,
+          ),
+          -1,
+        );
+      },
+    );
 
     test('timeoutOrNull gives null when the limit passes', () async {
-      expect(await timeoutOrNull<int>(Future<int>.value(7), const Duration(milliseconds: 50)), 7);
+      expect(
+        await timeoutOrNull<int>(
+          Future<int>.value(7),
+          const Duration(milliseconds: 50),
+        ),
+        7,
+      );
       final Completer<int> never = Completer<int>();
-      expect(await timeoutOrNull<int>(never.future, const Duration(milliseconds: 20)), isNull);
+      expect(
+        await timeoutOrNull<int>(
+          never.future,
+          const Duration(milliseconds: 20),
+        ),
+        isNull,
+      );
     });
   });
 }

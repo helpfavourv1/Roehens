@@ -39,9 +39,9 @@ class AppTextField extends StatefulWidget {
     this.onSubmitted,
     this.semanticLabel,
   }) : assert(
-          !obscureText || (revealLabel != null && concealLabel != null),
-          'A password field needs labels for its show/hide button.',
-        );
+         !obscureText || (revealLabel != null && concealLabel != null),
+         'A password field needs labels for its show/hide button.',
+       );
 
   final TextEditingController controller;
   final FocusNode? focusNode;
@@ -78,8 +78,9 @@ class _AppTextFieldState extends State<AppTextField> {
 
   FocusNode? _ownedFocus;
   final ValueNotifier<bool> _focused = ValueNotifier<bool>(false);
-  late final ValueNotifier<bool> _concealed =
-      ValueNotifier<bool>(widget.obscureText);
+  late final ValueNotifier<bool> _concealed = ValueNotifier<bool>(
+    widget.obscureText,
+  );
 
   FocusNode get _focusNode => widget.focusNode ?? (_ownedFocus ??= FocusNode());
 
@@ -120,7 +121,9 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     final AppColors colors = context.colors;
     final bool hasError = widget.errorText != null;
-    final TextStyle base = widget.monospace ? context.type.mono : context.type.body;
+    final TextStyle base = widget.monospace
+        ? context.type.mono
+        : context.type.body;
     final TextStyle style = base.copyWith(
       color: widget.enabled ? colors.textPrimary : colors.textTertiary,
     );
@@ -134,20 +137,21 @@ class _AppTextFieldState extends State<AppTextField> {
           children: <Widget>[
             ValueListenableBuilder<TextEditingValue>(
               valueListenable: widget.controller,
-              builder: (BuildContext context, TextEditingValue value, Widget? _) {
-                if (value.text.isNotEmpty || widget.hint == null) {
-                  return const SizedBox.shrink();
-                }
-                return IgnorePointer(
-                  child: Text(
-                    widget.hint!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textDirection: direction,
-                    style: style.copyWith(color: colors.textTertiary),
-                  ),
-                );
-              },
+              builder:
+                  (BuildContext context, TextEditingValue value, Widget? _) {
+                    if (value.text.isNotEmpty || widget.hint == null) {
+                      return const SizedBox.shrink();
+                    }
+                    return IgnorePointer(
+                      child: Text(
+                        widget.hint!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: direction,
+                        style: style.copyWith(color: colors.textTertiary),
+                      ),
+                    );
+                  },
             ),
             EditableText(
               controller: widget.controller,
@@ -182,8 +186,8 @@ class _AppTextFieldState extends State<AppTextField> {
         final Color border = hasError
             ? colors.error
             : focused
-                ? colors.borderFocus
-                : colors.borderStrong;
+            ? colors.borderFocus
+            : colors.borderStrong;
         return AnimatedContainer(
           duration: context.motion(AppMotion.press),
           curve: AppMotion.settle,
@@ -199,7 +203,9 @@ class _AppTextFieldState extends State<AppTextField> {
         behavior: HitTestBehavior.translucent,
         onTap: widget.enabled ? _focusNode.requestFocus : null,
         child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: AppSizes.buttonMinHeight),
+          constraints: const BoxConstraints(
+            minHeight: AppSizes.buttonMinHeight,
+          ),
           child: Padding(
             padding: const EdgeInsetsDirectional.only(
               start: AppSpacing.md,
@@ -224,8 +230,9 @@ class _AppTextFieldState extends State<AppTextField> {
                     builder: (BuildContext context, bool concealed, Widget? _) {
                       return AppIconButton(
                         icon: concealed ? AppIconName.show : AppIconName.hide,
-                        semanticLabel:
-                            concealed ? widget.revealLabel! : widget.concealLabel!,
+                        semanticLabel: concealed
+                            ? widget.revealLabel!
+                            : widget.concealLabel!,
                         onPressed: () => _concealed.value = !concealed,
                       );
                     },
@@ -253,7 +260,9 @@ class _AppTextFieldState extends State<AppTextField> {
               padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.xs),
               child: Text(
                 widget.label!,
-                style: context.type.callout.copyWith(color: colors.textSecondary),
+                style: context.type.callout.copyWith(
+                  color: colors.textSecondary,
+                ),
               ),
             ),
           field,

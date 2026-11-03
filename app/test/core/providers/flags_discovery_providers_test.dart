@@ -116,22 +116,25 @@ void main() {
       provider.dispose();
     });
 
-    test('a device found twice is listed once, keeping the ONVIF details', () async {
-      final DiscoveryProvider provider = build();
-      await provider.start();
-      discovery.controller.add(const DiscoveryFound(sweepHit));
-      discovery.controller.add(const DiscoveryFound(onvifHit));
-      discovery.controller.add(const DiscoveryFound(sweepHit));
-      await waitUntil(
-        () =>
-            provider.value.results.isNotEmpty &&
-            provider.value.results.first.source == DiscoverySource.onvif,
-      );
+    test(
+      'a device found twice is listed once, keeping the ONVIF details',
+      () async {
+        final DiscoveryProvider provider = build();
+        await provider.start();
+        discovery.controller.add(const DiscoveryFound(sweepHit));
+        discovery.controller.add(const DiscoveryFound(onvifHit));
+        discovery.controller.add(const DiscoveryFound(sweepHit));
+        await waitUntil(
+          () =>
+              provider.value.results.isNotEmpty &&
+              provider.value.results.first.source == DiscoverySource.onvif,
+        );
 
-      expect(provider.value.results, hasLength(1));
-      expect(provider.value.results.single.name, 'Porch');
-      provider.dispose();
-    });
+        expect(provider.value.results, hasLength(1));
+        expect(provider.value.results.single.name, 'Porch');
+        provider.dispose();
+      },
+    );
 
     test('a finished run with no devices reports found nothing', () async {
       final DiscoveryProvider provider = build();
@@ -202,8 +205,9 @@ void main() {
     });
 
     test('no permission is needed on Android', () async {
-      final DiscoveryProvider provider =
-          build(permission: FakePermission(PermissionStatus.notRequired));
+      final DiscoveryProvider provider = build(
+        permission: FakePermission(PermissionStatus.notRequired),
+      );
       await provider.start();
       expect(provider.value.isScanning, isTrue);
       provider.dispose();

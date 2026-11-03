@@ -53,8 +53,9 @@ class AppTheme {
   /// Transparent system bars with icons that contrast with the theme.
   static SystemUiOverlayStyle overlayStyle(AppTokensData tokens) {
     final Brightness icons = tokens.isDark ? Brightness.light : Brightness.dark;
-    final Brightness statusBar =
-        tokens.isDark ? Brightness.dark : Brightness.light;
+    final Brightness statusBar = tokens.isDark
+        ? Brightness.dark
+        : Brightness.light;
     return SystemUiOverlayStyle(
       statusBarColor: const Color(0x00000000),
       systemNavigationBarColor: const Color(0x00000000),

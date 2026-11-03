@@ -1,4 +1,3 @@
-
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -23,7 +22,9 @@ import '../../support/pump_app.dart';
 
 void main() {
   group('AppNavBar', () {
-    testWidgets('is 56 high with a title, a back button and actions', (WidgetTester tester) async {
+    testWidgets('is 56 high with a title, a back button and actions', (
+      WidgetTester tester,
+    ) async {
       int backs = 0;
       await pumpApp(
         tester,
@@ -34,22 +35,34 @@ void main() {
             onBack: () => backs++,
             backLabel: 'Back',
             actions: <Widget>[
-              AppIconButton(icon: AppIconName.more, semanticLabel: 'More', onPressed: () {}),
+              AppIconButton(
+                icon: AppIconName.more,
+                semanticLabel: 'More',
+                onPressed: () {},
+              ),
             ],
           ),
         ),
       );
-      expect(tester.getSize(find.byType(AppNavBar)).height, AppSizes.navBarHeight);
+      expect(
+        tester.getSize(find.byType(AppNavBar)).height,
+        AppSizes.navBarHeight,
+      );
       expect(find.text('Settings'), findsOneWidget);
       await tester.tap(find.byType(AppIconButton).first);
       expect(backs, 1);
       expect(find.byType(AppIconButton), findsNWidgets(2));
     });
 
-    testWidgets('a long title is cut with an ellipsis, not wrapped', (WidgetTester tester) async {
+    testWidgets('a long title is cut with an ellipsis, not wrapped', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
-        const SizedBox(width: 200, child: AppNavBar(title: 'A very long screen title that cannot fit')),
+        const SizedBox(
+          width: 200,
+          child: AppNavBar(title: 'A very long screen title that cannot fit'),
+        ),
         textScale: 3,
       );
       expect(tester.takeException(), isNull);
@@ -59,10 +72,15 @@ void main() {
       expect(() => AppNavBar(onBack: () {}), throwsAssertionError);
     });
 
-    testWidgets('a custom leading widget replaces the back button', (WidgetTester tester) async {
+    testWidgets('a custom leading widget replaces the back button', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
-        const SizedBox(width: 400, child: AppNavBar(leading: Text('Roehens'), title: 'x')),
+        const SizedBox(
+          width: 400,
+          child: AppNavBar(leading: Text('Roehens'), title: 'x'),
+        ),
       );
       expect(find.text('Roehens'), findsOneWidget);
       expect(find.byType(AppIconButton), findsNothing);
@@ -72,7 +90,11 @@ void main() {
   group('AppBottomBar', () {
     final List<AppBottomBarItem> items = <AppBottomBarItem>[
       const AppBottomBarItem(icon: AppIconName.cameraDome, label: 'Live'),
-      const AppBottomBarItem(icon: AppIconName.cameraDome, label: 'Cameras', badge: '3'),
+      const AppBottomBarItem(
+        icon: AppIconName.cameraDome,
+        label: 'Cameras',
+        badge: '3',
+      ),
       const AppBottomBarItem(icon: AppIconName.settings, label: 'Settings'),
     ];
 
@@ -82,7 +104,11 @@ void main() {
         tester,
         SizedBox(
           width: 400,
-          child: AppBottomBar(items: items, selectedIndex: 0, onSelected: (int i) => picked = i),
+          child: AppBottomBar(
+            items: items,
+            selectedIndex: 0,
+            onSelected: (int i) => picked = i,
+          ),
         ),
       );
       await tester.tap(find.text('Settings'));
@@ -90,34 +116,70 @@ void main() {
       expect(find.text('3'), findsOneWidget);
     });
 
-    testWidgets('is 64 high, plus the bottom safe area', (WidgetTester tester) async {
+    testWidgets('is 64 high, plus the bottom safe area', (
+      WidgetTester tester,
+    ) async {
       tester.view.padding = const FakeViewPadding(bottom: 34);
       addTearDown(tester.view.resetPadding);
       await pumpApp(
         tester,
-        SizedBox(width: 400, child: AppBottomBar(items: items, selectedIndex: 1, onSelected: (_) {})),
+        SizedBox(
+          width: 400,
+          child: AppBottomBar(
+            items: items,
+            selectedIndex: 1,
+            onSelected: (_) {},
+          ),
+        ),
       );
-      expect(tester.getSize(find.byType(AppBottomBar)).height, AppSizes.bottomBarHeight + 34);
+      expect(
+        tester.getSize(find.byType(AppBottomBar)).height,
+        AppSizes.bottomBarHeight + 34,
+      );
     });
 
-    testWidgets('the selected destination is announced as selected', (WidgetTester tester) async {
+    testWidgets('the selected destination is announced as selected', (
+      WidgetTester tester,
+    ) async {
       final SemanticsHandle handle = tester.ensureSemantics();
       await pumpApp(
         tester,
-        SizedBox(width: 400, child: AppBottomBar(items: items, selectedIndex: 1, onSelected: (_) {})),
+        SizedBox(
+          width: 400,
+          child: AppBottomBar(
+            items: items,
+            selectedIndex: 1,
+            onSelected: (_) {},
+          ),
+        ),
       );
-      expect(tester.getSemantics(find.bySemanticsLabel('Cameras')), isSemantics(isSelected: true));
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Cameras')),
+        isSemantics(isSelected: true),
+      );
       handle.dispose();
     });
 
-    testWidgets('labels stay on one line at large text', (WidgetTester tester) async {
+    testWidgets('labels stay on one line at large text', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
-        SizedBox(width: 400, child: AppBottomBar(items: items, selectedIndex: 0, onSelected: (_) {})),
+        SizedBox(
+          width: 400,
+          child: AppBottomBar(
+            items: items,
+            selectedIndex: 0,
+            onSelected: (_) {},
+          ),
+        ),
         textScale: 3,
       );
       expect(tester.takeException(), isNull);
-      expect(tester.getSize(find.byType(AppBottomBar)).height, AppSizes.bottomBarHeight);
+      expect(
+        tester.getSize(find.byType(AppBottomBar)).height,
+        AppSizes.bottomBarHeight,
+      );
     });
   });
 
@@ -128,53 +190,87 @@ void main() {
         body: const SizedBox.expand(key: Key('body')),
         bottomEmbed: const SizedBox(key: Key('embed'), height: 60),
         bottomBar: AppBottomBar(
-          items: const <AppBottomBarItem>[AppBottomBarItem(icon: AppIconName.cameraDome, label: 'Live')],
+          items: const <AppBottomBarItem>[
+            AppBottomBarItem(icon: AppIconName.cameraDome, label: 'Live'),
+          ],
           selectedIndex: 0,
           onSelected: (_) {},
         ),
       );
     }
 
-    testWidgets('stacks nav bar, body, embed and bar, and respects the safe areas', (WidgetTester tester) async {
-      tester.view.padding = const FakeViewPadding(top: 24, bottom: 20);
-      addTearDown(tester.view.resetPadding);
-      await pumpApp(tester, SizedBox(width: 400, height: 800, child: screen()));
+    testWidgets(
+      'stacks nav bar, body, embed and bar, and respects the safe areas',
+      (WidgetTester tester) async {
+        tester.view.padding = const FakeViewPadding(top: 24, bottom: 20);
+        addTearDown(tester.view.resetPadding);
+        await pumpApp(
+          tester,
+          SizedBox(width: 400, height: 800, child: screen()),
+        );
 
-      final Rect nav = tester.getRect(find.byType(AppNavBar));
-      final Rect body = tester.getRect(find.byKey(const Key('body')));
-      final Rect embed = tester.getRect(find.byKey(const Key('embed')));
-      final Rect bar = tester.getRect(find.byType(AppBottomBar));
-      expect(nav.top, 24);
-      expect(body.top, nav.bottom);
-      expect(embed.top, body.bottom);
-      expect(bar.top, embed.bottom);
-      expect(bar.bottom, 800);
-    });
+        final Rect nav = tester.getRect(find.byType(AppNavBar));
+        final Rect body = tester.getRect(find.byKey(const Key('body')));
+        final Rect embed = tester.getRect(find.byKey(const Key('embed')));
+        final Rect bar = tester.getRect(find.byType(AppBottomBar));
+        expect(nav.top, 24);
+        expect(body.top, nav.bottom);
+        expect(embed.top, body.bottom);
+        expect(bar.top, embed.bottom);
+        expect(bar.bottom, 800);
+      },
+    );
 
-    testWidgets('the whole bottom stack collapses under the keyboard and returns', (WidgetTester tester) async {
-      await pumpApp(tester, SizedBox(width: 400, height: 800, child: screen()));
-      final double normalBody = tester.getSize(find.byKey(const Key('body'))).height;
+    testWidgets(
+      'the whole bottom stack collapses under the keyboard and returns',
+      (WidgetTester tester) async {
+        await pumpApp(
+          tester,
+          SizedBox(width: 400, height: 800, child: screen()),
+        );
+        final double normalBody = tester
+            .getSize(find.byKey(const Key('body')))
+            .height;
 
-      tester.view.viewInsets = const FakeViewPadding(bottom: 300);
-      addTearDown(tester.view.resetViewInsets);
-      await tester.pumpAndSettle();
-      expect(find.byType(AppBottomBar), findsNothing);
-      expect(find.byKey(const Key('embed')).hitTestable(), findsNothing);
-      expect(tester.getSize(find.byKey(const Key('body'))).height, lessThan(normalBody + 200));
+        tester.view.viewInsets = const FakeViewPadding(bottom: 300);
+        addTearDown(tester.view.resetViewInsets);
+        await tester.pumpAndSettle();
+        expect(find.byType(AppBottomBar), findsNothing);
+        expect(find.byKey(const Key('embed')).hitTestable(), findsNothing);
+        expect(
+          tester.getSize(find.byKey(const Key('body'))).height,
+          lessThan(normalBody + 200),
+        );
 
-      tester.view.resetViewInsets();
-      await tester.pumpAndSettle();
-      expect(tester.getSize(find.byKey(const Key('body'))).height, normalBody);
-    });
+        tester.view.resetViewInsets();
+        await tester.pumpAndSettle();
+        expect(
+          tester.getSize(find.byKey(const Key('body'))).height,
+          normalBody,
+        );
+      },
+    );
 
-    testWidgets('immersive mode ignores the safe areas', (WidgetTester tester) async {
+    testWidgets('immersive mode ignores the safe areas', (
+      WidgetTester tester,
+    ) async {
       tester.view.padding = const FakeViewPadding(top: 24, bottom: 20);
       addTearDown(tester.view.resetPadding);
       await pumpApp(
         tester,
-        const SizedBox(width: 400, height: 800, child: AppScaffold(immersive: true, body: SizedBox.expand(key: Key('b')))),
+        const SizedBox(
+          width: 400,
+          height: 800,
+          child: AppScaffold(
+            immersive: true,
+            body: SizedBox.expand(key: Key('b')),
+          ),
+        ),
       );
-      expect(tester.getRect(find.byKey(const Key('b'))), const Rect.fromLTWH(0, 0, 400, 800));
+      expect(
+        tester.getRect(find.byKey(const Key('b'))),
+        const Rect.fromLTWH(0, 0, 400, 800),
+      );
     });
   });
 
@@ -208,7 +304,9 @@ void main() {
       expect(tester.getTopLeft(find.text('Second screen')).dx, lessThan(5));
     });
 
-    testWidgets('with reduced motion the screen is there at once', (WidgetTester tester) async {
+    testWidgets('with reduced motion the screen is there at once', (
+      WidgetTester tester,
+    ) async {
       await openScreen(tester, reduce: true);
       await tester.pump();
       expect(find.text('Second screen'), findsOneWidget);
@@ -223,54 +321,80 @@ void main() {
     ) async {
       await pumpApp(
         tester,
-        Builder(builder: (BuildContext context) => AppButton(label: 'Open', onPressed: () => open(context))),
+        Builder(
+          builder: (BuildContext context) =>
+              AppButton(label: 'Open', onPressed: () => open(context)),
+        ),
       );
       await tester.tap(find.text('Open'));
       await tester.pumpAndSettle();
     }
 
-    testWidgets('a sheet shows its title and content and closes on a tap outside', (WidgetTester tester) async {
+    testWidgets(
+      'a sheet shows its title and content and closes on a tap outside',
+      (WidgetTester tester) async {
+        await pumpOpener(
+          tester,
+          (BuildContext c) => showAppSheet<void>(
+            c,
+            dismissLabel: 'Close',
+            title: 'Layout',
+            builder: (BuildContext _) => const Text('Sheet body'),
+          ),
+        );
+        expect(find.text('Layout'), findsOneWidget);
+        expect(find.text('Sheet body'), findsOneWidget);
+
+        await tester.tapAt(const Offset(200, 20));
+        await tester.pumpAndSettle();
+        expect(find.text('Sheet body'), findsNothing);
+      },
+    );
+
+    testWidgets('Escape closes a sheet', (WidgetTester tester) async {
       await pumpOpener(
         tester,
         (BuildContext c) => showAppSheet<void>(
           c,
           dismissLabel: 'Close',
-          title: 'Layout',
           builder: (BuildContext _) => const Text('Sheet body'),
         ),
-      );
-      expect(find.text('Layout'), findsOneWidget);
-      expect(find.text('Sheet body'), findsOneWidget);
-
-      await tester.tapAt(const Offset(200, 20));
-      await tester.pumpAndSettle();
-      expect(find.text('Sheet body'), findsNothing);
-    });
-
-    testWidgets('Escape closes a sheet', (WidgetTester tester) async {
-      await pumpOpener(
-        tester,
-        (BuildContext c) => showAppSheet<void>(c, dismissLabel: 'Close', builder: (BuildContext _) => const Text('Sheet body')),
       );
       await tester.sendKeyEvent(LogicalKeyboardKey.escape);
       await tester.pumpAndSettle();
       expect(find.text('Sheet body'), findsNothing);
     });
 
-    testWidgets('a sheet is never taller than 90 percent of the screen', (WidgetTester tester) async {
+    testWidgets('a sheet is never taller than 90 percent of the screen', (
+      WidgetTester tester,
+    ) async {
       await pumpOpener(
         tester,
         (BuildContext c) => showAppSheet<void>(
           c,
           dismissLabel: 'Close',
-          builder: (BuildContext _) => ListView(children: <Widget>[for (int i = 0; i < 100; i++) const SizedBox(height: 60)]),
+          builder: (BuildContext _) => ListView(
+            children: <Widget>[
+              for (int i = 0; i < 100; i++) const SizedBox(height: 60),
+            ],
+          ),
         ),
       );
-      final Finder surface = find.descendant(of: find.byType(AppSheet), matching: find.byType(ConstrainedBox)).first;
-      expect(tester.getSize(surface).height, lessThanOrEqualTo(800 * AppSheet.maxHeightFactor + 1));
+      final Finder surface = find
+          .descendant(
+            of: find.byType(AppSheet),
+            matching: find.byType(ConstrainedBox),
+          )
+          .first;
+      expect(
+        tester.getSize(surface).height,
+        lessThanOrEqualTo(800 * AppSheet.maxHeightFactor + 1),
+      );
     });
 
-    testWidgets('a dialog returns the value of the chosen action', (WidgetTester tester) async {
+    testWidgets('a dialog returns the value of the chosen action', (
+      WidgetTester tester,
+    ) async {
       String? result;
       await pumpApp(
         tester,
@@ -285,8 +409,16 @@ void main() {
                   title: 'Delete camera?',
                   message: 'It will be removed from this phone.',
                   actions: <AppDialogAction>[
-                    AppDialogAction(label: 'Delete', kind: AppButtonKind.destructive, onPressed: () => Navigator.of(dialogContext).pop('delete')),
-                    AppDialogAction(label: 'Keep', onPressed: () => Navigator.of(dialogContext).pop('keep')),
+                    AppDialogAction(
+                      label: 'Delete',
+                      kind: AppButtonKind.destructive,
+                      onPressed: () =>
+                          Navigator.of(dialogContext).pop('delete'),
+                    ),
+                    AppDialogAction(
+                      label: 'Keep',
+                      onPressed: () => Navigator.of(dialogContext).pop('keep'),
+                    ),
                   ],
                 ),
               );
@@ -298,21 +430,27 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Delete camera?'), findsOneWidget);
       // Buttons are stacked, one under the other.
-      expect(tester.getTopLeft(find.text('Keep')).dy, greaterThan(tester.getTopLeft(find.text('Delete')).dy));
+      expect(
+        tester.getTopLeft(find.text('Keep')).dy,
+        greaterThan(tester.getTopLeft(find.text('Delete')).dy),
+      );
 
       await tester.tap(find.text('Keep'));
       await tester.pumpAndSettle();
       expect(result, 'keep');
     });
 
-    testWidgets('a dialog that is not dismissible ignores outside taps', (WidgetTester tester) async {
+    testWidgets('a dialog that is not dismissible ignores outside taps', (
+      WidgetTester tester,
+    ) async {
       await pumpOpener(
         tester,
         (BuildContext c) => showAppDialog<void>(
           c,
           dismissLabel: 'x',
           dismissible: false,
-          builder: (BuildContext _) => const AppDialog(title: 'Wait', actions: <AppDialogAction>[]),
+          builder: (BuildContext _) =>
+              const AppDialog(title: 'Wait', actions: <AppDialogAction>[]),
         ),
       );
       await tester.tapAt(const Offset(5, 5));
@@ -321,29 +459,34 @@ void main() {
       expect(find.text('Wait'), findsOneWidget);
     });
 
-    testWidgets('a dialog with long text and large type scrolls instead of overflowing', (WidgetTester tester) async {
-      await pumpApp(
-        tester,
-        Builder(
-          builder: (BuildContext context) => AppButton(
-            label: 'Open',
-            onPressed: () => showAppDialog<void>(
-              context,
-              dismissLabel: 'x',
-              builder: (BuildContext _) => AppDialog(
-                title: 'A fairly long dialog title',
-                message: 'A long message that goes on for several lines to be sure the dialog copes.',
-                actions: <AppDialogAction>[AppDialogAction(label: 'OK', onPressed: () {})],
+    testWidgets(
+      'a dialog with long text and large type scrolls instead of overflowing',
+      (WidgetTester tester) async {
+        await pumpApp(
+          tester,
+          Builder(
+            builder: (BuildContext context) => AppButton(
+              label: 'Open',
+              onPressed: () => showAppDialog<void>(
+                context,
+                dismissLabel: 'x',
+                builder: (BuildContext _) => AppDialog(
+                  title: 'A fairly long dialog title',
+                  message: 'A long message that goes on for several lines to be sure the dialog copes.',
+                  actions: <AppDialogAction>[
+                    AppDialogAction(label: 'OK', onPressed: () {}),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        textScale: 3,
-      );
-      await tester.tap(find.text('Open'));
-      await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull);
-    });
+          textScale: 3,
+        );
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+      },
+    );
   });
 
   group('AppToast', () {
@@ -373,7 +516,9 @@ void main() {
       await tester.pump(const Duration(milliseconds: 250));
     }
 
-    testWidgets('shows the message and goes away by itself', (WidgetTester tester) async {
+    testWidgets('shows the message and goes away by itself', (
+      WidgetTester tester,
+    ) async {
       await openToast(tester);
       expect(find.text('Camera deleted'), findsOneWidget);
       expect(AppToast.isShowing, isTrue);
@@ -384,7 +529,9 @@ void main() {
       expect(AppToast.isShowing, isFalse);
     });
 
-    testWidgets('the Undo pill runs its action and closes the toast', (WidgetTester tester) async {
+    testWidgets('the Undo pill runs its action and closes the toast', (
+      WidgetTester tester,
+    ) async {
       int undone = 0;
       await openToast(tester, actionLabel: 'Undo', onAction: () => undone++);
       await tester.tap(find.text('Undo'));
@@ -394,7 +541,9 @@ void main() {
       expect(find.text('Camera deleted'), findsNothing);
     });
 
-    testWidgets('a new toast replaces the old one', (WidgetTester tester) async {
+    testWidgets('a new toast replaces the old one', (
+      WidgetTester tester,
+    ) async {
       await openToast(tester);
       await tester.tap(find.text('Go'));
       await tester.pump();
@@ -406,7 +555,9 @@ void main() {
       final SemanticsHandle handle = tester.ensureSemantics();
       await openToast(tester);
       expect(
-        find.byWidgetPredicate((Widget w) => w is Semantics && w.properties.liveRegion == true),
+        find.byWidgetPredicate(
+          (Widget w) => w is Semantics && w.properties.liveRegion == true,
+        ),
         findsOneWidget,
       );
       AppToast.dismiss(immediately: true);
@@ -415,14 +566,17 @@ void main() {
   });
 
   group('AppBanner', () {
-    testWidgets('every tone shows its message with an icon', (WidgetTester tester) async {
+    testWidgets('every tone shows its message with an icon', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         SizedBox(
           width: 360,
           child: Column(
             children: <Widget>[
-              for (final AppBannerTone tone in AppBannerTone.values) AppBanner(message: tone.name, tone: tone),
+              for (final AppBannerTone tone in AppBannerTone.values)
+                AppBanner(message: tone.name, tone: tone),
             ],
           ),
         ),
@@ -438,7 +592,11 @@ void main() {
         tester,
         SizedBox(
           width: 360,
-          child: AppBanner(message: 'Storage problem', actionLabel: 'Export', onAction: () => taps++),
+          child: AppBanner(
+            message: 'Storage problem',
+            actionLabel: 'Export',
+            onAction: () => taps++,
+          ),
         ),
       );
       await tester.tap(find.text('Export'));
@@ -447,7 +605,9 @@ void main() {
   });
 
   group('AppLetterHeader', () {
-    testWidgets('stays pinned at the top while its group scrolls', (WidgetTester tester) async {
+    testWidgets('stays pinned at the top while its group scrolls', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         SizedBox(
@@ -457,11 +617,19 @@ void main() {
             slivers: <Widget>[
               AppLetterHeader.group(
                 letter: 'A',
-                sliver: SliverList.builder(itemCount: 10, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+                sliver: SliverList.builder(
+                  itemCount: 10,
+                  itemBuilder: (BuildContext c, int i) =>
+                      const SizedBox(height: 100),
+                ),
               ),
               AppLetterHeader.group(
                 letter: 'B',
-                sliver: SliverList.builder(itemCount: 10, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+                sliver: SliverList.builder(
+                  itemCount: 10,
+                  itemBuilder: (BuildContext c, int i) =>
+                      const SizedBox(height: 100),
+                ),
               ),
             ],
           ),
@@ -469,11 +637,16 @@ void main() {
       );
       await tester.drag(find.byType(CustomScrollView), const Offset(0, -400));
       await tester.pump();
-      expect(tester.getTopLeft(find.text('A')).dy, lessThan(AppLetterHeader.height));
+      expect(
+        tester.getTopLeft(find.text('A')).dy,
+        lessThan(AppLetterHeader.height),
+      );
       expect(find.text('A'), findsOneWidget);
     });
 
-    testWidgets('the next letter pushes the previous one away', (WidgetTester tester) async {
+    testWidgets('the next letter pushes the previous one away', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         SizedBox(
@@ -483,11 +656,19 @@ void main() {
             slivers: <Widget>[
               AppLetterHeader.group(
                 letter: 'A',
-                sliver: SliverList.builder(itemCount: 3, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+                sliver: SliverList.builder(
+                  itemCount: 3,
+                  itemBuilder: (BuildContext c, int i) =>
+                      const SizedBox(height: 100),
+                ),
               ),
               AppLetterHeader.group(
                 letter: 'B',
-                sliver: SliverList.builder(itemCount: 30, itemBuilder: (BuildContext c, int i) => const SizedBox(height: 100)),
+                sliver: SliverList.builder(
+                  itemCount: 30,
+                  itemBuilder: (BuildContext c, int i) =>
+                      const SizedBox(height: 100),
+                ),
               ),
             ],
           ),
@@ -495,13 +676,18 @@ void main() {
       );
       await tester.drag(find.byType(CustomScrollView), const Offset(0, -600));
       await tester.pump();
-      expect(tester.getTopLeft(find.text('B')).dy, lessThan(AppLetterHeader.height));
+      expect(
+        tester.getTopLeft(find.text('B')).dy,
+        lessThan(AppLetterHeader.height),
+      );
       expect(find.text('A'), findsNothing);
     });
   });
 
   group('AppEmptyState and AppErrorState', () {
-    testWidgets('an empty state shows icon, title, message and one action', (WidgetTester tester) async {
+    testWidgets('an empty state shows icon, title, message and one action', (
+      WidgetTester tester,
+    ) async {
       int taps = 0;
       await pumpApp(
         tester,
@@ -522,15 +708,23 @@ void main() {
       expect(taps, 1);
     });
 
-    testWidgets('an empty state with no action has no button', (WidgetTester tester) async {
+    testWidgets('an empty state with no action has no button', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
-        const SizedBox(width: 400, height: 800, child: AppEmptyState(icon: AppIconName.search, title: 'No results')),
+        const SizedBox(
+          width: 400,
+          height: 800,
+          child: AppEmptyState(icon: AppIconName.search, title: 'No results'),
+        ),
       );
       expect(find.byType(AppButton), findsNothing);
     });
 
-    testWidgets('an error state has retry and a second action', (WidgetTester tester) async {
+    testWidgets('an error state has retry and a second action', (
+      WidgetTester tester,
+    ) async {
       int retried = 0;
       int edited = 0;
       await pumpApp(
@@ -554,7 +748,9 @@ void main() {
       expect(edited, 1);
     });
 
-    testWidgets('both survive very large text without overflowing', (WidgetTester tester) async {
+    testWidgets('both survive very large text without overflowing', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         SizedBox(
@@ -562,7 +758,8 @@ void main() {
           height: 800,
           child: AppErrorState(
             title: 'Something went wrong here',
-            message: 'A longer explanation of what happened and what to try next.',
+            message:
+                'A longer explanation of what happened and what to try next.',
             primaryLabel: 'Retry',
             onPrimary: () {},
           ),
@@ -592,18 +789,28 @@ void main() {
       );
     }
 
-    testWidgets('a tap sets the value by position', (WidgetTester tester) async {
+    testWidgets('a tap sets the value by position', (
+      WidgetTester tester,
+    ) async {
       double? value;
       await pumpApp(tester, slider(onChanged: (double v) => value = v));
-      await tester.tapAt(tester.getTopLeft(find.byType(AppSlider)) + const Offset(150, 24));
+      await tester.tapAt(
+        tester.getTopLeft(find.byType(AppSlider)) + const Offset(150, 24),
+      );
       expect(value, closeTo(0.5, 0.02));
     });
 
-    testWidgets('dragging follows the finger and reports the end', (WidgetTester tester) async {
+    testWidgets('dragging follows the finger and reports the end', (
+      WidgetTester tester,
+    ) async {
       final List<double> values = <double>[];
       double? ended;
-      await pumpApp(tester, slider(onChanged: values.add, onChangeEnd: (double v) => ended = v));
-      final Offset start = tester.getTopLeft(find.byType(AppSlider)) + const Offset(20, 24);
+      await pumpApp(
+        tester,
+        slider(onChanged: values.add, onChangeEnd: (double v) => ended = v),
+      );
+      final Offset start =
+          tester.getTopLeft(find.byType(AppSlider)) + const Offset(20, 24);
       final TestGesture gesture = await tester.startGesture(start);
       await gesture.moveBy(const Offset(100, 0));
       await gesture.moveBy(const Offset(100, 0));
@@ -615,15 +822,29 @@ void main() {
 
     testWidgets('divisions snap the value', (WidgetTester tester) async {
       double? value;
-      await pumpApp(tester, slider(onChanged: (double v) => value = v, divisions: 4));
-      await tester.tapAt(tester.getTopLeft(find.byType(AppSlider)) + const Offset(165, 24));
+      await pumpApp(
+        tester,
+        slider(onChanged: (double v) => value = v, divisions: 4),
+      );
+      await tester.tapAt(
+        tester.getTopLeft(find.byType(AppSlider)) + const Offset(165, 24),
+      );
       expect(value, 0.5);
     });
 
-    testWidgets('in a right-to-left layout the high end is on the left', (WidgetTester tester) async {
+    testWidgets('in a right-to-left layout the high end is on the left', (
+      WidgetTester tester,
+    ) async {
       double? value;
-      await pumpApp(tester, slider(onChanged: (double v) => value = v), direction: TextDirection.rtl, size: const Size(300, 800));
-      await tester.tapAt(tester.getTopLeft(find.byType(AppSlider)) + const Offset(20, 24));
+      await pumpApp(
+        tester,
+        slider(onChanged: (double v) => value = v),
+        direction: TextDirection.rtl,
+        size: const Size(300, 800),
+      );
+      await tester.tapAt(
+        tester.getTopLeft(find.byType(AppSlider)) + const Offset(20, 24),
+      );
       expect(value, greaterThan(0.9));
     });
 
@@ -639,22 +860,34 @@ void main() {
       expect(values.last, lessThan(0.5));
     });
 
-    testWidgets('a disabled slider ignores touches', (WidgetTester tester) async {
+    testWidgets('a disabled slider ignores touches', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(tester, slider(onChanged: null));
-      await tester.tapAt(tester.getTopLeft(find.byType(AppSlider)) + const Offset(150, 24));
+      await tester.tapAt(
+        tester.getTopLeft(find.byType(AppSlider)) + const Offset(150, 24),
+      );
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('is exposed to accessibility as an adjustable value', (WidgetTester tester) async {
+    testWidgets('is exposed to accessibility as an adjustable value', (
+      WidgetTester tester,
+    ) async {
       final SemanticsHandle handle = tester.ensureSemantics();
       await pumpApp(tester, slider(value: 0.25, onChanged: (_) {}));
-      expect(tester.getSemantics(find.bySemanticsLabel('Speed')), isSemantics(isSlider: true, value: '25%'));
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Speed')),
+        isSemantics(isSlider: true, value: '25%'),
+      );
       handle.dispose();
     });
 
     testWidgets('has a 48 high touch area', (WidgetTester tester) async {
       await pumpApp(tester, slider(onChanged: (_) {}));
-      expect(tester.getSize(find.byType(AppSlider)).height, AppSizes.touchTarget);
+      expect(
+        tester.getSize(find.byType(AppSlider)).height,
+        AppSizes.touchTarget,
+      );
     });
   });
 }

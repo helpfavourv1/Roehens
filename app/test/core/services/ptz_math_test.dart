@@ -14,8 +14,14 @@ void main() {
     });
 
     test('other command kinds ask for no movement', () {
-      expect(PtzMath.isStill(PtzMath.velocityFor(const PtzCommand.stop())), isTrue);
-      expect(PtzMath.isStill(PtzMath.velocityFor(const PtzCommand.home())), isTrue);
+      expect(
+        PtzMath.isStill(PtzMath.velocityFor(const PtzCommand.stop())),
+        isTrue,
+      );
+      expect(
+        PtzMath.isStill(PtzMath.velocityFor(const PtzCommand.home())),
+        isTrue,
+      );
       expect(
         PtzMath.isStill(PtzMath.velocityFor(const PtzCommand.preset('3'))),
         isTrue,
@@ -32,47 +38,74 @@ void main() {
   group('fromPad', () {
     test('the centre and the dead zone do not move the camera', () {
       expect(PtzMath.fromPad(dx: 0, dy: 0, radius: 100), (pan: 0.0, tilt: 0.0));
-      final ({double pan, double tilt}) small =
-          PtzMath.fromPad(dx: 10, dy: 5, radius: 100);
+      final ({double pan, double tilt}) small = PtzMath.fromPad(
+        dx: 10,
+        dy: 5,
+        radius: 100,
+      );
       expect(small.pan, 0);
       expect(small.tilt, 0);
     });
 
     test('the edge of the pad is full speed in that direction', () {
-      final ({double pan, double tilt}) right =
-          PtzMath.fromPad(dx: 100, dy: 0, radius: 100);
+      final ({double pan, double tilt}) right = PtzMath.fromPad(
+        dx: 100,
+        dy: 0,
+        radius: 100,
+      );
       expect(right.pan, closeTo(1, 1e-9));
       expect(right.tilt, closeTo(0, 1e-9));
 
-      final ({double pan, double tilt}) left =
-          PtzMath.fromPad(dx: -100, dy: 0, radius: 100);
+      final ({double pan, double tilt}) left = PtzMath.fromPad(
+        dx: -100,
+        dy: 0,
+        radius: 100,
+      );
       expect(left.pan, closeTo(-1, 1e-9));
     });
 
     test('moving the finger up tilts up', () {
-      final ({double pan, double tilt}) up =
-          PtzMath.fromPad(dx: 0, dy: -100, radius: 100);
+      final ({double pan, double tilt}) up = PtzMath.fromPad(
+        dx: 0,
+        dy: -100,
+        radius: 100,
+      );
       expect(up.tilt, closeTo(1, 1e-9));
-      final ({double pan, double tilt}) down =
-          PtzMath.fromPad(dx: 0, dy: 100, radius: 100);
+      final ({double pan, double tilt}) down = PtzMath.fromPad(
+        dx: 0,
+        dy: 100,
+        radius: 100,
+      );
       expect(down.tilt, closeTo(-1, 1e-9));
     });
 
     test('past the edge is capped and speed rises smoothly', () {
-      final ({double pan, double tilt}) far =
-          PtzMath.fromPad(dx: 500, dy: 0, radius: 100);
+      final ({double pan, double tilt}) far = PtzMath.fromPad(
+        dx: 500,
+        dy: 0,
+        radius: 100,
+      );
       expect(far.pan, closeTo(1, 1e-9));
-      final ({double pan, double tilt}) a =
-          PtzMath.fromPad(dx: 40, dy: 0, radius: 100);
-      final ({double pan, double tilt}) b =
-          PtzMath.fromPad(dx: 70, dy: 0, radius: 100);
+      final ({double pan, double tilt}) a = PtzMath.fromPad(
+        dx: 40,
+        dy: 0,
+        radius: 100,
+      );
+      final ({double pan, double tilt}) b = PtzMath.fromPad(
+        dx: 70,
+        dy: 0,
+        radius: 100,
+      );
       expect(a.pan, greaterThan(0));
       expect(b.pan, greaterThan(a.pan));
     });
 
     test('a diagonal keeps both directions and never exceeds full speed', () {
-      final ({double pan, double tilt}) diagonal =
-          PtzMath.fromPad(dx: 100, dy: -100, radius: 100);
+      final ({double pan, double tilt}) diagonal = PtzMath.fromPad(
+        dx: 100,
+        dy: -100,
+        radius: 100,
+      );
       expect(diagonal.pan, greaterThan(0));
       expect(diagonal.tilt, greaterThan(0));
       expect(
@@ -95,9 +128,18 @@ void main() {
 
     test('only a meaningful change is worth sending', () {
       const PtzVelocity a = (pan: 0.5, tilt: 0.0, zoom: 0.0);
-      expect(PtzMath.isWorthSending(a, (pan: 0.52, tilt: 0.0, zoom: 0.0)), isFalse);
-      expect(PtzMath.isWorthSending(a, (pan: 0.6, tilt: 0.0, zoom: 0.0)), isTrue);
-      expect(PtzMath.isWorthSending(a, (pan: 0.5, tilt: 0.0, zoom: 0.1)), isTrue);
+      expect(
+        PtzMath.isWorthSending(a, (pan: 0.52, tilt: 0.0, zoom: 0.0)),
+        isFalse,
+      );
+      expect(
+        PtzMath.isWorthSending(a, (pan: 0.6, tilt: 0.0, zoom: 0.0)),
+        isTrue,
+      );
+      expect(
+        PtzMath.isWorthSending(a, (pan: 0.5, tilt: 0.0, zoom: 0.1)),
+        isTrue,
+      );
     });
   });
 }

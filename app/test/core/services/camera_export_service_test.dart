@@ -18,11 +18,11 @@ void main() {
   });
 
   test('writes every camera and no credential field', () {
-    final ExportFile file = CameraExportService(clock: clock, appVersion: '0.1.0')
-        .build(<Camera>[
-      testCamera(id: 'a', name: 'Garden'),
-      testCamera(id: 'b', name: 'Door', sortIndex: 1),
-    ]);
+    final ExportFile file =
+        CameraExportService(clock: clock, appVersion: '0.1.0').build(<Camera>[
+          testCamera(id: 'a', name: 'Garden'),
+          testCamera(id: 'b', name: 'Door', sortIndex: 1),
+        ]);
     final String text = utf8.decode(file.bytes);
 
     expect(file.cameraCount, 2);

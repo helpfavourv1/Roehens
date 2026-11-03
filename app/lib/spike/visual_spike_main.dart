@@ -46,14 +46,19 @@ void main() {
 
 /// What the person is trying out, shared by the whole spike.
 class _Controls {
-  final ValueNotifier<Brightness> brightness = ValueNotifier<Brightness>(Brightness.dark);
+  final ValueNotifier<Brightness> brightness = ValueNotifier<Brightness>(
+    Brightness.dark,
+  );
   final ValueNotifier<bool> rtl = ValueNotifier<bool>(false);
   final ValueNotifier<double> textScale = ValueNotifier<double>(1);
   final ValueNotifier<int> section = ValueNotifier<int>(0);
   final ValueNotifier<int> tab = ValueNotifier<int>(0);
-  final ValueNotifier<AdSlotState> ad = ValueNotifier<AdSlotState>(AdSlotState.collapsed);
+  final ValueNotifier<AdSlotState> ad = ValueNotifier<AdSlotState>(
+    AdSlotState.collapsed,
+  );
 
-  Listenable get look => Listenable.merge(<Listenable>[brightness, rtl, textScale]);
+  Listenable get look =>
+      Listenable.merge(<Listenable>[brightness, rtl, textScale]);
 }
 
 class VisualSpikeApp extends StatelessWidget {
@@ -63,7 +68,9 @@ class VisualSpikeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _Controls controls = _Controls();
     return WidgetsApp(
-      color: AppTokensData.resolve(brightness: Brightness.dark).colors.bgPrimary,
+      color: AppTokensData.resolve(brightness: Brightness.dark)
+          .colors
+          .bgPrimary,
       debugShowCheckedModeBanner: false,
       pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) {
         return AppPageRoute<T>(settings: settings, builder: builder);
@@ -75,12 +82,16 @@ class VisualSpikeApp extends StatelessWidget {
           listenable: controls.look,
           builder: (BuildContext context, Widget? _) {
             return Directionality(
-              textDirection: controls.rtl.value ? TextDirection.rtl : TextDirection.ltr,
+              textDirection: controls.rtl.value
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
               child: MediaQuery.withClampedTextScaling(
                 minScaleFactor: controls.textScale.value,
                 maxScaleFactor: controls.textScale.value,
                 child: AppTokens(
-                  data: AppTokensData.resolve(brightness: controls.brightness.value),
+                  data: AppTokensData.resolve(
+                    brightness: controls.brightness.value,
+                  ),
                   child: child!,
                 ),
               ),
@@ -118,10 +129,14 @@ class _SpikeHome extends StatelessWidget {
             return AppScaffold(
               navBar: AppNavBar(
                 leading: Padding(
-                  padding: const EdgeInsetsDirectional.only(start: AppSpacing.sm),
+                  padding: const EdgeInsetsDirectional.only(
+                    start: AppSpacing.sm,
+                  ),
                   child: Text(
                     'Roehens',
-                    style: context.type.title1.copyWith(color: context.colors.textPrimary),
+                    style: context.type.title1.copyWith(
+                      color: context.colors.textPrimary,
+                    ),
                   ),
                 ),
                 title: controls.rtl.value ? 'عرض التصميم' : 'Design check',
@@ -159,7 +174,9 @@ class _SpikeHome extends StatelessWidget {
                 viewBuilder: (Object view) => Center(
                   child: Text(
                     'Ad slot (mock)',
-                    style: context.type.footnote.copyWith(color: context.colors.textTertiary),
+                    style: context.type.footnote.copyWith(
+                      color: context.colors.textTertiary,
+                    ),
                   ),
                 ),
               ),
@@ -168,8 +185,15 @@ class _SpikeHome extends StatelessWidget {
                 onSelected: (int i) => controls.tab.value = i,
                 items: const <AppBottomBarItem>[
                   AppBottomBarItem(icon: AppIconName.cameraDome, label: 'Live'),
-                  AppBottomBarItem(icon: AppIconName.layoutGrid4, label: 'Cameras', badge: '3'),
-                  AppBottomBarItem(icon: AppIconName.settings, label: 'Settings'),
+                  AppBottomBarItem(
+                    icon: AppIconName.layoutGrid4,
+                    label: 'Cameras',
+                    badge: '3',
+                  ),
+                  AppBottomBarItem(
+                    icon: AppIconName.settings,
+                    label: 'Settings',
+                  ),
                 ],
               ),
             );
@@ -190,7 +214,10 @@ class _LookBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       child: ListenableBuilder(
         listenable: controls.look,
         builder: (BuildContext context, Widget? _) {
@@ -270,7 +297,8 @@ class _Notified<T> extends StatefulWidget {
   const _Notified({required this.initial, required this.builder});
 
   final T initial;
-  final Widget Function(BuildContext context, T value, ValueSetter<T> set) builder;
+  final Widget Function(BuildContext context, T value, ValueSetter<T> set)
+  builder;
 
   @override
   State<_Notified<T>> createState() => _NotifiedState<T>();
@@ -362,15 +390,20 @@ class _ComponentsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppTokensData tokens = context.tokens;
     final TextEditingController name = TextEditingController(text: 'Garden');
-    final TextEditingController host = TextEditingController(text: '192.168.1.20');
+    final TextEditingController host = TextEditingController(
+      text: '192.168.1.20',
+    );
     final TextEditingController secret = TextEditingController(text: 'secret');
     final TextEditingController bad = TextEditingController();
     return _Page(
       children: <Widget>[
-        const _Note('Icon weight beside text: Bold, Fill and Duotone next to three type sizes.'),
+        const _Note(
+          'Icon weight beside text: Bold, Fill and Duotone next to three type sizes.',
+        ),
         Row(
           children: <Widget>[
-            for (final AppIconWeight weight in AppIconWeight.values) ...<Widget>[
+            for (final AppIconWeight weight
+                in AppIconWeight.values) ...<Widget>[
               AppIcon(
                 AppIconName.cameraDome,
                 size: 24,
@@ -379,22 +412,51 @@ class _ComponentsSection extends StatelessWidget {
                 secondaryColor: tokens.colors.accent,
               ),
               const SizedBox(width: AppSpacing.sm),
-              Text(weight.name, style: context.type.callout.copyWith(color: tokens.colors.textPrimary)),
+              Text(
+                weight.name,
+                style: context.type.callout.copyWith(
+                  color: tokens.colors.textPrimary,
+                ),
+              ),
               const SizedBox(width: AppSpacing.md),
             ],
           ],
         ),
-        Text('Title 2 (17)', style: context.type.title2.copyWith(color: tokens.colors.textPrimary)),
-        Text('Body (15), the reading text of the app.', style: context.type.body.copyWith(color: tokens.colors.textSecondary)),
-        Text('Footnote (13) and 1920x1080 25fps', style: context.type.footnote.copyWith(color: tokens.colors.textTertiary)),
+        Text(
+          'Title 2 (17)',
+          style: context.type.title2.copyWith(color: tokens.colors.textPrimary),
+        ),
+        Text(
+          'Body (15), the reading text of the app.',
+          style: context.type.body.copyWith(color: tokens.colors.textSecondary),
+        ),
+        Text(
+          'Footnote (13) and 1920x1080 25fps',
+          style: context.type.footnote.copyWith(
+            color: tokens.colors.textTertiary,
+          ),
+        ),
         Wrap(
           spacing: AppSpacing.sm,
           runSpacing: AppSpacing.sm,
           children: <Widget>[
             AppButton(label: 'Primary', onPressed: () {}),
-            AppButton(label: 'Secondary', kind: AppButtonKind.secondary, onPressed: () {}),
-            AppButton(label: 'Tinted', kind: AppButtonKind.tinted, icon: AppIconName.plus, onPressed: () {}),
-            AppButton(label: 'Delete', kind: AppButtonKind.destructive, onPressed: () {}),
+            AppButton(
+              label: 'Secondary',
+              kind: AppButtonKind.secondary,
+              onPressed: () {},
+            ),
+            AppButton(
+              label: 'Tinted',
+              kind: AppButtonKind.tinted,
+              icon: AppIconName.plus,
+              onPressed: () {},
+            ),
+            AppButton(
+              label: 'Delete',
+              kind: AppButtonKind.destructive,
+              onPressed: () {},
+            ),
             const AppButton(label: 'Disabled', onPressed: null),
             AppButton(label: 'Busy', isLoading: true, onPressed: () {}),
           ],
@@ -413,7 +475,11 @@ class _ComponentsSection extends StatelessWidget {
         ),
         Row(
           children: <Widget>[
-            AppIconButton(icon: AppIconName.snapshot, semanticLabel: 'Snapshot', onPressed: () {}),
+            AppIconButton(
+              icon: AppIconName.snapshot,
+              semanticLabel: 'Snapshot',
+              onPressed: () {},
+            ),
             const SizedBox(width: AppSpacing.sm),
             AppIconButton(
               icon: AppIconName.volumeOff,
@@ -459,26 +525,36 @@ class _ComponentsSection extends StatelessWidget {
                   leading: AppIconName.sun,
                   title: 'Keep screen awake',
                   subtitle: 'While cameras are on screen',
-                  trailing: AppSwitch(value: on, onChanged: set, semanticLabel: 'Keep screen awake'),
+                  trailing: AppSwitch(
+                    value: on,
+                    onChanged: set,
+                    semanticLabel: 'Keep screen awake',
+                  ),
                 ),
-                AppListRow(leading: AppIconName.delete, title: 'Delete all local data', destructive: true, onTap: () {}),
+                AppListRow(
+                  leading: AppIconName.delete,
+                  title: 'Delete all local data',
+                  destructive: true,
+                  onTap: () {},
+                ),
               ],
             );
           },
         ),
         _Notified<String>(
           initial: 'a',
-          builder: (BuildContext context, String value, ValueSetter<String> set) {
-            return AppSegmentedControl<String>(
-              selected: value,
-              onChanged: set,
-              segments: const <AppSegment<String>>[
-                AppSegment<String>(value: 'a', label: 'System'),
-                AppSegment<String>(value: 'b', label: 'Light'),
-                AppSegment<String>(value: 'c', label: 'Dark'),
-              ],
-            );
-          },
+          builder:
+              (BuildContext context, String value, ValueSetter<String> set) {
+                return AppSegmentedControl<String>(
+                  selected: value,
+                  onChanged: set,
+                  segments: const <AppSegment<String>>[
+                    AppSegment<String>(value: 'a', label: 'System'),
+                    AppSegment<String>(value: 'b', label: 'Light'),
+                    AppSegment<String>(value: 'c', label: 'Dark'),
+                  ],
+                );
+              },
         ),
         AppCard(
           onTap: () {},
@@ -489,13 +565,17 @@ class _ComponentsSection extends StatelessWidget {
               Expanded(
                 child: Text(
                   'A tappable card: secondary surface, hairline border, no shadow.',
-                  style: context.type.body.copyWith(color: tokens.colors.textPrimary),
+                  style: context.type.body.copyWith(
+                    color: tokens.colors.textPrimary,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        const _Note('Fields. Long-press a field to try copy and paste (system menu).'),
+        const _Note(
+          'Fields. Long-press a field to try copy and paste (system menu).',
+        ),
         AppTextField(controller: name, label: 'Name', hint: 'Front door'),
         AppTextField(
           controller: host,
@@ -512,12 +592,22 @@ class _ComponentsSection extends StatelessWidget {
           revealLabel: 'Show password',
           concealLabel: 'Hide password',
         ),
-        AppTextField(controller: bad, label: 'Port', hint: '554', errorText: 'Enter a port from 1 to 65535'),
+        AppTextField(
+          controller: bad,
+          label: 'Port',
+          hint: '554',
+          errorText: 'Enter a port from 1 to 65535',
+        ),
         _Notified<double>(
           initial: 0.4,
-          builder: (BuildContext context, double value, ValueSetter<double> set) {
-            return AppSlider(value: value, onChanged: set, semanticLabel: 'Volume');
-          },
+          builder:
+              (BuildContext context, double value, ValueSetter<double> set) {
+                return AppSlider(
+                  value: value,
+                  onChanged: set,
+                  semanticLabel: 'Volume',
+                );
+              },
         ),
         Row(
           children: <Widget>[
@@ -526,9 +616,16 @@ class _ComponentsSection extends StatelessWidget {
             const Expanded(child: AppProgress.bar(value: 0.6)),
           ],
         ),
-        const AppBanner(message: 'Storage is not working. Cameras may not be saved.', tone: AppBannerTone.warning, actionLabel: 'Export'),
+        const AppBanner(
+          message: 'Storage is not working. Cameras may not be saved.',
+          tone: AppBannerTone.warning,
+          actionLabel: 'Export',
+        ),
         const AppBanner(message: 'Connected', tone: AppBannerTone.success),
-        const AppBanner(message: "Can't reach the camera", tone: AppBannerTone.error),
+        const AppBanner(
+          message: "Can't reach the camera",
+          tone: AppBannerTone.error,
+        ),
         const AppBanner(message: 'Same Wi-Fi as the camera works best.'),
       ],
     );
@@ -540,7 +637,13 @@ class _ComponentsSection extends StatelessWidget {
 class _TilesSection extends StatelessWidget {
   const _TilesSection();
 
-  Widget _tile(String name, StreamStatus status, String label, double hue, {bool video = true}) {
+  Widget _tile(
+    String name,
+    StreamStatus status,
+    String label,
+    double hue, {
+    bool video = true,
+  }) {
     return CameraTile(
       name: name,
       status: status,
@@ -557,16 +660,56 @@ class _TilesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return _Page(
       children: <Widget>[
-        const _Note('The tile at three widths: 360, 180 and 97 (the 4x4 grid on a phone).'),
-        SizedBox(width: 360, height: 360 * 9 / 16, child: _tile('Front door', StreamStatus.live, 'Live', 200)),
+        const _Note(
+          'The tile at three widths: 360, 180 and 97 (the 4x4 grid on a phone).',
+        ),
+        SizedBox(
+          width: 360,
+          height: 360 * 9 / 16,
+          child: _tile('Front door', StreamStatus.live, 'Live', 200),
+        ),
         Wrap(
           spacing: AppSpacing.sm,
           runSpacing: AppSpacing.sm,
           children: <Widget>[
-            SizedBox(width: 180, height: 180 * 9 / 16, child: _tile('Garden', StreamStatus.live, 'Live', 120)),
-            SizedBox(width: 180, height: 180 * 9 / 16, child: _tile('Garage', StreamStatus.connecting, 'Connecting', 30, video: false)),
-            SizedBox(width: 97, height: 97 * 9 / 16, child: _tile('Gate', StreamStatus.error, "Can't reach", 300, video: false)),
-            SizedBox(width: 97, height: 97 * 9 / 16, child: _tile('Roof', StreamStatus.offline, 'Offline', 60, video: false)),
+            SizedBox(
+              width: 180,
+              height: 180 * 9 / 16,
+              child: _tile('Garden', StreamStatus.live, 'Live', 120),
+            ),
+            SizedBox(
+              width: 180,
+              height: 180 * 9 / 16,
+              child: _tile(
+                'Garage',
+                StreamStatus.connecting,
+                'Connecting',
+                30,
+                video: false,
+              ),
+            ),
+            SizedBox(
+              width: 97,
+              height: 97 * 9 / 16,
+              child: _tile(
+                'Gate',
+                StreamStatus.error,
+                "Can't reach",
+                300,
+                video: false,
+              ),
+            ),
+            SizedBox(
+              width: 97,
+              height: 97 * 9 / 16,
+              child: _tile(
+                'Roof',
+                StreamStatus.offline,
+                'Offline',
+                60,
+                video: false,
+              ),
+            ),
           ],
         ),
         const _Note('2x2 grid (phone gutter), then 4x4.'),
@@ -578,7 +721,13 @@ class _TilesSection extends StatelessWidget {
             tiles: <Widget>[
               _tile('One', StreamStatus.live, 'Live', 10),
               _tile('Two', StreamStatus.live, 'Live', 90),
-              _tile('Three', StreamStatus.reconnecting, 'Reconnecting', 170, video: false),
+              _tile(
+                'Three',
+                StreamStatus.reconnecting,
+                'Reconnecting',
+                170,
+                video: false,
+              ),
               _tile('Four', StreamStatus.live, 'Live', 250),
             ],
           ),
@@ -590,14 +739,23 @@ class _TilesSection extends StatelessWidget {
             rows: 4,
             tiles: <Widget>[
               for (int i = 0; i < 16; i++)
-                _tile('Cam ${i + 1}', i % 5 == 4 ? StreamStatus.error : StreamStatus.live, i % 5 == 4 ? 'Error' : 'Live', i * 22.0),
+                _tile(
+                  'Cam ${i + 1}',
+                  i % 5 == 4 ? StreamStatus.error : StreamStatus.live,
+                  i % 5 == 4 ? 'Error' : 'Live',
+                  i * 22.0,
+                ),
             ],
           ),
         ),
         _Notified<int>(
           initial: 4,
           builder: (BuildContext context, int size, ValueSetter<int> set) {
-            return GridLayoutPicker(selected: size, onSelected: set, labelFor: (int n) => '$n');
+            return GridLayoutPicker(
+              selected: size,
+              onSelected: set,
+              labelFor: (int n) => '$n',
+            );
           },
         ),
       ],
@@ -630,7 +788,9 @@ class _PtzSection extends StatelessWidget {
             Center(
               child: PtzPad(
                 labels: _labels,
-                onMove: (double pan, double tilt) => set('move pan ${pan.toStringAsFixed(1)} tilt ${tilt.toStringAsFixed(1)}'),
+                onMove: (double pan, double tilt) => set(
+                  'move pan ${pan.toStringAsFixed(1)} tilt ${tilt.toStringAsFixed(1)}',
+                ),
                 onStop: () => set('stop'),
                 onZoom: (double z) => set('zoom $z'),
                 onHome: () => set('home'),
@@ -638,16 +798,27 @@ class _PtzSection extends StatelessWidget {
             ),
             _Notified<double>(
               initial: 0.5,
-              builder: (BuildContext context, double speed, ValueSetter<double> setSpeed) {
-                return PtzSpeedControl(value: speed, onChanged: setSpeed, label: 'Speed');
-              },
+              builder:
+                  (
+                    BuildContext context,
+                    double speed,
+                    ValueSetter<double> setSpeed,
+                  ) {
+                    return PtzSpeedControl(
+                      value: speed,
+                      onChanged: setSpeed,
+                      label: 'Speed',
+                    );
+                  },
             ),
             AppButton(
               label: 'Open fullscreen controls',
               icon: AppIconName.fullscreenEnter,
               onPressed: () {
                 Navigator.of(context).push<void>(
-                  AppPageRoute<void>(builder: (BuildContext _) => const _FullscreenDemo()),
+                  AppPageRoute<void>(
+                    builder: (BuildContext _) => const _FullscreenDemo(),
+                  ),
                 );
               },
             ),
@@ -669,13 +840,29 @@ class _FullscreenDemo extends StatelessWidget {
         title: 'Front door',
         closeLabel: 'Close',
         onClose: () => Navigator.of(context).pop(),
-        statusPill: const StreamStatusPill(status: StreamStatus.live, label: 'Live'),
+        statusPill: const StreamStatusPill(
+          status: StreamStatus.live,
+          label: 'Live',
+        ),
         topActions: <FullscreenAction>[
-          FullscreenAction(icon: AppIconName.volumeOff, label: 'Mute', onPressed: () {}),
+          FullscreenAction(
+            icon: AppIconName.volumeOff,
+            label: 'Mute',
+            onPressed: () {},
+          ),
         ],
         bottomActions: <FullscreenAction>[
-          FullscreenAction(icon: AppIconName.snapshot, label: 'Snapshot', onPressed: () {}),
-          FullscreenAction(icon: AppIconName.cameraPtz, label: 'PTZ', selected: true, onPressed: () {}),
+          FullscreenAction(
+            icon: AppIconName.snapshot,
+            label: 'Snapshot',
+            onPressed: () {},
+          ),
+          FullscreenAction(
+            icon: AppIconName.cameraPtz,
+            label: 'PTZ',
+            selected: true,
+            onPressed: () {},
+          ),
         ],
         panel: const SizedBox(
           width: 176,
@@ -693,9 +880,33 @@ class _BrandsSection extends StatelessWidget {
   const _BrandsSection();
 
   static const List<String> _names = <String>[
-    'Amcrest', 'Annke', 'Arlo', 'Axis', 'Bosch', 'Dahua', 'D-Link', 'EZVIZ', 'Foscam', 'Hanwha',
-    'Hikvision', 'Imou', 'Lorex', 'Mobotix', 'Reolink', 'Samsung', 'Sony', 'Swann', 'TP-Link',
-    'Tapo', 'Uniview', 'Vivotek', 'Wyze', 'Xiaomi', 'Yi', 'Zosi', '4K Generic',
+    'Amcrest',
+    'Annke',
+    'Arlo',
+    'Axis',
+    'Bosch',
+    'Dahua',
+    'D-Link',
+    'EZVIZ',
+    'Foscam',
+    'Hanwha',
+    'Hikvision',
+    'Imou',
+    'Lorex',
+    'Mobotix',
+    'Reolink',
+    'Samsung',
+    'Sony',
+    'Swann',
+    'TP-Link',
+    'Tapo',
+    'Uniview',
+    'Vivotek',
+    'Wyze',
+    'Xiaomi',
+    'Yi',
+    'Zosi',
+    '4K Generic',
   ];
 
   @override
@@ -720,7 +931,11 @@ class _BrandsSection extends StatelessWidget {
       noResultsMessage: 'Try another name, or choose Generic.',
       verifiedLabel: 'Verified',
       onSelected: (CameraBrandProfile brand) {
-        AppToast.show(context, message: '${brand.displayName} chosen', icon: AppIconName.check);
+        AppToast.show(
+          context,
+          message: '${brand.displayName} chosen',
+          icon: AppIconName.check,
+        );
       },
     );
   }
@@ -737,17 +952,23 @@ class _OverlaysSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return _Page(
       children: <Widget>[
-        const _Note('The ad slot sits above the bottom bar: it grows over 200 ms and collapses to nothing. Tap a field in Components to see the bars collapse under the keyboard.'),
+        const _Note(
+          'The ad slot sits above the bottom bar: it grows over 200 ms and collapses to nothing. Tap a field in Components to see the bars collapse under the keyboard.',
+        ),
         ValueListenableBuilder<AdSlotState>(
           valueListenable: controls.ad,
           builder: (BuildContext context, AdSlotState state, Widget? _) {
             return AppButton(
-              label: state.isVisible ? 'Remove the ad slot' : 'Show the ad slot',
+              label: state.isVisible
+                  ? 'Remove the ad slot'
+                  : 'Show the ad slot',
               kind: AppButtonKind.secondary,
               icon: AppIconName.upgrade,
               expand: true,
               onPressed: () {
-                controls.ad.value = state.isVisible ? AdSlotState.collapsed : AdSlotState(height: 60, view: Object());
+                controls.ad.value = state.isVisible
+                    ? AdSlotState.collapsed
+                    : AdSlotState(height: 60, view: Object());
               },
             );
           },
@@ -775,10 +996,8 @@ class _OverlaysSection extends StatelessWidget {
               context,
               dismissLabel: 'Close',
               title: 'Layout',
-              builder: (BuildContext _) => const Padding(
-                padding: AppSpacing.allMd,
-                child: _SheetBody(),
-              ),
+              builder: (BuildContext _) =>
+                  const Padding(padding: AppSpacing.allMd, child: _SheetBody()),
             );
           },
         ),
@@ -799,7 +1018,10 @@ class _OverlaysSection extends StatelessWidget {
                     kind: AppButtonKind.destructive,
                     onPressed: () => Navigator.of(dialogContext).pop(),
                   ),
-                  AppDialogAction(label: 'Keep', onPressed: () => Navigator.of(dialogContext).pop()),
+                  AppDialogAction(
+                    label: 'Keep',
+                    onPressed: () => Navigator.of(dialogContext).pop(),
+                  ),
                 ],
               ),
             );
@@ -818,7 +1040,11 @@ class _SheetBody extends StatelessWidget {
     return _Notified<int>(
       initial: 4,
       builder: (BuildContext context, int size, ValueSetter<int> set) {
-        return GridLayoutPicker(selected: size, onSelected: set, labelFor: (int n) => '$n');
+        return GridLayoutPicker(
+          selected: size,
+          onSelected: set,
+          labelFor: (int n) => '$n',
+        );
       },
     );
   }
@@ -831,30 +1057,61 @@ class _ArabicSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController address = TextEditingController(text: 'rtsp://192.168.1.20:554/stream1');
+    final TextEditingController address = TextEditingController(
+      text: 'rtsp://192.168.1.20:554/stream1',
+    );
     return Directionality(
       textDirection: TextDirection.rtl,
       child: _Page(
         children: <Widget>[
-          const _Note('هذا القسم يعرض الواجهة من اليمين إلى اليسار دائمًا. العناوين تبقى من اليسار إلى اليمين.'),
+          const _Note(
+            'هذا القسم يعرض الواجهة من اليمين إلى اليسار دائمًا. العناوين تبقى من اليسار إلى اليمين.',
+          ),
           const AppNavBar(title: 'الإعدادات', actions: <Widget>[]),
           AppSection(
             title: 'عام',
             children: <Widget>[
-              AppListRow(leading: AppIconName.moon, title: 'المظهر', subtitle: 'داكن', onTap: () {}),
-              AppListRow(leading: AppIconName.globe, title: 'اللغة', subtitle: 'العربية', onTap: () {}),
-              AppListRow(leading: AppIconName.help, title: 'المساعدة', onTap: () {}),
+              AppListRow(
+                leading: AppIconName.moon,
+                title: 'المظهر',
+                subtitle: 'داكن',
+                onTap: () {},
+              ),
+              AppListRow(
+                leading: AppIconName.globe,
+                title: 'اللغة',
+                subtitle: 'العربية',
+                onTap: () {},
+              ),
+              AppListRow(
+                leading: AppIconName.help,
+                title: 'المساعدة',
+                onTap: () {},
+              ),
             ],
           ),
-          AppTextField(controller: address, label: 'عنوان الكاميرا', forceLtr: true, monospace: true),
+          AppTextField(
+            controller: address,
+            label: 'عنوان الكاميرا',
+            forceLtr: true,
+            monospace: true,
+          ),
           Row(
             children: <Widget>[
-              AppChip(label: 'إعادة المحاولة', icon: AppIconName.refresh, onTap: () {}),
+              AppChip(
+                label: 'إعادة المحاولة',
+                icon: AppIconName.refresh,
+                onTap: () {},
+              ),
               const SizedBox(width: AppSpacing.sm),
               AppChip(label: 'تعديل', icon: AppIconName.edit, onTap: () {}),
             ],
           ),
-          const AppBanner(message: 'تعذر الوصول إلى الكاميرا', tone: AppBannerTone.error, actionLabel: 'إعادة'),
+          const AppBanner(
+            message: 'تعذر الوصول إلى الكاميرا',
+            tone: AppBannerTone.error,
+            actionLabel: 'إعادة',
+          ),
         ],
       ),
     );

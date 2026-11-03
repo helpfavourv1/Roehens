@@ -28,8 +28,8 @@ class LanInfo {
   LanInfo({
     MulticastLockChannel? channel,
     Future<List<LanInterface>> Function()? interfaces,
-  })  : _channel = channel ?? MulticastLockChannel(),
-        _interfaces = interfaces ?? _systemInterfaces;
+  }) : _channel = channel ?? MulticastLockChannel(),
+       _interfaces = interfaces ?? _systemInterfaces;
 
   final MulticastLockChannel _channel;
   final Future<List<LanInterface>> Function() _interfaces;
@@ -40,10 +40,9 @@ class LanInfo {
     );
     return <LanInterface>[
       for (final NetworkInterface interface in found)
-        LanInterface(
-          interface.name,
-          <String>[for (final InternetAddress a in interface.addresses) a.address],
-        ),
+        LanInterface(interface.name, <String>[
+          for (final InternetAddress a in interface.addresses) a.address,
+        ]),
     ];
   }
 

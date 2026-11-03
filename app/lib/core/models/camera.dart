@@ -123,10 +123,13 @@ class Camera {
       subPath: identical(subPath, _unset) ? this.subPath : subPath as String?,
       transport: transport ?? this.transport,
       brandId: identical(brandId, _unset) ? this.brandId : brandId as String?,
-      modelHint:
-          identical(modelHint, _unset) ? this.modelHint : modelHint as String?,
+      modelHint: identical(modelHint, _unset)
+          ? this.modelHint
+          : modelHint as String?,
       onvifEnabled: onvifEnabled ?? this.onvifEnabled,
-      onvifPort: identical(onvifPort, _unset) ? this.onvifPort : onvifPort as int?,
+      onvifPort: identical(onvifPort, _unset)
+          ? this.onvifPort
+          : onvifPort as int?,
       sortIndex: sortIndex ?? this.sortIndex,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -155,22 +158,22 @@ class Camera {
 
   @override
   int get hashCode => Object.hashAll(<Object?>[
-        id,
-        name,
-        protocol,
-        host,
-        port,
-        mainPath,
-        subPath,
-        transport,
-        brandId,
-        modelHint,
-        onvifEnabled,
-        onvifPort,
-        sortIndex,
-        createdAt,
-        updatedAt,
-      ]);
+    id,
+    name,
+    protocol,
+    host,
+    port,
+    mainPath,
+    subPath,
+    transport,
+    brandId,
+    modelHint,
+    onvifEnabled,
+    onvifPort,
+    sortIndex,
+    createdAt,
+    updatedAt,
+  ]);
 
   @override
   String toString() => 'Camera($id, $name, $host:$port)';
@@ -188,8 +191,10 @@ class CameraCredentials {
     );
   }
 
-  static const CameraCredentials none =
-      CameraCredentials(username: '', password: '');
+  static const CameraCredentials none = CameraCredentials(
+    username: '',
+    password: '',
+  );
 
   final String username;
   final String password;

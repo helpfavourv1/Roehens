@@ -38,7 +38,7 @@ class RemoteFlags {
   factory RemoteFlags.fromJson(Map<String, Object?> json) {
     final Map<String, Object?> raw =
         (json['killSwitches'] as Map<String, Object?>?) ??
-            const <String, Object?>{};
+        const <String, Object?>{};
     final Map<String, bool> known = <String, bool>{};
     for (final String key in RemoteFlagKeys.all) {
       final Object? value = raw[key];
@@ -84,11 +84,11 @@ class RemoteFlags {
 
   @override
   int get hashCode => Object.hash(
-        schemaVersion,
-        Object.hashAllUnordered(
-          killSwitches.entries.map((MapEntry<String, bool> e) => (e.key, e.value)),
-        ),
-        minSupportedVersion,
-        message,
-      );
+    schemaVersion,
+    Object.hashAllUnordered(
+      killSwitches.entries.map((MapEntry<String, bool> e) => (e.key, e.value)),
+    ),
+    minSupportedVersion,
+    message,
+  );
 }

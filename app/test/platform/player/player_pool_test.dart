@@ -17,7 +17,10 @@ import '../../support/async_helpers.dart';
 import '../../support/fake_player.dart';
 import '../../support/fakes.dart';
 
-PlayerSource source(String host, {StreamProtocol protocol = StreamProtocol.rtsp}) {
+PlayerSource source(
+  String host, {
+  StreamProtocol protocol = StreamProtocol.rtsp,
+}) {
   return PlayerSource(uri: Uri.parse('rtsp://$host:554/s'), protocol: protocol);
 }
 
@@ -109,7 +112,9 @@ void main() {
     });
 
     test('new sessions start one stagger apart', () async {
-      final PlayerPool pool = makePool(stagger: const Duration(milliseconds: 40));
+      final PlayerPool pool = makePool(
+        stagger: const Duration(milliseconds: 40),
+      );
       final Stopwatch clock = Stopwatch()..start();
       await pool.reconcile(<String, PlayerSource>{
         'a': source('a'),
@@ -132,16 +137,19 @@ void main() {
       expect(created.every((FakePlayerSession s) => s.disposed), isTrue);
     });
 
-    test('a session that cannot be opened ends in an error, not a crash', () async {
-      final PlayerPool pool = makePool(
-        configure: (FakePlayerSession s) => s.openError = StateError('boom'),
-      );
-      await pool.reconcile(<String, PlayerSource>{'a': source('a')});
-      final PlayerState state = pool.sessionFor('a')!.state.value;
-      expect(state, isA<PlayerError>());
-      expect((state as PlayerError).error.errorClass, ErrorClass.fatal);
-      await pool.disposeAll();
-    });
+    test(
+      'a session that cannot be opened ends in an error, not a crash',
+      () async {
+        final PlayerPool pool = makePool(
+          configure: (FakePlayerSession s) => s.openError = StateError('boom'),
+        );
+        await pool.reconcile(<String, PlayerSource>{'a': source('a')});
+        final PlayerState state = pool.sessionFor('a')!.state.value;
+        expect(state, isA<PlayerError>());
+        expect((state as PlayerError).error.errorClass, ErrorClass.fatal);
+        await pool.disposeAll();
+      },
+    );
   });
 
   group('reconnecting', () {
@@ -163,57 +171,66 @@ void main() {
       await pool.disposeAll();
     });
 
-    test('the tile keeps saying reconnecting while the engine reconnects', () async {
-      final PlayerPool pool = makePool();
-      await pool.reconcile(<String, PlayerSource>{'a': source('a')});
-      final FakePlayerSession session = created.single;
-      session.emit(dropped);
-      await waitUntil(() => session.opened.length == 2);
-      // open() put the session in "connecting"; the tile still shows reconnecting.
-      expect(
-        pool.sessionFor('a')!.state.value,
-        const PlayerReconnecting(attempt: 1),
-      );
-      await pool.disposeAll();
-    });
+    test(
+      'the tile keeps saying reconnecting while the engine reconnects',
+      () async {
+        final PlayerPool pool = makePool();
+        await pool.reconcile(<String, PlayerSource>{'a': source('a')});
+        final FakePlayerSession session = created.single;
+        session.emit(dropped);
+        await waitUntil(() => session.opened.length == 2);
+        // open() put the session in "connecting"; the tile still shows reconnecting.
+        expect(
+          pool.sessionFor('a')!.state.value,
+          const PlayerReconnecting(attempt: 1),
+        );
+        await pool.disposeAll();
+      },
+    );
 
-    test('an error that retrying cannot fix is shown and not retried', () async {
-      final PlayerPool pool = makePool();
-      await pool.reconcile(<String, PlayerSource>{'a': source('a')});
-      final FakePlayerSession session = created.single;
+    test(
+      'an error that retrying cannot fix is shown and not retried',
+      () async {
+        final PlayerPool pool = makePool();
+        await pool.reconcile(<String, PlayerSource>{'a': source('a')});
+        final FakePlayerSession session = created.single;
 
-      session.emit(const PlayerError(AppError(ErrorClass.authFailed)));
-      final PlayerState state = pool.sessionFor('a')!.state.value;
-      expect((state as PlayerError).error.errorClass, ErrorClass.authFailed);
+        session.emit(const PlayerError(AppError(ErrorClass.authFailed)));
+        final PlayerState state = pool.sessionFor('a')!.state.value;
+        expect((state as PlayerError).error.errorClass, ErrorClass.authFailed);
 
-      await Future<void>.delayed(const Duration(milliseconds: 60));
-      expect(session.opened.length, 1);
-      await pool.disposeAll();
-    });
+        await Future<void>.delayed(const Duration(milliseconds: 60));
+        expect(session.opened.length, 1);
+        await pool.disposeAll();
+      },
+    );
 
-    test('after the attempts run out the tile waits for a manual retry', () async {
-      final PlayerPool pool = makePool(maxAttempts: 2);
-      await pool.reconcile(<String, PlayerSource>{'a': source('a')});
-      final FakePlayerSession session = created.single;
-      final PooledSession pooled = pool.sessionFor('a')!;
+    test(
+      'after the attempts run out the tile waits for a manual retry',
+      () async {
+        final PlayerPool pool = makePool(maxAttempts: 2);
+        await pool.reconcile(<String, PlayerSource>{'a': source('a')});
+        final FakePlayerSession session = created.single;
+        final PooledSession pooled = pool.sessionFor('a')!;
 
-      session.emit(dropped);
-      await waitUntil(() => session.opened.length == 2);
-      session.emit(dropped);
-      await waitUntil(() => session.opened.length == 3);
-      session.emit(dropped);
+        session.emit(dropped);
+        await waitUntil(() => session.opened.length == 2);
+        session.emit(dropped);
+        await waitUntil(() => session.opened.length == 3);
+        session.emit(dropped);
 
-      expect(pooled.state.value, isA<PlayerError>());
-      await Future<void>.delayed(const Duration(milliseconds: 60));
-      expect(session.opened.length, 3);
+        expect(pooled.state.value, isA<PlayerError>());
+        await Future<void>.delayed(const Duration(milliseconds: 60));
+        expect(session.opened.length, 3);
 
-      await pool.retry('a');
-      expect(session.opened.length, 4);
-      expect(pooled.state.value, isA<PlayerConnecting>());
-      session.emit(dropped);
-      expect(pooled.state.value, const PlayerReconnecting(attempt: 1));
-      await pool.disposeAll();
-    });
+        await pool.retry('a');
+        expect(session.opened.length, 4);
+        expect(pooled.state.value, isA<PlayerConnecting>());
+        session.emit(dropped);
+        expect(pooled.state.value, const PlayerReconnecting(attempt: 1));
+        await pool.disposeAll();
+      },
+    );
 
     test('long healthy playback forgives earlier failures', () async {
       final FakeClock clock = FakeClock();
@@ -298,8 +315,10 @@ void main() {
       created.single.frame = Uint8List.fromList(<int>[1, 2, 3]);
       created.single.setSize(1280, 720);
 
-      final FrameCaptureService service =
-          FrameCaptureService(pool: pool, clock: FakeClock());
+      final FrameCaptureService service = FrameCaptureService(
+        pool: pool,
+        clock: FakeClock(),
+      );
       final Result<SnapshotImage> result = await service.capture('a');
       final SnapshotImage image = result.valueOrNull!;
       expect(image.bytes, <int>[1, 2, 3]);

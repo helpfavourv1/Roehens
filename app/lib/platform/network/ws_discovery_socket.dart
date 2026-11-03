@@ -16,8 +16,8 @@ class WsDiscoverySocket {
     this.codec = const WsDiscoveryCodec(),
     String? targetAddress,
     int? targetPort,
-  })  : targetAddress = targetAddress ?? Limits.wsDiscoveryAddress,
-        targetPort = targetPort ?? Limits.wsDiscoveryPort;
+  }) : targetAddress = targetAddress ?? Limits.wsDiscoveryAddress,
+       targetPort = targetPort ?? Limits.wsDiscoveryPort;
 
   final WsDiscoveryCodec codec;
 
@@ -49,8 +49,10 @@ class WsDiscoverySocket {
     controller.onCancel = shutdown;
     controller.onListen = () async {
       try {
-        final RawDatagramSocket bound =
-            await RawDatagramSocket.bind(InternetAddress.anyIPv4, 0);
+        final RawDatagramSocket bound = await RawDatagramSocket.bind(
+          InternetAddress.anyIPv4,
+          0,
+        );
         socket = bound;
         final Set<String> seen = <String>{};
         bound.listen((RawSocketEvent event) {
@@ -59,8 +61,9 @@ class WsDiscoverySocket {
           }
           Datagram? datagram = bound.receive();
           while (datagram != null) {
-            final DiscoveryResult? result =
-                codec.parseProbeMatch(utf8.decode(datagram.data, allowMalformed: true));
+            final DiscoveryResult? result = codec.parseProbeMatch(
+              utf8.decode(datagram.data, allowMalformed: true),
+            );
             if (result != null && seen.add('${result.host}:${result.port}')) {
               if (!controller.isClosed) {
                 controller.add(result);
@@ -70,8 +73,9 @@ class WsDiscoverySocket {
           }
         });
 
-        final List<int> message =
-            utf8.encode(codec.buildProbe(messageId: generateCameraId()));
+        final List<int> message = utf8.encode(
+          codec.buildProbe(messageId: generateCameraId()),
+        );
         final InternetAddress target = InternetAddress(targetAddress);
         bound.send(message, target, targetPort);
         resendTimer = Timer(const Duration(milliseconds: 300), () {

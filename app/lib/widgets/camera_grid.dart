@@ -44,18 +44,30 @@ class CameraGrid extends StatelessWidget {
             if (col > 0) {
               cells.add(SizedBox(width: gap));
             }
-            cells.add(SizedBox(width: tileWidth, height: tileHeight, child: tiles[index]));
+            cells.add(
+              SizedBox(
+                width: tileWidth,
+                height: tileHeight,
+                child: tiles[index],
+              ),
+            );
           }
           if (row > 0) {
             rowWidgets.add(SizedBox(height: gap));
           }
           rowWidgets.add(Row(children: cells));
         }
-        final Widget block = Column(mainAxisSize: MainAxisSize.min, children: rowWidgets);
+        final Widget block = Column(
+          mainAxisSize: MainAxisSize.min,
+          children: rowWidgets,
+        );
 
         final bool fits = !box.hasBoundedHeight || blockHeight <= box.maxHeight;
         if (fits && box.hasBoundedHeight) {
-          return SizedBox(height: box.maxHeight, child: Center(child: block));
+          return SizedBox(
+            height: box.maxHeight,
+            child: Center(child: block),
+          );
         }
         return SingleChildScrollView(child: block);
       },

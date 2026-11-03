@@ -73,9 +73,7 @@ class MjpegStreamParser {
   }
 
   void _setBoundary(String? name) {
-    _marker = name == null
-        ? null
-        : Uint8List.fromList(ascii.encode('--$name'));
+    _marker = name == null ? null : Uint8List.fromList(ascii.encode('--$name'));
   }
 
   /// Forgets buffered data, for example after a reconnect.
@@ -213,7 +211,8 @@ class MjpegStreamParser {
     if (lineEnd < 0) {
       return false;
     }
-    final bool closing = index + marker.length + 1 < _end &&
+    final bool closing =
+        index + marker.length + 1 < _end &&
         _buf[index + marker.length] == 0x2D &&
         _buf[index + marker.length + 1] == 0x2D;
     _start = lineEnd + 1;

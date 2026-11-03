@@ -12,9 +12,9 @@ class Entitlement {
   });
 
   const Entitlement.free()
-      : tier = EntitlementTier.free,
-        source = EntitlementSource.none,
-        verifiedAt = null;
+    : tier = EntitlementTier.free,
+      source = EntitlementSource.none,
+      verifiedAt = null;
 
   factory Entitlement.fromJson(Map<String, Object?> json) {
     final int? verified = json['verifiedAtMillis'] as int?;

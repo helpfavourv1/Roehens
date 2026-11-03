@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/platform/system/pip_service.dart';
 
 void main() {
-  final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
+  final TestWidgetsFlutterBinding binding =
+      TestWidgetsFlutterBinding.ensureInitialized();
   const MethodChannel channel = MethodChannel('roehens/pip');
   final List<String> calls = <String>[];
   bool supported = true;
@@ -13,7 +14,9 @@ void main() {
     calls.clear();
     supported = true;
     entered = true;
-    binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall call) async {
+    binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (
+      MethodCall call,
+    ) async {
       calls.add(call.method);
       if (call.method == 'isSupported') {
         return supported;
@@ -50,16 +53,19 @@ void main() {
     pip.dispose();
   });
 
-  test('a phone that does not support it is refused before asking to enter', () async {
-    supported = false;
-    final PipService pip = PipService(channel: channel, isAndroid: true);
-    await pip.initialize();
+  test(
+    'a phone that does not support it is refused before asking to enter',
+    () async {
+      supported = false;
+      final PipService pip = PipService(channel: channel, isAndroid: true);
+      await pip.initialize();
 
-    expect(pip.isSupported, isFalse);
-    expect(await pip.enter(), isFalse);
-    expect(calls, <String>['isSupported']);
-    pip.dispose();
-  });
+      expect(pip.isSupported, isFalse);
+      expect(await pip.enter(), isFalse);
+      expect(calls, <String>['isSupported']);
+      pip.dispose();
+    },
+  );
 
   test('the system refusing is reported as false', () async {
     entered = false;
@@ -75,14 +81,18 @@ void main() {
 
     await binding.defaultBinaryMessenger.handlePlatformMessage(
       'roehens/pip',
-      const StandardMethodCodec().encodeMethodCall(const MethodCall('pipChanged', true)),
+      const StandardMethodCodec().encodeMethodCall(
+        const MethodCall('pipChanged', true),
+      ),
       (_) {},
     );
     expect(pip.isInPip.value, isTrue);
 
     await binding.defaultBinaryMessenger.handlePlatformMessage(
       'roehens/pip',
-      const StandardMethodCodec().encodeMethodCall(const MethodCall('pipChanged', false)),
+      const StandardMethodCodec().encodeMethodCall(
+        const MethodCall('pipChanged', false),
+      ),
       (_) {},
     );
     expect(pip.isInPip.value, isFalse);

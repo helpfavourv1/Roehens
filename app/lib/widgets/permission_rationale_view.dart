@@ -61,7 +61,9 @@ class PermissionRationaleView extends StatelessWidget {
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: context.type.title1.copyWith(color: colors.textPrimary),
+                  style: context.type.title1.copyWith(
+                    color: colors.textPrimary,
+                  ),
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -74,7 +76,9 @@ class PermissionRationaleView extends StatelessWidget {
                 const SizedBox(height: AppSpacing.md),
                 for (final String reason in reasons)
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.sm),
+                    padding: const EdgeInsetsDirectional.only(
+                      bottom: AppSpacing.sm,
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -87,7 +91,9 @@ class PermissionRationaleView extends StatelessWidget {
                         Expanded(
                           child: Text(
                             reason,
-                            style: context.type.body.copyWith(color: colors.textPrimary),
+                            style: context.type.body.copyWith(
+                              color: colors.textPrimary,
+                            ),
                           ),
                         ),
                       ],
@@ -95,7 +101,11 @@ class PermissionRationaleView extends StatelessWidget {
                   ),
               ],
               const SizedBox(height: AppSpacing.lg),
-              AppButton(label: primaryLabel, onPressed: onPrimary, expand: true),
+              AppButton(
+                label: primaryLabel,
+                onPressed: onPrimary,
+                expand: true,
+              ),
               if (secondaryLabel != null && onSecondary != null) ...<Widget>[
                 const SizedBox(height: AppSpacing.sm),
                 AppButton(

@@ -32,8 +32,9 @@ class AppIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppIconLayers layers = AppIcons.layers(name, weight);
-    final TextDirection? direction =
-        name.mirrorsInRtl ? null : TextDirection.ltr;
+    final TextDirection? direction = name.mirrorsInRtl
+        ? null
+        : TextDirection.ltr;
 
     final Icon primary = Icon(
       layers.primary,

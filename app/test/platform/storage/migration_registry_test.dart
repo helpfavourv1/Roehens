@@ -27,8 +27,11 @@ void main() {
   });
 
   test('pending lists only the migrations after a version', () {
-    final MigrationRegistry registry =
-        MigrationRegistry(const <Migration>[_Step(1), _Step(2), _Step(3)]);
+    final MigrationRegistry registry = MigrationRegistry(const <Migration>[
+      _Step(1),
+      _Step(2),
+      _Step(3),
+    ]);
     expect(registry.latestVersion, 3);
     expect(registry.pending(0).map((Migration m) => m.version), <int>[1, 2, 3]);
     expect(registry.pending(1).map((Migration m) => m.version), <int>[2, 3]);

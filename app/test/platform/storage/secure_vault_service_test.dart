@@ -56,7 +56,10 @@ void main() {
   late FakeLogger logger;
   late SecureVaultService vault;
 
-  const CameraCredentials login = CameraCredentials(username: 'admin', password: 's3cret pass/word@');
+  const CameraCredentials login = CameraCredentials(
+    username: 'admin',
+    password: 's3cret pass/word@',
+  );
 
   setUp(() {
     secure = _FakeSecure();
@@ -71,14 +74,19 @@ void main() {
   });
 
   test('a camera with no credentials reads as null', () async {
-    final Result<CameraCredentials?> result = await vault.readCredentials('nobody');
+    final Result<CameraCredentials?> result = await vault.readCredentials(
+      'nobody',
+    );
     expect(result.isOk, isTrue);
     expect(result.valueOrNull, isNull);
   });
 
   test('credentials of two cameras stay separate', () async {
     await vault.writeCredentials('a', login);
-    await vault.writeCredentials('b', const CameraCredentials(username: 'u2', password: 'p2'));
+    await vault.writeCredentials(
+      'b',
+      const CameraCredentials(username: 'u2', password: 'p2'),
+    );
     expect((await vault.readCredentials('a')).valueOrNull?.username, 'admin');
     expect((await vault.readCredentials('b')).valueOrNull?.username, 'u2');
   });
@@ -99,7 +107,9 @@ void main() {
     await vault.readCredentials('a');
     await vault.deleteCredentials('a');
     await vault.deleteAll();
-    final String logged = logger.entries.map((LogEntry e) => e.toString()).join(' ');
+    final String logged = logger.entries
+        .map((LogEntry e) => e.toString())
+        .join(' ');
     expect(logged, isNot(contains('s3cret')));
     expect(logged, isNot(contains('admin')));
   });
@@ -111,22 +121,33 @@ void main() {
     expect((await vault.readCredentials('a')).valueOrNull, login);
   });
 
-  test('a locked keystore on read with nothing cached is a storage failure', () async {
-    secure.failing = true;
-    final Result<CameraCredentials?> read = await vault.readCredentials('a');
-    expect(read.errorOrNull?.errorClass, ErrorClass.storageFailure);
-  });
+  test(
+    'a locked keystore on read with nothing cached is a storage failure',
+    () async {
+      secure.failing = true;
+      final Result<CameraCredentials?> read = await vault.readCredentials('a');
+      expect(read.errorOrNull?.errorClass, ErrorClass.storageFailure);
+    },
+  );
 
   test('delete and delete all report a failing keystore', () async {
     secure.failing = true;
-    expect((await vault.deleteCredentials('a')).errorOrNull?.errorClass, ErrorClass.storageFailure);
-    expect((await vault.deleteAll()).errorOrNull?.errorClass, ErrorClass.storageFailure);
+    expect(
+      (await vault.deleteCredentials('a')).errorOrNull?.errorClass,
+      ErrorClass.storageFailure,
+    );
+    expect(
+      (await vault.deleteAll()).errorOrNull?.errorClass,
+      ErrorClass.storageFailure,
+    );
   });
 
   test('a damaged stored value is treated as a failed read', () async {
     secure.data[StorageKeys.vaultKeyForCamera('a')] = 'not json';
     expect((await vault.readCredentials('a')).isErr, isTrue);
-    secure.data[StorageKeys.vaultKeyForCamera('b')] = jsonEncode(<String, Object?>{'username': 'u'});
+    secure.data[StorageKeys.vaultKeyForCamera('b')] = jsonEncode(
+      <String, Object?>{'username': 'u'},
+    );
     expect((await vault.readCredentials('b')).isErr, isTrue);
   });
 

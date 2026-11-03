@@ -57,12 +57,29 @@ class DiscoveryResultRow extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(title, style: context.type.callout.copyWith(color: context.colors.textPrimary)),
+                    Text(
+                      title,
+                      style: context.type.callout.copyWith(
+                        color: context.colors.textPrimary,
+                      ),
+                    ),
                     if (subtitle != null)
-                      Text(subtitle!, style: context.type.footnote.copyWith(color: context.colors.textSecondary)),
-                    LtrText(address, style: context.type.mono.copyWith(color: context.colors.textSecondary)),
+                      Text(
+                        subtitle!,
+                        style: context.type.footnote.copyWith(
+                          color: context.colors.textSecondary,
+                        ),
+                      ),
+                    LtrText(
+                      address,
+                      style: context.type.mono.copyWith(
+                        color: context.colors.textSecondary,
+                      ),
+                    ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(top: AppSpacing.xs),
+                      padding: const EdgeInsetsDirectional.only(
+                        top: AppSpacing.xs,
+                      ),
                       child: AppBadge(sourceLabel),
                     ),
                   ],

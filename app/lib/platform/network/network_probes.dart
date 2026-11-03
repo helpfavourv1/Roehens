@@ -14,8 +14,8 @@ class NetworkProbes implements ConnectivityProbes {
   NetworkProbes({
     this.timeout = const Duration(seconds: 6),
     this._errorMapper = const ErrorMapper(),
-  })  : _rtsp = RtspProbe(timeout: timeout),
-        _http = HttpProbe(timeout: timeout);
+  }) : _rtsp = RtspProbe(timeout: timeout),
+       _http = HttpProbe(timeout: timeout);
 
   final Duration timeout;
   final ErrorMapper _errorMapper;
@@ -25,8 +25,8 @@ class NetworkProbes implements ConnectivityProbes {
   @override
   Future<bool> resolves(String host) async {
     try {
-      final List<InternetAddress> found =
-          await InternetAddress.lookup(host).timeout(timeout);
+      final List<InternetAddress> found = await InternetAddress.lookup(host)
+          .timeout(timeout);
       return found.isNotEmpty;
     } catch (_) {
       return false;
@@ -51,8 +51,10 @@ class NetworkProbes implements ConnectivityProbes {
     Uri uri,
     CameraCredentials credentials,
   ) async {
-    final Result<RtspProbeResult> result =
-        await _rtsp.describe(uri, credentials: credentials);
+    final Result<RtspProbeResult> result = await _rtsp.describe(
+      uri,
+      credentials: credentials,
+    );
     final AppError? error = result.errorOrNull;
     if (error != null) {
       return Err<RtspDescribeResult>(error);
@@ -74,15 +76,20 @@ class NetworkProbes implements ConnectivityProbes {
     Uri uri,
     CameraCredentials credentials,
   ) async {
-    final Result<HttpProbeResult> result =
-        await _http.get(uri, credentials: credentials);
+    final Result<HttpProbeResult> result = await _http.get(
+      uri,
+      credentials: credentials,
+    );
     final AppError? error = result.errorOrNull;
     if (error != null) {
       return Err<HttpHeadResult>(error);
     }
     final HttpProbeResult reply = result.valueOrNull!;
     return Ok<HttpHeadResult>(
-      HttpHeadResult(statusCode: reply.statusCode, contentType: reply.contentType),
+      HttpHeadResult(
+        statusCode: reply.statusCode,
+        contentType: reply.contentType,
+      ),
     );
   }
 }

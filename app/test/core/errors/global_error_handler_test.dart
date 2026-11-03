@@ -12,7 +12,9 @@ void main() {
 
   setUp(() {
     reported = <AppError>[];
-    handler = GlobalErrorHandler(onReport: (AppError error, StackTrace? stack) => reported.add(error));
+    handler = GlobalErrorHandler(
+      onReport: (AppError error, StackTrace? stack) => reported.add(error),
+    );
   });
 
   tearDown(() => handler.dispose());
@@ -48,7 +50,10 @@ void main() {
   });
 
   test('the platform error hook says it handled the error', () {
-    expect(handler.onPlatformError(StateError('boom'), StackTrace.current), isTrue);
+    expect(
+      handler.onPlatformError(StateError('boom'), StackTrace.current),
+      isTrue,
+    );
     expect(reported, hasLength(1));
   });
 
@@ -69,7 +74,9 @@ void main() {
     final FlutterExceptionHandler? original = FlutterError.onError;
     addTearDown(() => FlutterError.onError = original);
     handler.installFlutterErrorHook();
-    FlutterError.onError!(FlutterErrorDetails(exception: StateError('framework')));
+    FlutterError.onError!(
+      FlutterErrorDetails(exception: StateError('framework')),
+    );
     expect(reported, hasLength(1));
     expect(handler.fatalError.value, isNotNull);
   });

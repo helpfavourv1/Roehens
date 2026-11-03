@@ -24,7 +24,9 @@ class AdSlotState {
 
   @override
   bool operator ==(Object other) {
-    return other is AdSlotState && other.height == height && identical(other.view, view);
+    return other is AdSlotState &&
+        other.height == height &&
+        identical(other.view, view);
   }
 
   @override

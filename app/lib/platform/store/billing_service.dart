@@ -55,26 +55,27 @@ abstract interface class BillingBackend {
 
 class StoreBillingBackend implements BillingBackend {
   StoreBillingBackend({iap.InAppPurchase? store})
-      : _store = store ?? iap.InAppPurchase.instance;
+    : _store = store ?? iap.InAppPurchase.instance;
 
   final iap.InAppPurchase _store;
-  final Map<String, iap.ProductDetails> _products = <String, iap.ProductDetails>{};
+  final Map<String, iap.ProductDetails> _products =
+      <String, iap.ProductDetails>{};
 
   @override
-  late final Stream<PurchaseEvent> events = _store.purchaseStream.asyncExpand(
-    (List<iap.PurchaseDetails> updates) async* {
-      for (final iap.PurchaseDetails details in updates) {
-        yield PurchaseEvent(
-          productId: details.productID,
-          kind: _kind(details.status),
-          message: details.error?.message,
-        );
-        if (details.pendingCompletePurchase) {
-          await _store.completePurchase(details);
-        }
+  late final Stream<PurchaseEvent> events = _store.purchaseStream.asyncExpand((
+    List<iap.PurchaseDetails> updates,
+  ) async* {
+    for (final iap.PurchaseDetails details in updates) {
+      yield PurchaseEvent(
+        productId: details.productID,
+        kind: _kind(details.status),
+        message: details.error?.message,
+      );
+      if (details.pendingCompletePurchase) {
+        await _store.completePurchase(details);
       }
-    },
-  );
+    }
+  });
 
   static PurchaseEventKind _kind(iap.PurchaseStatus status) {
     switch (status) {
@@ -102,8 +103,8 @@ class StoreBillingBackend implements BillingBackend {
 
   @override
   Future<BillingProduct?> loadProduct(String productId) async {
-    final iap.ProductDetailsResponse response =
-        await _store.queryProductDetails(<String>{productId});
+    final iap.ProductDetailsResponse response = await _store
+        .queryProductDetails(<String>{productId});
     if (response.error != null) {
       throw StateError(response.error!.message);
     }
@@ -161,7 +162,8 @@ class BillingService implements PurchaseContract {
 
   final StreamController<Entitlement> _entitlements =
       StreamController<Entitlement>.broadcast();
-  final StreamController<AppError> _failures = StreamController<AppError>.broadcast();
+  final StreamController<AppError> _failures =
+      StreamController<AppError>.broadcast();
   StreamSubscription<PurchaseEvent>? _subscription;
   Entitlement _current = const Entitlement.free();
 
@@ -190,7 +192,9 @@ class BillingService implements PurchaseContract {
         );
         _entitlements.add(_current);
       case PurchaseEventKind.failed:
-        _failures.add(AppError(ErrorClass.purchaseFailed, detail: event.message));
+        _failures.add(
+          AppError(ErrorClass.purchaseFailed, detail: event.message),
+        );
       case PurchaseEventKind.pending || PurchaseEventKind.canceled:
         break;
     }
@@ -214,7 +218,9 @@ class BillingService implements PurchaseContract {
         return const Err<Entitlement>(_unavailable);
       }
       final Completer<void> found = Completer<void>();
-      final StreamSubscription<Entitlement> wait = _entitlements.stream.listen((_) {
+      final StreamSubscription<Entitlement> wait = _entitlements.stream.listen((
+        _,
+      ) {
         if (!found.isCompleted) {
           found.complete();
         }
@@ -224,7 +230,11 @@ class BillingService implements PurchaseContract {
       await wait.cancel();
       return Ok<Entitlement>(_current);
     } catch (error) {
-      logger?.warning('billing', 'could not read the entitlement', error: error);
+      logger?.warning(
+        'billing',
+        'could not read the entitlement',
+        error: error,
+      );
       return const Err<Entitlement>(_unavailable);
     }
   }
@@ -238,12 +248,18 @@ class BillingService implements PurchaseContract {
       if (!await _backend.isAvailable()) {
         return const Err<ProductInfo?>(_unavailable);
       }
-      final BillingProduct? product = await _backend.loadProduct(config.adFreeProductId);
+      final BillingProduct? product = await _backend.loadProduct(
+        config.adFreeProductId,
+      );
       if (product == null) {
         return const Ok<ProductInfo?>(null);
       }
       return Ok<ProductInfo?>(
-        ProductInfo(id: product.id, title: product.title, priceLabel: product.priceLabel),
+        ProductInfo(
+          id: product.id,
+          title: product.title,
+          priceLabel: product.priceLabel,
+        ),
       );
     } catch (error) {
       logger?.warning('billing', 'could not load the product', error: error);
@@ -264,7 +280,10 @@ class BillingService implements PurchaseContract {
       return started
           ? const Ok<void>(null)
           : const Err<void>(
-              AppError(ErrorClass.purchaseFailed, detail: 'the purchase could not start'),
+              AppError(
+                ErrorClass.purchaseFailed,
+                detail: 'the purchase could not start',
+              ),
             );
     } catch (error) {
       logger?.warning('billing', 'could not start the purchase', error: error);

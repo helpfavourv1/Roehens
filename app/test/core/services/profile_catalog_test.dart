@@ -21,8 +21,9 @@ void main() {
     });
 
     test('is sorted by name, ignoring case', () {
-      final List<String> names =
-          catalog.brands.map((CameraBrandProfile b) => b.displayName.toLowerCase()).toList();
+      final List<String> names = catalog.brands
+          .map((CameraBrandProfile b) => b.displayName.toLowerCase())
+          .toList();
       expect(names, <String>[...names]..sort());
     });
 
@@ -34,7 +35,8 @@ void main() {
         for (final int port in brand.defaultPorts) {
           expect(port, inInclusiveRange(1, 65535), reason: brand.id);
         }
-        final int paths = brand.mainPathTemplates.length +
+        final int paths =
+            brand.mainPathTemplates.length +
             brand.mjpegTemplates.length +
             brand.snapshotTemplates.length;
         expect(paths, greaterThan(0), reason: brand.id);
@@ -51,7 +53,11 @@ void main() {
         ]) {
           expect(path, startsWith('/'), reason: '${brand.id} $path');
           expect(path.contains('@'), isFalse, reason: '${brand.id} $path');
-          expect(path.toLowerCase().contains('password'), isFalse, reason: '${brand.id} $path');
+          expect(
+            path.toLowerCase().contains('password'),
+            isFalse,
+            reason: '${brand.id} $path',
+          );
           expect(path.contains(' '), isFalse, reason: '${brand.id} $path');
         }
       }
@@ -109,38 +115,50 @@ void main() {
     });
 
     test('search ignores case and matches inside the name', () {
-      expect(catalog.search('HIK').map((CameraBrandProfile b) => b.id), contains('hikvision'));
+      expect(
+        catalog.search('HIK').map((CameraBrandProfile b) => b.id),
+        contains('hikvision'),
+      );
       expect(catalog.search('  tapo ').single.id, 'tapo');
       expect(catalog.search('zzz'), isEmpty);
       expect(catalog.search('').length, catalog.brands.length);
     });
 
     test('grouping uses the first letter', () {
-      final Map<String, List<CameraBrandProfile>> groups = catalog.groupedByInitial();
-      expect(groups['H']!.map((CameraBrandProfile b) => b.id), contains('hikvision'));
+      final Map<String, List<CameraBrandProfile>> groups = catalog
+          .groupedByInitial();
+      expect(
+        groups['H']!.map((CameraBrandProfile b) => b.id),
+        contains('hikvision'),
+      );
       expect(groups['G']!.length, greaterThanOrEqualTo(3));
       expect(
-        groups.values.fold<int>(0, (int sum, List<CameraBrandProfile> l) => sum + l.length),
+        groups.values.fold<int>(
+          0,
+          (int sum, List<CameraBrandProfile> l) => sum + l.length,
+        ),
         catalog.brands.length,
       );
     });
 
     test('grouping respects the search text', () {
-      final Map<String, List<CameraBrandProfile>> groups = catalog.groupedByInitial('ax');
+      final Map<String, List<CameraBrandProfile>> groups = catalog
+          .groupedByInitial('ax');
       expect(groups.keys, <String>['A']);
     });
   });
 
   group('parsing', () {
-    String file(Object? brands, {Object? version = 1}) =>
-        jsonEncode(<String, Object?>{'schemaVersion': version, 'brands': brands});
+    String file(Object? brands, {Object? version = 1}) => jsonEncode(
+      <String, Object?>{'schemaVersion': version, 'brands': brands},
+    );
 
     Map<String, Object?> brand(String id) => <String, Object?>{
-          'id': id,
-          'displayName': id,
-          'defaultPorts': <int>[554],
-          'mainPathTemplates': <String>['/a'],
-        };
+      'id': id,
+      'displayName': id,
+      'defaultPorts': <int>[554],
+      'mainPathTemplates': <String>['/a'],
+    };
 
     test('a newer file format is refused', () {
       expect(
@@ -165,7 +183,9 @@ void main() {
     });
 
     test('optional lists may be missing', () {
-      final ProfileCatalog catalog = ProfileCatalog.parse(file(<Object?>[brand('a')]));
+      final ProfileCatalog catalog = ProfileCatalog.parse(
+        file(<Object?>[brand('a')]),
+      );
       expect(catalog.brands.single.subPathTemplates, isEmpty);
       expect(catalog.brands.single.verified, isFalse);
     });

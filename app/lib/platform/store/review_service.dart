@@ -31,7 +31,7 @@ class InAppReviewBackend implements ReviewBackend {
 /// throws; the store decides whether the prompt actually shows.
 class ReviewService implements ReviewContract {
   ReviewService({required this.config, ReviewBackend? backend, this.logger})
-      : _backend = backend ?? InAppReviewBackend();
+    : _backend = backend ?? InAppReviewBackend();
 
   final StoreConfig config;
   final LoggerContract? logger;
@@ -66,7 +66,11 @@ class ReviewService implements ReviewContract {
     try {
       await _backend.openStoreListing(appStoreId: config.appStoreId);
     } catch (error) {
-      logger?.warning('review', 'could not open the store listing', error: error);
+      logger?.warning(
+        'review',
+        'could not open the store listing',
+        error: error,
+      );
     }
   }
 }

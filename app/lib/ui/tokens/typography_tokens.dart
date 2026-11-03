@@ -39,8 +39,9 @@ class AppTypography {
         fontWeight: weight,
         height: height * scriptFactor,
         letterSpacing: letterSpacing,
-        fontFeatures:
-            tabular ? const <FontFeature>[FontFeature.tabularFigures()] : null,
+        fontFeatures: tabular
+            ? const <FontFeature>[FontFeature.tabularFigures()]
+            : null,
       );
     }
 

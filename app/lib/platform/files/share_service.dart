@@ -24,7 +24,9 @@ class ShareService {
     try {
       await SharePlus.instance.share(
         ShareParams(
-          files: <XFile>[XFile.fromData(bytes, mimeType: mimeType, name: fileName)],
+          files: <XFile>[
+            XFile.fromData(bytes, mimeType: mimeType, name: fileName),
+          ],
           fileNameOverrides: <String>[fileName],
           sharePositionOrigin: _centerOrigin(),
         ),
@@ -47,6 +49,10 @@ class ShareService {
     }
     final FlutterView view = views.first;
     final Size size = view.physicalSize / view.devicePixelRatio;
-    return Rect.fromCenter(center: size.center(Offset.zero), width: 1, height: 1);
+    return Rect.fromCenter(
+      center: size.center(Offset.zero),
+      width: 1,
+      height: 1,
+    );
   }
 }

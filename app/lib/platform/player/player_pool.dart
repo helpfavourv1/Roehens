@@ -12,7 +12,9 @@ import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/core/services/reconnect_policy.dart';
 
 /// Creates the right kind of session for a protocol.
-typedef SessionFactory = PlayerSessionContract Function(StreamProtocol protocol);
+typedef SessionFactory = PlayerSessionContract Function(
+  StreamProtocol protocol,
+);
 
 /// One session under the pool's care. Its [state] is what the tile shows: the
 /// raw session state plus the reconnect behavior the pool adds.
@@ -35,8 +37,9 @@ class PooledSession {
   final ErrorMapper _mapper;
   final LoggerContract? _logger;
 
-  final ValueNotifier<PlayerState> state =
-      ValueNotifier<PlayerState>(const PlayerIdle());
+  final ValueNotifier<PlayerState> state = ValueNotifier<PlayerState>(
+    const PlayerIdle(),
+  );
 
   Timer? _retryTimer;
   DateTime? _playingSince;

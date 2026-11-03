@@ -47,8 +47,8 @@ class AppTokens extends InheritedWidget {
   final AppTokensData data;
 
   static AppTokensData of(BuildContext context) {
-    final AppTokens? scope =
-        context.dependOnInheritedWidgetOfExactType<AppTokens>();
+    final AppTokens? scope = context
+        .dependOnInheritedWidgetOfExactType<AppTokens>();
     if (scope == null) {
       throw FlutterError('AppTokens is missing above this context.');
     }

@@ -23,10 +23,10 @@ class LocalNetworkPermissionService implements PermissionContract {
     MulticastLockChannel? channel,
     bool? isIos,
     Future<LocalNetworkOutcome> Function(String host)? probe,
-  })  : _lan = lan ?? LanInfo(),
-        _channel = channel ?? MulticastLockChannel(),
-        _isIos = isIos ?? Platform.isIOS,
-        _probe = probe ?? _tcpProbe;
+  }) : _lan = lan ?? LanInfo(),
+       _channel = channel ?? MulticastLockChannel(),
+       _isIos = isIos ?? Platform.isIOS,
+       _probe = probe ?? _tcpProbe;
 
   final LanInfo _lan;
   final MulticastLockChannel _channel;
@@ -71,8 +71,11 @@ class LocalNetworkPermissionService implements PermissionContract {
 
   static Future<LocalNetworkOutcome> _tcpProbe(String host) async {
     try {
-      final Socket socket =
-          await Socket.connect(host, 80, timeout: const Duration(milliseconds: 1500));
+      final Socket socket = await Socket.connect(
+        host,
+        80,
+        timeout: const Duration(milliseconds: 1500),
+      );
       socket.destroy();
       return outcomeFor(connected: true, timedOut: false);
     } on SocketException catch (error) {
@@ -102,7 +105,8 @@ class LocalNetworkPermissionService implements PermissionContract {
       return PermissionStatus.notRequired;
     }
     final LanSnapshot? lan = await _lan.read();
-    final String? target = lan?.gateway ??
+    final String? target =
+        lan?.gateway ??
         (lan == null ? null : LanSelector.guessGateway(lan.address));
     if (target == null) {
       return _last = PermissionStatus.unknown;

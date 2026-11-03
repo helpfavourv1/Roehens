@@ -18,7 +18,11 @@ class FileTransferService implements FileTransferContract {
     required String fileName,
     required String mimeType,
   }) {
-    return _share.shareBytes(bytes: bytes, fileName: fileName, mimeType: mimeType);
+    return _share.shareBytes(
+      bytes: bytes,
+      fileName: fileName,
+      mimeType: mimeType,
+    );
   }
 
   @override

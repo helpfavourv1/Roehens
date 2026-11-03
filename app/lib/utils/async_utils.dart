@@ -32,8 +32,7 @@ Future<T> withTimeout<T>(
 
 /// Completes with [future]'s value, or null when [limit] passes first.
 Future<T?> timeoutOrNull<T>(Future<T> future, Duration limit) {
-  return future.then<T?>((T value) => value).timeout(
-        limit,
-        onTimeout: () => null,
-      );
+  return future
+      .then<T?>((T value) => value)
+      .timeout(limit, onTimeout: () => null);
 }

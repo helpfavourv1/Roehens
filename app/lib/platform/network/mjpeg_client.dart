@@ -53,8 +53,9 @@ class MjpegClient {
         ),
       );
       await for (final List<int> chunk in response.timeout(idleTimeout)) {
-        final Uint8List bytes =
-            chunk is Uint8List ? chunk : Uint8List.fromList(chunk);
+        final Uint8List bytes = chunk is Uint8List
+            ? chunk
+            : Uint8List.fromList(chunk);
         for (final Uint8List frame in parser.add(bytes)) {
           yield frame;
         }
@@ -87,20 +88,23 @@ class MjpegClient {
   }
 
   HttpClient _newClient(CameraCredentials credentials) {
-    final HttpClient client = _clientFactory()..connectionTimeout = connectTimeout;
+    final HttpClient client = _clientFactory()
+      ..connectionTimeout = connectTimeout;
     answerChallengeOnce(client, credentials);
     return client;
   }
 
   Future<HttpClientResponse> _open(HttpClient client, Uri uri) async {
-    final HttpClientRequest request =
-        await client.getUrl(uri).timeout(connectTimeout);
+    final HttpClientRequest request = await client
+        .getUrl(uri)
+        .timeout(connectTimeout);
     request.headers.set(
       HttpHeaders.acceptHeader,
       'multipart/x-mixed-replace, image/jpeg',
     );
-    final HttpClientResponse response =
-        await request.close().timeout(connectTimeout);
+    final HttpClientResponse response = await request.close().timeout(
+      connectTimeout,
+    );
     if (response.statusCode != HttpStatus.ok) {
       await response.drain<void>();
       throw errorMapper.fromStatus(response.statusCode);
@@ -118,7 +122,8 @@ class MjpegClient {
       builder.add(chunk);
     }
     final Uint8List bytes = builder.takeBytes();
-    final bool isJpeg = bytes.length >= 4 &&
+    final bool isJpeg =
+        bytes.length >= 4 &&
         bytes[0] == 0xFF &&
         bytes[1] == 0xD8 &&
         bytes[bytes.length - 2] == 0xFF &&

@@ -122,6 +122,11 @@ class GridLayout {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, columns, rows, Object.hashAll(cameraIds), autoCycleSeconds);
+  int get hashCode => Object.hash(
+    id,
+    columns,
+    rows,
+    Object.hashAll(cameraIds),
+    autoCycleSeconds,
+  );
 }

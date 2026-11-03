@@ -26,9 +26,9 @@ class CameraListRow extends StatelessWidget {
     this.onDelete,
     this.deleteLabel,
   }) : assert(
-          onDelete == null || deleteLabel != null,
-          'A swipe-to-delete row needs a spoken label for delete.',
-        );
+         onDelete == null || deleteLabel != null,
+         'A swipe-to-delete row needs a spoken label for delete.',
+       );
 
   /// Stable per camera, so a swipe applies to the right row.
   final Key dismissKey;
@@ -52,7 +52,12 @@ class CameraListRow extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       style: AppPressStyle.tint,
-      semanticLabel: <String>[name, address, protocolLabel, ?statusLabel].join(', '),
+      semanticLabel: <String>[
+        name,
+        address,
+        protocolLabel,
+        ?statusLabel,
+      ].join(', '),
       child: ColoredBox(
         color: colors.bgSecondary,
         child: ConstrainedBox(
@@ -75,19 +80,28 @@ class CameraListRow extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(name, style: context.type.callout.copyWith(color: colors.textPrimary)),
+                      Text(
+                        name,
+                        style: context.type.callout.copyWith(
+                          color: colors.textPrimary,
+                        ),
+                      ),
                       Row(
                         children: <Widget>[
                           Flexible(
                             child: LtrText(
                               address,
-                              style: context.type.footnote.copyWith(color: colors.textSecondary),
+                              style: context.type.footnote.copyWith(
+                                color: colors.textSecondary,
+                              ),
                             ),
                           ),
                           const SizedBox(width: AppSpacing.sm),
                           LtrText(
                             protocolLabel,
-                            style: context.type.data.copyWith(color: colors.textTertiary),
+                            style: context.type.data.copyWith(
+                              color: colors.textTertiary,
+                            ),
                           ),
                         ],
                       ),
@@ -105,7 +119,9 @@ class CameraListRow extends StatelessWidget {
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     statusLabel!,
-                    style: context.type.data.copyWith(color: colors.textSecondary),
+                    style: context.type.data.copyWith(
+                      color: colors.textSecondary,
+                    ),
                   ),
                 ],
                 const SizedBox(width: AppSpacing.xs),
@@ -137,7 +153,9 @@ class CameraListRow extends StatelessWidget {
         child: Align(
           alignment: AlignmentDirectional.centerEnd,
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.lg),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.lg,
+            ),
             child: Semantics(
               label: deleteLabel,
               child: AppIcon(

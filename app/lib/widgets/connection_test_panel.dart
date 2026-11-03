@@ -119,14 +119,20 @@ class ConnectionTestPanel extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         passed ? labels.passed : labels.failed,
-                        style: context.type.title2.copyWith(color: colors.textPrimary),
+                        style: context.type.title2.copyWith(
+                          color: colors.textPrimary,
+                        ),
                       ),
                       if (failed && diagnosis != null)
                         Padding(
-                          padding: const EdgeInsetsDirectional.only(top: AppSpacing.xs),
+                          padding: const EdgeInsetsDirectional.only(
+                            top: AppSpacing.xs,
+                          ),
                           child: Text(
                             diagnosis!,
-                            style: context.type.body.copyWith(color: colors.textSecondary),
+                            style: context.type.body.copyWith(
+                              color: colors.textSecondary,
+                            ),
                           ),
                         ),
                     ],
@@ -153,7 +159,9 @@ class ConnectionTestPanel extends StatelessWidget {
                   Expanded(
                     child: Text(
                       suggestion,
-                      style: context.type.body.copyWith(color: colors.textSecondary),
+                      style: context.type.body.copyWith(
+                        color: colors.textSecondary,
+                      ),
                     ),
                   ),
                 ],
@@ -165,14 +173,18 @@ class ConnectionTestPanel extends StatelessWidget {
           label: isRunning
               ? labels.running
               : current == null
-                  ? labels.run
-                  : labels.runAgain,
+              ? labels.run
+              : labels.runAgain,
           onPressed: isRunning ? null : onRun,
           isLoading: isRunning,
-          kind: current == null ? AppButtonKind.primary : AppButtonKind.secondary,
+          kind: current == null
+              ? AppButtonKind.primary
+              : AppButtonKind.secondary,
           expand: true,
         ),
-        if (failed && onTroubleshoot != null && labels.troubleshoot != null) ...<Widget>[
+        if (failed &&
+            onTroubleshoot != null &&
+            labels.troubleshoot != null) ...<Widget>[
           const SizedBox(height: AppSpacing.sm),
           Align(
             alignment: AlignmentDirectional.centerStart,
@@ -231,16 +243,25 @@ class _StageRow extends StatelessWidget {
                 ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
-                child: Text(name, style: context.type.callout.copyWith(color: colors.textPrimary)),
+                child: Text(
+                  name,
+                  style: context.type.callout.copyWith(
+                    color: colors.textPrimary,
+                  ),
+                ),
               ),
-              if (millis != null && result.status == StageStatus.passed) ...<Widget>[
+              if (millis != null &&
+                  result.status == StageStatus.passed) ...<Widget>[
                 LtrText(
                   labels.elapsed(millis),
                   style: context.type.data.copyWith(color: colors.textTertiary),
                 ),
                 const SizedBox(width: AppSpacing.sm),
               ],
-              Text(status, style: context.type.data.copyWith(color: colors.textSecondary)),
+              Text(
+                status,
+                style: context.type.data.copyWith(color: colors.textSecondary),
+              ),
             ],
           ),
         ),

@@ -143,13 +143,17 @@ class OnvifResponseParser {
           OnvifProfile(
             token: token,
             name: _text(element, 'Name'),
-            videoEncoding: video == null ? null : _nullable(_text(video, 'Encoding')),
+            videoEncoding: video == null
+                ? null
+                : _nullable(_text(video, 'Encoding')),
             width: video == null ? null : int.tryParse(_text(video, 'Width')),
             height: video == null ? null : int.tryParse(_text(video, 'Height')),
-            frameRateLimit:
-                video == null ? null : int.tryParse(_text(video, 'FrameRateLimit')),
-            bitrateLimitKbps:
-                video == null ? null : int.tryParse(_text(video, 'BitrateLimit')),
+            frameRateLimit: video == null
+                ? null
+                : int.tryParse(_text(video, 'FrameRateLimit')),
+            bitrateLimitKbps: video == null
+                ? null
+                : int.tryParse(_text(video, 'BitrateLimit')),
             hasPtz: _first(element, 'PTZConfiguration') != null,
           ),
         );
@@ -238,7 +242,8 @@ class OnvifResponseParser {
         .map((XmlElement e) => e.innerText.trim())
         .join(' ');
     final String all = '$codes $reason'.toLowerCase();
-    final bool notAuthorized = all.contains('notauthorized') ||
+    final bool notAuthorized =
+        all.contains('notauthorized') ||
         all.contains('not authorized') ||
         all.contains('unauthorized');
     return AppError(

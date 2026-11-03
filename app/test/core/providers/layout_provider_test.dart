@@ -13,14 +13,19 @@ void main() {
 
   List<Camera> cameras(int count) {
     return <Camera>[
-      for (int i = 0; i < count; i++) testCamera(id: 'c$i', name: 'Cam $i', sortIndex: i),
+      for (int i = 0; i < count; i++)
+        testCamera(id: 'c$i', name: 'Cam $i', sortIndex: i),
     ];
   }
 
   setUp(() {
     storage = FakeStorage();
     store = FakeKeyValueStore();
-    provider = LayoutProvider(storage: storage, store: store, logger: FakeLogger());
+    provider = LayoutProvider(
+      storage: storage,
+      store: store,
+      logger: FakeLogger(),
+    );
   });
 
   tearDown(() => provider.dispose());
@@ -49,7 +54,10 @@ void main() {
     expect(provider.value.pageSize, 9);
     expect(provider.page.value, 1);
     expect(storage.layouts[LayoutProvider.defaultLayoutId]?.pageSize, 9);
-    expect(store.values[StorageKeys.activeLayoutId], LayoutProvider.defaultLayoutId);
+    expect(
+      store.values[StorageKeys.activeLayoutId],
+      LayoutProvider.defaultLayoutId,
+    );
   });
 
   test('an unsupported grid size is ignored', () async {
@@ -67,15 +75,18 @@ void main() {
     expect(provider.value.autoCycleSeconds, isNull);
   });
 
-  test('new cameras go last and removed cameras drop out of the order', () async {
-    await provider.setCameraOrder(<String>['c2', 'gone', 'c0']);
-    final List<Camera> list = cameras(4);
+  test(
+    'new cameras go last and removed cameras drop out of the order',
+    () async {
+      await provider.setCameraOrder(<String>['c2', 'gone', 'c0']);
+      final List<Camera> list = cameras(4);
 
-    expect(provider.orderedIds(list), <String>['c2', 'c0', 'c1', 'c3']);
+      expect(provider.orderedIds(list), <String>['c2', 'c0', 'c1', 'c3']);
 
-    await provider.syncCameras(list);
-    expect(provider.value.cameraIds, <String>['c2', 'c0', 'c1', 'c3']);
-  });
+      await provider.syncCameras(list);
+      expect(provider.value.cameraIds, <String>['c2', 'c0', 'c1', 'c3']);
+    },
+  );
 
   test('syncing an unchanged order saves nothing', () async {
     final List<Camera> list = cameras(2);

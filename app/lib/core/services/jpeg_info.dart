@@ -37,7 +37,9 @@ JpegSize? readJpegSize(Uint8List bytes) {
       continue;
     }
     // Markers without a length: SOI, TEM and the restart markers.
-    if (marker == 0xD8 || marker == 0x01 || (marker >= 0xD0 && marker <= 0xD7)) {
+    if (marker == 0xD8 ||
+        marker == 0x01 ||
+        (marker >= 0xD0 && marker <= 0xD7)) {
       i += 2;
       continue;
     }
@@ -46,7 +48,8 @@ JpegSize? readJpegSize(Uint8List bytes) {
       return null;
     }
     final int length = (bytes[i + 2] << 8) | bytes[i + 3];
-    final bool isFrameHeader = marker >= 0xC0 &&
+    final bool isFrameHeader =
+        marker >= 0xC0 &&
         marker <= 0xCF &&
         marker != 0xC4 &&
         marker != 0xC8 &&

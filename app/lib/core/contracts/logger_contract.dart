@@ -14,7 +14,8 @@ class LogEntry {
   final String message;
 
   @override
-  String toString() => '${time.toIso8601String()} ${level.name} [$tag] $message';
+  String toString() =>
+      '${time.toIso8601String()} ${level.name} [$tag] $message';
 }
 
 /// Local-only log kept in a ring buffer. Nothing is uploaded; the person can

@@ -14,7 +14,8 @@ Uint8List fakeJpeg(int id, {int size = 400}) {
 
 /// One multipart part carrying [body].
 Uint8List multipartPart(Uint8List body, {String boundary = 'frame'}) {
-  final String head = '--$boundary\r\nContent-Type: image/jpeg\r\n'
+  final String head =
+      '--$boundary\r\nContent-Type: image/jpeg\r\n'
       'Content-Length: ${body.length}\r\n\r\n';
   return Uint8List.fromList(<int>[
     ...ascii.encode(head),

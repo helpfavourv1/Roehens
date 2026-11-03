@@ -31,13 +31,21 @@ void main() {
 
     test('saves, updates, orders and deletes cameras', () async {
       final DatabaseService service = await openMemory();
-      expect((await service.saveCamera(testCamera(id: 'a', sortIndex: 1))).isOk, isTrue);
-      expect((await service.saveCamera(testCamera(id: 'b', sortIndex: 0))).isOk, isTrue);
+      expect(
+        (await service.saveCamera(testCamera(id: 'a', sortIndex: 1))).isOk,
+        isTrue,
+      );
+      expect(
+        (await service.saveCamera(testCamera(id: 'b', sortIndex: 0))).isOk,
+        isTrue,
+      );
 
       List<Camera> loaded = (await service.loadCameras()).valueOrNull!;
       expect(loaded.map((Camera c) => c.id), <String>['b', 'a']);
 
-      await service.saveCamera(testCamera(id: 'a', name: 'Renamed', sortIndex: 1));
+      await service.saveCamera(
+        testCamera(id: 'a', name: 'Renamed', sortIndex: 1),
+      );
       loaded = (await service.loadCameras()).valueOrNull!;
       expect(loaded.length, 2);
       expect(loaded.last.name, 'Renamed');
@@ -67,24 +75,24 @@ void main() {
       await service.close();
     });
 
-    test('updating a camera keeps its stream profiles, deleting removes them', () async {
-      final DatabaseService service = await openMemory();
-      await service.saveCamera(testCamera(id: 'a'));
-      await service.saveStreamProfiles('a', const <StreamProfile>[
-        StreamProfile(kind: StreamKind.main, path: '/m', codecHint: 'h265'),
-        StreamProfile(kind: StreamKind.sub, path: '/s'),
-      ]);
+    test(
+      'updating a camera keeps its stream profiles, deleting removes them',
+      () async {
+        final DatabaseService service = await openMemory();
+        await service.saveCamera(testCamera(id: 'a'));
+        await service.saveStreamProfiles('a', const <StreamProfile>[
+          StreamProfile(kind: StreamKind.main, path: '/m', codecHint: 'h265'),
+          StreamProfile(kind: StreamKind.sub, path: '/s'),
+        ]);
 
-      await service.saveCamera(testCamera(id: 'a', name: 'Changed'));
-      expect(
-        (await service.loadStreamProfiles('a')).valueOrNull!.length,
-        2,
-      );
+        await service.saveCamera(testCamera(id: 'a', name: 'Changed'));
+        expect((await service.loadStreamProfiles('a')).valueOrNull!.length, 2);
 
-      await service.deleteCamera('a');
-      expect((await service.loadStreamProfiles('a')).valueOrNull, isEmpty);
-      await service.close();
-    });
+        await service.deleteCamera('a');
+        expect((await service.loadStreamProfiles('a')).valueOrNull, isEmpty);
+        await service.close();
+      },
+    );
 
     test('layouts round trip and delete', () async {
       final DatabaseService service = await openMemory();
@@ -96,7 +104,8 @@ void main() {
       );
       await service.saveLayout(layout);
       await service.saveLayout(layout.copyWith(cameraIds: <String>['b']));
-      final List<GridLayout> loaded = (await service.loadLayouts()).valueOrNull!;
+      final List<GridLayout> loaded =
+          (await service.loadLayouts()).valueOrNull!;
       expect(loaded.single.cameraIds, <String>['b']);
       expect(loaded.single.autoCycleSeconds, 15);
 
@@ -129,14 +138,18 @@ void main() {
 
     test('data survives closing and reopening', () async {
       final String path = '${dir.path}/app.db';
-      final DatabaseService first =
-          DatabaseService(factory: databaseFactoryFfi, path: path);
+      final DatabaseService first = DatabaseService(
+        factory: databaseFactoryFfi,
+        path: path,
+      );
       await first.open();
       await first.saveCamera(testCamera(id: 'keep'));
       await first.close();
 
-      final DatabaseService second =
-          DatabaseService(factory: databaseFactoryFfi, path: path);
+      final DatabaseService second = DatabaseService(
+        factory: databaseFactoryFfi,
+        path: path,
+      );
       await second.open();
       expect(second.outcome, StorageOpenOutcome.ok);
       expect((await second.loadCameras()).valueOrNull!.single.id, 'keep');
@@ -163,7 +176,9 @@ void main() {
       expect(service.outcome, StorageOpenOutcome.downgradeRefused);
       expect(service.isDegraded.value, isTrue);
       expect(
-        dir.listSync().where((FileSystemEntity e) => e.path.contains('corrupt')),
+        dir.listSync().where(
+          (FileSystemEntity e) => e.path.contains('corrupt'),
+        ),
         isEmpty,
       );
       expect(File(path).lengthSync(), sizeBefore);
@@ -177,26 +192,34 @@ void main() {
       await check.close();
     });
 
-    test('a damaged file is moved aside and a clean database is started', () async {
-      final String path = '${dir.path}/broken.db';
-      File(path).writeAsBytesSync(List<int>.filled(4096, 7));
+    test(
+      'a damaged file is moved aside and a clean database is started',
+      () async {
+        final String path = '${dir.path}/broken.db';
+        File(path).writeAsBytesSync(List<int>.filled(4096, 7));
 
-      final DatabaseService service = DatabaseService(
-        factory: databaseFactoryFfi,
-        path: path,
-        clock: FakeClock(DateTime.utc(2026, 10, 4)),
-      );
-      await service.open();
+        final DatabaseService service = DatabaseService(
+          factory: databaseFactoryFfi,
+          path: path,
+          clock: FakeClock(DateTime.utc(2026, 10, 4)),
+        );
+        await service.open();
 
-      expect(service.outcome, StorageOpenOutcome.quarantined);
-      expect(service.isDegraded.value, isTrue);
-      expect(
-        dir.listSync().where((FileSystemEntity e) => e.path.contains('.corrupt-')),
-        isNotEmpty,
-      );
-      expect((await service.saveCamera(testCamera(id: 'fresh'))).isOk, isTrue);
-      expect((await service.loadCameras()).valueOrNull!.single.id, 'fresh');
-      await service.close();
-    });
+        expect(service.outcome, StorageOpenOutcome.quarantined);
+        expect(service.isDegraded.value, isTrue);
+        expect(
+          dir.listSync().where(
+            (FileSystemEntity e) => e.path.contains('.corrupt-'),
+          ),
+          isNotEmpty,
+        );
+        expect(
+          (await service.saveCamera(testCamera(id: 'fresh'))).isOk,
+          isTrue,
+        );
+        expect((await service.loadCameras()).valueOrNull!.single.id, 'fresh');
+        await service.close();
+      },
+    );
   });
 }

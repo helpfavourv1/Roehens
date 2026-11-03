@@ -10,8 +10,8 @@ LanInfo lanWith(List<LanInterface> interfaces, {String? gateway}) {
   const MethodChannel channel = MethodChannel('test/lan');
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(channel, (MethodCall call) async {
-    return call.method == 'gateway' ? gateway : null;
-  });
+        return call.method == 'gateway' ? gateway : null;
+      });
   addTearDown(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, null);
@@ -31,8 +31,10 @@ void main() {
 
   group('LanInfo', () {
     test('uses the real gateway when the phone reports one', () async {
-      final LanSnapshot snapshot =
-          (await lanWith(wifi, gateway: '192.168.1.254').read())!;
+      final LanSnapshot snapshot = (await lanWith(
+        wifi,
+        gateway: '192.168.1.254',
+      ).read())!;
       expect(snapshot.address, '192.168.1.20');
       expect(snapshot.gateway, '192.168.1.254');
       expect(snapshot.gatewayIsGuess, isFalse);
@@ -65,7 +67,10 @@ void main() {
   group('outcomes', () {
     test('a connection or a refusal means the network is reachable', () {
       expect(
-        LocalNetworkPermissionService.outcomeFor(connected: true, timedOut: false),
+        LocalNetworkPermissionService.outcomeFor(
+          connected: true,
+          timedOut: false,
+        ),
         LocalNetworkOutcome.reachable,
       );
       for (final int code in <int>[61, 111]) {
@@ -95,7 +100,10 @@ void main() {
 
     test('a timeout or an unknown error proves nothing', () {
       expect(
-        LocalNetworkPermissionService.outcomeFor(connected: false, timedOut: true),
+        LocalNetworkPermissionService.outcomeFor(
+          connected: false,
+          timedOut: true,
+        ),
         LocalNetworkOutcome.inconclusive,
       );
       expect(
@@ -118,7 +126,9 @@ void main() {
         PermissionStatus.permanentlyDenied,
       );
       expect(
-        LocalNetworkPermissionService.statusFor(LocalNetworkOutcome.inconclusive),
+        LocalNetworkPermissionService.statusFor(
+          LocalNetworkOutcome.inconclusive,
+        ),
         PermissionStatus.unknown,
       );
     });
@@ -126,47 +136,57 @@ void main() {
 
   group('service', () {
     test('Android needs no permission', () async {
-      final LocalNetworkPermissionService service = LocalNetworkPermissionService(
-        lan: lanWith(wifi),
-        channel: MulticastLockChannel(isAndroid: false),
-        isIos: false,
-        probe: (String host) async => fail('must not probe'),
-      );
+      final LocalNetworkPermissionService service =
+          LocalNetworkPermissionService(
+            lan: lanWith(wifi),
+            channel: MulticastLockChannel(isAndroid: false),
+            isIos: false,
+            probe: (String host) async => fail('must not probe'),
+          );
       expect(await service.localNetworkStatus(), PermissionStatus.notRequired);
       expect(await service.requestLocalNetwork(), PermissionStatus.notRequired);
     });
 
     test('iOS probes the gateway and remembers the answer', () async {
       String? probed;
-      final LocalNetworkPermissionService service = LocalNetworkPermissionService(
-        lan: lanWith(wifi),
-        isIos: true,
-        probe: (String host) async {
-          probed = host;
-          return LocalNetworkOutcome.blocked;
-        },
-      );
+      final LocalNetworkPermissionService service =
+          LocalNetworkPermissionService(
+            lan: lanWith(wifi),
+            isIos: true,
+            probe: (String host) async {
+              probed = host;
+              return LocalNetworkOutcome.blocked;
+            },
+          );
       expect(await service.localNetworkStatus(), PermissionStatus.unknown);
-      expect(await service.requestLocalNetwork(), PermissionStatus.permanentlyDenied);
+      expect(
+        await service.requestLocalNetwork(),
+        PermissionStatus.permanentlyDenied,
+      );
       expect(probed, '192.168.1.1');
-      expect(await service.localNetworkStatus(), PermissionStatus.permanentlyDenied);
+      expect(
+        await service.localNetworkStatus(),
+        PermissionStatus.permanentlyDenied,
+      );
     });
 
     test('iOS reports granted when the network answers', () async {
-      final LocalNetworkPermissionService service = LocalNetworkPermissionService(
-        lan: lanWith(wifi),
-        isIos: true,
-        probe: (String host) async => LocalNetworkOutcome.reachable,
-      );
+      final LocalNetworkPermissionService service =
+          LocalNetworkPermissionService(
+            lan: lanWith(wifi),
+            isIos: true,
+            probe: (String host) async => LocalNetworkOutcome.reachable,
+          );
       expect(await service.requestLocalNetwork(), PermissionStatus.granted);
     });
 
     test('iOS without a local network cannot tell', () async {
-      final LocalNetworkPermissionService service = LocalNetworkPermissionService(
-        lan: lanWith(const <LanInterface>[]),
-        isIos: true,
-        probe: (String host) async => fail('must not probe'),
-      );
+      final LocalNetworkPermissionService service =
+          LocalNetworkPermissionService(
+            lan: lanWith(const <LanInterface>[]),
+            isIos: true,
+            probe: (String host) async => fail('must not probe'),
+          );
       expect(await service.requestLocalNetwork(), PermissionStatus.unknown);
     });
   });

@@ -11,7 +11,11 @@ import 'package:roehens/utils/context_extensions.dart';
 /// the top edge, and nothing at all when there is no ad. It grows and shrinks
 /// over 200 ms, so the content above moves once and never jumps.
 class BannerAdSlot extends StatelessWidget {
-  const BannerAdSlot({super.key, required this.state, required this.viewBuilder});
+  const BannerAdSlot({
+    super.key,
+    required this.state,
+    required this.viewBuilder,
+  });
 
   final ValueListenable<AdSlotState> state;
 
@@ -33,11 +37,16 @@ class BannerAdSlot extends StatelessWidget {
               ? DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border(
-                      top: BorderSide(color: context.colors.borderSubtle, width: AppSizes.hairline),
+                      top: BorderSide(
+                        color: context.colors.borderSubtle,
+                        width: AppSizes.hairline,
+                      ),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AppSpacing.sm,
+                    ),
                     child: SizedBox(
                       height: slot.height.clamp(0, AppSizes.bannerMaxHeight),
                       width: double.infinity,

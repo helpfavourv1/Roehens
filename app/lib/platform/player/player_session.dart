@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:media_kit/media_kit.dart' hide PlayerState;
 import 'package:media_kit_video/media_kit_video.dart';
@@ -53,8 +54,8 @@ class MediaKitPlayerSession implements PlayerSessionContract, FrameCapturable {
     this.clock = const SystemClock(),
     this.logger,
   }) : _player = Player(
-          configuration: const PlayerConfiguration(logLevel: MPVLogLevel.error),
-        ) {
+         configuration: const PlayerConfiguration(logLevel: MPVLogLevel.error),
+       ) {
     _controller = VideoController(_player);
   }
 
@@ -65,8 +66,9 @@ class MediaKitPlayerSession implements PlayerSessionContract, FrameCapturable {
   final Player _player;
   late final VideoController _controller;
 
-  final ValueNotifier<PlayerState> _state =
-      ValueNotifier<PlayerState>(const PlayerIdle());
+  final ValueNotifier<PlayerState> _state = ValueNotifier<PlayerState>(
+    const PlayerIdle(),
+  );
   final ValueNotifier<VideoSize?> _size = ValueNotifier<VideoSize?>(null);
 
   Timer? _timer;
@@ -100,8 +102,10 @@ class MediaKitPlayerSession implements PlayerSessionContract, FrameCapturable {
     _state.value = const PlayerConnecting();
 
     await _applyOptions(source);
-    final Uri address =
-        StreamUrlUtils.withCredentials(source.uri, source.credentials);
+    final Uri address = StreamUrlUtils.withCredentials(
+      source.uri,
+      source.credentials,
+    );
     await _player.open(Media(address.toString()));
 
     _openedAt = clock.now();
@@ -201,8 +205,9 @@ class MediaKitPlayerSession implements PlayerSessionContract, FrameCapturable {
         );
         return;
       }
-      final PlayerState next =
-          waitingForData ? const PlayerBuffering() : const PlayerPlaying();
+      final PlayerState next = waitingForData
+          ? const PlayerBuffering()
+          : const PlayerPlaying();
       if (_state.value != next) {
         _state.value = next;
       }

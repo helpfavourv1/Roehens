@@ -10,14 +10,17 @@ import 'package:xml/xml.dart';
 import '../../support/fakes.dart';
 
 XmlElement find(XmlDocument document, String local) {
-  return document.rootElement.descendantElements
-      .firstWhere((XmlElement e) => e.name.local == local);
+  return document.rootElement.descendantElements.firstWhere(
+    (XmlElement e) => e.name.local == local,
+  );
 }
 
 void main() {
   final OnvifMessageBuilder builder = OnvifMessageBuilder(clock: FakeClock());
-  const CameraCredentials login =
-      CameraCredentials(username: 'admin', password: 'pw12345');
+  const CameraCredentials login = CameraCredentials(
+    username: 'admin',
+    password: 'pw12345',
+  );
 
   test('the password digest matches the WS-Security reference value', () {
     // Example from the WS-Security UsernameToken profile.
@@ -31,7 +34,9 @@ void main() {
 
   group('envelope', () {
     test('a signed request carries a UsernameToken with digest and nonce', () {
-      final Uint8List nonce = Uint8List.fromList(base64.decode('LKqI6G/AikKCQrN0zqZFlg=='));
+      final Uint8List nonce = Uint8List.fromList(
+        base64.decode('LKqI6G/AikKCQrN0zqZFlg=='),
+      );
       final String text = builder.envelope(
         '<tds:GetDeviceInformation/>',
         auth: const OnvifAuth(login),
@@ -50,7 +55,11 @@ void main() {
           password: 'pw12345',
         ),
       );
-      expect(text.contains('pw12345'), isFalse, reason: 'password must not be sent');
+      expect(
+        text.contains('pw12345'),
+        isFalse,
+        reason: 'password must not be sent',
+      );
     });
 
     test('the time offset moves the signed timestamp', () {
@@ -61,7 +70,10 @@ void main() {
         '<tds:GetProfiles/>',
         auth: const OnvifAuth(login, timeOffset: Duration(hours: 8)),
       );
-      expect(find(XmlDocument.parse(text), 'Created').innerText, '2026-10-05T20:00:00Z');
+      expect(
+        find(XmlDocument.parse(text), 'Created').innerText,
+        '2026-10-05T20:00:00Z',
+      );
     });
 
     test('a fresh random nonce is used each time', () {
@@ -77,14 +89,18 @@ void main() {
       final String text = builder.getProfiles();
       expect(text.contains('Security'), isFalse);
       expect(
-        builder.getProfiles(auth: const OnvifAuth(CameraCredentials.none)).contains('Security'),
+        builder
+            .getProfiles(auth: const OnvifAuth(CameraCredentials.none))
+            .contains('Security'),
         isFalse,
       );
     });
 
     test('special characters in the username are escaped', () {
       final String text = builder.getDeviceInformation(
-        auth: const OnvifAuth(CameraCredentials(username: 'a<b&c', password: 'x')),
+        auth: const OnvifAuth(
+          CameraCredentials(username: 'a<b&c', password: 'x'),
+        ),
       );
       expect(find(XmlDocument.parse(text), 'Username').innerText, 'a<b&c');
     });
@@ -107,8 +123,9 @@ void main() {
     });
 
     test('GetStreamUri asks for RTSP and names the profile', () {
-      final XmlDocument document =
-          XmlDocument.parse(builder.getStreamUri('profile_1'));
+      final XmlDocument document = XmlDocument.parse(
+        builder.getStreamUri('profile_1'),
+      );
       expect(find(document, 'ProfileToken').innerText, 'profile_1');
       expect(find(document, 'Protocol').innerText, 'RTSP');
       expect(find(document, 'Stream').innerText, 'RTP-Unicast');
@@ -149,15 +166,19 @@ void main() {
     test('stop halts both pan-tilt and zoom', () {
       final XmlDocument document = XmlDocument.parse(builder.stopMove('p'));
       final List<String> flags = document.rootElement.descendantElements
-          .where((XmlElement e) => e.name.local == 'PanTilt' || e.name.local == 'Zoom')
+          .where(
+            (XmlElement e) =>
+                e.name.local == 'PanTilt' || e.name.local == 'Zoom',
+          )
           .map((XmlElement e) => e.innerText)
           .toList();
       expect(flags, <String>['true', 'true']);
     });
 
     test('a preset request names the preset', () {
-      final XmlDocument document =
-          XmlDocument.parse(builder.ptzRequest(const PtzCommand.preset('9'), 'p'));
+      final XmlDocument document = XmlDocument.parse(
+        builder.ptzRequest(const PtzCommand.preset('9'), 'p'),
+      );
       expect(find(document, 'PresetToken').innerText, '9');
     });
   });

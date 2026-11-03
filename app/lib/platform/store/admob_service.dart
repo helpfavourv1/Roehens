@@ -25,7 +25,10 @@ abstract interface class AdsBackend {
   Future<void> initialize();
 
   /// Loads an anchored adaptive banner for [widthDp]; null when it fails.
-  Future<LoadedBanner?> loadBanner({required String unitId, required int widthDp});
+  Future<LoadedBanner?> loadBanner({
+    required String unitId,
+    required int widthDp,
+  });
 }
 
 class GoogleAdsBackend implements AdsBackend {
@@ -43,7 +46,8 @@ class GoogleAdsBackend implements AdsBackend {
     // to 15% of the screen height, which can exceed the 100 dp slot and would
     // clip the ad. The older method stays until the slot design changes.
     // ignore: deprecated_member_use
-    final Future<ads.AnchoredAdaptiveBannerAdSize?> request = ads.AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(widthDp);
+    final Future<ads.AnchoredAdaptiveBannerAdSize?> request =
+        ads.AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(widthDp);
     final ads.AnchoredAdaptiveBannerAdSize? size = await request;
     if (size == null) {
       return null;

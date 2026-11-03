@@ -11,8 +11,11 @@ import 'package:roehens/core/providers/safe_notifier.dart';
 /// The active Live layout and the page being shown. The layout holds the
 /// camera order; the page is session state and is not saved.
 class LayoutProvider extends SafeValueNotifier<GridLayout> {
-  LayoutProvider({required this._storage, required this._store, required this._logger})
-      : super(_defaultLayout);
+  LayoutProvider({
+    required this._storage,
+    required this._store,
+    required this._logger,
+  }) : super(_defaultLayout);
 
   static const String defaultLayoutId = 'default';
   static const int defaultPageSize = 4;
@@ -38,8 +41,9 @@ class LayoutProvider extends SafeValueNotifier<GridLayout> {
     if (layouts.isEmpty) {
       return;
     }
-    final String? activeId =
-        (await _store.getString(StorageKeys.activeLayoutId)).valueOrNull;
+    final String? activeId = (await _store.getString(
+      StorageKeys.activeLayoutId,
+    )).valueOrNull;
     GridLayout chosen = layouts.first;
     for (final GridLayout layout in layouts) {
       if (layout.id == activeId) {
@@ -69,7 +73,9 @@ class LayoutProvider extends SafeValueNotifier<GridLayout> {
 
   /// Saves a new camera order for the layout.
   Future<void> setCameraOrder(List<String> cameraIds) {
-    return _change(value.copyWith(cameraIds: List<String>.unmodifiable(cameraIds)));
+    return _change(
+      value.copyWith(cameraIds: List<String>.unmodifiable(cameraIds)),
+    );
   }
 
   /// Brings the saved order in line with the cameras that exist: new cameras

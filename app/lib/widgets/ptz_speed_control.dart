@@ -34,7 +34,9 @@ class PtzSpeedControl extends StatelessWidget {
       children: <Widget>[
         Text(
           label,
-          style: context.type.callout.copyWith(color: context.colors.textSecondary),
+          style: context.type.callout.copyWith(
+            color: context.colors.textSecondary,
+          ),
         ),
         const SizedBox(height: AppSpacing.xs),
         AppSlider(

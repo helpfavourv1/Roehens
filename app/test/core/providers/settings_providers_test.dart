@@ -36,8 +36,10 @@ void main() {
       await settings.setThemeMode(AppThemeMode.light);
       await settings.setHaptics(enabled: false);
 
-      final SettingsProvider restarted =
-          SettingsProvider(store: store, logger: FakeLogger());
+      final SettingsProvider restarted = SettingsProvider(
+        store: store,
+        logger: FakeLogger(),
+      );
       await restarted.load();
 
       expect(restarted.value.themeMode, AppThemeMode.light);
@@ -57,13 +59,16 @@ void main() {
       expect(settings.value, const AppSettings());
     });
 
-    test('an unsupported auto-cycle interval falls back to the default', () async {
-      await settings.setAutoCycle(enabled: true, seconds: 7);
-      expect(settings.value.autoCycleSeconds, Limits.defaultAutoCycleSeconds);
+    test(
+      'an unsupported auto-cycle interval falls back to the default',
+      () async {
+        await settings.setAutoCycle(enabled: true, seconds: 7);
+        expect(settings.value.autoCycleSeconds, Limits.defaultAutoCycleSeconds);
 
-      await settings.setAutoCycle(enabled: true, seconds: 30);
-      expect(settings.value.autoCycleSeconds, 30);
-    });
+        await settings.setAutoCycle(enabled: true, seconds: 30);
+        expect(settings.value.autoCycleSeconds, 30);
+      },
+    );
 
     test('a null language follows the system', () async {
       await settings.setLocaleCode('fr');
@@ -80,8 +85,10 @@ void main() {
     });
 
     test('a late save after dispose does not throw', () async {
-      final SettingsProvider short =
-          SettingsProvider(store: store, logger: FakeLogger());
+      final SettingsProvider short = SettingsProvider(
+        store: store,
+        logger: FakeLogger(),
+      );
       final Future<void> pending = short.setThemeMode(AppThemeMode.dark);
       short.dispose();
       await pending;
@@ -109,7 +116,10 @@ void main() {
       expect(locale.value, isNull);
 
       await locale.setLanguage('zh_Hans');
-      expect(locale.value, const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'));
+      expect(
+        locale.value,
+        const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+      );
       await locale.setLanguage('es_419');
       expect(locale.value, const Locale('es', '419'));
       await locale.setLanguage('pt_BR');
@@ -130,9 +140,14 @@ void main() {
 
     test('the language list matches the specification', () {
       expect(appLanguages, hasLength(24));
-      expect(appLanguages.map((AppLanguage l) => l.code).toSet(), hasLength(24));
       expect(
-        appLanguages.where((AppLanguage l) => l.isRtl).map((AppLanguage l) => l.code),
+        appLanguages.map((AppLanguage l) => l.code).toSet(),
+        hasLength(24),
+      );
+      expect(
+        appLanguages
+            .where((AppLanguage l) => l.isRtl)
+            .map((AppLanguage l) => l.code),
         <String>['ar', 'ur', 'fa', 'he'],
       );
       for (final AppLanguage language in appLanguages) {
@@ -142,28 +157,32 @@ void main() {
   });
 
   group('OnboardingProvider', () {
-    test('a first run needs onboarding and finishing it is remembered', () async {
-      final OnboardingProvider onboarding = OnboardingProvider(store: store);
-      expect(onboarding.isLoaded, isFalse);
-      await onboarding.load();
-      expect(onboarding.isLoaded, isTrue);
-      expect(onboarding.needsOnboarding, isTrue);
+    test(
+      'a first run needs onboarding and finishing it is remembered',
+      () async {
+        final OnboardingProvider onboarding = OnboardingProvider(store: store);
+        expect(onboarding.isLoaded, isFalse);
+        await onboarding.load();
+        expect(onboarding.isLoaded, isTrue);
+        expect(onboarding.needsOnboarding, isTrue);
 
-      await onboarding.markLocalNetworkRationaleSeen();
-      await onboarding.complete();
+        await onboarding.markLocalNetworkRationaleSeen();
+        await onboarding.complete();
 
-      final OnboardingProvider restarted = OnboardingProvider(store: store);
-      await restarted.load();
-      expect(restarted.needsOnboarding, isFalse);
-      expect(restarted.value.localNetworkRationaleSeen, isTrue);
-      onboarding.dispose();
-      restarted.dispose();
-    });
+        final OnboardingProvider restarted = OnboardingProvider(store: store);
+        await restarted.load();
+        expect(restarted.needsOnboarding, isFalse);
+        expect(restarted.value.localNetworkRationaleSeen, isTrue);
+        onboarding.dispose();
+        restarted.dispose();
+      },
+    );
 
     test('an older completed version shows onboarding again', () async {
       store.values[StorageKeys.onboarding] = jsonEncode(
-        const OnboardingState(completedVersion: AppConstants.onboardingVersion - 1)
-            .toJson(),
+        const OnboardingState(
+          completedVersion: AppConstants.onboardingVersion - 1,
+        ).toJson(),
       );
       final OnboardingProvider onboarding = OnboardingProvider(store: store);
       await onboarding.load();

@@ -14,8 +14,10 @@ import '../../support/mjpeg_fixtures.dart';
 typedef Handler = FutureOr<void> Function(HttpRequest request);
 
 Future<Uri> serve(Handler handler) async {
-  final HttpServer server =
-      await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+  final HttpServer server = await HttpServer.bind(
+    InternetAddress.loopbackIPv4,
+    0,
+  );
   addTearDown(() => server.close(force: true));
   server.listen((HttpRequest request) async {
     try {
@@ -59,16 +61,20 @@ void main() {
     for (int i = 0; i < 4; i++) fakeJpeg(i, size: 500 + i * 100),
   ];
 
-  test('streams every frame in order and ends when the server closes', () async {
-    final Uri uri = await serve((HttpRequest r) => streamFrames(r, frames));
-    final (List<Uint8List> got, Object? error) =
-        await collect(MjpegClient().frames(uri));
-    expect(error, isNull);
-    expect(got.length, frames.length);
-    for (int i = 0; i < frames.length; i++) {
-      expect(got[i], frames[i]);
-    }
-  });
+  test(
+    'streams every frame in order and ends when the server closes',
+    () async {
+      final Uri uri = await serve((HttpRequest r) => streamFrames(r, frames));
+      final (List<Uint8List> got, Object? error) = await collect(
+        MjpegClient().frames(uri),
+      );
+      expect(error, isNull);
+      expect(got.length, frames.length);
+      for (int i = 0; i < frames.length; i++) {
+        expect(got[i], frames[i]);
+      }
+    },
+  );
 
   test('answers a Basic authentication challenge', () async {
     final String expected =
@@ -99,43 +105,53 @@ void main() {
     expect(got.length, frames.length);
   });
 
-  test('wrong or missing credentials are reported as an authentication failure', () async {
-    final Uri uri = await serve((HttpRequest r) async {
-      r.response.statusCode = HttpStatus.unauthorized;
-      r.response.headers.set(
-        HttpHeaders.wwwAuthenticateHeader,
-        'Basic realm="cam"',
-      );
-      await r.response.close();
-    });
+  test(
+    'wrong or missing credentials are reported as an authentication failure',
+    () async {
+      final Uri uri = await serve((HttpRequest r) async {
+        r.response.statusCode = HttpStatus.unauthorized;
+        r.response.headers.set(
+          HttpHeaders.wwwAuthenticateHeader,
+          'Basic realm="cam"',
+        );
+        await r.response.close();
+      });
 
-    final (List<Uint8List> got, Object? error) =
-        await collect(MjpegClient().frames(uri));
-    expect(got, isEmpty);
-    expect(error, isA<AppError>());
-    expect((error! as AppError).errorClass, ErrorClass.authFailed);
-  });
-
-  test('wrong credentials fail fast instead of retrying until a timeout', () async {
-    final Uri uri = await serve((HttpRequest r) async {
-      r.response.statusCode = HttpStatus.unauthorized;
-      r.response.headers.set(
-        HttpHeaders.wwwAuthenticateHeader,
-        'Basic realm="cam"',
+      final (List<Uint8List> got, Object? error) = await collect(
+        MjpegClient().frames(uri),
       );
-      await r.response.close();
-    });
-    final Stopwatch clock = Stopwatch()..start();
-    final (List<Uint8List> got, Object? error) = await collect(
-      MjpegClient(connectTimeout: const Duration(seconds: 8)).frames(
-        uri,
-        credentials: const CameraCredentials(username: 'admin', password: 'wrong'),
-      ),
-    );
-    expect(got, isEmpty);
-    expect((error! as AppError).errorClass, ErrorClass.authFailed);
-    expect(clock.elapsedMilliseconds, lessThan(3000));
-  });
+      expect(got, isEmpty);
+      expect(error, isA<AppError>());
+      expect((error! as AppError).errorClass, ErrorClass.authFailed);
+    },
+  );
+
+  test(
+    'wrong credentials fail fast instead of retrying until a timeout',
+    () async {
+      final Uri uri = await serve((HttpRequest r) async {
+        r.response.statusCode = HttpStatus.unauthorized;
+        r.response.headers.set(
+          HttpHeaders.wwwAuthenticateHeader,
+          'Basic realm="cam"',
+        );
+        await r.response.close();
+      });
+      final Stopwatch clock = Stopwatch()..start();
+      final (List<Uint8List> got, Object? error) = await collect(
+        MjpegClient(connectTimeout: const Duration(seconds: 8)).frames(
+          uri,
+          credentials: const CameraCredentials(
+            username: 'admin',
+            password: 'wrong',
+          ),
+        ),
+      );
+      expect(got, isEmpty);
+      expect((error! as AppError).errorClass, ErrorClass.authFailed);
+      expect(clock.elapsedMilliseconds, lessThan(3000));
+    },
+  );
 
   test('HTTP statuses map to the documented error classes', () async {
     for (final (int status, ErrorClass expected) in <(int, ErrorClass)>[
@@ -146,42 +162,47 @@ void main() {
         r.response.statusCode = status;
         await r.response.close();
       });
-      final (List<Uint8List> got, Object? error) =
-          await collect(MjpegClient().frames(uri));
+      final (List<Uint8List> got, Object? error) = await collect(
+        MjpegClient().frames(uri),
+      );
       expect(got, isEmpty);
       expect((error! as AppError).errorClass, expected, reason: '$status');
     }
   });
 
-  test('a stalled stream is reported as dropped after the idle timeout', () async {
-    final Uri uri = await serve((HttpRequest r) async {
-      final HttpResponse response = r.response;
-      response.bufferOutput = false;
-      response.headers.set(
-        HttpHeaders.contentTypeHeader,
-        'multipart/x-mixed-replace; boundary=frame',
-      );
-      response.add(multipartPart(frames[0]));
-      await response.flush();
-      await Future<void>.delayed(const Duration(seconds: 5));
-    });
+  test(
+    'a stalled stream is reported as dropped after the idle timeout',
+    () async {
+      final Uri uri = await serve((HttpRequest r) async {
+        final HttpResponse response = r.response;
+        response.bufferOutput = false;
+        response.headers.set(
+          HttpHeaders.contentTypeHeader,
+          'multipart/x-mixed-replace; boundary=frame',
+        );
+        response.add(multipartPart(frames[0]));
+        await response.flush();
+        await Future<void>.delayed(const Duration(seconds: 5));
+      });
 
-    final (List<Uint8List> got, Object? error) = await collect(
-      MjpegClient(idleTimeout: const Duration(milliseconds: 300)).frames(uri),
-    );
-    expect(got.length, 1);
-    expect((error! as AppError).errorClass, ErrorClass.networkUnreachable);
-  });
+      final (List<Uint8List> got, Object? error) = await collect(
+        MjpegClient(idleTimeout: const Duration(milliseconds: 300)).frames(uri),
+      );
+      expect(got.length, 1);
+      expect((error! as AppError).errorClass, ErrorClass.networkUnreachable);
+    },
+  );
 
   test('an unreachable host is a network error', () async {
-    final HttpServer closed =
-        await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+    final HttpServer closed = await HttpServer.bind(
+      InternetAddress.loopbackIPv4,
+      0,
+    );
     final int port = closed.port;
     await closed.close(force: true);
     final (List<Uint8List> got, Object? error) = await collect(
-      MjpegClient(connectTimeout: const Duration(seconds: 2)).frames(
-        Uri.parse('http://127.0.0.1:$port/video.mjpg'),
-      ),
+      MjpegClient(connectTimeout: const Duration(seconds: 2))
+          .frames(Uri.parse('http://127.0.0.1:$port/video.mjpg')),
     );
     expect(got, isEmpty);
     expect((error! as AppError).errorClass, ErrorClass.networkUnreachable);
@@ -204,15 +225,17 @@ void main() {
     });
 
     late HttpClient created;
-    final MjpegClient client =
-        MjpegClient(clientFactory: () => created = HttpClient());
+    final MjpegClient client = MjpegClient(
+      clientFactory: () => created = HttpClient(),
+    );
     final Completer<void> first = Completer<void>();
-    final StreamSubscription<Uint8List> subscription =
-        client.frames(uri).listen((Uint8List frame) {
-      if (!first.isCompleted) {
-        first.complete();
-      }
-    });
+    final StreamSubscription<Uint8List> subscription = client
+        .frames(uri)
+        .listen((Uint8List frame) {
+          if (!first.isCompleted) {
+            first.complete();
+          }
+        });
     await first.future.timeout(
       const Duration(seconds: 5),
       onTimeout: () => fail('no frame arrived'),
@@ -234,19 +257,22 @@ void main() {
       expect(await MjpegClient().fetchSnapshot(uri), image);
     });
 
-    test('a snapshot that is not a complete JPEG is unsupported media', () async {
-      final Uri uri = await serve((HttpRequest r) async {
-        r.response.headers.set(HttpHeaders.contentTypeHeader, 'image/jpeg');
-        r.response.add(utf8.encode('<html>error</html>'));
-        await r.response.close();
-      });
-      try {
-        await MjpegClient().fetchSnapshot(uri);
-        fail('expected an AppError');
-      } on AppError catch (error) {
-        expect(error.errorClass, ErrorClass.unsupportedMedia);
-      }
-    });
+    test(
+      'a snapshot that is not a complete JPEG is unsupported media',
+      () async {
+        final Uri uri = await serve((HttpRequest r) async {
+          r.response.headers.set(HttpHeaders.contentTypeHeader, 'image/jpeg');
+          r.response.add(utf8.encode('<html>error</html>'));
+          await r.response.close();
+        });
+        try {
+          await MjpegClient().fetchSnapshot(uri);
+          fail('expected an AppError');
+        } on AppError catch (error) {
+          expect(error.errorClass, ErrorClass.unsupportedMedia);
+        }
+      },
+    );
 
     test('a stream address that serves one image yields one frame', () async {
       final Uint8List image = fakeJpeg(3);
@@ -255,8 +281,9 @@ void main() {
         r.response.add(image);
         await r.response.close();
       });
-      final (List<Uint8List> got, Object? error) =
-          await collect(MjpegClient().frames(uri));
+      final (List<Uint8List> got, Object? error) = await collect(
+        MjpegClient().frames(uri),
+      );
       expect(error, isNull);
       expect(got, <Uint8List>[image]);
     });

@@ -30,18 +30,19 @@ enum StreamStatus {
   }
 
   AppIconName get icon => switch (this) {
-        StreamStatus.live => AppIconName.live,
-        StreamStatus.connecting || StreamStatus.reconnecting => AppIconName.refresh,
-        StreamStatus.error => AppIconName.warning,
-        StreamStatus.offline => AppIconName.wifiOff,
-      };
+    StreamStatus.live => AppIconName.live,
+    StreamStatus.connecting || StreamStatus.reconnecting => AppIconName.refresh,
+    StreamStatus.error => AppIconName.warning,
+    StreamStatus.offline => AppIconName.wifiOff,
+  };
 
   Color color(AppColors colors) => switch (this) {
-        StreamStatus.live => colors.streamLive,
-        StreamStatus.connecting || StreamStatus.reconnecting => colors.streamConnecting,
-        StreamStatus.error => colors.streamError,
-        StreamStatus.offline => colors.streamOffline,
-      };
+    StreamStatus.live => colors.streamLive,
+    StreamStatus.connecting ||
+    StreamStatus.reconnecting => colors.streamConnecting,
+    StreamStatus.error => colors.streamError,
+    StreamStatus.offline => colors.streamOffline,
+  };
 }
 
 /// Status as icon, text and color together, on a dark plate so it reads over
@@ -92,7 +93,8 @@ class _StreamStatusPillState extends State<StreamStatusPill>
   }
 
   void _syncPulse() {
-    final bool pulse = widget.status == StreamStatus.live && !context.reduceMotion;
+    final bool pulse =
+        widget.status == StreamStatus.live && !context.reduceMotion;
     if (pulse && !_pulse.isAnimating) {
       _pulse.repeat(reverse: true);
     } else if (!pulse && _pulse.isAnimating) {
@@ -112,7 +114,10 @@ class _StreamStatusPillState extends State<StreamStatusPill>
     final AppColors colors = context.colors;
     final Color tone = widget.status.color(colors);
     final Widget icon = FadeTransition(
-      opacity: Tween<double>(begin: 1, end: AppMotion.pulseMinOpacity).animate(_pulse),
+      opacity: Tween<double>(
+        begin: 1,
+        end: AppMotion.pulseMinOpacity,
+      ).animate(_pulse),
       child: AppIcon(
         widget.status.icon,
         size: AppSizes.iconChipGlyph,
@@ -142,7 +147,9 @@ class _StreamStatusPillState extends State<StreamStatusPill>
                   widget.label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  textScaler: context.clampedTextScaler(max: AppSizes.tileOverlayMaxTextScale),
+                  textScaler: context.clampedTextScaler(
+                    max: AppSizes.tileOverlayMaxTextScale,
+                  ),
                   style: context.type.data.copyWith(color: colors.onVideoText),
                 ),
               ),
@@ -153,7 +160,11 @@ class _StreamStatusPillState extends State<StreamStatusPill>
     );
 
     if (widget.onTap == null) {
-      return Semantics(label: widget.label, excludeSemantics: true, child: pill);
+      return Semantics(
+        label: widget.label,
+        excludeSemantics: true,
+        child: pill,
+      );
     }
     return AppPressable(
       onTap: widget.onTap,

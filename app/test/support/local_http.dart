@@ -9,8 +9,10 @@ import 'package:flutter_test/flutter_test.dart';
 Future<Uri> serveLocal(
   FutureOr<void> Function(HttpRequest request) handler,
 ) async {
-  final HttpServer server =
-      await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+  final HttpServer server = await HttpServer.bind(
+    InternetAddress.loopbackIPv4,
+    0,
+  );
   addTearDown(() => server.close(force: true));
   server.listen((HttpRequest request) async {
     try {

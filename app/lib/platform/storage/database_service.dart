@@ -110,7 +110,11 @@ class DatabaseService implements StorageContract {
         _logger?.warning('storage', 'damaged database moved aside');
         return;
       } catch (error) {
-        _logger?.error('storage', 'clean database failed to open', error: error);
+        _logger?.error(
+          'storage',
+          'clean database failed to open',
+          error: error,
+        );
       }
     }
     _enterFallback(StorageOpenOutcome.inMemory);
@@ -155,8 +159,9 @@ class DatabaseService implements StorageContract {
       ),
     );
     try {
-      final List<Map<String, Object?>> check =
-          await db.rawQuery('PRAGMA quick_check');
+      final List<Map<String, Object?>> check = await db.rawQuery(
+        'PRAGMA quick_check',
+      );
       final Object? verdict = check.isEmpty ? null : check.first.values.first;
       if (verdict != 'ok') {
         throw StateError('quick_check failed: $verdict');
@@ -336,8 +341,10 @@ class DatabaseService implements StorageContract {
       if (db == null) {
         return _memLayouts.values.toList();
       }
-      final List<Map<String, Object?>> rows =
-          await db.query('grid_layouts', orderBy: 'id ASC');
+      final List<Map<String, Object?>> rows = await db.query(
+        'grid_layouts',
+        orderBy: 'id ASC',
+      );
       return rows.map((Map<String, Object?> row) {
         final List<Object?> ids =
             jsonDecode(row['camera_ids']! as String) as List<Object?>;
@@ -360,17 +367,13 @@ class DatabaseService implements StorageContract {
         _memLayouts[layout.id] = layout;
         return;
       }
-      await db.insert(
-        'grid_layouts',
-        <String, Object?>{
-          'id': layout.id,
-          'grid_columns': layout.columns,
-          'grid_rows': layout.rows,
-          'camera_ids': jsonEncode(layout.cameraIds),
-          'auto_cycle_seconds': layout.autoCycleSeconds,
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      await db.insert('grid_layouts', <String, Object?>{
+        'id': layout.id,
+        'grid_columns': layout.columns,
+        'grid_rows': layout.rows,
+        'camera_ids': jsonEncode(layout.cameraIds),
+        'auto_cycle_seconds': layout.autoCycleSeconds,
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
@@ -382,7 +385,11 @@ class DatabaseService implements StorageContract {
         _memLayouts.remove(id);
         return;
       }
-      await db.delete('grid_layouts', where: 'id = ?', whereArgs: <Object?>[id]);
+      await db.delete(
+        'grid_layouts',
+        where: 'id = ?',
+        whereArgs: <Object?>[id],
+      );
     });
   }
 
@@ -424,8 +431,16 @@ class DatabaseService implements StorageContract {
   }
 
   AppError _failure(Object error, StackTrace stack) {
-    _logger?.error('storage', 'operation failed', error: error, stackTrace: stack);
-    return AppError(ErrorClass.storageFailure, detail: error.runtimeType.toString());
+    _logger?.error(
+      'storage',
+      'operation failed',
+      error: error,
+      stackTrace: stack,
+    );
+    return AppError(
+      ErrorClass.storageFailure,
+      detail: error.runtimeType.toString(),
+    );
   }
 
   Map<String, Object?> _cameraToRow(Camera c) {

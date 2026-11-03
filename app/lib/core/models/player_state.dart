@@ -16,8 +16,7 @@ sealed class PlayerState {
       PlayerConnecting() ||
       PlayerBuffering() ||
       PlayerPlaying() ||
-      PlayerReconnecting() =>
-        true,
+      PlayerReconnecting() => true,
       PlayerIdle() || PlayerError() || PlayerStopped() => false,
     };
   }

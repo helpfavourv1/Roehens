@@ -90,11 +90,15 @@ class DiscoveryProvider extends SafeValueNotifier<DiscoveryState> {
       return;
     }
     if (!await _hasPermission()) {
-      setIfAlive(const DiscoveryState(status: DiscoveryStatus.permissionDenied));
+      setIfAlive(
+        const DiscoveryState(status: DiscoveryStatus.permissionDenied),
+      );
       return;
     }
     setIfAlive(const DiscoveryState(status: DiscoveryStatus.scanning));
-    _subscription = _discovery.discover(timeout: timeout).listen(
+    _subscription = _discovery
+        .discover(timeout: timeout)
+        .listen(
           _onEvent,
           onError: (Object error) {
             _logger.warning(_tag, 'discovery failed', error: error);
@@ -152,12 +156,14 @@ class DiscoveryProvider extends SafeValueNotifier<DiscoveryState> {
     List<DiscoveryResult> current,
     DiscoveryResult found,
   ) {
-    final int index =
-        current.indexWhere((DiscoveryResult r) => r.host == found.host);
+    final int index = current.indexWhere(
+      (DiscoveryResult r) => r.host == found.host,
+    );
     if (index == -1) {
       return <DiscoveryResult>[...current, found];
     }
-    final bool upgrade = current[index].source == DiscoverySource.sweep &&
+    final bool upgrade =
+        current[index].source == DiscoverySource.sweep &&
         found.source == DiscoverySource.onvif;
     if (!upgrade) {
       return current;

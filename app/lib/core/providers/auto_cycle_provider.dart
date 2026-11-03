@@ -8,7 +8,8 @@ import 'package:roehens/core/providers/safe_notifier.dart';
 /// Starts a one-shot timer. Replaced in tests.
 typedef TimerFactory = Timer Function(Duration delay, void Function() onFire);
 
-Timer _realTimer(Duration delay, void Function() onFire) => Timer(delay, onFire);
+Timer _realTimer(Duration delay, void Function() onFire) =>
+    Timer(delay, onFire);
 
 /// Local timer behind auto-cycle (D15). In the grid the screen advances a page
 /// on every tick; in fullscreen it advances the camera. Any touch restarts the
@@ -16,8 +17,8 @@ Timer _realTimer(Duration delay, void Function() onFire) => Timer(delay, onFire)
 /// the app is not on screen.
 class AutoCycleProvider extends SafeValueNotifier<bool> {
   AutoCycleProvider({TimerFactory? timerFactory})
-      : _timerFactory = timerFactory ?? _realTimer,
-        super(false);
+    : _timerFactory = timerFactory ?? _realTimer,
+      super(false);
 
   final TimerFactory _timerFactory;
 

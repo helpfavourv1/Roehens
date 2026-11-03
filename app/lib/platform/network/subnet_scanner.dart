@@ -88,12 +88,13 @@ class SubnetScanner {
       cancelled = true;
     };
     unawaited(
-      _run(localAddress, controller, () => cancelled, onProgress)
-          .whenComplete(() async {
-        if (!controller.isClosed) {
-          await controller.close();
-        }
-      }),
+      _run(localAddress, controller, () => cancelled, onProgress).whenComplete(
+        () async {
+          if (!controller.isClosed) {
+            await controller.close();
+          }
+        },
+      ),
     );
     return controller.stream;
   }

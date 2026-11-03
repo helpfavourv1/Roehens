@@ -31,10 +31,14 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget card = DecoratedBox(
       decoration: BoxDecoration(
-        color: selected ? context.colors.accentWash : context.colors.bgSecondary,
+        color: selected
+            ? context.colors.accentWash
+            : context.colors.bgSecondary,
         borderRadius: AppRadius.allLg,
         border: Border.all(
-          color: selected ? context.colors.borderFocus : context.colors.borderSubtle,
+          color: selected
+              ? context.colors.borderFocus
+              : context.colors.borderSubtle,
           width: AppSizes.hairline,
         ),
       ),

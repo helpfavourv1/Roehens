@@ -55,9 +55,9 @@ class _AppPressableState extends State<AppPressable> {
 
   static const Map<ShortcutActivator, Intent> _shortcuts =
       <ShortcutActivator, Intent>{
-    SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-    SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-  };
+        SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+        SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+      };
 
   @override
   void dispose() {
@@ -110,7 +110,10 @@ class _AppPressableState extends State<AppPressable> {
           decoration: BoxDecoration(
             borderRadius: widget.borderRadius,
             border: focused
-                ? Border.all(color: colors.borderFocus, width: AppSizes.focusRing)
+                ? Border.all(
+                    color: colors.borderFocus,
+                    width: AppSizes.focusRing,
+                  )
                 : null,
           ),
           child: child,

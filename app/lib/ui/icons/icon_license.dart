@@ -8,7 +8,8 @@ void registerIconLicense() {
 }
 
 Stream<LicenseEntry> _phosphorLicense() async* {
-  final String text =
-      await rootBundle.loadString('assets/fonts/LICENSE-phosphor.txt');
+  final String text = await rootBundle.loadString(
+    'assets/fonts/LICENSE-phosphor.txt',
+  );
   yield LicenseEntryWithLineBreaks(<String>['Phosphor Icons'], text);
 }

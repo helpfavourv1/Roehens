@@ -56,15 +56,20 @@ void main() {
     final Uri uri = await serveLocal((HttpRequest r) async {
       if (r.headers.value(HttpHeaders.authorizationHeader) != expected) {
         r.response.statusCode = HttpStatus.unauthorized;
-        r.response.headers.set(HttpHeaders.wwwAuthenticateHeader, 'Basic realm="cam"');
+        r.response.headers.set(
+          HttpHeaders.wwwAuthenticateHeader,
+          'Basic realm="cam"',
+        );
       }
       await r.response.close();
     });
     final HttpProbeResult accepted = (await HttpProbe().get(
       uri,
-      credentials: const CameraCredentials(username: 'admin', password: 'pw12345'),
-    ))
-        .valueOrNull!;
+      credentials: const CameraCredentials(
+        username: 'admin',
+        password: 'pw12345',
+      ),
+    )).valueOrNull!;
     expect(accepted.ok, isTrue);
 
     final HttpProbeResult rejected = (await HttpProbe().get(uri)).valueOrNull!;
@@ -74,22 +79,29 @@ void main() {
   test('wrong credentials give a 401 quickly', () async {
     final Uri uri = await serveLocal((HttpRequest r) async {
       r.response.statusCode = HttpStatus.unauthorized;
-      r.response.headers.set(HttpHeaders.wwwAuthenticateHeader, 'Basic realm="cam"');
+      r.response.headers.set(
+        HttpHeaders.wwwAuthenticateHeader,
+        'Basic realm="cam"',
+      );
       await r.response.close();
     });
     final Stopwatch clock = Stopwatch()..start();
     final HttpProbeResult result = (await HttpProbe().get(
       uri,
-      credentials: const CameraCredentials(username: 'admin', password: 'wrong'),
-    ))
-        .valueOrNull!;
+      credentials: const CameraCredentials(
+        username: 'admin',
+        password: 'wrong',
+      ),
+    )).valueOrNull!;
     expect(result.statusCode, 401);
     expect(clock.elapsedMilliseconds, lessThan(3000));
   });
 
   test('an unreachable host is a network error', () async {
-    final HttpServer closed =
-        await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+    final HttpServer closed = await HttpServer.bind(
+      InternetAddress.loopbackIPv4,
+      0,
+    );
     final int port = closed.port;
     await closed.close(force: true);
     final Result<HttpProbeResult> result = await HttpProbe(

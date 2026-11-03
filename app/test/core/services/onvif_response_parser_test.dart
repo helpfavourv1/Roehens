@@ -6,7 +6,8 @@ import 'package:roehens/core/errors/error_class.dart';
 import 'package:roehens/core/errors/result.dart';
 import 'package:roehens/core/services/onvif_response_parser.dart';
 
-String fixture(String name) => File('test/fixtures/onvif/$name').readAsStringSync();
+String fixture(String name) =>
+    File('test/fixtures/onvif/$name').readAsStringSync();
 
 String fault(String code, String reason) {
   return '<?xml version="1.0"?>'
@@ -21,8 +22,9 @@ void main() {
   const OnvifResponseParser parser = OnvifResponseParser();
 
   test('device information', () {
-    final OnvifDeviceInfo info =
-        parser.parseDeviceInformation(fixture('device_information.xml')).valueOrNull!;
+    final OnvifDeviceInfo info = parser
+        .parseDeviceInformation(fixture('device_information.xml'))
+        .valueOrNull!;
     expect(info.manufacturer, 'Example Cameras Ltd');
     expect(info.model, 'IPC-5MP-H265');
     expect(info.firmwareVersion, 'V5.3.1 build 250101');
@@ -32,8 +34,9 @@ void main() {
 
   group('profiles', () {
     test('both profiles are read with their stream details', () {
-      final List<OnvifProfile> profiles =
-          parser.parseProfiles(fixture('get_profiles.xml')).valueOrNull!;
+      final List<OnvifProfile> profiles = parser
+          .parseProfiles(fixture('get_profiles.xml'))
+          .valueOrNull!;
       expect(profiles.length, 2);
 
       final OnvifProfile main = profiles[0];
@@ -58,16 +61,22 @@ void main() {
     test('a profile without a token is skipped', () {
       final String text = fixture('get_profiles.xml')
           .replaceFirst('token="profile_1"', '');
-      final List<OnvifProfile> profiles = parser.parseProfiles(text).valueOrNull!;
+      final List<OnvifProfile> profiles = parser
+          .parseProfiles(text)
+          .valueOrNull!;
       expect(profiles.map((OnvifProfile p) => p.token), <String>['profile_2']);
     });
 
     test('a profile with no video configuration still lists', () {
-      const String text = '<s:Envelope xmlns:s="x"><s:Body>'
+      const String text =
+          '<s:Envelope xmlns:s="x"><s:Body>'
           '<trt:GetProfilesResponse xmlns:trt="y">'
           '<trt:Profiles token="only"><Name xmlns="z">Bare</Name></trt:Profiles>'
           '</trt:GetProfilesResponse></s:Body></s:Envelope>';
-      final OnvifProfile profile = parser.parseProfiles(text).valueOrNull!.single;
+      final OnvifProfile profile = parser
+          .parseProfiles(text)
+          .valueOrNull!
+          .single;
       expect(profile.token, 'only');
       expect(profile.width, isNull);
       expect(profile.videoEncoding, isNull);
@@ -76,7 +85,9 @@ void main() {
   });
 
   test('stream address', () {
-    final Uri uri = parser.parseStreamUri(fixture('stream_uri.xml')).valueOrNull!;
+    final Uri uri = parser
+        .parseStreamUri(fixture('stream_uri.xml'))
+        .valueOrNull!;
     expect(uri.scheme, 'rtsp');
     expect(uri.host, '192.168.1.64');
     expect(uri.port, 554);
@@ -84,7 +95,8 @@ void main() {
   });
 
   group('clock offset', () {
-    String time(int hour) => '<s:Envelope xmlns:s="x"><s:Body>'
+    String time(int hour) =>
+        '<s:Envelope xmlns:s="x"><s:Body>'
         '<tds:GetSystemDateAndTimeResponse xmlns:tds="y" xmlns:tt="z">'
         '<tds:SystemDateAndTime><tt:UTCDateTime>'
         '<tt:Time><tt:Hour>$hour</tt:Hour><tt:Minute>0</tt:Minute>'
@@ -111,7 +123,10 @@ void main() {
     test('a response without a time is an error', () {
       expect(
         parser
-            .parseTimeOffset(fixture('stream_uri.xml'), nowUtc: DateTime.utc(2026))
+            .parseTimeOffset(
+              fixture('stream_uri.xml'),
+              nowUtc: DateTime.utc(2026),
+            )
             .isErr,
         isTrue,
       );
@@ -128,7 +143,9 @@ void main() {
 
     test('other faults are reported as the camera refusing the request', () {
       final AppError error = parser
-          .parseAcknowledgement(fault('ter:ActionNotSupported', 'Optional Action Not Implemented'))
+          .parseAcknowledgement(
+            fault('ter:ActionNotSupported', 'Optional Action Not Implemented'),
+          )
           .errorOrNull!;
       expect(error.errorClass, ErrorClass.unsupportedMedia);
       expect(error.detail, contains('Optional Action Not Implemented'));
@@ -156,7 +173,8 @@ void main() {
     });
 
     test('an empty successful reply is a good acknowledgement', () {
-      const String ok = '<s:Envelope xmlns:s="x"><s:Body>'
+      const String ok =
+          '<s:Envelope xmlns:s="x"><s:Body>'
           '<tptz:ContinuousMoveResponse xmlns:tptz="y"/></s:Body></s:Envelope>';
       expect(parser.parseAcknowledgement(ok).isOk, isTrue);
     });
@@ -164,8 +182,9 @@ void main() {
 
   group('services', () {
     test('media and PTZ addresses are read', () {
-      final OnvifServices services =
-          parser.parseServices(fixture('capabilities.xml')).valueOrNull!;
+      final OnvifServices services = parser
+          .parseServices(fixture('capabilities.xml'))
+          .valueOrNull!;
       expect(services.media!.path, '/onvif/media_service');
       expect(services.ptz!.path, '/onvif/ptz_service');
     });
@@ -184,39 +203,48 @@ void main() {
   });
 
   group('main and substream selection', () {
-    final List<OnvifProfile> profiles =
-        const OnvifResponseParser().parseProfiles(fixture('get_profiles.xml')).valueOrNull!;
+    final List<OnvifProfile> profiles = const OnvifResponseParser()
+        .parseProfiles(fixture('get_profiles.xml'))
+        .valueOrNull!;
 
     test('the largest picture is main and the smallest is the substream', () {
-      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(profiles);
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(
+        profiles,
+      );
       expect(pick.main!.token, 'profile_1');
       expect(pick.sub!.token, 'profile_2');
     });
 
     test('the order of the profiles does not matter', () {
-      final ({OnvifProfile? main, OnvifProfile? sub}) pick =
-          selectMainAndSub(profiles.reversed.toList());
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(
+        profiles.reversed.toList(),
+      );
       expect(pick.main!.token, 'profile_1');
       expect(pick.sub!.token, 'profile_2');
     });
 
     test('a single profile has no substream', () {
-      final ({OnvifProfile? main, OnvifProfile? sub}) pick =
-          selectMainAndSub(<OnvifProfile>[profiles.first]);
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(
+        <OnvifProfile>[profiles.first],
+      );
       expect(pick.main!.token, 'profile_1');
       expect(pick.sub, isNull);
     });
 
     test('profiles of equal size have no substream', () {
-      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(<OnvifProfile>[
-        const OnvifProfile(token: 'a', name: 'a', width: 640, height: 360),
-        const OnvifProfile(token: 'b', name: 'b', width: 640, height: 360),
-      ]);
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(
+        <OnvifProfile>[
+          const OnvifProfile(token: 'a', name: 'a', width: 640, height: 360),
+          const OnvifProfile(token: 'b', name: 'b', width: 640, height: 360),
+        ],
+      );
       expect(pick.sub, isNull);
     });
 
     test('nothing in gives nothing out', () {
-      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(<OnvifProfile>[]);
+      final ({OnvifProfile? main, OnvifProfile? sub}) pick = selectMainAndSub(
+        <OnvifProfile>[],
+      );
       expect(pick.main, isNull);
       expect(pick.sub, isNull);
     });

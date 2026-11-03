@@ -124,7 +124,9 @@ class FakeStorage implements StorageContract {
   }
 
   @override
-  Future<Result<List<StreamProfile>>> loadStreamProfiles(String cameraId) async {
+  Future<Result<List<StreamProfile>>> loadStreamProfiles(
+    String cameraId,
+  ) async {
     return Ok<List<StreamProfile>>(profiles[cameraId] ?? <StreamProfile>[]);
   }
 
@@ -201,7 +203,8 @@ class FakeKeyValueStore implements KeyValueStore {
   final Map<String, String> values = <String, String>{};
 
   @override
-  Future<Result<String?>> getString(String key) async => Ok<String?>(values[key]);
+  Future<Result<String?>> getString(String key) async =>
+      Ok<String?>(values[key]);
 
   @override
   Future<Result<void>> setString(String key, String value) async {

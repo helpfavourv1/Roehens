@@ -126,7 +126,9 @@ class _ToastView extends StatelessWidget {
         },
         child: Center(
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: AppSpacing.md),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.md,
+            ),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 480),
               child: Semantics(
@@ -162,13 +164,20 @@ class _ToastView extends StatelessWidget {
                           child: ExcludeSemantics(
                             child: Text(
                               message,
-                              style: context.type.body.copyWith(color: tokens.colors.textPrimary),
+                              style: context.type.body.copyWith(
+                                color: tokens.colors.textPrimary,
+                              ),
                             ),
                           ),
                         ),
-                        if (actionLabel != null && onAction != null) ...<Widget>[
+                        if (actionLabel != null &&
+                            onAction != null) ...<Widget>[
                           const SizedBox(width: AppSpacing.sm),
-                          AppChip(label: actionLabel!, onTap: onAction, selected: true),
+                          AppChip(
+                            label: actionLabel!,
+                            onTap: onAction,
+                            selected: true,
+                          ),
                         ],
                       ],
                     ),

@@ -51,8 +51,8 @@ class OnvifClient {
     this.timeout = const Duration(seconds: 8),
     this.clock = const SystemClock(),
     HttpClient Function()? clientFactory,
-  })  : builder = builder ?? OnvifMessageBuilder(clock: clock),
-        _clientFactory = clientFactory ?? HttpClient.new;
+  }) : builder = builder ?? OnvifMessageBuilder(clock: clock),
+       _clientFactory = clientFactory ?? HttpClient.new;
 
   final OnvifMessageBuilder builder;
   final OnvifResponseParser parser;
@@ -73,11 +73,18 @@ class OnvifClient {
     final HttpClient client = _clientFactory()..connectionTimeout = timeout;
     answerChallengeOnce(client, credentials);
     try {
-      final HttpClientRequest request = await client.postUrl(service).timeout(timeout);
-      request.headers.contentType =
-          ContentType('application', 'soap+xml', charset: 'utf-8');
+      final HttpClientRequest request = await client
+          .postUrl(service)
+          .timeout(timeout);
+      request.headers.contentType = ContentType(
+        'application',
+        'soap+xml',
+        charset: 'utf-8',
+      );
       request.add(utf8.encode(body));
-      final HttpClientResponse response = await request.close().timeout(timeout);
+      final HttpClientResponse response = await request.close().timeout(
+        timeout,
+      );
       final String text = await utf8.decodeStream(response).timeout(timeout);
       if (text.trim().isEmpty ||
           (response.statusCode >= 400 && !text.contains('Fault'))) {
@@ -99,7 +106,11 @@ class OnvifClient {
     CameraCredentials credentials,
     Result<T> Function(String text) parse,
   ) async {
-    final Result<String> reply = await post(service, body, credentials: credentials);
+    final Result<String> reply = await post(
+      service,
+      body,
+      credentials: credentials,
+    );
     final AppError? error = reply.errorOrNull;
     if (error != null) {
       return Err<T>(error);
@@ -113,10 +124,8 @@ class OnvifClient {
       deviceService,
       builder.getSystemDateAndTime(),
       CameraCredentials.none,
-      (String text) => parser.parseTimeOffset(
-        text,
-        nowUtc: clock.now().toUtc(),
-      ),
+      (String text) =>
+          parser.parseTimeOffset(text, nowUtc: clock.now().toUtc()),
     );
   }
 
@@ -127,7 +136,9 @@ class OnvifClient {
   }) {
     return _call<OnvifDeviceInfo>(
       deviceService,
-      builder.getDeviceInformation(auth: OnvifAuth(credentials, timeOffset: clockOffset)),
+      builder.getDeviceInformation(
+        auth: OnvifAuth(credentials, timeOffset: clockOffset),
+      ),
       credentials,
       parser.parseDeviceInformation,
     );
@@ -140,7 +151,9 @@ class OnvifClient {
   }) {
     return _call<OnvifServices>(
       deviceService,
-      builder.getCapabilities(auth: OnvifAuth(credentials, timeOffset: clockOffset)),
+      builder.getCapabilities(
+        auth: OnvifAuth(credentials, timeOffset: clockOffset),
+      ),
       credentials,
       parser.parseServices,
     );
@@ -153,7 +166,9 @@ class OnvifClient {
   }) {
     return _call<List<OnvifProfile>>(
       mediaService,
-      builder.getProfiles(auth: OnvifAuth(credentials, timeOffset: clockOffset)),
+      builder.getProfiles(
+        auth: OnvifAuth(credentials, timeOffset: clockOffset),
+      ),
       credentials,
       parser.parseProfiles,
     );
@@ -207,30 +222,41 @@ class OnvifClient {
     final Duration offset =
         (await clockOffset(deviceService)).valueOrNull ?? Duration.zero;
 
-    final Result<OnvifDeviceInfo> info =
-        await deviceInfo(deviceService, credentials, clockOffset: offset);
+    final Result<OnvifDeviceInfo> info = await deviceInfo(
+      deviceService,
+      credentials,
+      clockOffset: offset,
+    );
     if (info.errorOrNull != null) {
       return Err<OnvifDevice>(info.errorOrNull!);
     }
 
-    final OnvifServices services = (await this.services(
-              deviceService,
-              credentials,
-              clockOffset: offset,
-            ))
-            .valueOrNull ??
+    final OnvifServices services =
+        (await this.services(
+          deviceService,
+          credentials,
+          clockOffset: offset,
+        )).valueOrNull ??
         const OnvifServices();
     final Uri media = _reachable(services.media, deviceService);
-    final Uri? ptz = services.ptz == null ? null : _reachable(services.ptz, deviceService);
+    final Uri? ptz = services.ptz == null
+        ? null
+        : _reachable(services.ptz, deviceService);
 
-    final Result<List<OnvifProfile>> profiles =
-        await this.profiles(media, credentials, clockOffset: offset);
+    final Result<List<OnvifProfile>> profiles = await this.profiles(
+      media,
+      credentials,
+      clockOffset: offset,
+    );
     if (profiles.errorOrNull != null) {
       return Err<OnvifDevice>(profiles.errorOrNull!);
     }
     if (profiles.valueOrNull!.isEmpty) {
       return const Err<OnvifDevice>(
-        AppError(ErrorClass.unsupportedMedia, detail: 'camera reports no profiles'),
+        AppError(
+          ErrorClass.unsupportedMedia,
+          detail: 'camera reports no profiles',
+        ),
       );
     }
     return Ok<OnvifDevice>(

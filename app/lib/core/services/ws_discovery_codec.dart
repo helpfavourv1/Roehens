@@ -45,7 +45,9 @@ class WsDiscoveryCodec {
     }
     return DiscoveryResult(
       host: chosen.host,
-      port: chosen.hasPort ? chosen.port : (chosen.scheme == 'https' ? 443 : 80),
+      port: chosen.hasPort
+          ? chosen.port
+          : (chosen.scheme == 'https' ? 443 : 80),
       source: DiscoverySource.onvif,
       name: _scopeValue(scopes, 'name'),
       model: _scopeValue(scopes, 'hardware'),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:app_tracking_transparency/app_tracking_transparency.dart' as att;
+import 'package:app_tracking_transparency/app_tracking_transparency.dart'
+    as att;
 import 'package:roehens/core/contracts/consent_contract.dart';
 import 'package:roehens/core/contracts/logger_contract.dart';
 
@@ -34,7 +35,9 @@ class AppTrackingBackend implements AttBackend {
 
   @override
   Future<TrackingStatus> request() async {
-    return _map(await att.AppTrackingTransparency.requestTrackingAuthorization());
+    return _map(
+      await att.AppTrackingTransparency.requestTrackingAuthorization(),
+    );
   }
 }
 
@@ -42,8 +45,8 @@ class AppTrackingBackend implements AttBackend {
 /// system prompt is only shown while the status is "not determined".
 class AttService implements TrackingAuthorizationContract {
   AttService({AttBackend? backend, bool? isIos, this.logger})
-      : _backend = backend ?? AppTrackingBackend(),
-        _isIos = isIos ?? Platform.isIOS;
+    : _backend = backend ?? AppTrackingBackend(),
+      _isIos = isIos ?? Platform.isIOS;
 
   final LoggerContract? logger;
   final AttBackend _backend;

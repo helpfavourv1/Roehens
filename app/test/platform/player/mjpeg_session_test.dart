@@ -42,7 +42,8 @@ void main() {
 
   test('goes from connecting to playing and exposes frame and size', () async {
     final Uri uri = await serveLocal(
-      (HttpRequest r) => sendFrames(r, frames, hold: const Duration(seconds: 3)),
+      (HttpRequest r) =>
+          sendFrames(r, frames, hold: const Duration(seconds: 3)),
     );
     final MjpegSession session = MjpegSession();
     addTearDown(session.dispose);
@@ -53,9 +54,7 @@ void main() {
     await opening;
 
     await waitUntil(() => session.state.value is PlayerPlaying);
-    await waitUntil(
-      () => listEquals(session.latestFrame.value, frames.last),
-    );
+    await waitUntil(() => listEquals(session.latestFrame.value, frames.last));
     expect(session.videoSize.value, const VideoSize(640, 480));
     expect(await session.captureFrame(), frames.last);
   });
@@ -132,7 +131,8 @@ void main() {
       await r.response.close();
     });
     final Uri good = await serveLocal(
-      (HttpRequest r) => sendFrames(r, frames, hold: const Duration(seconds: 3)),
+      (HttpRequest r) =>
+          sendFrames(r, frames, hold: const Duration(seconds: 3)),
     );
     final MjpegSession session = MjpegSession();
     addTearDown(session.dispose);
@@ -142,9 +142,7 @@ void main() {
 
     await session.open(sourceFor(good));
     await waitUntil(() => session.state.value is PlayerPlaying);
-    await waitUntil(
-      () => listEquals(session.latestFrame.value, frames.last),
-    );
+    await waitUntil(() => listEquals(session.latestFrame.value, frames.last));
   });
 
   test('the view handle is the frame notifier', () {

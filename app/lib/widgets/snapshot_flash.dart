@@ -64,9 +64,12 @@ class _SnapshotFlashState extends State<SnapshotFlash>
             child: AnimatedBuilder(
               animation: _controller,
               builder: (BuildContext context, Widget? child) {
-                final double opacity = (1 - _controller.value) * AppMotion.flashPeakOpacity;
+                final double opacity =
+                    (1 - _controller.value) * AppMotion.flashPeakOpacity;
                 return ColoredBox(
-                  color: white.withValues(alpha: _controller.isAnimating ? opacity : 0),
+                  color: white.withValues(
+                    alpha: _controller.isAnimating ? opacity : 0,
+                  ),
                 );
               },
             ),

@@ -59,10 +59,16 @@ class RtspUrlNormalizer {
 
     final String scheme = uri.scheme.toLowerCase();
     if (scheme == 'rtsps' || scheme == 'https') {
-      return _error(ErrorClass.unsupportedMedia, 'encrypted addresses are not supported');
+      return _error(
+        ErrorClass.unsupportedMedia,
+        'encrypted addresses are not supported',
+      );
     }
     if (scheme != 'rtsp' && scheme != 'http') {
-      return _error(ErrorClass.unsupportedMedia, 'unknown address type "$scheme"');
+      return _error(
+        ErrorClass.unsupportedMedia,
+        'unknown address type "$scheme"',
+      );
     }
     final String host = uri.host.toLowerCase();
     if (host.isEmpty) {
@@ -85,7 +91,9 @@ class RtspUrlNormalizer {
     String? password;
     if (uri.userInfo.isNotEmpty) {
       final int colon = uri.userInfo.indexOf(':');
-      final String user = colon < 0 ? uri.userInfo : uri.userInfo.substring(0, colon);
+      final String user = colon < 0
+          ? uri.userInfo
+          : uri.userInfo.substring(0, colon);
       final String pass = colon < 0 ? '' : uri.userInfo.substring(colon + 1);
       username = _decode(user);
       password = _decode(pass);
@@ -107,16 +115,20 @@ class RtspUrlNormalizer {
   /// A still-image address is polled; anything else is treated as MJPEG.
   static StreamProtocol _httpKind(String path) {
     final String lower = path.toLowerCase();
-    final bool isStill = lower.contains('snapshot') ||
+    final bool isStill =
+        lower.contains('snapshot') ||
         lower.contains('/image') ||
         lower.endsWith('.jpg') ||
         lower.endsWith('.jpeg') ||
         lower.contains('/picture');
-    final bool isStream = lower.contains('mjpg') ||
+    final bool isStream =
+        lower.contains('mjpg') ||
         lower.contains('mjpeg') ||
         lower.contains('video') ||
         lower.contains('stream');
-    return isStill && !isStream ? StreamProtocol.httpSnapshot : StreamProtocol.mjpeg;
+    return isStill && !isStream
+        ? StreamProtocol.httpSnapshot
+        : StreamProtocol.mjpeg;
   }
 
   static String _decode(String value) {
@@ -127,7 +139,10 @@ class RtspUrlNormalizer {
     }
   }
 
-  static Result<ParsedStreamAddress> _error(ErrorClass errorClass, String detail) {
+  static Result<ParsedStreamAddress> _error(
+    ErrorClass errorClass,
+    String detail,
+  ) {
     return Err<ParsedStreamAddress>(AppError(errorClass, detail: detail));
   }
 }

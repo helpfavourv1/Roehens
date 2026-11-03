@@ -40,8 +40,8 @@ class AppScaffold extends StatelessWidget {
     final double bottomPadding = immersive
         ? 0
         : keyboardUp
-            ? keyboard
-            : (bottomBar == null ? media.padding.bottom : 0);
+        ? keyboard
+        : (bottomBar == null ? media.padding.bottom : 0);
 
     return ColoredBox(
       color: context.colors.bgPrimary,
@@ -62,10 +62,7 @@ class AppScaffold extends StatelessWidget {
                     : Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          ?bottomEmbed,
-                          ?bottomBar,
-                        ],
+                        children: <Widget>[?bottomEmbed, ?bottomBar],
                       ),
               ),
           ],

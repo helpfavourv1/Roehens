@@ -20,8 +20,8 @@ class AppProgress extends StatefulWidget {
     super.key,
     required double this.value,
     this.semanticLabel,
-  })  : size = AppSizes.progressBarHeight,
-        color = null;
+  }) : size = AppSizes.progressBarHeight,
+       color = null;
 
   final double size;
   final Color? color;
@@ -114,7 +114,11 @@ class _AppProgressState extends State<AppProgress>
 }
 
 class _SpinnerPainter extends CustomPainter {
-  _SpinnerPainter({required this.color, required this.turn, required this.track});
+  _SpinnerPainter({
+    required this.color,
+    required this.turn,
+    required this.track,
+  });
 
   final Color color;
   final Color track;

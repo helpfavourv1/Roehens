@@ -2,7 +2,13 @@
 enum ConsentStatus { unknown, required, notRequired, obtained }
 
 /// iOS app tracking authorization.
-enum TrackingStatus { notDetermined, restricted, denied, authorized, notApplicable }
+enum TrackingStatus {
+  notDetermined,
+  restricted,
+  denied,
+  authorized,
+  notApplicable,
+}
 
 /// User Messaging Platform consent. Ads never load before consent resolves.
 abstract interface class ConsentContract {

@@ -37,6 +37,10 @@ class MediaPlayerService implements PlayerContract {
   }
 
   PlayerSessionContract _engineSession() {
-    return MediaKitPlayerSession(options: options, clock: clock, logger: logger);
+    return MediaKitPlayerSession(
+      options: options,
+      clock: clock,
+      logger: logger,
+    );
   }
 }

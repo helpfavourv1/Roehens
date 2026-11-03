@@ -104,26 +104,26 @@ class DiscoveryService implements DiscoveryContract {
               },
             )
             .listen(
-          (OpenPort open) {
-            if (!controller.isClosed) {
-              controller.add(
-                DiscoveryFound(
-                  DiscoveryResult(
-                    host: open.host,
-                    port: open.port,
-                    source: DiscoverySource.sweep,
-                  ),
-                ),
-              );
-            }
-          },
-          onError: (Object error) {
-            _logger?.warning(_tag, 'sweep failed', error: error);
-          },
-          onDone: () {
-            unawaited(finish());
-          },
-        );
+              (OpenPort open) {
+                if (!controller.isClosed) {
+                  controller.add(
+                    DiscoveryFound(
+                      DiscoveryResult(
+                        host: open.host,
+                        port: open.port,
+                        source: DiscoverySource.sweep,
+                      ),
+                    ),
+                  );
+                }
+              },
+              onError: (Object error) {
+                _logger?.warning(_tag, 'sweep failed', error: error);
+              },
+              onDone: () {
+                unawaited(finish());
+              },
+            );
       } catch (error) {
         _logger?.warning(_tag, 'discovery could not start', error: error);
         await finish();

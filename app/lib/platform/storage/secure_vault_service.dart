@@ -16,13 +16,14 @@ import 'package:roehens/core/models/camera.dart';
 /// ever logged except the operation name.
 class SecureVaultService implements SecureVaultContract {
   SecureVaultService({FlutterSecureStorage? storage, this._logger})
-      : _storage = storage ??
-            const FlutterSecureStorage(
-              aOptions: AndroidOptions(),
-              iOptions: IOSOptions(
-                accessibility: KeychainAccessibility.first_unlock_this_device,
-              ),
-            );
+    : _storage =
+          storage ??
+          const FlutterSecureStorage(
+            aOptions: AndroidOptions(),
+            iOptions: IOSOptions(
+              accessibility: KeychainAccessibility.first_unlock_this_device,
+            ),
+          );
 
   final FlutterSecureStorage _storage;
   final LoggerContract? _logger;
@@ -31,8 +32,9 @@ class SecureVaultService implements SecureVaultContract {
   @override
   Future<Result<CameraCredentials?>> readCredentials(String cameraId) async {
     try {
-      final String? raw =
-          await _storage.read(key: StorageKeys.vaultKeyForCamera(cameraId));
+      final String? raw = await _storage.read(
+        key: StorageKeys.vaultKeyForCamera(cameraId),
+      );
       if (raw == null) {
         return Ok<CameraCredentials?>(_session[cameraId]);
       }

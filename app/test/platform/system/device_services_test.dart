@@ -7,7 +7,8 @@ import 'package:roehens/platform/system/screen_wake_service.dart';
 import '../../support/fakes.dart';
 
 void main() {
-  final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
+  final TestWidgetsFlutterBinding binding =
+      TestWidgetsFlutterBinding.ensureInitialized();
   final List<MethodCall> calls = <MethodCall>[];
 
   setUp(() {
@@ -22,8 +23,10 @@ void main() {
   });
 
   tearDown(() {
-    binding.defaultBinaryMessenger
-        .setMockMethodCallHandler(SystemChannels.platform, null);
+    binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.platform,
+      null,
+    );
   });
 
   group('HapticsService', () {
@@ -61,12 +64,17 @@ void main() {
 
   group('OrientationService', () {
     test('locks landscape and restores all orientations', () async {
-      final OrientationService service = OrientationService(logger: FakeLogger());
+      final OrientationService service = OrientationService(
+        logger: FakeLogger(),
+      );
       await service.lockLandscape();
       await service.allowAll();
 
       final List<MethodCall> orientation = calls
-          .where((MethodCall c) => c.method == 'SystemChrome.setPreferredOrientations')
+          .where(
+            (MethodCall c) =>
+                c.method == 'SystemChrome.setPreferredOrientations',
+          )
           .toList();
       expect(orientation, hasLength(2));
       expect(orientation.first.arguments, hasLength(2));
@@ -74,12 +82,16 @@ void main() {
     });
 
     test('immersive mode hides and restores the system bars', () async {
-      final OrientationService service = OrientationService(logger: FakeLogger());
+      final OrientationService service = OrientationService(
+        logger: FakeLogger(),
+      );
       await service.setImmersive(immersive: true);
       await service.setImmersive(immersive: false);
 
       final List<MethodCall> modes = calls
-          .where((MethodCall c) => c.method == 'SystemChrome.setEnabledSystemUIMode')
+          .where(
+            (MethodCall c) => c.method == 'SystemChrome.setEnabledSystemUIMode',
+          )
           .toList();
       expect(modes.first.arguments, 'SystemUiMode.immersiveSticky');
       expect(modes.last.arguments, 'SystemUiMode.edgeToEdge');
@@ -106,7 +118,8 @@ void main() {
       final FakeLogger logger = FakeLogger();
       final ScreenWakeService service = ScreenWakeService(
         logger: logger,
-        backend: ({required bool enable}) async => throw Exception('no activity'),
+        backend: ({required bool enable}) async =>
+            throw Exception('no activity'),
       );
       await service.setAwake(true);
 

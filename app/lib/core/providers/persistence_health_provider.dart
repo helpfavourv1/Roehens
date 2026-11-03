@@ -18,8 +18,8 @@ enum PersistenceIssue {
 /// storage services.
 class PersistenceHealthProvider extends SafeValueNotifier<PersistenceIssue> {
   PersistenceHealthProvider({required List<ValueListenable<bool>> sources})
-      : _sources = List<ValueListenable<bool>>.unmodifiable(sources),
-        super(PersistenceIssue.none) {
+    : _sources = List<ValueListenable<bool>>.unmodifiable(sources),
+      super(PersistenceIssue.none) {
     for (final ValueListenable<bool> source in _sources) {
       source.addListener(_evaluate);
     }

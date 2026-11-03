@@ -52,7 +52,9 @@ class AppSection extends StatelessWidget {
             ),
             child: Text(
               overlineText(title!),
-              style: context.type.overline.copyWith(color: context.colors.textTertiary),
+              style: context.type.overline.copyWith(
+                color: context.colors.textTertiary,
+              ),
             ),
           ),
         DecoratedBox(
@@ -82,7 +84,9 @@ class AppSection extends StatelessWidget {
             ),
             child: Text(
               footer!,
-              style: context.type.footnote.copyWith(color: context.colors.textTertiary),
+              style: context.type.footnote.copyWith(
+                color: context.colors.textTertiary,
+              ),
             ),
           ),
       ],

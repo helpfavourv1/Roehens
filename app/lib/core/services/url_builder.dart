@@ -32,7 +32,9 @@ class UrlBuilder {
       PathKind.mjpeg => brand.mjpegTemplates,
       PathKind.snapshot => brand.snapshotTemplates,
     };
-    return <String>[for (final String t in templates) expand(t, channel: channel)];
+    return <String>[
+      for (final String t in templates) expand(t, channel: channel),
+    ];
   }
 
   /// A host name, an IPv4 address or an IPv6 address: letters, digits, dots,
