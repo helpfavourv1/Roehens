@@ -1,0 +1,45 @@
+name: publish_apk
+
+# Manual. Copies the APK of an android_debug run into a draft release, so it can
+# be downloaded with one tap on a phone (the artifact list on the phone layout
+# of GitHub has no download button). A draft release is visible only to people
+# who can write to the repository, so the test build is not public. Earlier test
+# drafts are removed.
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Run number (id) of the android_debug run to publish
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Download the APK from the build run
+        run: gh run download "${{ inputs.run_id }}" --repo "$REPO" -n roehens-debug-apk -D apk
+
+      - name: List what was downloaded
+        run: ls -la apk
+
+      - name: Remove earlier test drafts
+        run: |
+          for tag in $(gh release list --repo "$REPO" --limit 50 --json tagName,isDraft -q '.[] | select(.isDraft) | .tagName'); do
+            gh release delete "$tag" --repo "$REPO" --yes || true
+          done
+
+      - name: Create the draft release
+        run: |
+          gh release create "test-${{ inputs.run_id }}" apk/*.apk \
+            --repo "$REPO" --draft --prerelease --target main \
+            --title "Test build ${{ inputs.run_id }}" \
+            --notes "Debug APK for sideload testing (android_debug run ${{ inputs.run_id }}). Draft: visible only when signed in to the repository."
