@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/core/constants/storage_keys.dart';
@@ -14,34 +15,34 @@ import '../../support/fakes.dart';
 /// Stands in for the Keychain / Keystore.
 class _FakeSecure implements FlutterSecureStorage {
   final Map<String, String> data = <String, String>{};
-  bool failing = false;
+  final ValueNotifier<bool> failing = ValueNotifier<bool>(false);
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
     final Symbol name = invocation.memberName;
     final Map<Symbol, dynamic> args = invocation.namedArguments;
     if (name == #read) {
-      if (failing) {
+      if (failing.value) {
         return Future<String?>.error(StateError('keystore locked'));
       }
       return Future<String?>.value(data[args[#key]]);
     }
     if (name == #write) {
-      if (failing) {
+      if (failing.value) {
         return Future<void>.error(StateError('keystore locked'));
       }
       data[args[#key] as String] = args[#value] as String;
       return Future<void>.value();
     }
     if (name == #delete) {
-      if (failing) {
+      if (failing.value) {
         return Future<void>.error(StateError('keystore locked'));
       }
       data.remove(args[#key]);
       return Future<void>.value();
     }
     if (name == #deleteAll) {
-      if (failing) {
+      if (failing.value) {
         return Future<void>.error(StateError('keystore locked'));
       }
       data.clear();
@@ -102,7 +103,7 @@ void main() {
   });
 
   test('the logger never sees a password or a user name', () async {
-    secure.failing = true;
+    secure.failing.value = true;
     await vault.writeCredentials('a', login);
     await vault.readCredentials('a');
     await vault.deleteCredentials('a');
@@ -115,7 +116,7 @@ void main() {
   });
 
   test('a locked keystore on write is an error, but the session still has the credentials', () async {
-    secure.failing = true;
+    secure.failing.value = true;
     final Result<void> written = await vault.writeCredentials('a', login);
     expect(written.errorOrNull?.errorClass, ErrorClass.storageFailure);
     expect((await vault.readCredentials('a')).valueOrNull, login);
@@ -124,14 +125,14 @@ void main() {
   test(
     'a locked keystore on read with nothing cached is a storage failure',
     () async {
-      secure.failing = true;
+      secure.failing.value = true;
       final Result<CameraCredentials?> read = await vault.readCredentials('a');
       expect(read.errorOrNull?.errorClass, ErrorClass.storageFailure);
     },
   );
 
   test('delete and delete all report a failing keystore', () async {
-    secure.failing = true;
+    secure.failing.value = true;
     expect(
       (await vault.deleteCredentials('a')).errorOrNull?.errorClass,
       ErrorClass.storageFailure,

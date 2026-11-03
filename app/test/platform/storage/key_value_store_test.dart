@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/core/errors/result.dart';
 import 'package:roehens/platform/storage/key_value_store.dart';
@@ -8,19 +9,19 @@ import '../../support/fakes.dart';
 /// Stands in for the phone's preference store.
 class _FakePrefs implements SharedPreferencesAsync {
   final Map<String, String> data = <String, String>{};
-  bool failing = false;
+  final ValueNotifier<bool> failing = ValueNotifier<bool>(false);
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
     final Symbol name = invocation.memberName;
     if (name == #getString) {
-      if (failing) {
+      if (failing.value) {
         return Future<String?>.error(StateError('platform store down'));
       }
       return Future<String?>.value(data[invocation.positionalArguments.first]);
     }
     if (name == #setString) {
-      if (failing) {
+      if (failing.value) {
         return Future<void>.error(StateError('platform store down'));
       }
       data[invocation.positionalArguments[0] as String] =
@@ -28,14 +29,14 @@ class _FakePrefs implements SharedPreferencesAsync {
       return Future<void>.value();
     }
     if (name == #remove) {
-      if (failing) {
+      if (failing.value) {
         return Future<void>.error(StateError('platform store down'));
       }
       data.remove(invocation.positionalArguments.first);
       return Future<void>.value();
     }
     if (name == #clear) {
-      if (failing) {
+      if (failing.value) {
         return Future<void>.error(StateError('platform store down'));
       }
       data.clear();
@@ -85,7 +86,7 @@ void main() {
   });
 
   test('when writing fails the value is kept in memory and the store is marked degraded', () async {
-    prefs.failing = true;
+    prefs.failing.value = true;
     final Result<void> saved = await store.setString('k', 'v');
     expect(saved.isOk, isTrue);
     expect(store.isDegraded.value, isTrue);
@@ -96,7 +97,7 @@ void main() {
   test(
     'when reading fails a value written earlier in memory is still found',
     () async {
-      prefs.failing = true;
+      prefs.failing.value = true;
       await store.setString('k', 'v');
       final Result<String?> read = await store.getString('k');
       expect(read.valueOrNull, 'v');
@@ -107,7 +108,7 @@ void main() {
   test(
     'remove and clear never throw when the platform store is down',
     () async {
-      prefs.failing = true;
+      prefs.failing.value = true;
       expect((await store.remove('k')).isOk, isTrue);
       expect((await store.clear()).isOk, isTrue);
       expect(store.isDegraded.value, isTrue);
@@ -115,17 +116,17 @@ void main() {
   );
 
   test('clear also forgets the in-memory values', () async {
-    prefs.failing = true;
+    prefs.failing.value = true;
     await store.setString('k', 'v');
-    prefs.failing = false;
+    prefs.failing.value = false;
     await store.clear();
     expect((await store.getString('k')).valueOrNull, isNull);
   });
 
   test('a value saved after recovery is persisted again', () async {
-    prefs.failing = true;
+    prefs.failing.value = true;
     await store.setString('k', 'old');
-    prefs.failing = false;
+    prefs.failing.value = false;
     await store.setString('k', 'new');
     expect(prefs.data['k'], 'new');
   });

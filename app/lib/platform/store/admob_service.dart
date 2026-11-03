@@ -1,3 +1,8 @@
+// The replacement for the adaptive banner size call, getLargeAnchoredAdaptiveBannerAdSize,
+// returns banners up to 15% of the screen height, which can exceed the 100 dp ad
+// slot and would clip the ad. The older call stays until the slot design changes.
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -45,7 +50,6 @@ class GoogleAdsBackend implements AdsBackend {
     // The replacement, getLargeAnchoredAdaptiveBannerAdSize, returns banners up
     // to 15% of the screen height, which can exceed the 100 dp slot and would
     // clip the ad. The older method stays until the slot design changes.
-    // ignore: deprecated_member_use
     final Future<ads.AnchoredAdaptiveBannerAdSize?> request =
         ads.AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(widthDp);
     final ads.AnchoredAdaptiveBannerAdSize? size = await request;
