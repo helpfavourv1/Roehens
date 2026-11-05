@@ -74,8 +74,26 @@ class AppTextField extends StatefulWidget {
   State<AppTextField> createState() => _AppTextFieldState();
 }
 
-class _AppTextFieldState extends State<AppTextField> {
+class _AppTextFieldState extends State<AppTextField>
+    implements TextSelectionGestureDetectorBuilderDelegate {
   static final AppSelectionControls _selectionControls = AppSelectionControls();
+
+  // A bare EditableText does not react to taps or long presses. The gesture
+  // builder is what places the caret, selects a word on a long press, shows the
+  // handles and opens the cut/copy/paste bar; stock text fields get it from
+  // their own wrapper.
+  @override
+  final GlobalKey<EditableTextState> editableTextKey =
+      GlobalKey<EditableTextState>();
+
+  @override
+  bool get forcePressEnabled => false;
+
+  @override
+  bool get selectionEnabled => widget.enabled;
+
+  late final TextSelectionGestureDetectorBuilder _gestures =
+      TextSelectionGestureDetectorBuilder(delegate: this);
 
   FocusNode? _ownedFocus;
   final ValueNotifier<bool> _focused = ValueNotifier<bool>(false);
@@ -147,7 +165,11 @@ class _AppTextFieldState extends State<AppTextField> {
                     );
                   },
             ),
-            EditableText(
+            _gestures.buildGestureDetector(
+              behavior: HitTestBehavior.translucent,
+              child: EditableText(
+              key: editableTextKey,
+              rendererIgnoresPointer: true,
               controller: widget.controller,
               focusNode: _focusNode,
               style: style,
@@ -168,6 +190,7 @@ class _AppTextFieldState extends State<AppTextField> {
               textDirection: direction,
               onChanged: widget.onChanged,
               onSubmitted: widget.onSubmitted,
+            ),
             ),
           ],
         );
