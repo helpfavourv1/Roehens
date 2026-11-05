@@ -5,7 +5,8 @@ import 'package:roehens/utils/context_extensions.dart';
 
 /// Selection handles for text fields in an app that does not use Material or
 /// Cupertino. The cut/copy/paste bar is drawn by [AppTextSelectionToolbar].
-class AppSelectionControls extends TextSelectionControls {
+class AppSelectionControls extends TextSelectionControls
+    with TextSelectionHandleControls {
   @override
   Widget buildHandle(
     BuildContext context,
@@ -37,19 +38,5 @@ class AppSelectionControls extends TextSelectionControls {
   @override
   Size getHandleSize(double textLineHeight) {
     return const Size.square(AppSizes.selectionHandle);
-  }
-
-  @override
-  Widget buildToolbar(
-    BuildContext context,
-    Rect globalEditableRegion,
-    double textLineHeight,
-    Offset selectionMidpoint,
-    List<TextSelectionPoint> endpoints,
-    TextSelectionDelegate delegate,
-    ValueListenable<ClipboardStatus>? clipboardStatus,
-    Offset? lastSecondaryTapDownPosition,
-  ) {
-    return const SizedBox.shrink();
   }
 }
