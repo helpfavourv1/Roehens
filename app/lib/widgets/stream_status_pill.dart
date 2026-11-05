@@ -55,6 +55,7 @@ class StreamStatusPill extends StatefulWidget {
     required this.label,
     this.iconOnly = false,
     this.expandHitArea = true,
+    this.plate = true,
     this.onTap,
   });
 
@@ -67,6 +68,10 @@ class StreamStatusPill extends StatefulWidget {
   /// Grows the tap area of an icon-only pill to 48x48. A tile too small for
   /// that turns it off and relies on the tile's own tap instead.
   final bool expandHitArea;
+
+  /// Draws the dark rounded plate behind the pill. A parent that already has a
+  /// plate (the name plate of a very small tile) turns it off.
+  final bool plate;
   final VoidCallback? onTap;
 
   @override
@@ -112,7 +117,10 @@ class _StreamStatusPillState extends State<StreamStatusPill>
   @override
   Widget build(BuildContext context) {
     final AppColors colors = context.colors;
-    final Color tone = widget.status.color(colors);
+    // The pill always sits on a dark plate or a picture, so it uses the bright
+    // status colors of the dark theme in both themes; the light-theme greens
+    // and ambers are too dark to read there.
+    final Color tone = widget.status.color(AppColors.dark);
     final Widget icon = FadeTransition(
       opacity: Tween<double>(
         begin: 1,
@@ -126,38 +134,41 @@ class _StreamStatusPillState extends State<StreamStatusPill>
       ),
     );
 
-    final Widget pill = DecoratedBox(
-      decoration: BoxDecoration(
-        color: colors.overlayOnVideo,
-        borderRadius: AppRadius.allPill,
-      ),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.symmetric(
-          horizontal: AppSpacing.sm,
-          vertical: AppSpacing.xs,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            icon,
-            if (!widget.iconOnly) ...<Widget>[
-              const SizedBox(width: AppSpacing.xs),
-              Flexible(
-                child: Text(
-                  widget.label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textScaler: context.clampedTextScaler(
-                    max: AppSizes.tileOverlayMaxTextScale,
-                  ),
-                  style: context.type.data.copyWith(color: colors.onVideoText),
-                ),
+    final Widget content = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        icon,
+        if (!widget.iconOnly) ...<Widget>[
+          const SizedBox(width: AppSpacing.xs),
+          Flexible(
+            child: Text(
+              widget.label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textScaler: context.clampedTextScaler(
+                max: AppSizes.tileOverlayMaxTextScale,
               ),
-            ],
-          ],
-        ),
-      ),
+              style: context.type.data.copyWith(color: colors.onVideoText),
+            ),
+          ),
+        ],
+      ],
     );
+    final Widget pill = widget.plate
+        ? DecoratedBox(
+            decoration: BoxDecoration(
+              color: colors.overlayOnVideo,
+              borderRadius: AppRadius.allPill,
+            ),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
+              child: content,
+            ),
+          )
+        : content;
 
     if (widget.onTap == null) {
       return Semantics(

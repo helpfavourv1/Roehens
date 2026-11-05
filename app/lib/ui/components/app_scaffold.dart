@@ -1,4 +1,6 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:roehens/ui/tokens/app_theme.dart';
 import 'package:roehens/ui/tokens/motion_tokens.dart';
 import 'package:roehens/utils/context_extensions.dart';
 
@@ -43,7 +45,11 @@ class AppScaffold extends StatelessWidget {
         ? keyboard
         : (bottomBar == null ? media.padding.bottom : 0);
 
-    return ColoredBox(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // Status and navigation bar icons contrast with the theme (white icons on
+      // a light screen are invisible), and the bars are transparent.
+      value: AppTheme.overlayStyle(context.tokens),
+      child: ColoredBox(
       color: context.colors.bgPrimary,
       child: Padding(
         padding: EdgeInsets.only(top: top, bottom: bottomPadding),
@@ -68,6 +74,6 @@ class AppScaffold extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

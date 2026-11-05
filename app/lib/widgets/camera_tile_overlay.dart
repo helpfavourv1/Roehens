@@ -46,6 +46,46 @@ class CameraTileOverlay extends StatelessWidget {
         : context.type.callout;
     final Color white = context.colors.onVideoText;
     final bool hasPlate = showLabels;
+    if (compact) {
+      // The smallest tiles (a 16-up grid on a phone is about 80 x 45) have room
+      // for one thin row: the status icon and the name on a single plate.
+      return Padding(
+        padding: const EdgeInsets.all(AppSpacing.xxs),
+        child: Align(
+          alignment: AlignmentDirectional.bottomStart,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: context.colors.overlayOnVideo,
+              borderRadius: AppRadius.allSm,
+            ),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppSpacing.xs,
+                vertical: AppSpacing.xxs,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  statusPill,
+                  if (hasPlate) ...<Widget>[
+                    const SizedBox(width: AppSpacing.xxs),
+                    Flexible(
+                      child: Text(
+                        name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textScaler: scaler,
+                        style: nameStyle.copyWith(color: white),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.xs),
       child: Column(

@@ -103,7 +103,7 @@ class _AppProgressState extends State<AppProgress>
               painter: _SpinnerPainter(
                 color: accent,
                 turn: _controller.value,
-                track: context.colors.borderSubtle,
+                track: accent.withValues(alpha: AppSizes.spinnerTrackOpacity),
               ),
             );
           },

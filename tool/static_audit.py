@@ -141,7 +141,7 @@ for p, where in sorted(used.items()):
         err(f'package:{p} is imported ({", ".join(sorted(where))}) but not declared in pubspec.yaml')
     elif declared.get(p) == 'dev_dependencies' and 'lib' in where:
         err(f'package:{p} is a dev dependency but used in lib/')
-RUNTIME_ONLY = {'media_kit_libs_video', 'cupertino_icons', 'flutter_lints', 'flutter_test',
+RUNTIME_ONLY = {'integration_test', 'media_kit_libs_video', 'cupertino_icons', 'flutter_lints', 'flutter_test',
                 'flutter_localizations', 'sqflite_common_ffi'}
 for p, kind in sorted(declared.items()):
     if p not in used and p not in RUNTIME_ONLY and p not in SDK:

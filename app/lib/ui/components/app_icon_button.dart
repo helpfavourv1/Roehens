@@ -17,6 +17,9 @@ enum AppIconButtonTone {
 
   /// Over video: dark plate, white glyph.
   overVideo,
+
+  /// A toggle that is on, over video: solid accent plate.
+  overVideoSelected,
 }
 
 /// A 40x40 chip inside a 48x48 hit area. A bare icon is never a control.
@@ -48,11 +51,13 @@ class AppIconButton extends StatelessWidget {
       AppIconButtonTone.neutral => colors.bgTertiary,
       AppIconButtonTone.selected => colors.accentWash,
       AppIconButtonTone.overVideo => colors.overlayOnVideo,
+      AppIconButtonTone.overVideoSelected => colors.accent,
     };
     Color glyph = switch (tone) {
       AppIconButtonTone.neutral => colors.textPrimary,
       AppIconButtonTone.selected => colors.accent,
       AppIconButtonTone.overVideo => colors.onVideoText,
+      AppIconButtonTone.overVideoSelected => colors.textOnAccent,
     };
     if (!enabled) {
       glyph = colors.textTertiary;
@@ -74,7 +79,9 @@ class AppIconButton extends StatelessWidget {
               icon,
               size: size,
               color: glyph,
-              weight: tone == AppIconButtonTone.selected
+              weight:
+                  tone == AppIconButtonTone.selected ||
+                      tone == AppIconButtonTone.overVideoSelected
                   ? AppIconWeight.fill
                   : weight,
             ),

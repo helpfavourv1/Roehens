@@ -119,6 +119,7 @@ class CameraTile extends StatelessWidget {
                     label: statusLabel,
                     iconOnly: narrow,
                     expandHitArea: !narrow,
+                    plate: !narrow,
                     onTap: onStatusTap,
                   ),
                 ),

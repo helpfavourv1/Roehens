@@ -61,7 +61,7 @@ class AppNavBar extends StatelessWidget {
             children: <Widget>[
               if (start != null) ...<Widget>[
                 start,
-                const SizedBox(width: AppSpacing.xs),
+                SizedBox(width: leading != null ? AppSpacing.md : AppSpacing.xs),
               ],
               Expanded(
                 child: title == null

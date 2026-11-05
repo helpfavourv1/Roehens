@@ -225,7 +225,7 @@ class _FullscreenControlsState extends State<FullscreenControls> {
       icon: action.icon,
       semanticLabel: action.label,
       tone: action.selected
-          ? AppIconButtonTone.selected
+          ? AppIconButtonTone.overVideoSelected
           : AppIconButtonTone.overVideo,
       onPressed: action.onPressed,
     );

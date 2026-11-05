@@ -4,8 +4,7 @@ import 'package:roehens/ui/tokens/size_tokens.dart';
 import 'package:roehens/utils/context_extensions.dart';
 
 /// Selection handles for text fields in an app that does not use Material or
-/// Cupertino. The copy/paste menu is not drawn here: the text field asks the
-/// system for its own menu, which is already in the person's language.
+/// Cupertino. The cut/copy/paste bar is drawn by [AppTextSelectionToolbar].
 class AppSelectionControls extends TextSelectionControls {
   @override
   Widget buildHandle(

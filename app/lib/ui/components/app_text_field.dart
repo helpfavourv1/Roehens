@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:roehens/ui/components/app_icon_button.dart';
 import 'package:roehens/ui/components/app_selection_controls.dart';
+import 'package:roehens/ui/components/app_text_selection_toolbar.dart';
 import 'package:roehens/ui/icons/app_icon.dart';
 import 'package:roehens/ui/icons/app_icons.dart';
 import 'package:roehens/ui/tokens/color_tokens.dart';
@@ -110,13 +111,6 @@ class _AppTextFieldState extends State<AppTextField> {
 
   void _onFocusChanged() => _focused.value = _focusNode.hasFocus;
 
-  static Widget _contextMenu(BuildContext context, EditableTextState state) {
-    if (SystemContextMenu.isSupportedByField(state)) {
-      return SystemContextMenu.editableText(editableTextState: state);
-    }
-    return const SizedBox.shrink();
-  }
-
   @override
   Widget build(BuildContext context) {
     final AppColors colors = context.colors;
@@ -161,7 +155,7 @@ class _AppTextFieldState extends State<AppTextField> {
               backgroundCursorColor: colors.bgTertiary,
               selectionColor: colors.accentWash,
               selectionControls: _selectionControls,
-              contextMenuBuilder: _contextMenu,
+              contextMenuBuilder: AppTextSelectionToolbar.builder,
               keyboardType: widget.keyboardType,
               textInputAction: widget.textInputAction,
               inputFormatters: widget.inputFormatters,

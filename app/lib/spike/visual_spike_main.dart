@@ -1,6 +1,7 @@
 // Temporary entry point for checkpoint A1 (batch P4E). It shows the component
 // library on a real phone so the finish can be judged by eye. It uses no
 // services and no stored data, and it is deleted in batch P8.
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:roehens/core/models/camera_brand_profile.dart';
 import 'package:roehens/core/providers/ad_state_provider.dart';
@@ -41,6 +42,8 @@ import 'package:roehens/widgets/stream_status_pill.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // Draw behind the system bars; the scaffold sets their icon colors.
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   runApp(const VisualSpikeApp());
 }
 
@@ -464,6 +467,7 @@ class _ComponentsSection extends StatelessWidget {
         Wrap(
           spacing: AppSpacing.sm,
           runSpacing: AppSpacing.sm,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: <Widget>[
             AppChip(label: 'Retry', icon: AppIconName.refresh, onTap: () {}),
             AppChip(label: 'Selected', selected: true, onTap: () {}),

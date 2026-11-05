@@ -102,7 +102,7 @@ class _Destination extends StatelessWidget {
                 ),
                 if (item.badge != null)
                   PositionedDirectional(
-                    end: -AppSpacing.md,
+                    end: -(AppSpacing.md + AppSpacing.xs),
                     top: -AppSpacing.xs,
                     child: AppBadge(item.badge!, tone: AppBadgeTone.accent),
                   ),
