@@ -50,30 +50,31 @@ class AppScaffold extends StatelessWidget {
       // a light screen are invisible), and the bars are transparent.
       value: AppTheme.overlayStyle(context.tokens),
       child: ColoredBox(
-      color: context.colors.bgPrimary,
-      child: Padding(
-        padding: EdgeInsets.only(top: top, bottom: bottomPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            ?navBar,
-            Expanded(child: body),
-            if (hasBottomStack)
-              AnimatedSize(
-                duration: context.motion(AppMotion.adSlot),
-                curve: AppMotion.settle,
-                alignment: Alignment.topCenter,
-                child: keyboardUp || immersive
-                    ? const SizedBox(width: double.infinity)
-                    : Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[?bottomEmbed, ?bottomBar],
-                      ),
-              ),
-          ],
+        color: context.colors.bgPrimary,
+        child: Padding(
+          padding: EdgeInsets.only(top: top, bottom: bottomPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              ?navBar,
+              Expanded(child: body),
+              if (hasBottomStack)
+                AnimatedSize(
+                  duration: context.motion(AppMotion.adSlot),
+                  curve: AppMotion.settle,
+                  alignment: Alignment.topCenter,
+                  child: keyboardUp || immersive
+                      ? const SizedBox(width: double.infinity)
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[?bottomEmbed, ?bottomBar],
+                        ),
+                ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

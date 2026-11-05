@@ -174,20 +174,24 @@ void main() {
           .value;
     }
 
-    testWidgets('a dark screen gets light bar icons, a light screen dark ones', (
-      WidgetTester tester,
-    ) async {
-      final SystemUiOverlayStyle dark = await styleFor(tester, Brightness.dark);
-      expect(dark.statusBarIconBrightness, Brightness.light);
-      expect(dark.systemNavigationBarIconBrightness, Brightness.light);
+    testWidgets(
+      'a dark screen gets light bar icons, a light screen dark ones',
+      (WidgetTester tester) async {
+        final SystemUiOverlayStyle dark = await styleFor(
+          tester,
+          Brightness.dark,
+        );
+        expect(dark.statusBarIconBrightness, Brightness.light);
+        expect(dark.systemNavigationBarIconBrightness, Brightness.light);
 
-      final SystemUiOverlayStyle light = await styleFor(
-        tester,
-        Brightness.light,
-      );
-      expect(light.statusBarIconBrightness, Brightness.dark);
-      expect(light.systemNavigationBarIconBrightness, Brightness.dark);
-    });
+        final SystemUiOverlayStyle light = await styleFor(
+          tester,
+          Brightness.light,
+        );
+        expect(light.statusBarIconBrightness, Brightness.dark);
+        expect(light.systemNavigationBarIconBrightness, Brightness.dark);
+      },
+    );
 
     testWidgets('the bars are transparent so the app shows through', (
       WidgetTester tester,
