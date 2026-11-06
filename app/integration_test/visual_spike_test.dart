@@ -39,7 +39,7 @@ void main() {
     );
     final EditableText field = tester.widget<EditableText>(name);
 
-    await tester.longPress(name);
+    await tester.longPressAt(tester.getTopLeft(name) + const Offset(20, 10));
     await tester.pumpAndSettle();
     expect(find.text('Select all'), findsOneWidget, reason: 'the toolbar must appear');
     expect(find.text('Copy'), findsOneWidget);
@@ -63,7 +63,7 @@ void main() {
       300,
       scrollable: _verticalScrollable().first,
     );
-    await tester.longPress(name);
+    await tester.longPressAt(tester.getTopLeft(name) + const Offset(20, 10));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Copy'));
     await tester.pumpAndSettle();

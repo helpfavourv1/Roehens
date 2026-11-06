@@ -72,7 +72,9 @@ void main() {
       WidgetTester tester,
     ) async {
       await pumpField(tester);
-      await tester.longPress(find.byType(EditableText));
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
       await tester.pump();
 
       expect(find.byType(AppTextSelectionToolbar), findsOneWidget);
@@ -90,7 +92,9 @@ void main() {
       WidgetTester tester,
     ) async {
       final TextEditingController controller = await pumpField(tester);
-      await tester.longPress(find.byType(EditableText));
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
       await tester.pump();
       await tester.tap(find.text('Paste'));
       await tester.pump();
@@ -102,7 +106,9 @@ void main() {
       WidgetTester tester,
     ) async {
       await pumpField(tester);
-      await tester.longPress(find.byType(EditableText));
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
       await tester.pump();
       await tester.tap(find.text('Copy'));
       await tester.pump();
@@ -114,7 +120,9 @@ void main() {
       WidgetTester tester,
     ) async {
       final TextEditingController controller = await pumpField(tester);
-      await tester.longPress(find.byType(EditableText));
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
       await tester.pump();
       await tester.tap(find.text('Select all'));
       await tester.pump();
@@ -127,7 +135,9 @@ void main() {
       WidgetTester tester,
     ) async {
       await pumpField(tester);
-      await tester.longPress(find.byType(EditableText));
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
       await tester.pump();
 
       final Rect bar = tester.getRect(find.byType(AppTextSelectionToolbar));
@@ -143,7 +153,9 @@ void main() {
       WidgetTester tester,
     ) async {
       await pumpField(tester);
-      await tester.longPress(find.byType(EditableText));
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
       await tester.pump();
 
       expect(
