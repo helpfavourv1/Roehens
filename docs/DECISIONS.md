@@ -156,3 +156,15 @@ No third-party runtime dependency has been added yet. Each addition is logged he
 5. **Android backups are off** (`allowBackup=false` plus `data_extraction_rules.xml`), as the specification requires; the first audit found them still on.
 6. **Coverage gaps found and closed:** the key-value store and the credential vault were at 0 percent; five models had no JSON round-trip test; formatters, async helpers, the error handler, the theme builder and the icon license had no tests.
 7. **Not covered by automated tests, by design:** `player_session.dart` (needs the native player), `ptz_service.dart` (needs a real ONVIF camera), and the store SDK adapters (need a store account). They are proven on the phone.
+
+## Changes after the first look at the design on a phone (checkpoint A1)
+
+Found by the owner on a Redmi 25028RN03A, and by the first real emulator run:
+
+1. **Copy and paste did not work.** Flutter's system context menu shows nothing on Android (documented: iOS 16 and later only), and a bare `EditableText` does not handle taps or long presses at all. `AppTextField` now has the selection gesture handling, in-repo handles, and its own cut/copy/paste/select-all bar (`AppTextSelectionToolbar`). The words are Flutter's own translated widget strings. The selection controls must be a `TextSelectionHandleControls`, or Flutter ignores the menu builder.
+2. **System bars.** The scaffold now applies the theme's bar style: icon colors contrast with the theme (white icons on a light screen were invisible) and both bars are transparent. The app draws edge to edge.
+3. **Status colors on dark plates.** The status pill always uses the bright status colors, because it sits on a dark plate or a picture in both themes.
+4. **Smallest tiles.** A 16-up phone grid has tiles of about 79 x 44, and the old overlay overflowed. Narrow tiles now show one thin row: status icon and name.
+5. **Spacing.** Gap between the brand and the screen title; the count badge on a bottom-bar icon no longer covers it; the busy spinner track follows its own color; a selected toggle over video has a solid accent plate.
+6. **Animations off.** With "remove animations" on, the framework's `AnimatedSize` notifies during its own layout (a debug error, a layout glitch in release). `AppAnimatedSize` skips it when the duration is zero. Found by the emulator run, not by any widget test; there are now tests for it.
+7. **A new check: `emulator_check`.** A manual workflow that runs `integration_test/` on an Android 34 emulator. It covers what widget tests cannot: the real engine, text input and clipboard.

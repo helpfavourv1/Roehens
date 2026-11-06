@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:roehens/core/providers/ad_state_provider.dart';
+import 'package:roehens/core/providers/persistence_health_provider.dart';
 import 'package:roehens/ui/components/app_nav_bar.dart';
 import 'package:roehens/ui/components/app_scaffold.dart';
 import 'package:roehens/ui/components/app_text_field.dart';
@@ -9,7 +11,9 @@ import 'package:roehens/ui/icons/app_icon.dart';
 import 'package:roehens/ui/tokens/color_tokens.dart';
 import 'package:roehens/ui/tokens/size_tokens.dart';
 import 'package:roehens/ui/tokens/spacing_tokens.dart';
+import 'package:roehens/widgets/banner_ad_slot.dart';
 import 'package:roehens/widgets/camera_tile.dart';
+import 'package:roehens/widgets/persistence_warning_banner.dart';
 import 'package:roehens/widgets/stream_status_pill.dart';
 
 import '../../support/pump_app.dart';
@@ -289,6 +293,97 @@ void main() {
           ),
         ),
       );
+      expect(tester.takeException(), isNull);
+    });
+  });
+
+  group('with animations switched off', () {
+    void switchAnimationsOff(WidgetTester tester) {
+      tester.platformDispatcher.accessibilityFeaturesTestValue =
+          const FakeAccessibilityFeatures(disableAnimations: true);
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+    }
+
+    testWidgets('the bottom stack changes size without an error', (
+      WidgetTester tester,
+    ) async {
+      switchAnimationsOff(tester);
+      final ValueNotifier<bool> showEmbed = ValueNotifier<bool>(false);
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 400,
+          height: 800,
+          child: ValueListenableBuilder<bool>(
+            valueListenable: showEmbed,
+            builder: (BuildContext context, bool show, Widget? _) {
+              return AppScaffold(
+                body: const SizedBox.expand(),
+                bottomEmbed: show ? const SizedBox(height: 60) : null,
+                bottomBar: const SizedBox(height: 64),
+              );
+            },
+          ),
+        ),
+      );
+      showEmbed.value = true;
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+      showEmbed.value = false;
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('the ad slot appears and collapses without an error', (
+      WidgetTester tester,
+    ) async {
+      switchAnimationsOff(tester);
+      final ValueNotifier<AdSlotState> state = ValueNotifier<AdSlotState>(
+        AdSlotState.collapsed,
+      );
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 400,
+          child: BannerAdSlot(
+            state: state,
+            viewBuilder: (Object view) => const SizedBox(),
+          ),
+        ),
+      );
+      state.value = AdSlotState(height: 60, view: Object());
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+      expect(tester.getSize(find.byType(BannerAdSlot)).height, 76);
+      state.value = AdSlotState.collapsed;
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+      expect(tester.getSize(find.byType(BannerAdSlot)).height, 0);
+    });
+
+    testWidgets('the storage warning appears and goes without an error', (
+      WidgetTester tester,
+    ) async {
+      switchAnimationsOff(tester);
+      final ValueNotifier<PersistenceIssue> issue =
+          ValueNotifier<PersistenceIssue>(PersistenceIssue.none);
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 400,
+          child: PersistenceWarningBanner(
+            issue: issue,
+            degradedMessage: 'Cameras may not be saved.',
+            updateMessage: 'Update the app.',
+          ),
+        ),
+      );
+      issue.value = PersistenceIssue.degraded;
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+      expect(find.text('Cameras may not be saved.'), findsOneWidget);
+      issue.value = PersistenceIssue.none;
+      await tester.pump();
       expect(tester.takeException(), isNull);
     });
   });

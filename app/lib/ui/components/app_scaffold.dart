@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:roehens/ui/components/app_animated_size.dart';
 import 'package:roehens/ui/tokens/app_theme.dart';
-import 'package:roehens/ui/tokens/motion_tokens.dart';
 import 'package:roehens/utils/context_extensions.dart';
 
 /// The frame of every screen: the scaffold color, an optional nav bar, the
@@ -59,11 +59,8 @@ class AppScaffold extends StatelessWidget {
               ?navBar,
               Expanded(child: body),
               if (hasBottomStack)
-                AnimatedSize(
-                  duration: context.motion(AppMotion.adSlot),
-                  curve: AppMotion.settle,
-                  alignment: Alignment.topCenter,
-                  child: keyboardUp || immersive
+                AppAnimatedSize(
+child: keyboardUp || immersive
                       ? const SizedBox(width: double.infinity)
                       : Column(
                           mainAxisSize: MainAxisSize.min,

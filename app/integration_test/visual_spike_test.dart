@@ -79,6 +79,7 @@ void main() {
     await tester.pumpAndSettle();
 
     for (final String look in <String>['Dark', 'Light', 'RTL']) {
+      await tester.ensureVisible(find.text(look).first);
       await tester.tap(find.text(look).first);
       await tester.pumpAndSettle();
       for (final String section in <String>[
@@ -89,6 +90,7 @@ void main() {
         'Overlays',
         'Arabic',
       ]) {
+        await tester.ensureVisible(find.text(section).first);
         await tester.tap(find.text(section).first);
         await tester.pumpAndSettle();
         expect(

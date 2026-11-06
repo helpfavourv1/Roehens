@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:roehens/ui/components/app_animated_size.dart';
 import 'package:roehens/core/providers/ad_state_provider.dart';
-import 'package:roehens/ui/tokens/motion_tokens.dart';
 import 'package:roehens/ui/tokens/size_tokens.dart';
 import 'package:roehens/ui/tokens/spacing_tokens.dart';
 import 'package:roehens/utils/context_extensions.dart';
@@ -29,11 +29,8 @@ class BannerAdSlot extends StatelessWidget {
       valueListenable: state,
       builder: (BuildContext context, AdSlotState slot, Widget? _) {
         final Object? view = slot.view;
-        return AnimatedSize(
-          duration: context.motion(AppMotion.adSlot),
-          curve: AppMotion.settle,
-          alignment: Alignment.topCenter,
-          child: slot.isVisible && view != null
+        return AppAnimatedSize(
+child: slot.isVisible && view != null
               ? DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border(

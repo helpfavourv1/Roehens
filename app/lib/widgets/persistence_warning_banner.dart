@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:roehens/ui/components/app_animated_size.dart';
 import 'package:roehens/core/providers/persistence_health_provider.dart';
 import 'package:roehens/ui/components/app_banner.dart';
-import 'package:roehens/ui/tokens/motion_tokens.dart';
 import 'package:roehens/ui/tokens/spacing_tokens.dart';
-import 'package:roehens/utils/context_extensions.dart';
 
 /// The persistent warning when local storage is not working: saved cameras may
 /// not survive closing the app. It stays until the problem is gone and offers
@@ -43,11 +42,8 @@ class PersistenceWarningBanner extends StatelessWidget {
             tone: AppBannerTone.error,
           ),
         };
-        return AnimatedSize(
-          duration: context.motion(AppMotion.adSlot),
-          curve: AppMotion.settle,
-          alignment: Alignment.topCenter,
-          child: banner == null
+        return AppAnimatedSize(
+child: banner == null
               ? const SizedBox(width: double.infinity)
               : Padding(padding: AppSpacing.allMd, child: banner),
         );
