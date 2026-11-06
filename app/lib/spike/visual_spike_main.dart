@@ -392,7 +392,9 @@ class _ComponentsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTokensData tokens = context.tokens;
-    final TextEditingController name = TextEditingController(text: 'Garden gate');
+    final TextEditingController name = TextEditingController(
+      text: 'Garden gate',
+    );
     final TextEditingController host = TextEditingController(
       text: '192.168.1.20',
     );
