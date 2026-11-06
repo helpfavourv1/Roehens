@@ -53,7 +53,7 @@ void main() {
     Future<TextEditingController> pumpField(WidgetTester tester) async {
       mockClipboard(tester);
       final TextEditingController controller = TextEditingController(
-        text: 'Garden',
+        text: 'Garden gate',
       );
       await pumpApp(
         tester,

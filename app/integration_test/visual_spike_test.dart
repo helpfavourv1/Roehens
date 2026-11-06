@@ -31,7 +31,7 @@ void main() {
       const ClipboardData(text: 'rtsp://192.168.1.50:554/stream1'),
     );
 
-    final Finder name = _fieldWithText('Garden');
+    final Finder name = _fieldWithText('Garden gate');
     await tester.scrollUntilVisible(
       name,
       300,
@@ -57,7 +57,7 @@ void main() {
     await tester.pumpAndSettle();
     await Clipboard.setData(const ClipboardData(text: 'before'));
 
-    final Finder name = _fieldWithText('Garden');
+    final Finder name = _fieldWithText('Garden gate');
     await tester.scrollUntilVisible(
       name,
       300,
