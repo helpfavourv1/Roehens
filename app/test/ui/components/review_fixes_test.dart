@@ -301,7 +301,9 @@ void main() {
     void switchAnimationsOff(WidgetTester tester) {
       tester.platformDispatcher.accessibilityFeaturesTestValue =
           const FakeAccessibilityFeatures(disableAnimations: true);
-      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+      addTearDown(
+        tester.platformDispatcher.clearAccessibilityFeaturesTestValue,
+      );
     }
 
     testWidgets('the bottom stack changes size without an error', (

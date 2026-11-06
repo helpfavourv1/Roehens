@@ -43,7 +43,7 @@ class PersistenceWarningBanner extends StatelessWidget {
           ),
         };
         return AppAnimatedSize(
-child: banner == null
+          child: banner == null
               ? const SizedBox(width: double.infinity)
               : Padding(padding: AppSpacing.allMd, child: banner),
         );

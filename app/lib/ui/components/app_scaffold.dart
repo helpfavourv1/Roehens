@@ -60,7 +60,7 @@ class AppScaffold extends StatelessWidget {
               Expanded(child: body),
               if (hasBottomStack)
                 AppAnimatedSize(
-child: keyboardUp || immersive
+                  child: keyboardUp || immersive
                       ? const SizedBox(width: double.infinity)
                       : Column(
                           mainAxisSize: MainAxisSize.min,

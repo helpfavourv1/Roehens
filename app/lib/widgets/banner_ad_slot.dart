@@ -30,7 +30,7 @@ class BannerAdSlot extends StatelessWidget {
       builder: (BuildContext context, AdSlotState slot, Widget? _) {
         final Object? view = slot.view;
         return AppAnimatedSize(
-child: slot.isVisible && view != null
+          child: slot.isVisible && view != null
               ? DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border(
