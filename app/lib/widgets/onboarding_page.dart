@@ -104,11 +104,11 @@ class OnboardingPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               FirstLineIcon(
- icon: AppIconName.check,
- size: AppSizes.iconRowTrailing,
- color: colors.success,
- textStyle: context.type.body,
- ),
+                                icon: AppIconName.check,
+                                size: AppSizes.iconRowTrailing,
+                                color: colors.success,
+                                textStyle: context.type.body,
+                              ),
                               const SizedBox(width: AppSpacing.sm),
                               Expanded(
                                 child: Text(

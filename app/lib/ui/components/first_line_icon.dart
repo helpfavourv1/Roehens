@@ -26,9 +26,8 @@ class FirstLineIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double fontSize = textStyle.fontSize ?? size;
-    final double lineHeight = MediaQuery.textScalerOf(
-      context,
-    ).scale(fontSize * (textStyle.height ?? 1.2));
+    final double lineHeight = MediaQuery.textScalerOf(context)
+        .scale(fontSize * (textStyle.height ?? 1.2));
     return SizedBox(
       height: lineHeight < size ? size : lineHeight,
       child: Center(

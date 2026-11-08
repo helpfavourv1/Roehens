@@ -45,53 +45,54 @@ class AppNavBar extends StatelessWidget {
     return MediaQuery.withClampedTextScaling(
       maxScaleFactor: AppSizes.navBarMaxTextScale,
       child: DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: context.colors.borderSubtle,
-            width: AppSizes.hairline,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: context.colors.borderSubtle,
+              width: AppSizes.hairline,
+            ),
           ),
         ),
-      ),
-      child: SizedBox(
-        height: AppSizes.navBarHeight,
-        child: Padding(
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AppSpacing.sm,
-          ),
-          child: Row(
-            children: <Widget>[
-              if (start != null) ...<Widget>[
-                start,
-                SizedBox(
-                  width: leading != null ? AppSpacing.md : AppSpacing.xs,
-                ),
-              ],
-              Expanded(
-                child: title == null
-                    ? const SizedBox.shrink()
-                    : Padding(
-                        padding: EdgeInsetsDirectional.only(
-                          start: start == null ? AppSpacing.sm : 0,
-                        ),
-                        child: Semantics(
-                          header: true,
-                          child: Text(
-                            title!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: context.type.title2.copyWith(
-                              color: context.colors.textPrimary,
+        child: SizedBox(
+          height: AppSizes.navBarHeight,
+          child: Padding(
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppSpacing.sm,
+            ),
+            child: Row(
+              children: <Widget>[
+                if (start != null) ...<Widget>[
+                  start,
+                  SizedBox(
+                    width: leading != null ? AppSpacing.md : AppSpacing.xs,
+                  ),
+                ],
+                Expanded(
+                  child: title == null
+                      ? const SizedBox.shrink()
+                      : Padding(
+                          padding: EdgeInsetsDirectional.only(
+                            start: start == null ? AppSpacing.sm : 0,
+                          ),
+                          child: Semantics(
+                            header: true,
+                            child: Text(
+                              title!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: context.type.title2.copyWith(
+                                color: context.colors.textPrimary,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-              ),
-              for (final Widget action in actions) action,
-            ],
+                ),
+                for (final Widget action in actions) action,
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

@@ -502,7 +502,10 @@ void main() {
         ),
         textScale: 3,
       );
-      expect(tester.widget<Text>(find.text('3')).textScaler, TextScaler.noScaling);
+      expect(
+        tester.widget<Text>(find.text('3')).textScaler,
+        TextScaler.noScaling,
+      );
     });
 
     testWidgets('a banner icon sits on the first line of its text', (
@@ -521,8 +524,13 @@ void main() {
       );
       final double firstLineCenter =
           tester.getTopLeft(find.byType(Text)).dy +
-          MediaQuery.textScalerOf(tester.element(find.byType(Text))).scale(15 * 1.45) / 2;
-      expect(tester.getCenter(find.byType(AppIcon)).dy, closeTo(firstLineCenter, 1.5));
+          MediaQuery.textScalerOf(tester.element(find.byType(Text)))
+                  .scale(15 * 1.45) /
+              2;
+      expect(
+        tester.getCenter(find.byType(AppIcon)).dy,
+        closeTo(firstLineCenter, 1.5),
+      );
     });
   });
 
