@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:roehens/ui/components/app_chip.dart';
+import 'package:roehens/ui/components/first_line_icon.dart';
 import 'package:roehens/ui/icons/app_icon.dart';
 import 'package:roehens/ui/icons/app_icons.dart';
 import 'package:roehens/ui/tokens/color_tokens.dart';
@@ -54,7 +55,12 @@ class AppBanner extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              AppIcon(icon, size: AppSizes.iconRowLeading, color: accent),
+              FirstLineIcon(
+                icon: icon,
+                size: AppSizes.iconRowLeading,
+                color: accent,
+                textStyle: context.type.body,
+              ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: ExcludeSemantics(

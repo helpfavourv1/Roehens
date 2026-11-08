@@ -48,7 +48,10 @@ class AppScaffold extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // Status and navigation bar icons contrast with the theme (white icons on
       // a light screen are invisible), and the bars are transparent.
-      value: AppTheme.overlayStyle(context.tokens),
+      value: AppTheme.overlayStyle(
+        // Fullscreen video is a dark picture whatever the theme: light icons.
+        immersive ? AppTheme.dark() : context.tokens,
+      ),
       child: ColoredBox(
         color: context.colors.bgPrimary,
         child: Padding(

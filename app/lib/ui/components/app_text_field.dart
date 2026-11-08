@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:roehens/ui/components/app_icon_button.dart';
 import 'package:roehens/ui/components/app_selection_controls.dart';
 import 'package:roehens/ui/components/app_text_selection_toolbar.dart';
+import 'package:roehens/ui/components/first_line_icon.dart';
 import 'package:roehens/ui/icons/app_icon.dart';
 import 'package:roehens/ui/icons/app_icons.dart';
 import 'package:roehens/ui/tokens/color_tokens.dart';
@@ -290,10 +291,11 @@ class _AppTextFieldState extends State<AppTextField>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   if (hasError) ...<Widget>[
-                    AppIcon(
-                      AppIconName.warning,
+                    FirstLineIcon(
+                      icon: AppIconName.warning,
                       size: AppSizes.iconChipGlyph,
                       color: colors.error,
+                      textStyle: context.type.footnote,
                     ),
                     const SizedBox(width: AppSpacing.xs),
                   ],

@@ -405,7 +405,9 @@ class _ComponentsSection extends StatelessWidget {
         const _Note(
           'Icon weight beside text: Bold, Fill and Duotone next to three type sizes.',
         ),
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runSpacing: AppSpacing.sm,
           children: <Widget>[
             for (final AppIconWeight weight
                 in AppIconWeight.values) ...<Widget>[

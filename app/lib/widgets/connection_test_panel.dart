@@ -5,6 +5,7 @@ import 'package:roehens/ui/components/app_card.dart';
 import 'package:roehens/ui/components/app_chip.dart';
 import 'package:roehens/ui/components/app_divider.dart';
 import 'package:roehens/ui/components/app_progress.dart';
+import 'package:roehens/ui/components/first_line_icon.dart';
 import 'package:roehens/ui/components/ltr_text.dart';
 import 'package:roehens/ui/icons/app_icon.dart';
 import 'package:roehens/ui/icons/app_icons.dart';
@@ -106,11 +107,12 @@ class ConnectionTestPanel extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                AppIcon(
-                  passed ? AppIconName.success : AppIconName.failure,
+                FirstLineIcon(
+                  icon: passed ? AppIconName.success : AppIconName.failure,
                   size: AppSizes.iconRowLeading,
                   color: passed ? colors.success : colors.error,
                   weight: AppIconWeight.fill,
+                  textStyle: context.type.title2,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
@@ -150,10 +152,11 @@ class ConnectionTestPanel extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  AppIcon(
-                    AppIconName.chevronRight,
+                  FirstLineIcon(
+                    icon: AppIconName.chevronRight,
                     size: AppSizes.iconChipGlyph,
                     color: colors.textTertiary,
+                    textStyle: context.type.body,
                   ),
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(

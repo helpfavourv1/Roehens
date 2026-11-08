@@ -42,7 +42,9 @@ class AppNavBar extends StatelessWidget {
                 semanticLabel: backLabel!,
                 onPressed: onBack,
               ));
-    return DecoratedBox(
+    return MediaQuery.withClampedTextScaling(
+      maxScaleFactor: AppSizes.navBarMaxTextScale,
+      child: DecoratedBox(
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -90,6 +92,6 @@ class AppNavBar extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

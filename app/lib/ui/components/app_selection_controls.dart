@@ -6,6 +6,9 @@ import 'package:roehens/utils/context_extensions.dart';
 /// Cupertino. The cut/copy/paste bar is drawn by [AppTextSelectionToolbar].
 class AppSelectionControls extends TextSelectionControls
     with TextSelectionHandleControls {
+  /// Marks each drawn handle, so tests can count them.
+  static const Key handleKey = ValueKey<String>('app-selection-handle');
+
   @override
   Widget buildHandle(
     BuildContext context,
@@ -17,6 +20,7 @@ class AppSelectionControls extends TextSelectionControls
       behavior: HitTestBehavior.translucent,
       onTap: onTap,
       child: SizedBox.square(
+        key: handleKey,
         dimension: AppSizes.selectionHandle,
         child: DecoratedBox(
           decoration: BoxDecoration(

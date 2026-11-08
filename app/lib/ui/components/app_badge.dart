@@ -10,10 +10,19 @@ enum AppBadgeTone { neutral, accent, success, warning, error }
 /// A small non-interactive label such as a count or "PRO". Not a status: the
 /// status pill (icon, text and color together) is its own widget.
 class AppBadge extends StatelessWidget {
-  const AppBadge(this.label, {super.key, this.tone = AppBadgeTone.neutral});
+  const AppBadge(
+    this.label, {
+    super.key,
+    this.tone = AppBadgeTone.neutral,
+    this.textScaler,
+  });
 
   final String label;
   final AppBadgeTone tone;
+
+  /// Caps the text size where the badge sits on something of fixed size, such
+  /// as an icon in the bottom bar.
+  final TextScaler? textScaler;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +62,7 @@ class AppBadge extends StatelessWidget {
               label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
+              textScaler: textScaler,
               style: context.type.data.copyWith(color: foreground),
             ),
           ),

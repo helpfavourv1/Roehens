@@ -1,7 +1,8 @@
 name: emulator_check
 
 # Manual. Runs the integration tests in app/integration_test on a real Android
-# emulator (API 34). It checks what widget tests cannot: the real engine, the
+# emulator (API 34) with flutter drive, which also saves screenshots of what the
+# app draws and publishes them to the ci-logs branch (folder screenshots/). It checks what widget tests cannot: the real engine, the
 # real text input and the real clipboard. It changes nothing in the repository.
 
 on:
@@ -49,7 +50,7 @@ jobs:
           profile: pixel_6
           disable-animations: true
           working-directory: app
-          script: flutter test integration_test --reporter expanded > ../ci.log 2>&1 || (tail -n 120 ../ci.log; exit 1)
+          script: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/visual_spike_test.dart -d emulator-5554 > ../ci.log 2>&1 || (tail -n 120 ../ci.log; exit 1)
 
       - name: Result
         if: always()
@@ -62,4 +63,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           JOB_STATUS: ${{ job.status }}
+          SCREENSHOT_DIR: ${{ github.workspace }}/app/screenshots
         run: sh tool/ci_publish_log.sh "$LOG" emulator_check

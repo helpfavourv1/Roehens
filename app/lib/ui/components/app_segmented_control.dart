@@ -30,9 +30,25 @@ class AppSegmentedControl<T> extends StatelessWidget {
   final T selected;
   final ValueChanged<T> onChanged;
 
+  /// Above this text scale, three or more segments are stacked.
+  static const double stackAtTextScale = 1.5;
+
   @override
   Widget build(BuildContext context) {
     final AppColors colors = context.colors;
+    // Three or more segments side by side cannot hold large text without
+    // breaking words, so at large sizes they stack, one per line.
+    final bool stacked =
+        segments.length > 2 &&
+        MediaQuery.textScalerOf(context).scale(1) > stackAtTextScale;
+    Widget segment(AppSegment<T> item) {
+      return _Segment<T>(
+        segment: item,
+        isSelected: item.value == selected,
+        onTap: () => onChanged(item.value),
+      );
+    }
+
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.bgTertiary,
@@ -40,21 +56,22 @@ class AppSegmentedControl<T> extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.xxs),
-        child: IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              for (final AppSegment<T> segment in segments)
-                Expanded(
-                  child: _Segment<T>(
-                    segment: segment,
-                    isSelected: segment.value == selected,
-                    onTap: () => onChanged(segment.value),
-                  ),
+        child: stacked
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  for (final AppSegment<T> item in segments) segment(item),
+                ],
+              )
+            : IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    for (final AppSegment<T> item in segments)
+                      Expanded(child: segment(item)),
+                  ],
                 ),
-            ],
-          ),
-        ),
+              ),
       ),
     );
   }

@@ -3,11 +3,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/core/providers/ad_state_provider.dart';
 import 'package:roehens/core/providers/persistence_health_provider.dart';
+import 'package:roehens/ui/components/app_banner.dart';
+import 'package:roehens/ui/components/app_bottom_bar.dart';
 import 'package:roehens/ui/components/app_nav_bar.dart';
+import 'package:roehens/ui/components/app_segmented_control.dart';
+import 'package:roehens/ui/components/app_selection_controls.dart';
 import 'package:roehens/ui/components/app_scaffold.dart';
 import 'package:roehens/ui/components/app_text_field.dart';
 import 'package:roehens/ui/components/app_text_selection_toolbar.dart';
 import 'package:roehens/ui/icons/app_icon.dart';
+import 'package:roehens/ui/icons/app_icons.dart';
 import 'package:roehens/ui/tokens/color_tokens.dart';
 import 'package:roehens/ui/tokens/size_tokens.dart';
 import 'package:roehens/ui/tokens/spacing_tokens.dart';
@@ -387,6 +392,184 @@ void main() {
       issue.value = PersistenceIssue.none;
       await tester.pump();
       expect(tester.takeException(), isNull);
+    });
+  });
+
+  group('large text', () {
+    Widget segments() {
+      return SizedBox(
+        width: 328,
+        child: AppSegmentedControl<String>(
+          selected: 'a',
+          onChanged: (_) {},
+          segments: const <AppSegment<String>>[
+            AppSegment<String>(value: 'a', label: 'System'),
+            AppSegment<String>(value: 'b', label: 'Light'),
+            AppSegment<String>(value: 'c', label: 'Dark'),
+          ],
+        ),
+      );
+    }
+
+    testWidgets('three segments stay in a row at normal text', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(tester, segments());
+      expect(
+        tester.getTopLeft(find.text('System')).dy,
+        tester.getTopLeft(find.text('Dark')).dy,
+      );
+    });
+
+    testWidgets('three segments stack, one per line, at large text', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        segments(),
+        textScale: 2,
+        size: const Size(400, 1600),
+      );
+      final double system = tester.getTopLeft(find.text('System')).dy;
+      final double light = tester.getTopLeft(find.text('Light')).dy;
+      final double dark = tester.getTopLeft(find.text('Dark')).dy;
+      expect(system, lessThan(light));
+      expect(light, lessThan(dark));
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('two segments stay in a row at large text', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 328,
+          child: AppSegmentedControl<int>(
+            selected: 1,
+            onChanged: (_) {},
+            segments: const <AppSegment<int>>[
+              AppSegment<int>(value: 1, label: 'On'),
+              AppSegment<int>(value: 2, label: 'Off'),
+            ],
+          ),
+        ),
+        textScale: 2,
+      );
+      expect(
+        tester.getTopLeft(find.text('On')).dy,
+        tester.getTopLeft(find.text('Off')).dy,
+      );
+    });
+
+    testWidgets('the nav bar text stops growing at 130 percent', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        const SizedBox(
+          width: 400,
+          child: AppNavBar(leading: Text('Roehens'), title: 'Design check'),
+        ),
+        textScale: 2,
+      );
+      for (final String text in <String>['Roehens', 'Design check']) {
+        expect(
+          MediaQuery.textScalerOf(tester.element(find.text(text))).scale(10),
+          closeTo(13, 0.01),
+        );
+      }
+    });
+
+    testWidgets('a count badge on a bottom bar icon does not grow', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 400,
+          child: AppBottomBar(
+            selectedIndex: 0,
+            onSelected: (_) {},
+            items: const <AppBottomBarItem>[
+              AppBottomBarItem(
+                icon: AppIconName.cameraDome,
+                label: 'Cameras',
+                badge: '3',
+              ),
+            ],
+          ),
+        ),
+        textScale: 3,
+      );
+      expect(tester.widget<Text>(find.text('3')).textScaler, TextScaler.noScaling);
+    });
+
+    testWidgets('a banner icon sits on the first line of its text', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        const SizedBox(
+          width: 360,
+          child: AppBanner(
+            message: 'Storage is not working. Cameras may not be saved.',
+          ),
+        ),
+        textScale: 2,
+        size: const Size(400, 2000),
+      );
+      final double firstLineCenter =
+          tester.getTopLeft(find.byType(Text)).dy +
+          MediaQuery.textScalerOf(tester.element(find.byType(Text))).scale(15 * 1.45) / 2;
+      expect(tester.getCenter(find.byType(AppIcon)).dy, closeTo(firstLineCenter, 1.5));
+    });
+  });
+
+  group('selection handles', () {
+    testWidgets('a selected word has a handle at each end', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 360,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 200),
+            child: AppTextField(
+              controller: TextEditingController(text: 'Garden gate'),
+              label: 'Name',
+            ),
+          ),
+        ),
+      );
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
+      await tester.pump();
+      expect(find.byKey(AppSelectionControls.handleKey), findsNWidgets(2));
+    });
+  });
+
+  group('fullscreen system bars', () {
+    testWidgets('a light theme still gets light icons over fullscreen video', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        const SizedBox(
+          width: 400,
+          height: 800,
+          child: AppScaffold(immersive: true, body: SizedBox.expand()),
+        ),
+        brightness: Brightness.light,
+      );
+      final SystemUiOverlayStyle style = tester
+          .widget<AnnotatedRegion<SystemUiOverlayStyle>>(
+            find.byType(AnnotatedRegion<SystemUiOverlayStyle>),
+          )
+          .value;
+      expect(style.statusBarIconBrightness, Brightness.light);
     });
   });
 

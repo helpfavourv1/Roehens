@@ -38,6 +38,9 @@ class AppSizes {
   static const double switchThumbInset = 3;
   static const double spinner = 20;
   static const double spinnerStroke = 2.5;
+
+  /// The nav bar is 56 high, so its text stops growing at this scale.
+  static const double navBarMaxTextScale = 1.3;
   static const double spinnerTrackOpacity = 0.25;
   static const double progressBarHeight = 4;
   static const double inputBorder = 1.5;

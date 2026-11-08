@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:roehens/ui/components/app_button.dart';
+import 'package:roehens/ui/components/first_line_icon.dart';
 import 'package:roehens/ui/icons/app_icon.dart';
 import 'package:roehens/ui/icons/app_icons.dart';
 import 'package:roehens/ui/tokens/color_tokens.dart';
@@ -82,11 +83,12 @@ class PermissionRationaleView extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        AppIcon(
-                          AppIconName.check,
-                          size: AppSizes.iconRowTrailing,
-                          color: colors.success,
-                        ),
+                        FirstLineIcon(
+ icon: AppIconName.check,
+ size: AppSizes.iconRowTrailing,
+ color: colors.success,
+ textStyle: context.type.body,
+ ),
                         const SizedBox(width: AppSpacing.sm),
                         Expanded(
                           child: Text(
