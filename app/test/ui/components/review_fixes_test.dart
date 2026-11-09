@@ -578,7 +578,8 @@ void main() {
       await tester.longPressAt(field.topLeft + const Offset(20, 10));
       await tester.pump();
       final List<String> handles = <String>[
-        for (final Element e in find.byKey(AppSelectionControls.handleKey).evaluate())
+        for (final Element e
+            in find.byKey(AppSelectionControls.handleKey).evaluate())
           '${tester.getRect(find.byElementPredicate((Element x) => x == e))}',
       ];
       final Rect toolbar = tester.getRect(find.byType(AppTextSelectionToolbar));
