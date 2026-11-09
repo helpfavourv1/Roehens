@@ -579,11 +579,13 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 600));
       final List<String> handles = <String>[];
-      for (final Element e in find.byKey(AppSelectionControls.handleKey).evaluate()) {
+      for (final Element e
+          in find.byKey(AppSelectionControls.handleKey).evaluate()) {
         final Finder here = find.byElementPredicate((Element x) => x == e);
-        final Iterable<FadeTransition> fades = tester.widgetList<FadeTransition>(
-          find.ancestor(of: here, matching: find.byType(FadeTransition)),
-        );
+        final Iterable<FadeTransition> fades = tester
+            .widgetList<FadeTransition>(
+              find.ancestor(of: here, matching: find.byType(FadeTransition)),
+            );
         handles.add(
           '${tester.getRect(here)} opacity=${fades.map((FadeTransition f) => f.opacity.value).toList()}',
         );
