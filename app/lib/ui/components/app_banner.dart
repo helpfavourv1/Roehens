@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:roehens/ui/components/app_chip.dart';
 import 'package:roehens/ui/components/first_line_icon.dart';
-import 'package:roehens/ui/icons/app_icon.dart';
 import 'package:roehens/ui/icons/app_icons.dart';
 import 'package:roehens/ui/tokens/color_tokens.dart';
 import 'package:roehens/ui/tokens/radius_tokens.dart';
