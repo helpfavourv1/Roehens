@@ -577,11 +577,17 @@ void main() {
       final Rect field = tester.getRect(find.byType(EditableText));
       await tester.longPressAt(field.topLeft + const Offset(20, 10));
       await tester.pump();
-      final List<String> handles = <String>[
-        for (final Element e
-            in find.byKey(AppSelectionControls.handleKey).evaluate())
-          '${tester.getRect(find.byElementPredicate((Element x) => x == e))}',
-      ];
+      await tester.pump(const Duration(milliseconds: 600));
+      final List<String> handles = <String>[];
+      for (final Element e in find.byKey(AppSelectionControls.handleKey).evaluate()) {
+        final Finder here = find.byElementPredicate((Element x) => x == e);
+        final Iterable<FadeTransition> fades = tester.widgetList<FadeTransition>(
+          find.ancestor(of: here, matching: find.byType(FadeTransition)),
+        );
+        handles.add(
+          '${tester.getRect(here)} opacity=${fades.map((FadeTransition f) => f.opacity.value).toList()}',
+        );
+      }
       final Rect toolbar = tester.getRect(find.byType(AppTextSelectionToolbar));
       fail('field=$field handles=$handles toolbar=$toolbar screen=400x800');
     });
