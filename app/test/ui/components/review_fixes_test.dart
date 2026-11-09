@@ -559,6 +559,33 @@ void main() {
     });
   });
 
+  group('DEBUG handle geometry (temporary)', () {
+    testWidgets('report where the handles are', (WidgetTester tester) async {
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 360,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 200),
+            child: AppTextField(
+              controller: TextEditingController(text: 'Garden gate'),
+              label: 'Name',
+            ),
+          ),
+        ),
+      );
+      final Rect field = tester.getRect(find.byType(EditableText));
+      await tester.longPressAt(field.topLeft + const Offset(20, 10));
+      await tester.pump();
+      final List<String> handles = <String>[
+        for (final Element e in find.byKey(AppSelectionControls.handleKey).evaluate())
+          '${tester.getRect(find.byElementPredicate((Element x) => x == e))}',
+      ];
+      final Rect toolbar = tester.getRect(find.byType(AppTextSelectionToolbar));
+      fail('field=$field handles=$handles toolbar=$toolbar screen=400x800');
+    });
+  });
+
   group('fullscreen system bars', () {
     testWidgets('a light theme still gets light icons over fullscreen video', (
       WidgetTester tester,
