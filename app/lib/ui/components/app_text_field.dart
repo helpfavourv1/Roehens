@@ -156,7 +156,8 @@ class _AppTextFieldState extends State<AppTextField>
         cause == SelectionChangedCause.stylusHandwriting) {
       return true;
     }
-    return widget.controller.text.isNotEmpty && !selection.isCollapsed;
+    // A caret in non-empty text gets its drop handle, as on any Android field.
+    return widget.controller.text.isNotEmpty;
   }
 
   void _onFocusChanged() => _focused.value = _focusNode.hasFocus;
