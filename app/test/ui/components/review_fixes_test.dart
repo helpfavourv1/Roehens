@@ -581,27 +581,35 @@ void main() {
       for (final Element handle
           in find.byKey(AppSelectionControls.handleKey).evaluate()) {
         final Finder here = find.byElementPredicate((Element x) => x == handle);
-        final Iterable<FadeTransition> fades = tester.widgetList<FadeTransition>(
-          find.ancestor(of: here, matching: find.byType(FadeTransition)),
+        final Iterable<FadeTransition> fades = tester
+            .widgetList<FadeTransition>(
+              find.ancestor(of: here, matching: find.byType(FadeTransition)),
+            );
+        expect(
+          fades.map((FadeTransition f) => f.opacity.value),
+          everyElement(1),
         );
-        expect(fades.map((FadeTransition f) => f.opacity.value), everyElement(1));
       }
     });
 
-    testWidgets('a collapsed caret shows no handles on a long press of empty space', (
-      WidgetTester tester,
-    ) async {
-      await pumpApp(
-        tester,
-        SizedBox(
-          width: 360,
-          child: AppTextField(controller: TextEditingController(), label: 'Name'),
-        ),
-      );
-      await tester.tap(find.byType(EditableText));
-      await tester.pump(const Duration(milliseconds: 600));
-      expect(find.byKey(AppSelectionControls.handleKey), findsNothing);
-    });
+    testWidgets(
+      'a collapsed caret shows no handles on a long press of empty space',
+      (WidgetTester tester) async {
+        await pumpApp(
+          tester,
+          SizedBox(
+            width: 360,
+            child: AppTextField(
+              controller: TextEditingController(),
+              label: 'Name',
+            ),
+          ),
+        );
+        await tester.tap(find.byType(EditableText));
+        await tester.pump(const Duration(milliseconds: 600));
+        expect(find.byKey(AppSelectionControls.handleKey), findsNothing);
+      },
+    );
   });
 
   group('fullscreen system bars', () {

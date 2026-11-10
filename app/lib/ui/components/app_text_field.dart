@@ -141,7 +141,10 @@ class _AppTextFieldState extends State<AppTextField>
     _showHandles.value = _shouldShowHandles(selection, cause);
   }
 
-  bool _shouldShowHandles(TextSelection selection, SelectionChangedCause? cause) {
+  bool _shouldShowHandles(
+    TextSelection selection,
+    SelectionChangedCause? cause,
+  ) {
     // Not when something other than a touch started the selection.
     if (!_gestures.shouldShowSelectionToolbar) {
       return false;
@@ -200,31 +203,31 @@ class _AppTextFieldState extends State<AppTextField>
                 valueListenable: _showHandles,
                 builder: (BuildContext context, bool showHandles, Widget? _) {
                   return EditableText(
-                key: editableTextKey,
-                showSelectionHandles: showHandles,
-                onSelectionChanged: _onSelectionChanged,
-                rendererIgnoresPointer: true,
-                controller: widget.controller,
-                focusNode: _focusNode,
-                style: style,
-                cursorColor: colors.accent,
-                backgroundCursorColor: colors.bgTertiary,
-                selectionColor: colors.accentWash,
-                selectionControls: _selectionControls,
-                contextMenuBuilder: AppTextSelectionToolbar.builder,
-                keyboardType: widget.keyboardType,
-                textInputAction: widget.textInputAction,
-                inputFormatters: widget.inputFormatters,
-                obscureText: concealed,
-                autocorrect: false,
-                enableSuggestions: !widget.obscureText && !widget.forceLtr,
-                readOnly: !widget.enabled,
-                autofocus: widget.autofocus,
-                maxLines: widget.obscureText ? 1 : widget.maxLines,
-                textDirection: direction,
-                onChanged: widget.onChanged,
-                onSubmitted: widget.onSubmitted,
-              );
+                    key: editableTextKey,
+                    showSelectionHandles: showHandles,
+                    onSelectionChanged: _onSelectionChanged,
+                    rendererIgnoresPointer: true,
+                    controller: widget.controller,
+                    focusNode: _focusNode,
+                    style: style,
+                    cursorColor: colors.accent,
+                    backgroundCursorColor: colors.bgTertiary,
+                    selectionColor: colors.accentWash,
+                    selectionControls: _selectionControls,
+                    contextMenuBuilder: AppTextSelectionToolbar.builder,
+                    keyboardType: widget.keyboardType,
+                    textInputAction: widget.textInputAction,
+                    inputFormatters: widget.inputFormatters,
+                    obscureText: concealed,
+                    autocorrect: false,
+                    enableSuggestions: !widget.obscureText && !widget.forceLtr,
+                    readOnly: !widget.enabled,
+                    autofocus: widget.autofocus,
+                    maxLines: widget.obscureText ? 1 : widget.maxLines,
+                    textDirection: direction,
+                    onChanged: widget.onChanged,
+                    onSubmitted: widget.onSubmitted,
+                  );
                 },
               ),
             ),
