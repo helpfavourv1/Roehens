@@ -557,10 +557,10 @@ void main() {
       await tester.pump();
       expect(find.byKey(AppSelectionControls.handleKey), findsNWidgets(2));
     });
-  });
 
-  group('DEBUG handle geometry (temporary)', () {
-    testWidgets('report where the handles are', (WidgetTester tester) async {
+    testWidgets('the handles are visible, not just built', (
+      WidgetTester tester,
+    ) async {
       await pumpApp(
         tester,
         SizedBox(
@@ -574,24 +574,33 @@ void main() {
           ),
         ),
       );
-      final Rect field = tester.getRect(find.byType(EditableText));
-      await tester.longPressAt(field.topLeft + const Offset(20, 10));
-      await tester.pump();
+      await tester.longPressAt(
+        tester.getTopLeft(find.byType(EditableText)) + const Offset(20, 10),
+      );
       await tester.pump(const Duration(milliseconds: 600));
-      final List<String> handles = <String>[];
-      for (final Element e
+      for (final Element handle
           in find.byKey(AppSelectionControls.handleKey).evaluate()) {
-        final Finder here = find.byElementPredicate((Element x) => x == e);
-        final Iterable<FadeTransition> fades = tester
-            .widgetList<FadeTransition>(
-              find.ancestor(of: here, matching: find.byType(FadeTransition)),
-            );
-        handles.add(
-          '${tester.getRect(here)} opacity=${fades.map((FadeTransition f) => f.opacity.value).toList()}',
+        final Finder here = find.byElementPredicate((Element x) => x == handle);
+        final Iterable<FadeTransition> fades = tester.widgetList<FadeTransition>(
+          find.ancestor(of: here, matching: find.byType(FadeTransition)),
         );
+        expect(fades.map((FadeTransition f) => f.opacity.value), everyElement(1));
       }
-      final Rect toolbar = tester.getRect(find.byType(AppTextSelectionToolbar));
-      fail('field=$field handles=$handles toolbar=$toolbar screen=400x800');
+    });
+
+    testWidgets('a collapsed caret shows no handles on a long press of empty space', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 360,
+          child: AppTextField(controller: TextEditingController(), label: 'Name'),
+        ),
+      );
+      await tester.tap(find.byType(EditableText));
+      await tester.pump(const Duration(milliseconds: 600));
+      expect(find.byKey(AppSelectionControls.handleKey), findsNothing);
     });
   });
 

@@ -97,6 +97,11 @@ class _AppTextFieldState extends State<AppTextField>
       TextSelectionGestureDetectorBuilder(delegate: this);
 
   FocusNode? _ownedFocus;
+
+  /// Whether the drag handles under a selection show. A bare EditableText never
+  /// shows them (its default is off); the stock text field turns them on from
+  /// the selection callback, and so does this one, by the same rules.
+  final ValueNotifier<bool> _showHandles = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _focused = ValueNotifier<bool>(false);
   late final ValueNotifier<bool> _concealed = ValueNotifier<bool>(
     widget.obscureText,
@@ -125,7 +130,30 @@ class _AppTextFieldState extends State<AppTextField>
     _ownedFocus?.dispose();
     _focused.dispose();
     _concealed.dispose();
+    _showHandles.dispose();
     super.dispose();
+  }
+
+  void _onSelectionChanged(
+    TextSelection selection,
+    SelectionChangedCause? cause,
+  ) {
+    _showHandles.value = _shouldShowHandles(selection, cause);
+  }
+
+  bool _shouldShowHandles(TextSelection selection, SelectionChangedCause? cause) {
+    // Not when something other than a touch started the selection.
+    if (!_gestures.shouldShowSelectionToolbar) {
+      return false;
+    }
+    if (cause == SelectionChangedCause.keyboard || !widget.enabled) {
+      return false;
+    }
+    if (cause == SelectionChangedCause.longPress ||
+        cause == SelectionChangedCause.stylusHandwriting) {
+      return true;
+    }
+    return widget.controller.text.isNotEmpty && !selection.isCollapsed;
   }
 
   void _onFocusChanged() => _focused.value = _focusNode.hasFocus;
@@ -168,8 +196,13 @@ class _AppTextFieldState extends State<AppTextField>
             ),
             _gestures.buildGestureDetector(
               behavior: HitTestBehavior.translucent,
-              child: EditableText(
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _showHandles,
+                builder: (BuildContext context, bool showHandles, Widget? _) {
+                  return EditableText(
                 key: editableTextKey,
+                showSelectionHandles: showHandles,
+                onSelectionChanged: _onSelectionChanged,
                 rendererIgnoresPointer: true,
                 controller: widget.controller,
                 focusNode: _focusNode,
@@ -191,6 +224,8 @@ class _AppTextFieldState extends State<AppTextField>
                 textDirection: direction,
                 onChanged: widget.onChanged,
                 onSubmitted: widget.onSubmitted,
+              );
+                },
               ),
             ),
           ],
