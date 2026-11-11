@@ -593,7 +593,7 @@ void main() {
     });
 
     testWidgets(
-      'a collapsed caret shows no handles on a long press of empty space',
+      'an empty field shows no visible handle when tapped',
       (WidgetTester tester) async {
         await pumpApp(
           tester,
@@ -607,7 +607,22 @@ void main() {
         );
         await tester.tap(find.byType(EditableText));
         await tester.pump(const Duration(milliseconds: 600));
-        expect(find.byKey(AppSelectionControls.handleKey), findsNothing);
+        // Flutter builds a hidden handle for a caret; it must not be visible.
+        for (final Element handle in find
+            .byKey(AppSelectionControls.handleKey)
+            .evaluate()) {
+          final Finder here = find.byElementPredicate(
+            (Element x) => x == handle,
+          );
+          final Iterable<FadeTransition> fades = tester
+              .widgetList<FadeTransition>(
+                find.ancestor(of: here, matching: find.byType(FadeTransition)),
+              );
+          expect(
+            fades.map((FadeTransition f) => f.opacity.value),
+            everyElement(0),
+          );
+        }
       },
     );
   });
