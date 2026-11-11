@@ -592,39 +592,35 @@ void main() {
       }
     });
 
-    testWidgets(
-      'an empty field shows no visible handle when tapped',
-      (WidgetTester tester) async {
-        await pumpApp(
-          tester,
-          SizedBox(
-            width: 360,
-            child: AppTextField(
-              controller: TextEditingController(),
-              label: 'Name',
-            ),
+    testWidgets('an empty field shows no visible handle when tapped', (
+      WidgetTester tester,
+    ) async {
+      await pumpApp(
+        tester,
+        SizedBox(
+          width: 360,
+          child: AppTextField(
+            controller: TextEditingController(),
+            label: 'Name',
           ),
+        ),
+      );
+      await tester.tap(find.byType(EditableText));
+      await tester.pump(const Duration(milliseconds: 600));
+      // Flutter builds a hidden handle for a caret; it must not be visible.
+      for (final Element handle
+          in find.byKey(AppSelectionControls.handleKey).evaluate()) {
+        final Finder here = find.byElementPredicate((Element x) => x == handle);
+        final Iterable<FadeTransition> fades = tester
+            .widgetList<FadeTransition>(
+              find.ancestor(of: here, matching: find.byType(FadeTransition)),
+            );
+        expect(
+          fades.map((FadeTransition f) => f.opacity.value),
+          everyElement(0),
         );
-        await tester.tap(find.byType(EditableText));
-        await tester.pump(const Duration(milliseconds: 600));
-        // Flutter builds a hidden handle for a caret; it must not be visible.
-        for (final Element handle in find
-            .byKey(AppSelectionControls.handleKey)
-            .evaluate()) {
-          final Finder here = find.byElementPredicate(
-            (Element x) => x == handle,
-          );
-          final Iterable<FadeTransition> fades = tester
-              .widgetList<FadeTransition>(
-                find.ancestor(of: here, matching: find.byType(FadeTransition)),
-              );
-          expect(
-            fades.map((FadeTransition f) => f.opacity.value),
-            everyElement(0),
-          );
-        }
-      },
-    );
+      }
+    });
   });
 
   group('fullscreen system bars', () {
