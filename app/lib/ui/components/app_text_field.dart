@@ -214,8 +214,8 @@ class _AppTextFieldState extends State<AppTextField>
                     cursorColor: colors.accent,
                     backgroundCursorColor: colors.bgTertiary,
                     selectionColor: colors.accent.withValues(
-                    alpha: AppSizes.selectionOpacity,
-                  ),
+                      alpha: AppSizes.selectionOpacity,
+                    ),
                     selectionControls: _selectionControls,
                     contextMenuBuilder: AppTextSelectionToolbar.builder,
                     keyboardType: widget.keyboardType,
