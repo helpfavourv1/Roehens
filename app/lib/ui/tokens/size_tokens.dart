@@ -42,6 +42,9 @@ class AppSizes {
   /// The nav bar is 56 high, so its text stops growing at this scale.
   static const double navBarMaxTextScale = 1.3;
   static const double spinnerTrackOpacity = 0.25;
+
+  /// How strong the highlight behind selected text is.
+  static const double selectionOpacity = 0.35;
   static const double progressBarHeight = 4;
   static const double inputBorder = 1.5;
   static const double focusRing = 2;

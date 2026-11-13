@@ -168,3 +168,10 @@ Found by the owner on a Redmi 25028RN03A, and by the first real emulator run:
 5. **Spacing.** Gap between the brand and the screen title; the count badge on a bottom-bar icon no longer covers it; the busy spinner track follows its own color; a selected toggle over video has a solid accent plate.
 6. **Animations off.** With "remove animations" on, the framework's `AnimatedSize` notifies during its own layout (a debug error, a layout glitch in release). `AppAnimatedSize` skips it when the duration is zero. Found by the emulator run, not by any widget test; there are now tests for it.
 7. **A new check: `emulator_check`.** A manual workflow that runs `integration_test/` on an Android 34 emulator. It covers what widget tests cannot: the real engine, text input and clipboard.
+
+## Second round after the A1 screenshots (large text and selection handles)
+
+1. **Selection handles.** A bare `EditableText` has `showSelectionHandles` off. `AppTextField` now turns it on from the selection callback by the stock rules (a touch-started selection, enabled, non-empty text). Found by reading the handle's opacity (0.0) in a test, then confirmed in an emulator screenshot.
+2. **Large text.** The nav bar (56 high) stops growing at 130 percent. Count badges on icons never scale. Three or more segments stack above 150 percent. `FirstLineIcon` centers an icon on the first line of the text beside it (banner, field error, rows).
+3. **Fullscreen video** always gets light system bar icons, whatever the theme.
+4. **Seeing the app without a phone.** `emulator_check` now runs `flutter drive`, takes screenshots on the emulator and publishes them to the `ci-logs` branch (`screenshots/`), which the agent can look at. The branch is replaced by the next workflow run, so screenshots are read straight after the emulator run.
