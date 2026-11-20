@@ -42,3 +42,6 @@ app/ios/**/xcuserdata/
 *-keystore-base64.txt
 .env
 .env.*
+
+__pycache__/
+*.pyc

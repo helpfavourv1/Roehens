@@ -12,7 +12,7 @@ IP camera viewer for iOS and Android. Every camera on your network, one calm scr
 |---|---|
 | `app/` | Flutter application |
 | `tool/` | `guard.sh` (structure and style rules), CI helper scripts |
-| `docs/` | Identity, decisions, icon map, visual QA log, runbooks |
+| `docs/` | `BLUEPRINT.md` (master plan), `DECISIONS.md` (pivots in order), `HANDOFF.md` (state and next steps), identity, icon map, visual QA log, runbooks |
 | `website/` | Static marketing site (added in P7C) |
 | `store_submission/` | Store listing and policy documents (added in P7D) |
 | `.github/workflows/` | CI |

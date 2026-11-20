@@ -367,7 +367,7 @@ for r in unused:
     warn(f'not imported by any other file yet: {r}')
 
 # --------------------------------------------------------------- 11. docs
-for d in ('IDENTITY.md', 'DECISIONS.md', 'ICON_MAP.md', 'VISUAL_QA.md'):
+for d in ('IDENTITY.md', 'DECISIONS.md', 'ICON_MAP.md', 'VISUAL_QA.md', 'HANDOFF.md', 'BLUEPRINT.md'):
     if not os.path.exists(os.path.join(ROOT, 'docs', d)):
         err(f'docs/{d} is missing')
 if not os.path.exists(os.path.join(ROOT, 'app/pubspec.lock')):
