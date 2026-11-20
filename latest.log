@@ -1,0 +1,1143 @@
+workflow: check
+run: 44716512635
+sha: f6462dcb50d32d89fdc6db245746912f6061066e
+job status: success
+
+Flutter 3.47.6 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 5fc346839b (7 weeks ago) • 2026-09-30 15:02:49 -0700
+Engine • hash b8c8d3d8d5d0095127057f8a29ca8cc53da2167c (revision 692136cb65) (1 months ago) • 2026-09-30 00:56:59.000Z
+Tools • Dart 3.13.5 • DevTools 2.60.0
+== pub get
+Resolving dependencies...
+Downloading packages...
+  android_file_picker 1.1.1 (2.2.0 available)
+  archive 4.3.0 (4.7.1 available)
+  code_assets 2.1.0 (2.2.0 available)
+  cross_file 0.3.5+5 (0.4.0 available)
+  crypto 3.0.7 (3.0.8 available)
+  dbus 0.7.15 (0.8.1 available)
+  file_picker 12.3.0 (13.4.0 available)
+  file_picker_darwin 1.2.0 (2.5.1 available)
+  file_picker_linux 1.1.0 (2.0.4 available)
+  file_picker_platform_interface 3.4.0 (4.3.0 available)
+  file_picker_web 3.1.0 (4.2.1 available)
+  google_mobile_ads 9.1.0 (9.2.0 available)
+  image 4.10.1 (4.13.1 available)
+  in_app_purchase_android 0.5.3 (0.5.5 available)
+  in_app_purchase_storekit 0.4.13+1 (0.4.17 available)
+  jni 1.1.0 (1.2.1 available)
+  jni_flutter 1.0.3 (1.1.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  native_toolchain_c 0.19.5 (0.19.6 available)
+  objective_c 9.6.2 (9.6.4 available)
+  posix 6.5.2 (6.5.4 available)
+  safe_local_storage 2.0.6 (2.0.7 available)
+  shared_preferences 2.5.5 (2.5.6 available)
+  shared_preferences_android 2.4.28 (2.5.5 available)
+  shared_preferences_foundation 2.5.7 (2.6.2 available)
+  sqflite 2.4.4 (2.4.6 available)
+  sqflite_android 2.4.4 (2.4.6 available)
+  sqflite_common 2.5.13 (2.5.17 available)
+  sqflite_common_ffi 2.4.3 (2.4.7 available)
+  sqflite_darwin 2.4.4 (2.4.6 available)
+  sqflite_platform_interface 2.4.2 (2.4.4 available)
+  sqlite3 3.7.0 (3.9.1 available)
+  synchronized 3.4.2 (3.6.1+1 available)
+  test_api 0.7.12 (0.7.15 available)
+  url_launcher_android 6.3.33 (6.3.35 available)
+  vector_math 2.4.3 (2.4.4 available)
+  vm_service 15.3.0 (15.4.0 available)
+  wakelock_plus 1.8.0 (1.8.2 available)
+  web 1.1.1 (1.1.2 available)
+  webview_flutter_wkwebview 3.27.0 (3.27.2 available)
+  windows_file_picker 1.3.0 (2.0.2 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies!
+42 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+pubspec.lock is up to date
+== format
+Formatted 266 files (0 changed) in 0.48 seconds.
+code is already formatted
+== analyze
+Resolving dependencies...
+Downloading packages...
+  android_file_picker 1.1.1 (2.2.0 available)
+  archive 4.3.0 (4.7.1 available)
+  code_assets 2.1.0 (2.2.0 available)
+  cross_file 0.3.5+5 (0.4.0 available)
+  crypto 3.0.7 (3.0.8 available)
+  dbus 0.7.15 (0.8.1 available)
+  file_picker 12.3.0 (13.4.0 available)
+  file_picker_darwin 1.2.0 (2.5.1 available)
+  file_picker_linux 1.1.0 (2.0.4 available)
+  file_picker_platform_interface 3.4.0 (4.3.0 available)
+  file_picker_web 3.1.0 (4.2.1 available)
+  google_mobile_ads 9.1.0 (9.2.0 available)
+  image 4.10.1 (4.13.1 available)
+  in_app_purchase_android 0.5.3 (0.5.5 available)
+  in_app_purchase_storekit 0.4.13+1 (0.4.17 available)
+  jni 1.1.0 (1.2.1 available)
+  jni_flutter 1.0.3 (1.1.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  native_toolchain_c 0.19.5 (0.19.6 available)
+  objective_c 9.6.2 (9.6.4 available)
+  posix 6.5.2 (6.5.4 available)
+  safe_local_storage 2.0.6 (2.0.7 available)
+  shared_preferences 2.5.5 (2.5.6 available)
+  shared_preferences_android 2.4.28 (2.5.5 available)
+  shared_preferences_foundation 2.5.7 (2.6.2 available)
+  sqflite 2.4.4 (2.4.6 available)
+  sqflite_android 2.4.4 (2.4.6 available)
+  sqflite_common 2.5.13 (2.5.17 available)
+  sqflite_common_ffi 2.4.3 (2.4.7 available)
+  sqflite_darwin 2.4.4 (2.4.6 available)
+  sqflite_platform_interface 2.4.2 (2.4.4 available)
+  sqlite3 3.7.0 (3.9.1 available)
+  synchronized 3.4.2 (3.6.1+1 available)
+  test_api 0.7.12 (0.7.15 available)
+  url_launcher_android 6.3.33 (6.3.35 available)
+  vector_math 2.4.3 (2.4.4 available)
+  vm_service 15.3.0 (15.4.0 available)
+  wakelock_plus 1.8.0 (1.8.2 available)
+  web 1.1.1 (1.1.2 available)
+  webview_flutter_wkwebview 3.27.0 (3.27.2 available)
+  windows_file_picker 1.3.0 (2.0.2 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies!
+42 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing app...                                                
+No issues found! (ran in 10.8s)
+== guard
+guard: all rules passed
+== test
+Resolving dependencies...
+Downloading packages...
+  android_file_picker 1.1.1 (2.2.0 available)
+  archive 4.3.0 (4.7.1 available)
+  code_assets 2.1.0 (2.2.0 available)
+  cross_file 0.3.5+5 (0.4.0 available)
+  crypto 3.0.7 (3.0.8 available)
+  dbus 0.7.15 (0.8.1 available)
+  file_picker 12.3.0 (13.4.0 available)
+  file_picker_darwin 1.2.0 (2.5.1 available)
+  file_picker_linux 1.1.0 (2.0.4 available)
+  file_picker_platform_interface 3.4.0 (4.3.0 available)
+  file_picker_web 3.1.0 (4.2.1 available)
+  google_mobile_ads 9.1.0 (9.2.0 available)
+  image 4.10.1 (4.13.1 available)
+  in_app_purchase_android 0.5.3 (0.5.5 available)
+  in_app_purchase_storekit 0.4.13+1 (0.4.17 available)
+  jni 1.1.0 (1.2.1 available)
+  jni_flutter 1.0.3 (1.1.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  native_toolchain_c 0.19.5 (0.19.6 available)
+  objective_c 9.6.2 (9.6.4 available)
+  posix 6.5.2 (6.5.4 available)
+  safe_local_storage 2.0.6 (2.0.7 available)
+  shared_preferences 2.5.5 (2.5.6 available)
+  shared_preferences_android 2.4.28 (2.5.5 available)
+  shared_preferences_foundation 2.5.7 (2.6.2 available)
+  sqflite 2.4.4 (2.4.6 available)
+  sqflite_android 2.4.4 (2.4.6 available)
+  sqflite_common 2.5.13 (2.5.17 available)
+  sqflite_common_ffi 2.4.3 (2.4.7 available)
+  sqflite_darwin 2.4.4 (2.4.6 available)
+  sqflite_platform_interface 2.4.2 (2.4.4 available)
+  sqlite3 3.7.0 (3.9.1 available)
+  synchronized 3.4.2 (3.6.1+1 available)
+  test_api 0.7.12 (0.7.15 available)
+  url_launcher_android 6.3.33 (6.3.35 available)
+  vector_math 2.4.3 (2.4.4 available)
+  vm_service 15.3.0 (15.4.0 available)
+  wakelock_plus 1.8.0 (1.8.2 available)
+  web 1.1.1 (1.1.2 available)
+  webview_flutter_wkwebview 3.27.0 (3.27.2 available)
+  windows_file_picker 1.3.0 (2.0.2 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies!
+42 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+
+::group::✅ Passing tests
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "RTSP/1.0 401 Unauthorized" is ErrorClass.authFailed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "HTTP 403 Forbidden" is ErrorClass.authFailed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Authentication failed" is ErrorClass.authFailed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "RTSP/1.0 404 Not Found" is ErrorClass.pathNotFound
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Unsupported codec: hevc" is ErrorClass.unsupportedMedia
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Invalid data found when processing input" is ErrorClass.unsupportedMedia
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Connection reset by peer" is ErrorClass.streamDropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Broken pipe" is ErrorClass.streamDropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Connection refused" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Operation timed out" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "No route to host" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification "Failed host lookup: 'cam.local'" is ErrorClass.networkUnreachable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification status codes inside hosts, ports and addresses are not statuses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: message classification an unknown message uses the fallback
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: statuses map to the documented classes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: exceptions an AppError passes through unchanged
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: exceptions a timeout is a network problem
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: exceptions an unknown exception is fatal and keeps its detail
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: error classes every class has a distinct localization key
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: error classes only transient classes retry on their own
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: error classes authentication and path errors are not retriable
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: Result Ok carries a value
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/error_mapper_test.dart: Result Err carries an error
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: builds every provider and loads local data before the first frame
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: the layout follows the cameras that exist
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: auto-cycle follows the settings and the layout interval
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: the app going to the background stops auto-cycle
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: haptics follow the setting at once
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: a deleted camera can be undone
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: the cached ad-free unlock is read at start
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: delete all local data empties cameras, credentials and settings
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: a degraded store shows the warning
+✅ /home/runner/work/Roehens/Roehens/app/test/app/app_providers_test.dart: disposing twice is safe
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: reports every error it classifies
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: an unexpected error is fatal and sets the fallback state
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: a known recoverable error does not trigger the fallback screen
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: clearFatal ends the fallback state
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: listeners hear about a fatal error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: the platform error hook says it handled the error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: errors thrown inside a guarded zone are caught and reported
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/core/errors/global_error_handler_test.dart: the Flutter error hook feeds the handler
+══╡ EXCEPTION CAUGHT BY FLUTTER FRAMEWORK ╞═════════════════════════════════════════════════════════
+The following StateError was thrown:
+Bad state: framework
+════════════════════════════════════════════════════════════════════════════════════════════════════
+::endgroup::
+::group::✅ Passing tests
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: a new install is free
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: the store answer unlocks ad-free and is cached with a timestamp
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: the cache applies when the store cannot be reached
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: a refund reported by the store removes the unlock
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: a purchase made later arrives through the stream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: buying reports failures and clears them on the next try
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: restore calls the store
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: the product and price load from the store
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: without billing the app stays free and the cache is cleared
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/subscription_provider_test.dart: reset goes back to free
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: SettingsProvider starts with defaults when nothing is saved
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: SettingsProvider saves every change and reads it back after a restart
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: SettingsProvider an unreadable file gives defaults
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: SettingsProvider an unsupported auto-cycle interval falls back to the default
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: SettingsProvider a null language follows the system
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: SettingsProvider reset returns to defaults and clears the saved file
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: SettingsProvider a late save after dispose does not throw
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: ThemeProvider follows the settings in both directions
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: LocaleProvider maps codes with scripts and regions to locales
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: LocaleProvider an unsupported code means the system language
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: LocaleProvider the language list matches the specification
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: OnboardingProvider a first run needs onboarding and finishing it is remembered
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: OnboardingProvider an older completed version shows onboarding again
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/settings_providers_test.dart: OnboardingProvider an unreadable file runs onboarding again
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: FlagsProvider everything is on by default
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: FlagsProvider a switch changed while the app is open reaches the screens
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: FlagsProvider refresh asks the service
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: FlagsProvider compares versions numerically
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: FlagsProvider an update is required only below the minimum
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider lists finds, shows progress and finishes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider a device found twice is listed once, keeping the ONVIF details
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider a finished run with no devices reports found nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider the stream ending also finishes the run
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider cancel keeps what was found
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider the kill switch stops the scan before it starts
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider a refused permission stops the scan
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider a granted prompt lets the scan run
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider no permission is needed on Android
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider starting twice runs once
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/flags_discovery_providers_test.dart: DiscoveryProvider clear returns to idle
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: does nothing until enabled and a cycling screen is showing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: every tick counts once and the timer starts again
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: a touch restarts the wait for a full interval
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: a touch while stopped does not start it
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: stops when the app goes to the background and resumes after
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: stops when the person leaves the cycling screens
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: turning it off in settings stops the timer
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: an unsupported interval uses the default
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: the layout interval overrides the global one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/auto_cycle_provider_test.dart: a timer that fires after dispose does nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: starts with a four-tile layout
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: loads the saved active layout
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: changing the grid size saves it and keeps the page in range
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: an unsupported grid size is ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: auto-cycle interval accepts only supported values or null
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: new cameras go last and removed cameras drop out of the order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: syncing an unchanged order saves nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: cameras on a page follow the layout order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: next and previous page wrap around
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/layout_provider_test.dart: one page means paging stays on page zero
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider shows the banner on Live once consent is resolved
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider nothing is requested before consent resolves
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider a crash in the consent form leaves ads off and the app running
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider collapses off the Live screen and returns on it
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider collapses while the keyboard is up
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider a new width asks for a new banner
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider the ad-free unlock removes the banner and never starts the SDK
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider buying the unlock while a banner shows removes it
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider the ads kill switch removes the banner, and lifting it brings it back
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: AdStateProvider no fill leaves the slot collapsed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: UndoProvider offers a delete and restores it on undo
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: UndoProvider the window closing makes the delete final
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: UndoProvider a second delete replaces the first offer
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: UndoProvider dismiss clears the toast
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: UndoProvider undo with nothing pending does nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: PersistenceHealthProvider reports degraded storage and recovery
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: PersistenceHealthProvider a newer database takes priority over a plain warning
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/ad_undo_persistence_test.dart: PersistenceHealthProvider works with no sources
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: is not loaded until the first load finishes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: a failed load keeps what is shown and reports the error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: adding shows the camera at the end
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: a failed add shows nothing new
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: editing updates the list and can replace credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: delete then restore brings back the camera and its credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: reorder shows the new order and saves it
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: reorder keeps cameras that were left out of the list
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: delete all empties the list
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: filter empty text shows everything
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: filter matches name, host and model without regard to case
+✅ /home/runner/work/Roehens/Roehens/app/test/core/providers/cameras_provider_test.dart: filter no match gives an empty list
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: DiscoveryResult round-trips with every field
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: DiscoveryResult optional fields may be missing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: DiscoveryResult differs by any field
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: DiscoveryResult an unknown source name is rejected
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: StreamProfile round-trips and copies
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: ConnectionTestResult passes only when something passed and nothing failed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: ConnectionTestResult finds the first failed stage
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: ConnectionTestResult compares stages, error and suggestions
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: PtzCommand a continuous move is clamped to the allowed range
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: PtzCommand every kind round-trips through JSON
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: PtzCommand commands of different kinds are different
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: CameraBrandProfile round-trips through JSON text
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: CameraBrandProfile missing lists are empty and verified defaults to false
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: CameraBrandProfile differs by id and by verified flag
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: RemoteFlags round-trips and keeps only the switches it knows
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: RemoteFlags an empty file means everything on
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: RemoteFlags lists every switch of the first release
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: CameraExportBundle round-trips and never contains credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: CameraExportBundle refuses files that are not camera lists
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: CameraExportBundle refuses a newer or invalid schema
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: CameraExportBundle a file with no cameras is valid and empty
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: PlayerState states of the same kind are equal
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: PlayerState knows which states are active
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/remaining_models_test.dart: PlayerState an error carries its cause and a reconnect carries its attempt
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: survives a JSON round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: JSON never contains credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: optional fields default when absent
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: copyWith changes only what it is given and can clear optionals
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: credentials are redacted in text and compare by value
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/camera_test.dart: generated ids are version 4 UUIDs and differ
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: every supported size has columns times rows equal to the size
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: an unsupported size falls back to a single tile
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: page count rounds up and is at least one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: survives a JSON round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/grid_layout_test.dart: copyWith can clear the auto-cycle override
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: defaults follow the specification
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: survives a JSON round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: missing keys fall back to defaults and unknown keys are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/models/app_settings_test.dart: copyWith can clear the language back to the system language
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_export_service_test.dart: the file name carries the date
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_export_service_test.dart: writes every camera and no credential field
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_export_service_test.dart: the output reads back as the same cameras
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_export_service_test.dart: an empty list still makes a valid file
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a full address with a login is taken apart
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses the default port is 554
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses an address without a scheme is treated as RTSP
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses just a host gives the root path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses surrounding spaces and an upper-case scheme and host are tolerated
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a query string is kept in the path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a fragment is dropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses percent-encoded credentials are decoded
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses a login without a password has an empty password
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses an address with no login has no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: RTSP addresses an IPv6 host in brackets is understood
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses a stream address is MJPEG
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses the default HTTP port is 80
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses a still-image address is polled as a snapshot
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: HTTP addresses a stream address that mentions an image stays MJPEG
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used empty input
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used encrypted schemes are not supported
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used other schemes are not supported
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used a missing host
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used a port out of range
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/rtsp_url_normalizer_test.dart: addresses that cannot be used garbage never throws
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: withCredentials empty credentials leave the address alone
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: withCredentials credentials go into the user-info part and the rest is kept
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: withCredentials special characters are percent-encoded and survive a round trip
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: rtspTransportOption tcp is always tcp
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: rtspTransportOption without UDP support udp and auto fall back to tcp
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/stream_url_utils_test.dart: rtspTransportOption with UDP support udp is honored and auto lets the engine choose
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: tiles beyond the decoder budget become posters, in screen order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: the plan keeps the input order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: the focused tile always plays and uses the main stream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: a focused tile plays even with a budget of zero
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: grid tiles use the substream when the camera has one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: substreams can be switched off
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: snapshot cameras cost nothing and are always live
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: only HTTP cameras refresh their poster
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: memory pressure with a focused tile leaves only that tile live
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: memory pressure in the grid halves the budget but keeps one tile
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: a focused id that is not on screen is ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: nothing on screen gives an empty plan
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/grid_planner_test.dart: budgets match the specification
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database is valid and not empty
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database is sorted by name, ignoring case
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database every brand has an id, a name, ports and at least one path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database every path starts with a slash and carries no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database only placeholders the builder knows are used
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database only the confirmed generic entry is marked verified
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: the bundled database the famous brands are present
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups byId finds a brand and returns null for an unknown one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups search ignores case and matches inside the name
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups grouping uses the first letter
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: lookups grouping respects the search text
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing a newer file format is refused
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing duplicate ids are refused
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing something that is not an object is refused
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/profile_catalog_test.dart: parsing optional lists may be missing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: challenge is parsed from the header
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: challenge unquoted values and any letter case are accepted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: challenge anything else is not a challenge
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response matches the RFC 2617 example
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response without qop the older RFC 2069 form is used
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response the nonce count is counted in hex with eight digits
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: digest response a random client nonce differs between calls
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: basic encodes user and password
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: answer prefers Digest over Basic
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: answer falls back to Basic
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/http_auth_test.dart: answer offers nothing when the server asks for something else
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue is due once the person has used the app enough
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue never after an error in this session
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue not within a day of an earlier error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue allowed again after the quiet period
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue not before the first days have passed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue not without enough viewing sessions
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue not again within the minimum gap between prompts
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue again once the gap has passed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue never beyond the lifetime cap
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: isDue not without a recorded first launch
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: recording a new install is not due
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: recording becomes due after days and enough sessions, and prompting resets it
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: recording an error in the session blocks the prompt
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: recording state survives a restart
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/review_prompt_policy_test.dart: recording a corrupt saved state starts clean
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: reads the size from the frame header
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: segments before the frame header are skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: anything that is not a JPEG gives null
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: a truncated header gives null instead of throwing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/jpeg_info_test.dart: a zero size is rejected
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: a healthy RTSP camera passes every step
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: the address handed to the probes carries no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a host name that does not exist
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a number address skips the name lookup
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a host name is looked up first
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a closed port
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try enabling RTSP is only suggested for RTSP cameras
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a wrong login
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a wrong path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a transport the camera refuses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a camera that answers with a server error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try a probe that cannot complete
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try no picture appears
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: failures stop the test and say what to try an address that cannot be built
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras an MJPEG stream passes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a still-image address passes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a web page instead of a stream is a wrong path
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a login rejection
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: HTTP cameras a missing page
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps without a picture check the last step is skipped and the test passes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps progress reports every step and ends with a final answer for each
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps a failed run still leaves no step pending
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/connection_tester_test.dart: progress and optional steps each step that ran reports how long it took
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: the password digest matches the WS-Security reference value
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope a signed request carries a UsernameToken with digest and nonce
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope the time offset moves the signed timestamp
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope a fresh random nonce is used each time
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope without credentials the request is unsigned
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: envelope special characters in the username are escaped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests every request is well-formed XML
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests GetStreamUri asks for RTSP and names the profile
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests a profile token is escaped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests continuous move carries the velocities
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests each command kind produces its own request
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests stop halts both pan-tilt and zoom
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: requests a preset request names the preset
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_message_builder_test.dart: GetCapabilities asks for every category
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: describes the app, the device and the settings
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: cameras are described by type only
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: hostKind tells private, public, hostname and IPv6 apart
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: credentials in log lines are masked
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: only the newest log lines are kept
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: active remote switches are listed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: Redactor masks every login in a text
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/diagnostics_service_test.dart: Redactor leaves text without logins alone
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe message is well-formed and asks for network video transmitters
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match a real-looking reply becomes a discovery result
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match the port defaults to 80 when the address has none
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match an IPv4 address is preferred over other addresses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match a reply without a usable address is ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match anything else is ignored without throwing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ws_discovery_codec_test.dart: probe match a device name without a scope is simply absent
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 1 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 3 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 17 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 512 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts with Content-Length chunks of 100000 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 1 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 3 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 17 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 512 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: parts without Content-Length chunks of 100000 bytes
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: bare line feeds instead of CRLF are accepted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a boundary declared with leading dashes still matches
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a quoted boundary value is unquoted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: the boundary is found in the stream when none is declared
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: junk before the first part is skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a part that is not a JPEG is dropped and the next one still parses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: a truncated JPEG is dropped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: an oversize part is skipped and the stream recovers
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: reset forgets a half-received part
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/mjpeg_stream_parser_test.dart: boundaryFromContentType handles the usual headers
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: starts with everything on
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: a fetched file is applied and cached; unknown switches are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: a failed fetch keeps the cached flags
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: a failed fetch with no cache leaves the defaults
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: an invalid file is ignored and does not replace the cache
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: a corrupt cache is ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: without a url the network is never used
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: a plain http url is refused
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: resume skips a recheck made moments ago, then allows one later
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/flag_service_test.dart: listeners are told when the flags change
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: parse rejects files that are not a camera list
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: parse rejects a newer schema and an oversized file
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: parse a file with no usable camera is invalid
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: parse reads good cameras and counts the bad ones
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: parse flags a camera that matches a saved one by address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: parse flags a camera that matches a saved one by id
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: parse drops a duplicate entry inside the file
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: apply skip adds new cameras and leaves matches alone
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: apply replace updates the match and keeps its credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: apply duplicate adds the match as a second camera
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_import_service_test.dart: apply imported cameras get no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: device information
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: profiles both profiles are read with their stream details
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: profiles a profile without a token is skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: profiles a profile with no video configuration still lists
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: stream address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: clock offset a camera ahead of us has a positive offset
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: clock offset a camera behind us has a negative offset
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: clock offset a response without a time is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses not authorized becomes an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses other faults are reported as the camera refusing the request
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses a fault is found whatever the request was
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses malformed XML never throws
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses a response to a different request is unexpected
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: faults and bad responses an empty successful reply is a good acknowledgement
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: services media and PTZ addresses are read
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: services a service the camera does not offer is null
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: services a response without capabilities is unexpected
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection the largest picture is main and the smallest is the substream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection the order of the profiles does not matter
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection a single profile has no substream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection profiles of equal size have no substream
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/onvif_response_parser_test.dart: main and substream selection nothing in gives nothing out
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: expand fills every placeholder
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: expand a template without placeholders is unchanged
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: expand a query with several placeholders is expanded
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: pathsFor each kind lists its own paths
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: isValidHost accepts names and addresses
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: isValidHost rejects what cannot be a host
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: normalizePath adds the missing slash and keeps queries
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri an RTSP camera gives an rtsp address with its port
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri the substream is used when asked and when the camera has one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri an HTTP camera gives an http address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri a query string stays a query string
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri a path without a slash gets one
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri host names and IPv6 hosts are accepted
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri no address is built from unusable settings
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/url_builder_test.dart: streamUri credentials never appear in the address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: isPrivateIpv4 accepts the three private ranges
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: isPrivateIpv4 rejects everything else
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress picks the Wi-Fi address
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress mobile data and tunnels never count
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress Wi-Fi wins over an unknown interface regardless of order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress an unknown interface is used when there is nothing better
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress Apple interface names are recognized
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress public and link-local addresses are skipped
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: chooseLocalAddress no interfaces gives nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: guessGateway is the first host of the /24
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/lan_selector_test.dart: guessGateway is null for an address that is not private
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: delays follow 1, 2, 4, 8, then 15 seconds
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: it gives up after ten attempts
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: jitter stays within 20 percent of the base delay
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: jitter actually varies the delay
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: thirty seconds of healthy playback forgives earlier failures
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/reconnect_policy_test.dart: a manual retry starts the schedule again
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: adding assigns id, position and timestamps and stores credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: a camera without credentials writes nothing to the vault
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: credentials are rolled back when the camera cannot be saved
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: a failed credential write stops the add
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: loading returns display order
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: a storage failure while loading is reported
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: updating bumps the timestamp and leaves credentials alone by default
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: updating can replace or remove credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: delete returns camera and credentials, and restore puts them back
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: deleting an unknown camera is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: reorder writes the new positions
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: credentialsFor returns none when nothing is stored
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/camera_repository_test.dart: delete all clears cameras and credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: velocityFor a continuous command is scaled by its speed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: velocityFor other command kinds ask for no movement
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: velocityFor speed outside 0..1 cannot push a velocity past the limits
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad the centre and the dead zone do not move the camera
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad the edge of the pad is full speed in that direction
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad moving the finger up tilts up
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad past the edge is capped and speed rises smoothly
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad a diagonal keeps both directions and never exceeds full speed
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: fromPad a pad with no size does nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: throttling helpers quantize rounds to the step
+✅ /home/runner/work/Roehens/Roehens/app/test/core/services/ptz_math_test.dart: throttling helpers only a meaningful change is worth sending
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/app_theme_test.dart: AppTheme builds a dark and a light token set
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/app_theme_test.dart: AppTheme a script factor makes lines taller for scripts that need it
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/app_theme_test.dart: AppTheme the base text style has no underline and the primary text color
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/app_theme_test.dart: AppTheme system bars are transparent and their icons contrast with the theme
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/app_theme_test.dart: AppScrollBehavior lists use clamping physics and show no overscroll glow
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) body text on the surfaces it sits on
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) tertiary text on cards, scaffold and inputs
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) label on the accent fill and accent text on the scaffold
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) status colors on cards
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: dark contrast (WCAG AA, 4.5:1) stream status tokens alias the status colors
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) body text on the surfaces it sits on
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) tertiary text on cards, scaffold and inputs
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) label on the accent fill and accent text on the scaffold
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) status colors on cards
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: light contrast (WCAG AA, 4.5:1) stream status tokens alias the status colors
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: video backdrop is identical in both themes
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography script factors follow the specification
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography line height is multiplied by the script factor
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography uppercase applies only to cased scripts
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/tokens/token_values_test.dart: typography changing numbers use tabular figures
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_font_bundle_test.dart: the font manifest contains every icon weight in use
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_license_test.dart: the Phosphor license reaches the licenses screen
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: every semantic name has a mapping
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: no two semantic names share a glyph
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: each weight resolves to its own font family
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: only duotone icons carry a secondary layer
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: glyphs come from the bundled fonts, not from a package
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/icons/icon_registry_test.dart: only directional icons mirror in right-to-left layouts
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: copy and paste in text fields a long press shows cut, copy, paste and select all
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: copy and paste in text fields paste puts the clipboard text into the field
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: copy and paste in text fields copy puts the selected word on the clipboard
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: copy and paste in text fields select all selects the whole text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: copy and paste in text fields the toolbar stays inside the screen
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: copy and paste in text fields each button has a 48 high touch area
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: system bars a dark screen gets light bar icons, a light screen dark ones
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: system bars the bars are transparent so the app shows through
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: status pill colors use the bright colors in the light theme too
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: status pill colors a pill without a plate is just the icon
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: the smallest tile fits its overlay at the real 16-up size on a phone
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: the smallest tile keeps the name legible for a long camera name
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: with animations switched off the bottom stack changes size without an error
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: with animations switched off the ad slot appears and collapses without an error
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: with animations switched off the storage warning appears and goes without an error
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: large text three segments stay in a row at normal text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: large text three segments stack, one per line, at large text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: large text two segments stay in a row at large text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: large text the nav bar text stops growing at 130 percent
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: large text a count badge on a bottom bar icon does not grow
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: large text a banner icon sits on the first line of its text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: selection handles a selected word has a handle at each end
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppPressable taps call onTap and a disabled one does nothing
+
+Warning: A call to tap() with finder "Found 1 widget with key [<'on'>]: [
+  SizedBox-[<'on'>](width: 80.0, height: 80.0, renderObject: RenderConstrainedBox#06005 relayoutBoundary=up10),
+]" derived an Offset (Offset(40.0, 40.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderConstrainedBox#06005 relayoutBoundary=up10
+The hit test result at that offset is: HitTestResult(RenderDecoratedBox#06663@Offset(40.0, 40.0), RenderSemanticsAnnotations#54084@Offset(40.0, 40.0), RenderPointerListener#147e3@Offset(40.0, 40.0), RenderSemanticsGestureHandler#4b9f2@Offset(40.0, 40.0), RenderSemanticsAnnotations#98123@Offset(40.0, 40.0), RenderMouseRegion#d196e@Offset(40.0, 40.0), RenderSemanticsAnnotations#22146@Offset(40.0, 40.0), RenderFlex#fa21b@Offset(40.0, 40.0), RenderPositionedBox#5f592@Offset(40.0, 40.0), RenderRepaintBoundary#8ffd0@Offset(40.0, 40.0), RenderIgnorePointer#604fa@Offset(40.0, 40.0), RenderRepaintBoundary#5f676@Offset(40.0, 40.0), RenderSemanticsAnnotations#dbaf7@Offset(40.0, 40.0), RenderOffstage#a4c11@Offset(40.0, 40.0), RenderSemanticsAnnotations#7b3f6@Offset(40.0, 40.0), _RenderTheater#8e6a5@Offset(40.0, 40.0), RenderAbsorbPointer#6ee8a@Offset(40.0, 40.0), RenderPointerListener#7457f@Offset(40.0, 40.0), RenderSemanticsAnnotations#5ddad@Offset(40.0, 40.0), RenderCustomPaint#2f409@Offset(40.0, 40.0), RenderSemanticsAnnotations#acf71@Offset(40.0, 40.0), RenderSemanticsAnnotations#472cf@Offset(40.0, 40.0), RenderSemanticsAnnotations#8d5c6@Offset(40.0, 40.0), RenderTapRegionSurface#dc7c4@Offset(40.0, 40.0), RenderSemanticsAnnotations#87de2@Offset(40.0, 40.0), RenderSemanticsAnnotations#ee29f@Offset(40.0, 40.0), HitTestEntry<HitTestTarget>#aee55(_ReusableRenderView#6ad68), HitTestEntry<HitTestTarget>#c1fa2(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure>.<anonymous closure> (file:///home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart:36:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+
+Warning: A call to tap() with finder "Found 1 widget with key [<'off'>]: [
+  SizedBox-[<'off'>](width: 80.0, height: 80.0, renderObject: RenderConstrainedBox#8ad1a relayoutBoundary=up9),
+]" derived an Offset (Offset(40.0, 120.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderConstrainedBox#8ad1a relayoutBoundary=up9
+The hit test result at that offset is: HitTestResult(RenderDecoratedBox#7dc36@Offset(40.0, 40.0), RenderSemanticsAnnotations#8a5c1@Offset(40.0, 40.0), RenderPointerListener#6d516@Offset(40.0, 40.0), RenderSemanticsGestureHandler#345b7@Offset(40.0, 40.0), RenderSemanticsAnnotations#2977c@Offset(40.0, 40.0), RenderMouseRegion#941db@Offset(40.0, 40.0), RenderFlex#fa21b@Offset(40.0, 120.0), RenderPositionedBox#5f592@Offset(40.0, 120.0), RenderRepaintBoundary#8ffd0@Offset(40.0, 120.0), RenderIgnorePointer#604fa@Offset(40.0, 120.0), RenderRepaintBoundary#5f676@Offset(40.0, 120.0), RenderSemanticsAnnotations#dbaf7@Offset(40.0, 120.0), RenderOffstage#a4c11@Offset(40.0, 120.0), RenderSemanticsAnnotations#7b3f6@Offset(40.0, 120.0), _RenderTheater#8e6a5@Offset(40.0, 120.0), RenderAbsorbPointer#6ee8a@Offset(40.0, 120.0), RenderPointerListener#7457f@Offset(40.0, 120.0), RenderSemanticsAnnotations#5ddad@Offset(40.0, 120.0), RenderCustomPaint#2f409@Offset(40.0, 120.0), RenderSemanticsAnnotations#acf71@Offset(40.0, 120.0), RenderSemanticsAnnotations#472cf@Offset(40.0, 120.0), RenderSemanticsAnnotations#8d5c6@Offset(40.0, 120.0), RenderTapRegionSurface#dc7c4@Offset(40.0, 120.0), RenderSemanticsAnnotations#87de2@Offset(40.0, 120.0), RenderSemanticsAnnotations#ee29f@Offset(40.0, 120.0), HitTestEntry<HitTestTarget>#7cd0c(_ReusableRenderView#6ad68), HitTestEntry<HitTestTarget>#06f62(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure>.<anonymous closure> (file:///home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart:37:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+::endgroup::
+::group::✅ Passing tests
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: selection handles the handles are visible, not just built
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppPressable fades while pressed and returns when released
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: selection handles an empty field shows no visible handle when tapped
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppPressable never scales
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: fullscreen system bars a light theme still gets light icons over fullscreen video
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/review_fixes_test.dart: nav bar leaves a gap between the brand and the title
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppPressable Enter and Space activate the focused element
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppPressable a small child still gets a 48 by 48 hit area
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppPressable a semantic label replaces the child text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppButton every kind shows its label and fires
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppButton is at least 48 high and expands on request
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppButton disabled and loading buttons ignore taps
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppButton a long label wraps instead of overflowing at large text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppIconButton draws a 40 chip inside a 48 hit area
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppIconButton is announced by its label
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppChip a chip with onTap is tappable and has a 48 hit area
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppChip without onTap it is a plain label
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppChip selected and destructive chips build
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppSwitch reports the opposite value when tapped
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppSwitch exposes its state to accessibility
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppSwitch the thumb sits at the end, and mirrors in right-to-left
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppSwitch disabled does nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppSegmentedControl selecting a segment reports its value
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/pressable_and_controls_test.dart: AppSegmentedControl segments are equally wide and tall enough to tap
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppCard has the card surface, hairline border and no shadow
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppCard is tappable only when given a handler
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppListRow shows two lines and a chevron when tappable
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppListRow a custom trailing widget replaces the chevron
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppListRow a long title and subtitle wrap at large text without overflow
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppListRow the tap handler fires from anywhere in the row
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppSection puts hairlines between rows only
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppSection upper-cases only scripts that have case
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppDivider is a hairline and insets from the start edge
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppDivider the inset follows right-to-left
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppBadge shows its label for every tone
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppProgress the bar fills to its value
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppProgress the bar clamps out-of-range values
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppProgress the spinner animates and stops on dispose without leaking a ticker
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField shows the label and the hint, and the hint goes when typing
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField reports changes and submissions
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField tapping the padding focuses the field
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField an error shows its message with an icon
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField helper text shows when there is no error
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField a password field hides the text until revealed
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField an address field stays left-to-right in a right-to-left layout
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppNavBar is 56 high with a title, a back button and actions
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField a disabled field does not take input
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppNavBar a long title is cut with an ellipsis, not wrapped
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppNavBar a back button without a label is a programming error
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/content_components_test.dart: AppTextField a field with a leading icon and a long label survives large text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppNavBar a custom leading widget replaces the back button
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppBottomBar reports the tapped destination
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppBottomBar is 64 high, plus the bottom safe area
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppBottomBar the selected destination is announced as selected
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppBottomBar labels stay on one line at large text
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppScaffold stacks nav bar, body, embed and bar, and respects the safe areas
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppScaffold the whole bottom stack collapses under the keyboard and returns
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppScaffold immersive mode ignores the safe areas
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppPageRoute fades and slides in over 350 ms
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppPageRoute with reduced motion the screen is there at once
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: showAppSheet and showAppDialog a sheet shows its title and content and closes on a tap outside
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: DateFormatter.age uses the largest whole unit
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: DateFormatter.age a time in the future is zero seconds, never negative
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: DateFormatter.age spans compare by value and print readably
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: DateFormatter text clock, date and date-time use Western digits and fixed widths
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: DateFormatter text a year below 1000 is padded to four digits
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: NumberFormatter bitrate
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: NumberFormatter resolution uses the multiplication sign
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: NumberFormatter frame rate rounds to whole frames
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: NumberFormatter bytes use decimal units like the storage tables
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: showAppSheet and showAppDialog Escape closes a sheet
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: showAppSheet and showAppDialog a sheet is never taller than 90 percent of the screen
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: Debouncer runs only the last action after the delay
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: showAppSheet and showAppDialog a dialog returns the value of the chosen action
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: showAppSheet and showAppDialog a dialog that is not dismissible ignores outside taps
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: Debouncer cancel and dispose drop a pending action
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: showAppSheet and showAppDialog a dialog with long text and large type scrolls instead of overflowing
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: timeouts withTimeout gives the value in time and the fallback otherwise
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppToast shows the message and goes away by itself
+✅ /home/runner/work/Roehens/Roehens/app/test/utils/formatters_and_async_test.dart: timeouts timeoutOrNull gives null when the limit passes
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppToast the Undo pill runs its action and closes the toast
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppToast a new toast replaces the old one
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppToast is announced as a live region
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppBanner every tone shows its message with an icon
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppBanner its action is a pill that fires
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppLetterHeader stays pinned at the top while its group scrolls
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppLetterHeader the next letter pushes the previous one away
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppEmptyState and AppErrorState an empty state shows icon, title, message and one action
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppEmptyState and AppErrorState an empty state with no action has no button
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppEmptyState and AppErrorState an error state has retry and a second action
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppEmptyState and AppErrorState both survive very large text without overflowing
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider a tap sets the value by position
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider dragging follows the finger and reports the end
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider divisions snap the value
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider in a right-to-left layout the high end is on the left
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider arrow keys move it by a step
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider a disabled slider ignores touches
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider is exposed to accessibility as an adjustable value
+✅ /home/runner/work/Roehens/Roehens/app/test/ui/components/surfaces_test.dart: AppSlider has a 48 high touch area
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: StreamStatus maps every playback state
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: StreamStatus every status has its own icon
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: StreamStatusPill shows icon and label, and icon only when asked
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: StreamStatusPill a tap is reported and an icon-only pill still has a 48 hit area
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: StreamStatusPill live pulses; other states and reduced motion stay still
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: StreamStatusPill with reduced motion the pulse is static
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile shows the name, status and resolution
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile has the video tile shape: md radius and a hairline border
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile a narrow tile shows the status as an icon only
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile the smallest tiles of a 16-up grid fit their overlay
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile the icon-only status opens its message when tapped
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile the video fades in over the poster
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile a tile without a poster or video is just the backdrop with its overlay
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile tapping the tile reports it
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile the name plate can be switched off
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile is announced with name, status and resolution
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile overlay text stops scaling at 130 percent
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_tile_test.dart: CameraTile a long name is cut with an ellipsis
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) the nav bar puts back at the right and actions at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) direction-aware icons mirror and physical ones do not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) an address field stays left-to-right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) rows keep addresses left-to-right and put the chevron at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) the camera list row is mirrored and its address is not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) the bottom bar lists destinations from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) segments run from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) list rows put the chevron at the end of the reading direction
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ar) the camera grid fills the page from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) the nav bar puts back at the right and actions at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) direction-aware icons mirror and physical ones do not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) an address field stays left-to-right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) rows keep addresses left-to-right and put the chevron at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) the camera list row is mirrored and its address is not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) the bottom bar lists destinations from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) segments run from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) list rows put the chevron at the end of the reading direction
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (fa) the camera grid fills the page from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) the nav bar puts back at the right and actions at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) direction-aware icons mirror and physical ones do not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) an address field stays left-to-right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) rows keep addresses left-to-right and put the chevron at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) the camera list row is mirrored and its address is not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) the bottom bar lists destinations from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) segments run from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) list rows put the chevron at the end of the reading direction
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (ur) the camera grid fills the page from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) the nav bar puts back at the right and actions at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) direction-aware icons mirror and physical ones do not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) an address field stays left-to-right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) rows keep addresses left-to-right and put the chevron at the left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) the camera list row is mirrored and its address is not
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) the bottom bar lists destinations from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) segments run from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) list rows put the chevron at the end of the reading direction
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/rtl_layout_test.dart: right-to-left layout (he) the camera grid fills the page from the right
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: CameraGrid two by two: equal 16:9 tiles separated by the gutter
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: CameraGrid the block is centered in the height that is left
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: CameraGrid empty slots are left out, not drawn
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: CameraGrid a single tile takes the full width
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: CameraGrid a grid taller than the space scrolls
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: CameraGrid tablets use the wider gutter
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: CameraGrid sixteen tiles in four by four fit in a phone page
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: GridLayoutPicker offers every grid size and marks the selected one
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: GridLayoutPicker tapping an option reports its size
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/camera_grid_test.dart: GridLayoutPicker every size has its own icon
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: shows the title, status and action buttons
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: the close button and Escape both close
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: fades out after three seconds without a touch
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: hidden controls do not take touches, a tap on the picture brings them back
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: any touch restarts the wait and reports activity
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: with a screen reader on, the controls stay
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: shows a panel above the bottom row
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/fullscreen_controls_test.dart: a long camera name does not overflow at large text
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: DiscoveryResultRow shows name, address and source and reports taps
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: DiscoveryResultRow survives large text
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: CameraListRow shows name, address, protocol and status
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: CameraListRow tap and long-press are reported
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: CameraListRow swiping toward the end asks to delete and keeps the row until the list changes
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: CameraListRow in right-to-left the delete swipe goes the other way
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: CameraListRow a row with no status shows none
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BrandPicker groups by first letter, sorted, with other characters last
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BrandPicker search is case-insensitive and matches inside names
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BrandPicker letters
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BrandPicker shows letter headers and brands, and selecting reports the brand
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BrandPicker typing filters the list and shows an empty state when nothing matches
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BrandPicker the search field scrolls away with the content
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad dragging right pans right, and letting go stops
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BrandPicker the chosen brand is marked selected
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad dragging up tilts up
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ConnectionTestPanel before a run it offers the primary action and nothing else
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ConnectionTestPanel a pass shows every stage, its time and a success message
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad nothing moves inside the dead zone
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ConnectionTestPanel a failure shows the diagnosis, suggestions and the troubleshooter pill
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad moving back to the middle stops the camera
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ConnectionTestPanel while running the button is busy and cannot be pressed twice
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad small wobbles are not sent again
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ConnectionTestPanel each stage is announced as name and status
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BannerAdSlot is absent until there is an ad, then shows it with a hairline and gaps
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: BannerAdSlot never taller than 100
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad arrow keys move while held and stop on release
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ProBadge shows its label and is announced by it
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad the home button reports a tap
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: PermissionRationaleView explains, lists reasons and offers both actions
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad holding zoom in zooms until released
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: PermissionRationaleView works without a second action and survives large text
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad a disabled pad does nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: OnboardingPage shows the header only when given, then title, message and points
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad is 176 wide on phones and can be the tablet size
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: OnboardingPage a later page has no header
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzPad keeps its left-and-right arrows in place in a right-to-left layout
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: OnboardingPage scrolls instead of overflowing at the largest text size
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: PtzSpeedControl shows its label and reports speed changes
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: PersistenceWarningBanner appears with the problem and goes when it is fixed
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: SnapshotFlash flashes when the trigger changes and fades out
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ErrorBoundaryView shows the app until a fatal error, then the fallback, then the app again
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: SnapshotFlash never blocks touches to the picture underneath
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/setup_widgets_test.dart: ErrorBoundaryView without a report handler there is no Report button
+✅ /home/runner/work/Roehens/Roehens/app/test/widgets/ptz_and_flash_test.dart: SnapshotFlash reduced motion shows no flash
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/store_config_test.dart: the ad units are Google sample units until real ones exist
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/store_config_test.dart: both stores sell the same ad-free product
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/store_config_test.dart: the stores are told apart and the App Store ID is not invented
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/store_config_test.dart: the current configuration follows the platform
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService a store without billing offers nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService product and purchase the product comes with its price
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService product and purchase a product the store does not know is not an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService product and purchase an unavailable store is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService product and purchase a store that throws is an error, not a crash
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService product and purchase buying starts the flow
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService product and purchase a flow that cannot start is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService events a purchase becomes an ad-free entitlement
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService events a restore becomes an entitlement from a restore
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService events other products are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService events a cancelled or pending purchase is silent
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService events a failed purchase is reported
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService current entitlement is free when the store has nothing to restore
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService current entitlement picks up a purchase the store restores
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService current entitlement once ad-free it answers without asking the store again
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: BillingService restore asks the store
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: ReviewService the prompt is requested when available
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: ReviewService no prompt when the store says it is unavailable
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: ReviewService a failing store never throws
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: ReviewService Google Play opens the listing without an App Store ID
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/billing_and_review_test.dart: ReviewService the App Store listing needs its ID and is skipped until it is known
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: nothing is shown before the SDK is started
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: starting twice starts the SDK once
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: a failed start never throws and keeps ads off
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: a loaded banner reserves its height and exposes its view
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: the reserved height never exceeds the cap
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: a failed load collapses the slot and releases the old banner
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: a backend that throws collapses the slot without throwing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: a new banner replaces and releases the previous one
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: a load that finishes after a newer request is discarded
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: disposing collapses the slot and ignores a load still in flight
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: a width of zero is ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/admob_service_test.dart: listeners hear height changes
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService ads are not allowed before consent was gathered
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService a resolved consent allows ads
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService a region that needs no consent also allows ads
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService a refused consent keeps ads off when the SDK says so
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService a failed update leaves the status unknown but never throws
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService earlier consent still allows ads after a failed update
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService an unreadable consent state keeps ads off
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService the privacy options entry follows the SDK and survives errors
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: ConsentService showing the privacy options refreshes whether ads are allowed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: AttService Android has nothing to ask
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: AttService iOS asks once while the choice is open
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: AttService a choice already made is returned without asking again
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: AttService a restricted device is never prompted
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/store/consent_and_att_test.dart: AttService failures never throw
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions reconcile opens one session per wanted key
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions keys that are no longer wanted are disposed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions an unchanged source is not restarted
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions a changed source replaces the session
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions release disposes one session and stops wanting it
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions new sessions start one stagger apart
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions disposeAll disposes every session
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: starting and stopping sessions a session that cannot be opened ends in an error, not a crash
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting a dropped stream reconnects and returns to playing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting the tile keeps saying reconnecting while the engine reconnects
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting an error that retrying cannot fix is shown and not retried
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting after the attempts run out the tile waits for a manual retry
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting long healthy playback forgives earlier failures
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: reconnecting a short healthy spell does not forgive failures
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: app lifecycle pause disposes everything except the kept session
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: app lifecycle while paused, reconcile only remembers what is wanted
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: app lifecycle resume recreates the remembered sessions
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture returns the current frame of a playing camera
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture a camera that is not playing gives an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture a session without a current frame gives an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/player_pool_test.dart: frame capture a session that cannot capture gives an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: finds a device that answers and reports it once
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: replies that are not ONVIF are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: silence ends cleanly after the timeout
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/ws_discovery_socket_test.dart: cancelling ends the probe early
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: hostsOf lists the other 253 addresses of the /24
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: hostsOf an address that is not dotted IPv4 gives nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: goes from connecting to playing and exposes frame and size
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: there is no frame before the first one arrives
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan reports exactly the open host and port pairs
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: a server that closes the stream is reported as dropped
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: wrong credentials are an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan tries every host on every port and never the phone itself
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan the commonest ports are tried first
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: stop ends the stream and later frames are ignored
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan never runs more connections at once than the limit
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan progress only goes up and ends at one
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan cancelling stops further connection attempts
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan a connector that throws counts as closed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/subnet_scanner_test.dart: scan an invalid local address finishes at once with nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: an open camera answers with its codecs
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: the request line carries no credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a Digest challenge is answered correctly
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a Basic challenge is answered with Basic
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: wrong credentials end as an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a login is required but none was given
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a wrong path is reported as not found
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: nothing listening is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a camera that never answers times out
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/rtsp_probe_test.dart: a camera that hangs up without answering is a dropped stream
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: localhost resolves and a nonsense name does not
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: a listening port connects and a closed one is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: an RTSP answer is converted with its codecs
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: an HTTP answer is converted with its content type
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/network_probes_test.dart: probe failures come back as errors
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: reads status, content type and server without the body
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: an image address is recognized
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: a missing page is reported as a status, not an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: a Basic challenge is answered with the credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: wrong credentials give a 401 quickly
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/http_probe_test.dart: an unreachable host is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/discovery_service_test.dart: reports open camera ports as sweep results, then finishes
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/discovery_service_test.dart: without a local network it finishes at once with nothing found
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/discovery_service_test.dart: cancelling the subscription stops the run
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: streams every frame in order and ends when the server closes
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: answers a Basic authentication challenge
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: wrong or missing credentials are reported as an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: wrong credentials fail fast instead of retrying until a timeout
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: HTTP statuses map to the documented error classes
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: the same session can be opened again after a failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/player/mjpeg_session_test.dart: the view handle is the frame notifier
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: a stalled stream is reported as dropped after the idle timeout
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: an unreachable host is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: cancelling the subscription closes the HTTP client
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: single images a snapshot address returns one JPEG
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: single images a snapshot that is not a complete JPEG is unsupported media
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/mjpeg_client_test.dart: single images a stream address that serves one image yields one frame
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/flags_http_fetcher_test.dart: returns the body of a 200 response
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/flags_http_fetcher_test.dart: sends no cookies or credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/flags_http_fetcher_test.dart: throws on a non-200 status
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/flags_http_fetcher_test.dart: throws when the file is larger than the limit
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect learns the clock, device, services and profiles
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect the clock request is unsigned and the others are signed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/flags_http_fetcher_test.dart: throws when the server does not answer in time
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect signatures use the camera clock, not ours
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a camera that cannot report its services still connects
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a camera whose clock cannot be read still connects
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect wrong credentials end as an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a plain HTTP login rejection is an authentication failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect a camera with no profiles is reported
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: connect an unreachable camera is a network error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls stream address for a profile
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls a PTZ command is acknowledged
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls a PTZ command the camera refuses is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/onvif_client_test.dart: single calls an empty answer is an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo uses the real gateway when the phone reports one
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo guesses the gateway when the phone cannot say
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo is null when the phone is not on a local network
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: LanInfo is null when the interfaces cannot be read
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes a connection or a refusal means the network is reachable
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes no route to host means access is blocked
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes a timeout or an unknown error proves nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: outcomes outcomes map to permission states
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service Android needs no permission
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service iOS probes the gateway and remembers the answer
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service iOS reports granted when the network answers
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/lan_and_permission_test.dart: service iOS without a local network cannot tell
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: on Android the calls go to the native side
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: off Android nothing is called and the answers are empty
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: a native failure is swallowed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/network/multicast_lock_channel_test.dart: a missing native side is swallowed
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: stores, reads and removes a value
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: a missing key is null, not an error
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: clear removes everything
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: is healthy while the platform store works
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: when writing fails the value is kept in memory and the store is marked degraded
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: when reading fails a value written earlier in memory is still found
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: remove and clear never throw when the platform store is down
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: clear also forgets the in-memory values
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/key_value_store_test.dart: a value saved after recovery is persisted again
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: stores credentials under the camera key and reads them back
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: a camera with no credentials reads as null
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: credentials of two cameras stay separate
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: delete removes one camera and deleteAll removes everything
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: the logger never sees a password or a user name
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: a locked keystore on write is an error, but the session still has the credentials
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: a locked keystore on read with nothing cached is a storage failure
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: delete and delete all report a failing keystore
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: a damaged stored value is treated as a failed read
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/secure_vault_service_test.dart: credentials print as redacted
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: the shipped registry starts at version 1 and is contiguous
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: pending lists only the migrations after a version
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: a gap, a duplicate or a wrong start is rejected
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/migration_registry_test.dart: an empty registry has version 0
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory opens cleanly and is not degraded
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory saves, updates, orders and deletes cameras
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory a camera round trips through the database unchanged
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory updating a camera keeps its stream profiles, deleting removes them
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory layouts round trip and delete
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, in memory delete all empties every table
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, on disk data survives closing and reopening
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, on disk a database from a newer app is refused and left untouched
+error DowngradeRefusedException(99 -> 1) during open, closing...
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/storage/database_service_test.dart: real SQLite, on disk a damaged file is moved aside and a clean database is started
+error SqfliteFfiException(sqlite_error: 26, , SqliteException(26): while selecting from statement, file is not a database, file is not a database (code 26)
+  Causing statement: PRAGMA user_version}) DatabaseException(SqliteException(26): while selecting from statement, file is not a database, file is not a database (code 26)
+  Causing statement: PRAGMA user_version) sql 'PRAGMA user_version' {details: {database: {path: /tmp/roehens_db_testNSBIZB/broken.db, id: 12, readOnly: false, singleInstance: true}}} during open, closing...
+::endgroup::
+::group::✅ Passing tests
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/device_services_test.dart: HapticsService sends feedback when enabled
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/device_services_test.dart: HapticsService sends nothing when the person turned haptics off
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/device_services_test.dart: HapticsService reads the setting on every call
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/device_services_test.dart: OrientationService locks landscape and restores all orientations
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/device_services_test.dart: OrientationService immersive mode hides and restores the system bars
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/device_services_test.dart: ScreenWakeService skips calls that would change nothing
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/device_services_test.dart: ScreenWakeService a failing plugin is logged and the state stays unchanged
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/pip_service_test.dart: on iOS it is unsupported and never calls the platform
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/pip_service_test.dart: on a supporting Android phone it enters picture-in-picture
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/pip_service_test.dart: a phone that does not support it is refused before asking to enter
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/pip_service_test.dart: the system refusing is reported as false
+✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/pip_service_test.dart: follows the window entering and leaving picture-in-picture
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/logger_service_test.dart: credentials inside URLs are masked
+2026-10-04T12:00:00.000Z info [player] opening rtsp://***@10.0.0.5/stream0 now
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/logger_service_test.dart: the buffer keeps only the newest entries
+2026-10-04T12:00:00.000Z info [t] message 0
+2026-10-04T12:00:00.000Z info [t] message 1
+2026-10-04T12:00:00.000Z info [t] message 2
+2026-10-04T12:00:00.000Z info [t] message 3
+2026-10-04T12:00:00.000Z info [t] message 4
+::endgroup::
+::group::✅ /home/runner/work/Roehens/Roehens/app/test/platform/system/logger_service_test.dart: errors and levels are recorded and the buffer can be cleared
+2026-10-04T12:00:00.000Z error [db] failed | error: Bad state: boom
+::endgroup::
+
+🎉 907 tests passed.
