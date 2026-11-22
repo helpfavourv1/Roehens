@@ -19,15 +19,17 @@ Future<ScreenHarness> open(
         cameras ??
         <Camera>[
           cameraWithSub(id: 'a', name: 'Porch', host: '10.0.0.5'),
-          cameraWithSub(id: 'b', name: 'Garage', sortIndex: 1, host: '10.0.0.6'),
+          cameraWithSub(
+            id: 'b',
+            name: 'Garage',
+            sortIndex: 1,
+            host: '10.0.0.6',
+          ),
         ],
   );
   await pumpApp(
     tester,
-    CamerasScreen(
-      onAddCamera: onAdd ?? () {},
-      onEditCamera: onEdit ?? (_) {},
-    ),
+    CamerasScreen(onAddCamera: onAdd ?? () {}, onEditCamera: onEdit ?? (_) {}),
     providers: h.app,
   );
   await settle(tester, milliseconds: 300);
@@ -73,7 +75,10 @@ void main() {
     WidgetTester tester,
   ) async {
     Camera? edited;
-    final ScreenHarness h = await open(tester, onEdit: (Camera c) => edited = c);
+    final ScreenHarness h = await open(
+      tester,
+      onEdit: (Camera c) => edited = c,
+    );
 
     await tester.longPress(find.text('Porch'));
     await settle(tester, milliseconds: 600);

@@ -79,17 +79,20 @@ void main() {
       cameraWithSub(id: 'c$i', name: 'Cam $i', sortIndex: i),
   ];
 
-  test('the grid decodes only the cameras on the page, on the substream', () async {
-    await boot(five());
-    live.setViewingGrid(viewing: true);
-    await waitUntil(() => pool.keys.length == 4);
+  test(
+    'the grid decodes only the cameras on the page, on the substream',
+    () async {
+      await boot(five());
+      live.setViewingGrid(viewing: true);
+      await waitUntil(() => pool.keys.length == 4);
 
-    expect(pool.keys.toSet(), <String>{'c0', 'c1', 'c2', 'c3'});
-    expect(live.sessionFor('c4'), isNull);
-    for (final FakePlayerSession s in sessions) {
-      expect(s.opened.single.uri.path, '/sub');
-    }
-  });
+      expect(pool.keys.toSet(), <String>{'c0', 'c1', 'c2', 'c3'});
+      expect(live.sessionFor('c4'), isNull);
+      for (final FakePlayerSession s in sessions) {
+        expect(s.opened.single.uri.path, '/sub');
+      }
+    },
+  );
 
   test('turning the page swaps the cameras that decode', () async {
     await boot(five());
@@ -124,22 +127,25 @@ void main() {
     await waitUntil(() => pool.keys.length == 6);
   });
 
-  test('fullscreen plays one camera: substream first, then the main stream', () async {
-    await boot(five());
-    live.setViewingGrid(viewing: true);
-    await waitUntil(() => pool.keys.length == 4);
+  test(
+    'fullscreen plays one camera: substream first, then the main stream',
+    () async {
+      await boot(five());
+      live.setViewingGrid(viewing: true);
+      await waitUntil(() => pool.keys.length == 4);
 
-    live.focus('c2');
-    await waitUntil(() => pool.keys.length == 1 && pool.keys.first == 'c2');
-    expect(live.focusIsMainStream, isFalse);
-    expect(pool.sessionFor('c2')!.source.uri.path, '/sub');
+      live.focus('c2');
+      await waitUntil(() => pool.keys.length == 1 && pool.keys.first == 'c2');
+      expect(live.focusIsMainStream, isFalse);
+      expect(pool.sessionFor('c2')!.source.uri.path, '/sub');
 
-    await waitUntil(() => live.focusIsMainStream);
-    await waitUntil(() => pool.sessionFor('c2')?.source.uri.path == '/main');
+      await waitUntil(() => live.focusIsMainStream);
+      await waitUntil(() => pool.sessionFor('c2')?.source.uri.path == '/main');
 
-    live.focus(null);
-    await waitUntil(() => pool.keys.length == 4);
-  });
+      live.focus(null);
+      await waitUntil(() => pool.keys.length == 4);
+    },
+  );
 
   test('low quality keeps the substream in fullscreen', () async {
     await boot(five());
@@ -154,18 +160,21 @@ void main() {
     await waitUntil(() => pool.sessionFor('c1')?.source.uri.path == '/main');
   });
 
-  test('leaving the app disposes every player; returning restores them', () async {
-    await boot(five());
-    live.setViewingGrid(viewing: true);
-    await waitUntil(() => pool.keys.length == 4);
+  test(
+    'leaving the app disposes every player; returning restores them',
+    () async {
+      await boot(five());
+      live.setViewingGrid(viewing: true);
+      await waitUntil(() => pool.keys.length == 4);
 
-    live.setForeground(foreground: false);
-    await waitUntil(() => pool.keys.isEmpty);
-    expect(sessions.where((FakePlayerSession s) => s.disposed).length, 4);
+      live.setForeground(foreground: false);
+      await waitUntil(() => pool.keys.isEmpty);
+      expect(sessions.where((FakePlayerSession s) => s.disposed).length, 4);
 
-    live.setForeground(foreground: true);
-    await waitUntil(() => pool.keys.length == 4);
-  });
+      live.setForeground(foreground: true);
+      await waitUntil(() => pool.keys.length == 4);
+    },
+  );
 
   test('a playing tile that stops keeps its last picture', () async {
     await boot(five());
