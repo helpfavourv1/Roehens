@@ -202,9 +202,23 @@ void main() {
 
     final LiveSession session = live.sessionFor('c0')!;
     expect(session.state.value, isA<PlayerConnecting>());
-    await session.setMuted(muted: true);
-    expect(sessions.first.lastMuted, isTrue);
     expect(session.viewHandle, isNotNull);
+    expect(session.videoSize.value, isNull);
+  });
+
+  test('mute follows the fullscreen camera across the stream switch', () async {
+    await boot(five());
+    live.focus('c1');
+    await waitUntil(() => pool.sessionFor('c1') != null);
+    await live.setMuted(muted: true);
+    expect(live.isMuted, isTrue);
+    expect(sessions.last.lastMuted, isTrue);
+
+    await waitUntil(() => pool.sessionFor('c1')?.source.uri.path == '/main');
+    await waitUntil(() => sessions.last.lastMuted == true);
+
+    live.focus('c2');
+    expect(live.isMuted, isFalse);
   });
 
   test('a deleted camera stops decoding', () async {
