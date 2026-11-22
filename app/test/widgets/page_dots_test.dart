@@ -33,11 +33,11 @@ void main() {
 
     expect(find.bySemanticsLabel('Page 2 of 3'), findsOneWidget);
     tester.semantics.performAction(
-      find.bySemanticsLabel('Page 2 of 3'),
+      find.semantics.byLabel('Page 2 of 3'),
       SemanticsAction.increase,
     );
     tester.semantics.performAction(
-      find.bySemanticsLabel('Page 2 of 3'),
+      find.semantics.byLabel('Page 2 of 3'),
       SemanticsAction.decrease,
     );
     expect(next, 1);
