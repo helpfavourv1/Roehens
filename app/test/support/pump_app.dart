@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/app/app_providers.dart';
 import 'package:roehens/app/app_scope.dart';
@@ -23,7 +24,7 @@ Future<void> pumpApp(
 
   await tester.pumpWidget(
     WidgetsApp(
-      localizationsDelegates: const <LocalizationsDelegate<Object?>>[
+      localizationsDelegates: <LocalizationsDelegate<Object?>>[
         AppLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
