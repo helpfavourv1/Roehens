@@ -17,7 +17,8 @@ Widget buildVideoSurface(
   Color? backdrop,
 }) {
   // Callers pass the design token `videoBackdrop`; without one the fill is clear.
-  final Color fill = backdrop ?? const Color.from(alpha: 0, red: 0, green: 0, blue: 0);
+  final Color fill =
+      backdrop ?? const Color.from(alpha: 0, red: 0, green: 0, blue: 0);
   if (handle is VideoController) {
     return Video(
       controller: handle,
