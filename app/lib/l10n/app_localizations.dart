@@ -597,6 +597,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export cameras'**
   String get persistenceExport;
+
+  /// Label of the pan and tilt speed slider.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get ptzSpeed;
 }
 
 class _AppLocalizationsDelegate

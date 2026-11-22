@@ -321,4 +321,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get persistenceExport => 'Export cameras';
+
+  @override
+  String get ptzSpeed => 'Speed';
 }
