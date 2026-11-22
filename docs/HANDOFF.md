@@ -120,3 +120,11 @@ Notes for P5A and what it needs first:
 ## 9. Keeping the docs current
 
 At the end of every batch: append a `DECISIONS.md` section (what changed from the blueprint and why, findings, anything unproven); update the status table, "next" and "outstanding" sections here; update `VISUAL_QA.md` when a screen is built or reviewed; keep `IDENTITY.md` honest. Commit them with the batch. At every checkpoint run `full_check`, and for anything visual run `emulator_check` and look at the screenshots before handing a build to the owner.
+
+
+## Update after batch P5A
+
+- **P5A is done and green** (960 tests; analyze, guard and static audit clean). Files: `lib/screens/{main_shell,home_screen,fullscreen_screen,cameras_screen,layout_sheet}.dart`, `lib/screens/support/{live_tile,status_sheet,screen_labels}.dart`, `lib/app/{app_scope,live_sessions}.dart`, `lib/platform/player/{video_surface,snapshot_session}.dart`, `lib/core/services/zoom_math.dart`, `lib/widgets/{page_dots,wordmark}.dart`, `lib/l10n/app_en.arb` plus generated files. See `DECISIONS.md` "Primary screens (batch P5A)".
+- **Next: P5B** (camera edit, discovery, brand picker, import/export). The Live and Cameras screens already call `onAddCamera`, `onFindCameras` and `onEditCamera`; P5B builds the screens behind them and P6A wires the routes. Add each screen's strings to `app_en.arb` and read them as `AppLocalizations.of(context)`; the CI regenerates and commits the Dart files.
+- Screen tests use `test/support/screen_harness.dart` (`ScreenHarness.boot`) with `pumpApp(..., providers: h.app)` and `settle(tester)`.
+- Gate 2 for the P5A screens is still open (see `VISUAL_QA.md`).

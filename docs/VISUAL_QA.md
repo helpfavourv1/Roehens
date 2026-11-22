@@ -38,3 +38,8 @@ Nav bar wordmark squeezed the title; bottom bar count badge grew over its label;
 
 ### Not testable on the available hardware
 Picture-in-picture (the test phone does not support it) and anything on iOS (no device).
+
+
+## Checkpoint CP2 (open): batch P5A screens
+
+Implemented (Gate 1 passed) and not yet looked at on a device: main shell, Live, fullscreen, Cameras, layout sheet. To judge on the Redmi 25028RN03A against Google Home once an APK of the real app exists (after P6A): tile and grid spacing, page dots, fullscreen controls over real video, the layout sheet at 200 percent text, the cameras list, and the status sheet on 16-up tiles. Not testable here: picture-in-picture, iOS.
