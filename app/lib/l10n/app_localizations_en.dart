@@ -196,10 +196,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fullscreenPtz => 'Pan and tilt';
 
   @override
-  String get fullscreenQualityHigh => 'Switch to high quality';
+  String get fullscreenQualityHigh => 'Use high quality';
 
   @override
-  String get fullscreenQualityLow => 'Switch to low quality';
+  String get fullscreenQualityLow => 'Use low quality';
 
   @override
   String get fullscreenPip => 'Picture in picture';

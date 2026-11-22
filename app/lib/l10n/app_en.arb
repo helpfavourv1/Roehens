@@ -228,11 +228,11 @@
   "@fullscreenPtz": {
     "description": "Spoken label of the button that shows the pan and tilt pad."
   },
-  "fullscreenQualityHigh": "Switch to high quality",
+  "fullscreenQualityHigh": "Use high quality",
   "@fullscreenQualityHigh": {
     "description": "Spoken label: use the main stream."
   },
-  "fullscreenQualityLow": "Switch to low quality",
+  "fullscreenQualityLow": "Use low quality",
   "@fullscreenQualityLow": {
     "description": "Spoken label: use the substream."
   },
