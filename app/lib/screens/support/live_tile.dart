@@ -46,7 +46,10 @@ class LiveTile extends StatelessWidget {
         final PosterFrame? poster = live.posterFor(camera.id);
         final String? age = poster == null
             ? null
-            : ageLabel(l10n, DateFormatter.age(poster.capturedAt, DateTime.now()));
+            : ageLabel(
+                l10n,
+                DateFormatter.age(poster.capturedAt, DateTime.now()),
+              );
         if (pooled == null) {
           return CameraTile(
             name: camera.name,
