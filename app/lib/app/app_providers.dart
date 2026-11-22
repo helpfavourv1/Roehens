@@ -70,7 +70,7 @@ import 'package:roehens/platform/system/screen_wake_service.dart';
 /// Builds the picture of one playing session from its view handle. The real
 /// one lives in `platform/player/video_surface.dart`; tests replace it.
 typedef VideoViewBuilder =
-    Widget Function(Object? handle, {BoxFit fit, Color backdrop});
+    Widget Function(Object? handle, {BoxFit fit, Color? backdrop});
 
 /// Replacements for the pieces that talk to the phone, used by tests. A null
 /// field means the real service.

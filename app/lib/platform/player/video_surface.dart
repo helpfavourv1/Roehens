@@ -14,20 +14,22 @@ import 'package:media_kit_video/media_kit_video.dart';
 Widget buildVideoSurface(
   Object? handle, {
   BoxFit fit = BoxFit.cover,
-  Color backdrop = const Color(0xFF050608),
+  Color? backdrop,
 }) {
+  // Callers pass the design token `videoBackdrop`; without one the fill is clear.
+  final Color fill = backdrop ?? const Color.from(alpha: 0, red: 0, green: 0, blue: 0);
   if (handle is VideoController) {
     return Video(
       controller: handle,
       controls: null,
       fit: fit,
-      fill: backdrop,
+      fill: fill,
       wakelock: false,
     );
   }
   if (handle is ValueListenable<Uint8List?>) {
     return ColoredBox(
-      color: backdrop,
+      color: fill,
       child: ValueListenableBuilder<Uint8List?>(
         valueListenable: handle,
         builder: (BuildContext context, Uint8List? frame, Widget? _) {
@@ -46,5 +48,5 @@ Widget buildVideoSurface(
       ),
     );
   }
-  return ColoredBox(color: backdrop, child: const SizedBox.expand());
+  return ColoredBox(color: fill, child: const SizedBox.expand());
 }
