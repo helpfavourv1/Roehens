@@ -323,8 +323,7 @@ class _FullscreenScreenState extends State<FullscreenScreen> {
     final LiveSession? pooled = _app.live.sessionFor(camera.id);
     final bool ptzAllowed = _app.flags.isEnabled('ptz');
     return ValueListenableBuilder<PlayerState>(
-      valueListenable:
-          pooled?.state ?? _noSession,
+      valueListenable: pooled?.state ?? _noSession,
       builder: (BuildContext context, PlayerState state, Widget? _) {
         final StreamStatus status = StreamStatus.fromPlayerState(state);
         final AppError? error = state is PlayerError ? state.error : null;

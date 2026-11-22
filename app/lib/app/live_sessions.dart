@@ -21,12 +21,11 @@ import 'package:roehens/platform/player/player_pool.dart';
 
 /// Fetches one still picture of a camera that is not decoding right now.
 /// Returns null when the camera cannot give one.
-typedef PosterFetcher =
-    Future<Uint8List?> Function(
-      Camera camera,
-      CameraCredentials credentials,
-      StreamKind kind,
-    );
+typedef PosterFetcher = Future<Uint8List?> Function(
+  Camera camera,
+  CameraCredentials credentials,
+  StreamKind kind,
+);
 
 /// What a screen may know about a decoding camera: its state, size, the
 /// handle its video view draws, and mute. The pool and the engine stay hidden.
@@ -244,7 +243,10 @@ class LiveSessions extends ChangeNotifier {
           if (camera == null) {
             continue;
           }
-          final PlayerSource? source = await _sourceFor(camera, tile.streamKind);
+          final PlayerSource? source = await _sourceFor(
+            camera,
+            tile.streamKind,
+          );
           if (source != null) {
             desired[camera.id] = source;
           }
@@ -368,7 +370,10 @@ class LiveSessions extends ChangeNotifier {
             changed = true;
           }
         } catch (error) {
-          logger.debug(_tag, 'no poster for ${camera.id}: ${error.runtimeType}');
+          logger.debug(
+            _tag,
+            'no poster for ${camera.id}: ${error.runtimeType}',
+          );
         }
       }
       if (changed && !_disposed) {

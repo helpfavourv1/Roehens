@@ -8,7 +8,12 @@ void main() {
   const Offset center = Offset(200, 112.5);
 
   test('zoom stays between 1x and 4x', () {
-    ZoomState state = ZoomMath.zoomAround(ZoomState.reset, 10, center, viewport);
+    ZoomState state = ZoomMath.zoomAround(
+      ZoomState.reset,
+      10,
+      center,
+      viewport,
+    );
     expect(state.scale, 4);
     state = ZoomMath.zoomAround(state, 0.01, center, viewport);
     expect(state, ZoomState.reset);

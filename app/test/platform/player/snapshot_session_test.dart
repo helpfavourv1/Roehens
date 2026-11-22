@@ -17,30 +17,33 @@ PlayerSource sourceFor(Uri uri) {
 }
 
 void main() {
-  test('shows connecting, then plays and exposes the picture and size', () async {
-    final Uint8List image = fakeSizedJpeg(640, 480, id: 1);
-    final Uri uri = await serveLocal((HttpRequest r) async {
-      r.response.headers.set(HttpHeaders.contentTypeHeader, 'image/jpeg');
-      r.response.add(image);
-      await r.response.close();
-    });
-    final SnapshotSession session = SnapshotSession(
-      interval: const Duration(milliseconds: 50),
-    );
-    addTearDown(session.dispose);
+  test(
+    'shows connecting, then plays and exposes the picture and size',
+    () async {
+      final Uint8List image = fakeSizedJpeg(640, 480, id: 1);
+      final Uri uri = await serveLocal((HttpRequest r) async {
+        r.response.headers.set(HttpHeaders.contentTypeHeader, 'image/jpeg');
+        r.response.add(image);
+        await r.response.close();
+      });
+      final SnapshotSession session = SnapshotSession(
+        interval: const Duration(milliseconds: 50),
+      );
+      addTearDown(session.dispose);
 
-    expect(session.state.value, isA<PlayerIdle>());
-    final Future<void> opening = session.open(sourceFor(uri));
-    expect(session.state.value, isA<PlayerConnecting>());
-    await opening;
+      expect(session.state.value, isA<PlayerIdle>());
+      final Future<void> opening = session.open(sourceFor(uri));
+      expect(session.state.value, isA<PlayerConnecting>());
+      await opening;
 
-    expect(session.state.value, isA<PlayerPlaying>());
-    final ValueListenable<Uint8List?> handle =
-        session.viewHandle! as ValueListenable<Uint8List?>;
-    expect(handle.value, image);
-    expect(session.videoSize.value, const VideoSize(640, 480));
-    expect(await session.captureFrame(), image);
-  });
+      expect(session.state.value, isA<PlayerPlaying>());
+      final ValueListenable<Uint8List?> handle =
+          session.viewHandle! as ValueListenable<Uint8List?>;
+      expect(handle.value, image);
+      expect(session.videoSize.value, const VideoSize(640, 480));
+      expect(await session.captureFrame(), image);
+    },
+  );
 
   test('keeps fetching and shows the newest picture', () async {
     int served = 0;

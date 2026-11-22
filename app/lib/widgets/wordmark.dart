@@ -16,7 +16,9 @@ class Wordmark extends StatelessWidget {
         name,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: context.type.headline.copyWith(color: context.colors.textPrimary),
+        style: context.type.headline.copyWith(
+          color: context.colors.textPrimary,
+        ),
       ),
     );
   }

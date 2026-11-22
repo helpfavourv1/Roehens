@@ -233,8 +233,7 @@ class _CamerasScreenState extends State<CamerasScreen> {
   ) {
     final LiveSession? session = app.live.sessionFor(camera.id);
     return ValueListenableBuilder<PlayerState>(
-      valueListenable:
-          session?.state ?? _noState,
+      valueListenable: session?.state ?? _noState,
       builder: (BuildContext context, PlayerState state, Widget? _) {
         final StreamStatus? status = session == null
             ? null
@@ -247,9 +246,8 @@ class _CamerasScreenState extends State<CamerasScreen> {
           status: status,
           statusLabel: status == null ? null : streamStatusLabel(l10n, status),
           deleteLabel: l10n.cameraDeleteSwipe,
-          onTap: () => unawaited(
-            openFullscreen(context, camera.id, fromLive: false),
-          ),
+          onTap: () =>
+              unawaited(openFullscreen(context, camera.id, fromLive: false)),
           onLongPress: () => _actions(context, camera),
           onDelete: () => unawaited(_delete(context, camera)),
         );
@@ -257,6 +255,7 @@ class _CamerasScreenState extends State<CamerasScreen> {
     );
   }
 
-  static final ValueNotifier<PlayerState> _noState =
-      ValueNotifier<PlayerState>(const PlayerIdle());
+  static final ValueNotifier<PlayerState> _noState = ValueNotifier<PlayerState>(
+    const PlayerIdle(),
+  );
 }

@@ -274,7 +274,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             camera: camera,
                             error: error,
-                            onRetry: () => unawaited(_app.live.retry(camera.id)),
+                            onRetry: () =>
+                                unawaited(_app.live.retry(camera.id)),
                             onEdit: () => widget.onEditCamera(camera),
                           ),
                         ),

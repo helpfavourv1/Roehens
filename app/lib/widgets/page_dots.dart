@@ -50,7 +50,9 @@ class PageDots extends StatelessWidget {
             children: <Widget>[
               for (int i = 0; i < count; i++)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxs),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xxs,
+                  ),
                   child: AnimatedContainer(
                     duration: fade,
                     curve: AppMotion.settle,
@@ -58,9 +60,7 @@ class PageDots extends StatelessWidget {
                     height: AppSizes.pageDot,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: i == current
-                          ? colors.accent
-                          : colors.borderStrong,
+                      color: i == current ? colors.accent : colors.borderStrong,
                     ),
                   ),
                 ),

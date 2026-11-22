@@ -36,7 +36,9 @@ Future<void> showCameraStatusSheet(
           children: <Widget>[
             Text(
               errorMessage(l10n, error),
-              style: sheet.type.body.copyWith(color: sheet.colors.textSecondary),
+              style: sheet.type.body.copyWith(
+                color: sheet.colors.textSecondary,
+              ),
             ),
             const SizedBox(height: AppSpacing.md),
             Row(
