@@ -1,3 +1,4 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:roehens/widgets/page_dots.dart';
@@ -31,15 +32,12 @@ void main() {
     );
 
     expect(find.bySemanticsLabel('Page 2 of 3'), findsOneWidget);
-    final SemanticsNode node = tester.getSemantics(
+    tester.semantics.performAction(
       find.bySemanticsLabel('Page 2 of 3'),
-    );
-    tester.binding.pipelineOwner.semanticsOwner!.performAction(
-      node.id,
       SemanticsAction.increase,
     );
-    tester.binding.pipelineOwner.semanticsOwner!.performAction(
-      node.id,
+    tester.semantics.performAction(
+      find.bySemanticsLabel('Page 2 of 3'),
       SemanticsAction.decrease,
     );
     expect(next, 1);
