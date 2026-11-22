@@ -202,8 +202,6 @@ abstract class AppLocalizations {
   /// **'Page {current} of {total}'**
   String livePageOf(int current, int total);
 
-
-
   /// Stream status: playing.
   ///
   /// In en, this message translates to:
