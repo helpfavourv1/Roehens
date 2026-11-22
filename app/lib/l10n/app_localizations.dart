@@ -397,13 +397,13 @@ abstract class AppLocalizations {
   /// Spoken label: use the main stream.
   ///
   /// In en, this message translates to:
-  /// **'Switch to high quality'**
+  /// **'Use high quality'**
   String get fullscreenQualityHigh;
 
   /// Spoken label: use the substream.
   ///
   /// In en, this message translates to:
-  /// **'Switch to low quality'**
+  /// **'Use low quality'**
   String get fullscreenQualityLow;
 
   /// Spoken label of the picture-in-picture button.
