@@ -10,6 +10,7 @@ import 'package:roehens/core/contracts/consent_contract.dart';
 import 'package:roehens/core/contracts/discovery_contract.dart';
 import 'package:roehens/core/contracts/logger_contract.dart';
 import 'package:roehens/core/contracts/permission_contract.dart';
+import 'package:roehens/core/contracts/ptz_contract.dart';
 import 'package:roehens/core/contracts/purchase_contract.dart';
 import 'package:roehens/core/contracts/secure_vault_contract.dart';
 import 'package:roehens/core/contracts/storage_contract.dart';
@@ -34,6 +35,8 @@ import 'package:roehens/core/services/diagnostics_service.dart';
 import 'package:roehens/core/services/flag_service.dart';
 import 'package:roehens/core/services/grid_planner.dart';
 import 'package:roehens/core/services/profile_catalog.dart';
+import 'package:roehens/core/services/url_builder.dart';
+import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/core/services/review_prompt_policy.dart';
 import 'package:roehens/platform/files/file_picker_service.dart';
 import 'package:roehens/platform/files/file_transfer_service.dart';
@@ -48,6 +51,10 @@ import 'package:roehens/platform/network/onvif_client.dart';
 import 'package:roehens/platform/network/ptz_service.dart';
 import 'package:roehens/platform/network/subnet_scanner.dart';
 import 'package:roehens/platform/network/ws_discovery_socket.dart';
+import 'package:roehens/app/live_sessions.dart';
+import 'package:roehens/core/models/camera.dart';
+import 'package:roehens/core/models/stream_profile.dart';
+import 'package:roehens/platform/network/mjpeg_client.dart';
 import 'package:roehens/platform/player/frame_capture_service.dart';
 import 'package:roehens/platform/player/media_player_service.dart';
 import 'package:roehens/platform/player/player_pool.dart';
@@ -89,6 +96,9 @@ class AppOverrides {
     this.discovery,
     this.clock,
     this.videoBuilder,
+    this.sessionFactory,
+    this.ptz,
+    this.posterFetcher,
   });
 
   final KeyValueStore? keyValueStore;
@@ -101,6 +111,9 @@ class AppOverrides {
   final DiscoveryContract? discovery;
   final ClockContract? clock;
   final VideoViewBuilder? videoBuilder;
+  final SessionFactory? sessionFactory;
+  final PtzContract? ptz;
+  final PosterFetcher? posterFetcher;
 }
 
 /// The composition root: every real service is built here with plain
@@ -147,6 +160,7 @@ class AppProviders {
     required this.frameCapture,
     required this.gridPlanner,
     required this.videoBuilder,
+    required this.live,
     required this.iosDiscoveryMode,
     required this._ownedResources,
   });
@@ -182,7 +196,7 @@ class AppProviders {
   final ScreenWakeService wake;
   final OrientationService orientation;
   final PipService pip;
-  final PtzService ptz;
+  final PtzContract ptz;
   final PermissionContract permission;
   final LanInfo lan;
   final ConnectionTester connectionTester;
@@ -194,6 +208,9 @@ class AppProviders {
 
   /// Draws a playing session; screens never import the player layer.
   final VideoViewBuilder videoBuilder;
+
+  /// Which cameras decode, and their sessions (Live and fullscreen).
+  final LiveSessions live;
 
   /// `subnet_sweep_only` or `ws_discovery` (D4), for diagnostics.
   final String iosDiscoveryMode;
@@ -321,7 +338,7 @@ class AppProviders {
 
     final MediaPlayerService mediaPlayer = MediaPlayerService(logger: logger);
     final PlayerPool pool = PlayerPool(
-      sessionFactory: mediaPlayer.sessionFor,
+      sessionFactory: overrides.sessionFactory ?? mediaPlayer.sessionFor,
       logger: logger,
     );
     owned.add(pool.disposeAll);
@@ -339,6 +356,23 @@ class AppProviders {
     if (downgradeRefused) {
       persistence.markUpdateRequired();
     }
+
+    final FrameCaptureService frameCapture = FrameCaptureService(
+      pool: pool,
+      clock: clock,
+    );
+    final LiveSessions live = LiveSessions(
+      pool: pool,
+      planner: const GridPlanner(),
+      cameras: cameras,
+      layout: layout,
+      settings: settings,
+      repository: repository,
+      snapshots: frameCapture,
+      logger: logger,
+      posterFetcher: overrides.posterFetcher ?? _fetchPoster,
+    );
+    owned.add(() async => live.dispose());
 
     final AppProviders app = AppProviders._(
       logger: logger,
@@ -373,22 +407,48 @@ class AppProviders {
       wake: ScreenWakeService(logger: logger),
       orientation: OrientationService(logger: logger),
       pip: pip,
-      ptz: PtzService(client: OnvifClient()),
+      ptz: overrides.ptz ?? PtzService(client: OnvifClient()),
       permission: permission,
       lan: lan,
       connectionTester: ConnectionTester(probes: NetworkProbes()),
       profiles: profiles,
       diagnostics: const DiagnosticsService(),
       playerPool: pool,
-      frameCapture: FrameCaptureService(pool: pool, clock: clock),
+      frameCapture: frameCapture,
       gridPlanner: const GridPlanner(),
       videoBuilder: overrides.videoBuilder ?? buildVideoSurface,
+      live: live,
       iosDiscoveryMode: iosMode,
       ownedResources: owned,
     );
     app._wire();
     await app._startBackgroundWork();
     return app;
+  }
+
+  /// One still picture for a tile that gave up its decoder: only MJPEG and
+  /// snapshot cameras can give one cheaply; RTSP tiles keep their last frame.
+  static Future<Uint8List?> _fetchPoster(
+    Camera camera,
+    CameraCredentials credentials,
+    StreamKind kind,
+  ) async {
+    final Uri? uri = UrlBuilder.streamUri(camera, kind: kind);
+    if (uri == null) {
+      return null;
+    }
+    final MjpegClient client = MjpegClient();
+    switch (camera.protocol) {
+      case StreamProtocol.httpSnapshot:
+        return client.fetchSnapshot(uri, credentials: credentials);
+      case StreamProtocol.mjpeg:
+        return client
+            .frames(uri, credentials: credentials)
+            .first
+            .timeout(const Duration(seconds: 4));
+      case StreamProtocol.rtsp:
+        return null;
+    }
   }
 
   /// Connections between providers that no single provider owns.
@@ -434,12 +494,14 @@ class AppProviders {
   /// Call when the app returns to the foreground.
   Future<void> onResume() async {
     autoCycle.setForeground(foreground: true);
+    live.setForeground(foreground: true);
     await flagService.onResume();
   }
 
   /// Call when the app leaves the screen.
   void onPause() {
     autoCycle.setForeground(foreground: false);
+    live.setForeground(foreground: false);
   }
 
   /// "Delete all local data" (A3): cameras, credentials, layouts, settings,

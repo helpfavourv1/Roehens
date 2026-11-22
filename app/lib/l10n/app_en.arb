@@ -398,5 +398,9 @@
   "persistenceExport": "Export cameras",
   "@persistenceExport": {
     "description": "Banner action."
+  },
+  "ptzSpeed": "Speed",
+  "@ptzSpeed": {
+    "description": "Label of the pan and tilt speed slider."
   }
 }

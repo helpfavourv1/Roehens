@@ -56,6 +56,9 @@ class AppSizes {
   /// Video tiles are 16:9.
   static const double tileAspectRatio = 16 / 9;
 
+  /// Diameter of one dot of the page indicator.
+  static const double pageDot = 8;
+
   /// The draggable thumb on the PTZ pad.
   static const double ptzThumb = 48;
 

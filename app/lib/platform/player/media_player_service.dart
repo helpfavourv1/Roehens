@@ -4,6 +4,7 @@ import 'package:roehens/core/contracts/player_contract.dart';
 import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/platform/player/mjpeg_session.dart';
 import 'package:roehens/platform/player/player_session.dart';
+import 'package:roehens/platform/player/snapshot_session.dart';
 
 /// The playback engine: media_kit (libmpv) for RTSP, and the Dart MJPEG client
 /// for MJPEG cameras. Implements [PlayerContract] and supplies the
@@ -33,7 +34,11 @@ class MediaPlayerService implements PlayerContract {
   /// Session for [protocol]: MJPEG cameras use the Dart client, everything else
   /// the video engine.
   PlayerSessionContract sessionFor(StreamProtocol protocol) {
-    return protocol == StreamProtocol.mjpeg ? MjpegSession() : _engineSession();
+    return switch (protocol) {
+      StreamProtocol.mjpeg => MjpegSession(),
+      StreamProtocol.httpSnapshot => SnapshotSession(),
+      StreamProtocol.rtsp => _engineSession(),
+    };
   }
 
   PlayerSessionContract _engineSession() {
