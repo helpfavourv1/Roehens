@@ -12,20 +12,18 @@ class PageDots extends StatelessWidget {
     super.key,
     required this.count,
     required this.current,
-    required this.semanticLabel,
+    required this.pageLabel,
     this.onNext,
     this.onPrevious,
-    this.nextLabel,
-    this.previousLabel,
   });
 
   final int count;
   final int current;
-  final String semanticLabel;
+
+  /// The spoken position of a page, for example "Page 2 of 3".
+  final String Function(int pageIndex) pageLabel;
   final VoidCallback? onNext;
   final VoidCallback? onPrevious;
-  final String? nextLabel;
-  final String? previousLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +35,11 @@ class PageDots extends StatelessWidget {
     final Duration fade = context.motion(AppMotion.tileConnect);
     return Semantics(
       container: true,
-      label: semanticLabel,
+      value: pageLabel(current),
       onIncrease: onNext,
       onDecrease: onPrevious,
-      increasedValue: nextLabel,
-      decreasedValue: previousLabel,
+      increasedValue: pageLabel((current + 1) % count),
+      decreasedValue: pageLabel((current - 1 + count) % count),
       child: ExcludeSemantics(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),

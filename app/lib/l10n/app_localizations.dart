@@ -202,17 +202,7 @@ abstract class AppLocalizations {
   /// **'Page {current} of {total}'**
   String livePageOf(int current, int total);
 
-  /// Spoken label for moving to the previous page.
-  ///
-  /// In en, this message translates to:
-  /// **'Previous page'**
-  String get livePagePrevious;
 
-  /// Spoken label for moving to the next page.
-  ///
-  /// In en, this message translates to:
-  /// **'Next page'**
-  String get livePageNext;
 
   /// Stream status: playing.
   ///

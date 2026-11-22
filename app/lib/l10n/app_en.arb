@@ -80,14 +80,6 @@
       }
     }
   },
-  "livePagePrevious": "Previous page",
-  "@livePagePrevious": {
-    "description": "Spoken label for moving to the previous page."
-  },
-  "livePageNext": "Next page",
-  "@livePageNext": {
-    "description": "Spoken label for moving to the next page."
-  },
   "statusLive": "Live",
   "@statusLive": {
     "description": "Stream status: playing."

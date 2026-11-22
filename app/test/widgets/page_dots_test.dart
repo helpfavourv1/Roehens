@@ -9,7 +9,7 @@ void main() {
   testWidgets('one page draws nothing', (WidgetTester tester) async {
     await pumpApp(
       tester,
-      const PageDots(count: 1, current: 0, semanticLabel: 'Page 1 of 1'),
+      PageDots(count: 1, current: 0, pageLabel: (int i) => 'Page ${i + 1} of 1'),
     );
     expect(tester.getSize(find.byType(PageDots)), Size.zero);
   });
@@ -25,19 +25,19 @@ void main() {
       PageDots(
         count: 3,
         current: 1,
-        semanticLabel: 'Page 2 of 3',
+        pageLabel: (int i) => 'Page ${i + 1} of 3',
         onNext: () => next++,
         onPrevious: () => previous++,
       ),
     );
 
-    expect(find.bySemanticsLabel('Page 2 of 3'), findsOneWidget);
+    expect(find.semantics.byValue('Page 2 of 3'), findsOneWidget);
     tester.semantics.performAction(
-      find.semantics.byLabel('Page 2 of 3'),
+      find.semantics.byValue('Page 2 of 3'),
       SemanticsAction.increase,
     );
     tester.semantics.performAction(
-      find.semantics.byLabel('Page 2 of 3'),
+      find.semantics.byValue('Page 2 of 3'),
       SemanticsAction.decrease,
     );
     expect(next, 1);

@@ -66,11 +66,7 @@ class AppLocalizationsEn extends AppLocalizations {
     return 'Page $current of $total';
   }
 
-  @override
-  String get livePagePrevious => 'Previous page';
 
-  @override
-  String get livePageNext => 'Next page';
 
   @override
   String get statusLive => 'Live';

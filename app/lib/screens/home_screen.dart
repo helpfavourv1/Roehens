@@ -289,11 +289,9 @@ class _HomeScreenState extends State<HomeScreen> {
         PageDots(
           count: pages,
           current: page,
-          semanticLabel: l10n.livePageOf(page + 1, pages),
+          pageLabel: (int index) => l10n.livePageOf(index + 1, pages),
           onNext: () => _app.layout.nextPage(cameraCount: total),
           onPrevious: () => _app.layout.previousPage(cameraCount: total),
-          nextLabel: l10n.livePageNext,
-          previousLabel: l10n.livePagePrevious,
         ),
       ],
     );

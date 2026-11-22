@@ -28,7 +28,7 @@ typedef PosterFetcher = Future<Uint8List?> Function(
 );
 
 /// What a screen may know about a decoding camera: its state, size, the
-/// handle its video view draws, and mute. The pool and the engine stay hidden.
+/// and the handle its video view draws. The pool and the engine stay hidden.
 class LiveSession {
   LiveSession(this._pooled);
 
@@ -38,9 +38,6 @@ class LiveSession {
   ValueListenable<VideoSize?> get videoSize => _pooled.videoSize;
   Object? get viewHandle => _pooled.viewHandle;
 
-  Future<void> setMuted({required bool muted}) {
-    return _pooled.session.setMuted(muted: muted);
-  }
 }
 
 /// The last picture of a tile that stopped decoding.
@@ -101,6 +98,7 @@ class LiveSessions extends ChangeNotifier {
   String? _focusId;
   bool _focusLowQuality = false;
   bool _focusSettled = false;
+  bool _muted = false;
   Timer? _settleTimer;
   Timer? _posterTimer;
 
@@ -157,6 +155,10 @@ class LiveSessions extends ChangeNotifier {
       return;
     }
     _settleTimer?.cancel();
+    if (cameraId != _focusId) {
+      // Sound is off only for the camera the person muted.
+      _muted = false;
+    }
     _focusId = cameraId;
     _focusLowQuality = lowQuality;
     _focusSettled = false;
@@ -174,6 +176,24 @@ class LiveSessions extends ChangeNotifier {
     final String? id = _focusId;
     if (id != null) {
       focus(id, lowQuality: lowQuality);
+    }
+  }
+
+  /// True while the fullscreen camera is muted.
+  bool get isMuted => _muted;
+
+  /// Mutes or unmutes the fullscreen camera. The choice survives the switch
+  /// from substream to main stream, which opens a new session.
+  Future<void> setMuted({required bool muted}) async {
+    _muted = muted;
+    await _applyMute();
+    notifyListeners();
+  }
+
+  Future<void> _applyMute() async {
+    final String? id = _focusId;
+    if (id != null) {
+      await pool.sessionFor(id)?.session.setMuted(muted: _muted);
     }
   }
 
@@ -265,6 +285,9 @@ class LiveSessions extends ChangeNotifier {
     if (_foreground) {
       await pool.resume();
       await pool.reconcile(desired);
+      if (_muted) {
+        await _applyMute();
+      }
     } else {
       await pool.pause();
     }

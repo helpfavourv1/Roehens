@@ -16,6 +16,7 @@ Future<ScreenHarness> open(
   WidgetTester tester, {
   bool onvif = false,
   bool ptzSupported = true,
+  int settleMs = 600,
 }) async {
   final ScreenHarness h = await ScreenHarness.boot(
     tester,
@@ -30,7 +31,7 @@ Future<ScreenHarness> open(
     const FullscreenScreen(cameraId: 'a', fromLive: false),
     providers: h.app,
   );
-  await settle(tester, milliseconds: 600);
+  await settle(tester, milliseconds: settleMs);
   return h;
 }
 
@@ -58,14 +59,31 @@ void main() {
   testWidgets('mute and unmute reach the player', (WidgetTester tester) async {
     final SemanticsHandle semantics = tester.ensureSemantics();
     final ScreenHarness h = await open(tester);
-    final FakePlayerSession session = h.sessions.first;
+    // By now the camera has moved to the main stream: the newest session.
+    FakePlayerSession current() => h.sessions.last;
 
     await tester.tap(find.bySemanticsLabel('Mute'));
     await settle(tester, milliseconds: 200);
-    expect(session.lastMuted, isTrue);
+    expect(current().lastMuted, isTrue);
     await tester.tap(find.bySemanticsLabel('Unmute'));
     await settle(tester, milliseconds: 200);
-    expect(session.lastMuted, isFalse);
+    expect(current().lastMuted, isFalse);
+
+    semantics.dispose();
+    await close(tester);
+  });
+
+  testWidgets('mute survives the switch to the main stream', (
+    WidgetTester tester,
+  ) async {
+    final SemanticsHandle semantics = tester.ensureSemantics();
+    final ScreenHarness h = await open(tester, settleMs: 100);
+    await tester.tap(find.bySemanticsLabel('Mute'));
+    await settle(tester, milliseconds: 1200);
+
+    expect(h.sessions.length, greaterThan(1));
+    expect(h.sessions.last.opened.last.uri.path, '/main');
+    expect(h.sessions.last.lastMuted, isTrue);
 
     semantics.dispose();
     await close(tester);
@@ -165,7 +183,7 @@ void main() {
     WidgetTester tester,
   ) async {
     final ScreenHarness h = await open(tester);
-    h.sessions.first.emit(const PlayerError(AppError(ErrorClass.authFailed)));
+    h.sessions.last.emit(const PlayerError(AppError(ErrorClass.authFailed)));
     await settle(tester, milliseconds: 300);
 
     expect(find.text('Check the username or password'), findsOneWidget);

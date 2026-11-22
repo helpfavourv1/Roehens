@@ -90,7 +90,7 @@ void main() {
     );
     await settle(tester);
 
-    expect(find.bySemanticsLabel('Page 1 of 2'), findsOneWidget);
+    expect(find.semantics.byValue('Page 1 of 2'), findsOneWidget);
     // Page 1 holds four of the five cameras.
     expect(h.sessions.length, 4);
     semantics.dispose();

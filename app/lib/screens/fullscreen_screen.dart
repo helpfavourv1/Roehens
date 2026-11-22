@@ -356,10 +356,7 @@ class _FullscreenScreenState extends State<FullscreenScreen> {
                       : l10n.fullscreenMute,
                   onPressed: () {
                     _muted.value = !_muted.value;
-                    unawaited(
-                      pooled?.setMuted(muted: _muted.value) ??
-                          Future<void>.value(),
-                    );
+                    unawaited(_app.live.setMuted(muted: _muted.value));
                   },
                 ),
                 FullscreenAction(
