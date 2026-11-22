@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:roehens/core/contracts/ad_contract.dart';
 import 'package:roehens/core/contracts/clock_contract.dart';
@@ -50,6 +51,7 @@ import 'package:roehens/platform/network/ws_discovery_socket.dart';
 import 'package:roehens/platform/player/frame_capture_service.dart';
 import 'package:roehens/platform/player/media_player_service.dart';
 import 'package:roehens/platform/player/player_pool.dart';
+import 'package:roehens/platform/player/video_surface.dart';
 import 'package:roehens/platform/storage/database_service.dart';
 import 'package:roehens/platform/storage/key_value_store.dart';
 import 'package:roehens/platform/storage/secure_vault_service.dart';
@@ -65,6 +67,11 @@ import 'package:roehens/platform/system/orientation_service.dart';
 import 'package:roehens/platform/system/pip_service.dart';
 import 'package:roehens/platform/system/screen_wake_service.dart';
 
+/// Builds the picture of one playing session from its view handle. The real
+/// one lives in `platform/player/video_surface.dart`; tests replace it.
+typedef VideoViewBuilder =
+    Widget Function(Object? handle, {BoxFit fit, Color backdrop});
+
 /// Replacements for the pieces that talk to the phone, used by tests. A null
 /// field means the real service.
 class AppOverrides {
@@ -78,6 +85,7 @@ class AppOverrides {
     this.permission,
     this.discovery,
     this.clock,
+    this.videoBuilder,
   });
 
   final KeyValueStore? keyValueStore;
@@ -89,6 +97,7 @@ class AppOverrides {
   final PermissionContract? permission;
   final DiscoveryContract? discovery;
   final ClockContract? clock;
+  final VideoViewBuilder? videoBuilder;
 }
 
 /// The composition root: every real service is built here with plain
@@ -134,6 +143,7 @@ class AppProviders {
     required this.playerPool,
     required this.frameCapture,
     required this.gridPlanner,
+    required this.videoBuilder,
     required this.iosDiscoveryMode,
     required this._ownedResources,
   });
@@ -178,6 +188,9 @@ class AppProviders {
   final PlayerPool playerPool;
   final FrameCaptureService frameCapture;
   final GridPlanner gridPlanner;
+
+  /// Draws a playing session; screens never import the player layer.
+  final VideoViewBuilder videoBuilder;
 
   /// `subnet_sweep_only` or `ws_discovery` (D4), for diagnostics.
   final String iosDiscoveryMode;
@@ -366,6 +379,7 @@ class AppProviders {
       playerPool: pool,
       frameCapture: FrameCaptureService(pool: pool, clock: clock),
       gridPlanner: const GridPlanner(),
+      videoBuilder: overrides.videoBuilder ?? buildVideoSurface,
       iosDiscoveryMode: iosMode,
       ownedResources: owned,
     );

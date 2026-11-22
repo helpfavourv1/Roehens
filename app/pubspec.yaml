@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   app_tracking_transparency: ^2.0.6
   crypto: ^3.0.6
   file_picker: ^12.2.0
@@ -17,6 +19,7 @@ dependencies:
   google_mobile_ads: ^9.1.0
   in_app_purchase: ^3.2.0
   in_app_review: ^2.0.10
+  intl: any
   media_kit: ^1.2.6
   media_kit_libs_video: ^1.0.7
   media_kit_video: ^2.0.1
@@ -37,6 +40,7 @@ dev_dependencies:
   sqflite_common_ffi: ^2.3.5
 
 flutter:
+  generate: true
   uses-material-design: false
 
   assets:

@@ -1,0 +1,402 @@
+{
+  "@@locale": "en",
+  "appName": "Roehens",
+  "@appName": {
+    "description": "The product name, shown as the wordmark."
+  },
+  "tabLive": "Live",
+  "@tabLive": {
+    "description": "Bottom bar label for the live camera grid."
+  },
+  "tabCameras": "Cameras",
+  "@tabCameras": {
+    "description": "Bottom bar label for the camera list."
+  },
+  "tabSettings": "Settings",
+  "@tabSettings": {
+    "description": "Bottom bar label for settings."
+  },
+  "actionAddCamera": "Add camera",
+  "@actionAddCamera": {
+    "description": "Button that starts adding a camera."
+  },
+  "actionRetry": "Retry",
+  "@actionRetry": {
+    "description": "Button that tries a failed connection again."
+  },
+  "actionEdit": "Edit",
+  "@actionEdit": {
+    "description": "Button that opens a camera for editing."
+  },
+  "actionUndo": "Undo",
+  "@actionUndo": {
+    "description": "Button that reverses a delete."
+  },
+  "actionClose": "Close",
+  "@actionClose": {
+    "description": "Spoken label of a close button."
+  },
+  "actionDelete": "Delete",
+  "@actionDelete": {
+    "description": "Button that deletes a camera."
+  },
+  "actionBack": "Back",
+  "@actionBack": {
+    "description": "Spoken label of a back button."
+  },
+  "liveEmptyTitle": "No cameras yet",
+  "@liveEmptyTitle": {
+    "description": "Title shown on Live before any camera exists."
+  },
+  "liveEmptyBody": "Add a camera to see it here. Roehens can find cameras on your network, or you can enter one yourself.",
+  "@liveEmptyBody": {
+    "description": "Body text on Live before any camera exists."
+  },
+  "liveFindCameras": "Find cameras on my network",
+  "@liveFindCameras": {
+    "description": "Button that opens network discovery."
+  },
+  "liveLayoutButton": "Layout",
+  "@liveLayoutButton": {
+    "description": "Spoken label of the button that opens the layout sheet."
+  },
+  "liveAutoCycleStart": "Start auto-cycle",
+  "@liveAutoCycleStart": {
+    "description": "Spoken label of the button that starts cycling through cameras."
+  },
+  "liveAutoCycleStop": "Stop auto-cycle",
+  "@liveAutoCycleStop": {
+    "description": "Spoken label of the button that stops cycling."
+  },
+  "livePageOf": "Page {current} of {total}",
+  "@livePageOf": {
+    "description": "Spoken position among pages of cameras.",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "livePagePrevious": "Previous page",
+  "@livePagePrevious": {
+    "description": "Spoken label for moving to the previous page."
+  },
+  "livePageNext": "Next page",
+  "@livePageNext": {
+    "description": "Spoken label for moving to the next page."
+  },
+  "statusLive": "Live",
+  "@statusLive": {
+    "description": "Stream status: playing."
+  },
+  "statusConnecting": "Connecting",
+  "@statusConnecting": {
+    "description": "Stream status: opening the connection."
+  },
+  "statusReconnecting": "Reconnecting",
+  "@statusReconnecting": {
+    "description": "Stream status: lost and trying again."
+  },
+  "statusError": "Error",
+  "@statusError": {
+    "description": "Stream status: failed."
+  },
+  "statusOffline": "Offline",
+  "@statusOffline": {
+    "description": "Stream status: not playing."
+  },
+  "ageSeconds": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@ageSeconds": {
+    "description": "Age of a still picture.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageMinutes": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@ageMinutes": {
+    "description": "Age of a still picture.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageHours": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@ageHours": {
+    "description": "Age of a still picture.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageDays": "{count, plural, =1{1 day ago} other{{count} days ago}}",
+  "@ageDays": {
+    "description": "Age of a still picture.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "errorNetworkUnreachable": "Can't reach the camera",
+  "@errorNetworkUnreachable": {
+    "description": "Error message."
+  },
+  "errorAuthFailed": "Check the username or password",
+  "@errorAuthFailed": {
+    "description": "Error message."
+  },
+  "errorPathNotFound": "The stream path was not found",
+  "@errorPathNotFound": {
+    "description": "Error message."
+  },
+  "errorUnsupportedMedia": "This camera's video format isn't supported",
+  "@errorUnsupportedMedia": {
+    "description": "Error message."
+  },
+  "errorLocalNetworkDenied": "Local network access is turned off",
+  "@errorLocalNetworkDenied": {
+    "description": "Error message."
+  },
+  "errorStreamDropped": "The stream dropped",
+  "@errorStreamDropped": {
+    "description": "Error message."
+  },
+  "errorResourcePressure": "Too many streams for this phone",
+  "@errorResourcePressure": {
+    "description": "Error message."
+  },
+  "errorStorageFailure": "Saved data couldn't be read or written",
+  "@errorStorageFailure": {
+    "description": "Error message."
+  },
+  "errorFlagDisabled": "This feature is switched off for now",
+  "@errorFlagDisabled": {
+    "description": "Error message."
+  },
+  "errorPurchaseFailed": "The purchase didn't go through",
+  "@errorPurchaseFailed": {
+    "description": "Error message."
+  },
+  "errorInvalidFile": "That file isn't a Roehens camera list",
+  "@errorInvalidFile": {
+    "description": "Error message."
+  },
+  "errorTransferFailed": "The file couldn't be shared or opened",
+  "@errorTransferFailed": {
+    "description": "Error message."
+  },
+  "errorFatal": "Something went wrong",
+  "@errorFatal": {
+    "description": "Error message."
+  },
+  "protocolRtsp": "RTSP",
+  "@protocolRtsp": {
+    "description": "Protocol name; stays in Latin script."
+  },
+  "protocolMjpeg": "MJPEG",
+  "@protocolMjpeg": {
+    "description": "Protocol name; stays in Latin script."
+  },
+  "protocolSnapshot": "HTTP snapshot",
+  "@protocolSnapshot": {
+    "description": "Protocol name for a camera that serves still pictures."
+  },
+  "fullscreenMute": "Mute",
+  "@fullscreenMute": {
+    "description": "Spoken label: turn camera sound off."
+  },
+  "fullscreenUnmute": "Unmute",
+  "@fullscreenUnmute": {
+    "description": "Spoken label: turn camera sound on."
+  },
+  "fullscreenSnapshot": "Take snapshot",
+  "@fullscreenSnapshot": {
+    "description": "Spoken label of the snapshot button."
+  },
+  "fullscreenSnapshotFailed": "Couldn't capture a picture",
+  "@fullscreenSnapshotFailed": {
+    "description": "Message when a snapshot fails."
+  },
+  "fullscreenPtz": "Pan and tilt",
+  "@fullscreenPtz": {
+    "description": "Spoken label of the button that shows the pan and tilt pad."
+  },
+  "fullscreenQualityHigh": "Switch to high quality",
+  "@fullscreenQualityHigh": {
+    "description": "Spoken label: use the main stream."
+  },
+  "fullscreenQualityLow": "Switch to low quality",
+  "@fullscreenQualityLow": {
+    "description": "Spoken label: use the substream."
+  },
+  "fullscreenPip": "Picture in picture",
+  "@fullscreenPip": {
+    "description": "Spoken label of the picture-in-picture button."
+  },
+  "fullscreenZoomReset": "Reset zoom",
+  "@fullscreenZoomReset": {
+    "description": "Spoken label of the button that resets zoom."
+  },
+  "fullscreenZoomLevel": "Zoom {level}×",
+  "@fullscreenZoomLevel": {
+    "description": "Zoom level shown while zoomed in.",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "fullscreenPreviousCamera": "Previous camera",
+  "@fullscreenPreviousCamera": {
+    "description": "Spoken label for the previous camera."
+  },
+  "fullscreenNextCamera": "Next camera",
+  "@fullscreenNextCamera": {
+    "description": "Spoken label for the next camera."
+  },
+  "ptzPad": "Pan and tilt pad",
+  "@ptzPad": {
+    "description": "Spoken label of the pan and tilt pad."
+  },
+  "ptzHome": "Home position",
+  "@ptzHome": {
+    "description": "Spoken label of the button that returns the camera to its home position."
+  },
+  "ptzZoomIn": "Zoom in",
+  "@ptzZoomIn": {
+    "description": "Spoken label of the camera zoom-in button."
+  },
+  "ptzZoomOut": "Zoom out",
+  "@ptzZoomOut": {
+    "description": "Spoken label of the camera zoom-out button."
+  },
+  "ptzNeedsOnvif": "Turn on ONVIF for this camera to use pan and tilt.",
+  "@ptzNeedsOnvif": {
+    "description": "Hint shown when pan and tilt is unavailable."
+  },
+  "ptzNotSupported": "This camera doesn't report pan and tilt control.",
+  "@ptzNotSupported": {
+    "description": "Message when the camera has no pan and tilt."
+  },
+  "camerasTitle": "Cameras",
+  "@camerasTitle": {
+    "description": "Screen title."
+  },
+  "camerasSearchHint": "Search cameras",
+  "@camerasSearchHint": {
+    "description": "Hint of the camera search field."
+  },
+  "camerasEmptyTitle": "No cameras yet",
+  "@camerasEmptyTitle": {
+    "description": "Title of the empty camera list."
+  },
+  "camerasEmptyBody": "Add your first camera. Roehens keeps its password in the secure storage of this phone.",
+  "@camerasEmptyBody": {
+    "description": "Body of the empty camera list."
+  },
+  "camerasNoResultsTitle": "No matching cameras",
+  "@camerasNoResultsTitle": {
+    "description": "Title when a search finds nothing."
+  },
+  "camerasNoResultsBody": "Try a different name or address.",
+  "@camerasNoResultsBody": {
+    "description": "Body when a search finds nothing."
+  },
+  "cameraDeleted": "Deleted {name}",
+  "@cameraDeleted": {
+    "description": "Message after a camera is deleted.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cameraDeleteSwipe": "Delete",
+  "@cameraDeleteSwipe": {
+    "description": "Spoken label of the swipe-to-delete action."
+  },
+  "layoutTitle": "Layout",
+  "@layoutTitle": {
+    "description": "Title of the layout sheet."
+  },
+  "layoutPerPage": "{count, plural, =1{1 camera per page} other{{count} cameras per page}}",
+  "@layoutPerPage": {
+    "description": "Description of the selected grid size.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "layoutSizeLabel": "{count}",
+  "@layoutSizeLabel": {
+    "description": "Label of one grid size choice.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "layoutOrderSection": "Order",
+  "@layoutOrderSection": {
+    "description": "Section header of the camera order list."
+  },
+  "layoutMoveUp": "Move {name} up",
+  "@layoutMoveUp": {
+    "description": "Spoken label of the move-up button.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "layoutMoveDown": "Move {name} down",
+  "@layoutMoveDown": {
+    "description": "Spoken label of the move-down button.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "layoutAutoCycleSection": "Auto-cycle",
+  "@layoutAutoCycleSection": {
+    "description": "Section header of the auto-cycle interval."
+  },
+  "layoutAutoCycleDefault": "Use default",
+  "@layoutAutoCycleDefault": {
+    "description": "Choice that uses the global auto-cycle interval."
+  },
+  "layoutAutoCycleSeconds": "{seconds} s",
+  "@layoutAutoCycleSeconds": {
+    "description": "Auto-cycle interval choice, in seconds.",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "layoutAutoCycleHelp": "Moves to the next page after this time. Touching the screen pauses it.",
+  "@layoutAutoCycleHelp": {
+    "description": "Help text under the auto-cycle choices."
+  },
+  "persistenceDegraded": "Your saved data can't be kept right now. Export your cameras to keep a copy.",
+  "@persistenceDegraded": {
+    "description": "Banner when storage fails."
+  },
+  "persistenceUpdate": "Update Roehens to open your saved data.",
+  "@persistenceUpdate": {
+    "description": "Banner when the saved data is from a newer version."
+  },
+  "persistenceExport": "Export cameras",
+  "@persistenceExport": {
+    "description": "Banner action."
+  }
+}

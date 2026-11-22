@@ -16,7 +16,7 @@ Precedence (from the blueprint): owner decisions > `DECISIONS.md` > `BLUEPRINT.m
 
 - **Repository:** `https://github.com/helpfavourv1/Roehens` (public, default branch `main`, owner account `helpfavourv1`).
 - **Access token:** the owner supplies it in the conversation or the project instructions. **It is not in the repository and must never be written into any file, commit, comment or doc** (the repo is public; the guard and `tool/static_audit.py` fail on token patterns). It authenticates as `helpfavourv1` and has Contents, Workflows, Actions and Secrets read/write on `Roehens`.
-- Clone: `git clone https://helpfavourv1:<TOKEN>@github.com/helpfavourv1/Roehens.git`
+- Clone: `git clone https://github.com/helpfavourv1/Roehens.git` (pass the token as a Basic auth header: `git -c http.extraHeader="Authorization: Basic $(printf 'helpfavourv1:%s' "$TOKEN" | base64 -w0)" clone ...)`
 - Commit identity: name `helpfavourv1`, email `314438714+helpfavourv1@users.noreply.github.com` (GitHub rejects pushes that expose a private email).
 - The owner's support email for the app and privacy page is `stmakarios@gmail.com` (in `IDENTITY.md` and `AppConstants.supportEmail`). It is not a commit identity.
 - GitHub Actions secrets already set (values are never read back): `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`, `ANDROID_KEY_ALIAS` (alias is lowercase `roehens`), `SPIKE_RTSP_URL`, `SPIKE_MJPEG_URL`, `SPIKE_EXTRA_URLS`. The keystore itself never enters the repo.

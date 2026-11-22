@@ -64,7 +64,8 @@ def resolve(path, target):
     return os.path.normpath(os.path.join(os.path.dirname(path), target))
 
 
-lib_files = dart_files(LIB)
+GENERATED_L10N = re.compile(r'/l10n/app_localizations(_[A-Za-z_]+)?\.dart$')
+lib_files = [f for f in dart_files(LIB) if not GENERATED_L10N.search(f.replace('\\', '/'))]
 test_files = dart_files(TEST)
 all_files = lib_files + test_files
 
@@ -77,6 +78,8 @@ for f in all_files:
         if r is None:
             continue
         if not os.path.exists(r):
+            if GENERATED_L10N.search(r.replace('\\', '/')) and os.path.exists(os.path.join(LIB, 'l10n', 'app_en.arb')):
+                continue  # written by `flutter pub get` from the ARB files in CI
             err(f'{rel(f)}: import does not resolve: {t}')
         else:
             deps.add(r)
@@ -142,7 +145,7 @@ for p, where in sorted(used.items()):
     elif declared.get(p) == 'dev_dependencies' and 'lib' in where:
         err(f'package:{p} is a dev dependency but used in lib/')
 RUNTIME_ONLY = {'integration_test', 'media_kit_libs_video', 'cupertino_icons', 'flutter_lints', 'flutter_test',
-                'flutter_localizations', 'sqflite_common_ffi'}
+                'flutter_localizations', 'sqflite_common_ffi', 'intl'}  # intl: used by generated l10n code
 for p, kind in sorted(declared.items()):
     if p not in used and p not in RUNTIME_ONLY and p not in SDK:
         warn(f'{p} ({kind}) is declared but never imported')
