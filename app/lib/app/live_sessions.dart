@@ -37,7 +37,6 @@ class LiveSession {
   ValueListenable<PlayerState> get state => _pooled.state;
   ValueListenable<VideoSize?> get videoSize => _pooled.videoSize;
   Object? get viewHandle => _pooled.viewHandle;
-
 }
 
 /// The last picture of a tile that stopped decoding.

@@ -9,7 +9,11 @@ void main() {
   testWidgets('one page draws nothing', (WidgetTester tester) async {
     await pumpApp(
       tester,
-      PageDots(count: 1, current: 0, pageLabel: (int i) => 'Page ${i + 1} of 1'),
+      PageDots(
+        count: 1,
+        current: 0,
+        pageLabel: (int i) => 'Page ${i + 1} of 1',
+      ),
     );
     expect(tester.getSize(find.byType(PageDots)), Size.zero);
   });
