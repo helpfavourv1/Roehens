@@ -78,7 +78,15 @@ class ScreenHarness {
     addTearDown(() async {
       await tester.runAsync(app!.dispose);
     });
-    return ScreenHarness._(app!, sessions, ptz, storage, discovery, files, probes);
+    return ScreenHarness._(
+      app!,
+      sessions,
+      ptz,
+      storage,
+      discovery,
+      files,
+      probes,
+    );
   }
 }
 

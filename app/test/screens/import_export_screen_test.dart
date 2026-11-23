@@ -85,7 +85,11 @@ void main() {
   testWidgets('a camera that already exists asks what to do', (
     WidgetTester tester,
   ) async {
-    final Camera saved = cameraWithSub(id: 'a', name: 'Porch', host: '10.0.0.5');
+    final Camera saved = cameraWithSub(
+      id: 'a',
+      name: 'Porch',
+      host: '10.0.0.5',
+    );
     final ScreenHarness h = await ScreenHarness.boot(
       tester,
       cameras: <Camera>[saved],
@@ -113,7 +117,11 @@ void main() {
   });
 
   testWidgets('keeping both adds a second camera', (WidgetTester tester) async {
-    final Camera saved = cameraWithSub(id: 'a', name: 'Porch', host: '10.0.0.5');
+    final Camera saved = cameraWithSub(
+      id: 'a',
+      name: 'Porch',
+      host: '10.0.0.5',
+    );
     final ScreenHarness h = await ScreenHarness.boot(
       tester,
       cameras: <Camera>[saved],

@@ -15,7 +15,10 @@ void main() {
     final ScreenHarness h = await ScreenHarness.boot(tester);
     await pumpApp(
       tester,
-      DiscoveryScreen(onPick: (DiscoveryResult r) => picked = r, onManual: () {}),
+      DiscoveryScreen(
+        onPick: (DiscoveryResult r) => picked = r,
+        onManual: () {},
+      ),
       providers: h.app,
     );
     await settle(tester, milliseconds: 300);

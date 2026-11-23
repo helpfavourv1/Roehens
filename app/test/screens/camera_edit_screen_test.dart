@@ -46,7 +46,9 @@ Future<ScreenHarness> open(
 }
 
 EditableText editable(WidgetTester tester, int index) {
-  return tester.widgetList<EditableText>(find.byType(EditableText)).elementAt(index);
+  return tester
+      .widgetList<EditableText>(find.byType(EditableText))
+      .elementAt(index);
 }
 
 void main() {
