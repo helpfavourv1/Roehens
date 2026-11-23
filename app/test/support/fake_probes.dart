@@ -1,4 +1,5 @@
 import 'package:roehens/core/errors/result.dart';
+import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/services/connection_tester.dart';
 
 /// Answers the connection tester's network questions from memory.
