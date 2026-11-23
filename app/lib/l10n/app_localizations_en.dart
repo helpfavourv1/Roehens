@@ -318,4 +318,344 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ptzSpeed => 'Speed';
+
+  @override
+  String get editAddTitle => 'Add camera';
+
+  @override
+  String get editEditTitle => 'Edit camera';
+
+  @override
+  String get editSectionCamera => 'Camera';
+
+  @override
+  String get editSectionSignIn => 'Sign-in';
+
+  @override
+  String get editSectionStreams => 'Streams';
+
+  @override
+  String get editSectionAdvanced => 'Advanced';
+
+  @override
+  String get editStreamAddress => 'Stream address';
+
+  @override
+  String get editStreamAddressHint => 'rtsp://192.168.1.10/stream0';
+
+  @override
+  String get editStreamAddressHelp =>
+      'Paste a full address to fill in the fields below. A password in it is moved to secure storage.';
+
+  @override
+  String get editAddressNotUnderstood => 'That address couldn\'t be read.';
+
+  @override
+  String get editName => 'Name';
+
+  @override
+  String get editNameHint => 'Front door';
+
+  @override
+  String get editNameRequired => 'Give the camera a name.';
+
+  @override
+  String get editProtocol => 'Type';
+
+  @override
+  String get editHost => 'Address or host name';
+
+  @override
+  String get editHostHint => '192.168.1.10';
+
+  @override
+  String get editHostInvalid =>
+      'Enter an IP address or host name, without spaces or slashes.';
+
+  @override
+  String get editPort => 'Port';
+
+  @override
+  String get editPortInvalid => 'Enter a port from 1 to 65535.';
+
+  @override
+  String get editUsername => 'Username';
+
+  @override
+  String get editPassword => 'Password';
+
+  @override
+  String get editShowPassword => 'Show password';
+
+  @override
+  String get editHidePassword => 'Hide password';
+
+  @override
+  String get editMainPath => 'Main stream path';
+
+  @override
+  String get editSubPath => 'Substream path (optional)';
+
+  @override
+  String get editTransport => 'Transport';
+
+  @override
+  String get transportAuto => 'Automatic';
+
+  @override
+  String get transportTcp => 'TCP';
+
+  @override
+  String get editOnvif => 'Use ONVIF';
+
+  @override
+  String get editOnvifHelp =>
+      'Needed for pan and tilt. Most cameras answer on port 80 or 8000.';
+
+  @override
+  String get editOnvifPort => 'ONVIF port';
+
+  @override
+  String get editBrand => 'Brand';
+
+  @override
+  String get editBrandNone => 'Choose a brand';
+
+  @override
+  String get editModel => 'Model (optional)';
+
+  @override
+  String get editBrandPaths => 'Other paths this brand uses';
+
+  @override
+  String get editSave => 'Save';
+
+  @override
+  String get testRun => 'Test connection';
+
+  @override
+  String get testRunAgain => 'Test again';
+
+  @override
+  String get testRunning => 'Testing…';
+
+  @override
+  String get testPassed => 'The connection works.';
+
+  @override
+  String get testFailed => 'The connection didn\'t work.';
+
+  @override
+  String get testStageDns => 'Find the address';
+
+  @override
+  String get testStageTcp => 'Connect';
+
+  @override
+  String get testStageAuth => 'Sign in';
+
+  @override
+  String get testStageDescribe => 'Read the stream';
+
+  @override
+  String get testStageFirstFrame => 'First picture';
+
+  @override
+  String get testStatusPending => 'Waiting';
+
+  @override
+  String get testStatusRunning => 'Running';
+
+  @override
+  String get testStatusPassed => 'OK';
+
+  @override
+  String get testStatusFailed => 'Failed';
+
+  @override
+  String get testStatusSkipped => 'Skipped';
+
+  @override
+  String testElapsed(int millis) {
+    return '$millis ms';
+  }
+
+  @override
+  String get testOpenTroubleshooter => 'Open troubleshooter';
+
+  @override
+  String get testSuggestCheckHostName =>
+      'Check the address for typing mistakes.';
+
+  @override
+  String get testSuggestCheckWifi =>
+      'Make sure this phone and the camera are on the same Wi-Fi.';
+
+  @override
+  String get testSuggestCheckPort =>
+      'Check the port. Many cameras use 554 for RTSP.';
+
+  @override
+  String get testSuggestEnableRtsp => 'Turn on RTSP in the camera settings.';
+
+  @override
+  String get testSuggestCheckCredentials => 'Check the username and password.';
+
+  @override
+  String get testSuggestTryBrandPaths => 'Try another path for this brand.';
+
+  @override
+  String get testSuggestTrySubstream => 'Try the substream, which is lighter.';
+
+  @override
+  String get testSuggestTryMjpeg =>
+      'Try an MJPEG address if the camera offers one.';
+
+  @override
+  String get testSuggestOpenTroubleshooter =>
+      'Open the troubleshooter for more help.';
+
+  @override
+  String get brandTitle => 'Brand';
+
+  @override
+  String get brandSearch => 'Search brands';
+
+  @override
+  String get brandNoResults => 'No brand matches';
+
+  @override
+  String get brandNoResultsHint =>
+      'Choose Generic RTSP if your brand isn\'t listed.';
+
+  @override
+  String get brandVerified => 'Verified';
+
+  @override
+  String get discoveryTitle => 'Find cameras';
+
+  @override
+  String get discoveryScanning => 'Looking for cameras on your network…';
+
+  @override
+  String discoveryFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cameras found',
+      one: '1 camera found',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get discoveryRescan => 'Scan again';
+
+  @override
+  String get discoveryNone => 'No cameras found';
+
+  @override
+  String get discoveryNoneBody =>
+      'Check that this phone and the camera are on the same Wi-Fi, and that ONVIF is on in the camera.';
+
+  @override
+  String get discoveryManual => 'Add a camera by hand';
+
+  @override
+  String get discoverySourceOnvif => 'ONVIF';
+
+  @override
+  String get discoverySourceSweep => 'Network scan';
+
+  @override
+  String get discoveryDisabled => 'Camera search is switched off for now.';
+
+  @override
+  String get discoveryPermissionTitle => 'Local network access is off';
+
+  @override
+  String get discoveryPermissionBody =>
+      'Roehens needs local network access to find cameras. Turn it on in Settings.';
+
+  @override
+  String get discoveryOpenSettings => 'Open Settings';
+
+  @override
+  String get ioTitle => 'Import and export';
+
+  @override
+  String get ioExportSection => 'Export';
+
+  @override
+  String get ioExportRow => 'Export camera list';
+
+  @override
+  String ioExportBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cameras, without passwords',
+      one: '1 camera, without its password',
+      zero: 'No cameras to export',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ioImportSection => 'Import';
+
+  @override
+  String get ioImportRow => 'Import from a file';
+
+  @override
+  String get ioImportBody =>
+      'Choose a camera list exported from Roehens. Passwords are not included; add them afterwards.';
+
+  @override
+  String ioPreviewSection(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cameras in the file',
+      one: '1 camera in the file',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ioItemNew => 'New';
+
+  @override
+  String get ioItemExists => 'Already saved';
+
+  @override
+  String get ioConflictSection => 'When a camera already exists';
+
+  @override
+  String get ioSkip => 'Skip';
+
+  @override
+  String get ioReplace => 'Replace';
+
+  @override
+  String get ioDuplicate => 'Keep both';
+
+  @override
+  String ioInvalidEntries(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries could not be read and are left out',
+      one: '1 entry could not be read and is left out',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ioApply => 'Import';
+
+  @override
+  String ioDone(int added, int replaced, int skipped, int failed) {
+    return 'Added $added, replaced $replaced, skipped $skipped, failed $failed.';
+  }
 }

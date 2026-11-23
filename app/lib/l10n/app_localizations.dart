@@ -591,6 +591,588 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Speed'**
   String get ptzSpeed;
+
+  /// Title of the add-camera screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Add camera'**
+  String get editAddTitle;
+
+  /// Title of the edit-camera screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit camera'**
+  String get editEditTitle;
+
+  /// Section header.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get editSectionCamera;
+
+  /// Section header for username and password.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in'**
+  String get editSectionSignIn;
+
+  /// Section header for the stream paths.
+  ///
+  /// In en, this message translates to:
+  /// **'Streams'**
+  String get editSectionStreams;
+
+  /// Section header for transport and ONVIF.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get editSectionAdvanced;
+
+  /// Label of the field that takes a whole stream address.
+  ///
+  /// In en, this message translates to:
+  /// **'Stream address'**
+  String get editStreamAddress;
+
+  /// Hint of the stream address field. An example address; keep it as is.
+  ///
+  /// In en, this message translates to:
+  /// **'rtsp://192.168.1.10/stream0'**
+  String get editStreamAddressHint;
+
+  /// Help under the stream address field.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a full address to fill in the fields below. A password in it is moved to secure storage.'**
+  String get editStreamAddressHelp;
+
+  /// Error under the stream address field.
+  ///
+  /// In en, this message translates to:
+  /// **'That address couldn\'t be read.'**
+  String get editAddressNotUnderstood;
+
+  /// Label of the camera name field.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get editName;
+
+  /// Hint of the camera name field.
+  ///
+  /// In en, this message translates to:
+  /// **'Front door'**
+  String get editNameHint;
+
+  /// Error when the name is empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Give the camera a name.'**
+  String get editNameRequired;
+
+  /// Label of the stream type choice.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get editProtocol;
+
+  /// Label of the host field.
+  ///
+  /// In en, this message translates to:
+  /// **'Address or host name'**
+  String get editHost;
+
+  /// Hint of the host field. An example address; keep it as is.
+  ///
+  /// In en, this message translates to:
+  /// **'192.168.1.10'**
+  String get editHostHint;
+
+  /// Error when the host is not valid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an IP address or host name, without spaces or slashes.'**
+  String get editHostInvalid;
+
+  /// Label of the port field.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get editPort;
+
+  /// Error when a port is not valid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a port from 1 to 65535.'**
+  String get editPortInvalid;
+
+  /// Label of the username field.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get editUsername;
+
+  /// Label of the password field.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get editPassword;
+
+  /// Spoken label of the show-password button.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get editShowPassword;
+
+  /// Spoken label of the hide-password button.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get editHidePassword;
+
+  /// Label of the main stream path field.
+  ///
+  /// In en, this message translates to:
+  /// **'Main stream path'**
+  String get editMainPath;
+
+  /// Label of the substream path field.
+  ///
+  /// In en, this message translates to:
+  /// **'Substream path (optional)'**
+  String get editSubPath;
+
+  /// Label of the RTSP transport choice.
+  ///
+  /// In en, this message translates to:
+  /// **'Transport'**
+  String get editTransport;
+
+  /// RTSP transport: let the app choose.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic'**
+  String get transportAuto;
+
+  /// RTSP transport; stays in Latin script.
+  ///
+  /// In en, this message translates to:
+  /// **'TCP'**
+  String get transportTcp;
+
+  /// Label of the ONVIF switch.
+  ///
+  /// In en, this message translates to:
+  /// **'Use ONVIF'**
+  String get editOnvif;
+
+  /// Help under the ONVIF switch.
+  ///
+  /// In en, this message translates to:
+  /// **'Needed for pan and tilt. Most cameras answer on port 80 or 8000.'**
+  String get editOnvifHelp;
+
+  /// Label of the ONVIF port field.
+  ///
+  /// In en, this message translates to:
+  /// **'ONVIF port'**
+  String get editOnvifPort;
+
+  /// Label of the brand row.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get editBrand;
+
+  /// Value of the brand row before a brand is chosen.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a brand'**
+  String get editBrandNone;
+
+  /// Label of the model field.
+  ///
+  /// In en, this message translates to:
+  /// **'Model (optional)'**
+  String get editModel;
+
+  /// Header over the chips of alternative stream paths.
+  ///
+  /// In en, this message translates to:
+  /// **'Other paths this brand uses'**
+  String get editBrandPaths;
+
+  /// Button that saves the camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get editSave;
+
+  /// Button that tests the connection.
+  ///
+  /// In en, this message translates to:
+  /// **'Test connection'**
+  String get testRun;
+
+  /// Button that repeats the connection test.
+  ///
+  /// In en, this message translates to:
+  /// **'Test again'**
+  String get testRunAgain;
+
+  /// Shown while the connection test runs.
+  ///
+  /// In en, this message translates to:
+  /// **'Testing…'**
+  String get testRunning;
+
+  /// Result when every step passed.
+  ///
+  /// In en, this message translates to:
+  /// **'The connection works.'**
+  String get testPassed;
+
+  /// Result when a step failed.
+  ///
+  /// In en, this message translates to:
+  /// **'The connection didn\'t work.'**
+  String get testFailed;
+
+  /// Test step: name lookup.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the address'**
+  String get testStageDns;
+
+  /// Test step: open the connection.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get testStageTcp;
+
+  /// Test step: check the login.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get testStageAuth;
+
+  /// Test step: ask for the stream details.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the stream'**
+  String get testStageDescribe;
+
+  /// Test step: wait for a picture.
+  ///
+  /// In en, this message translates to:
+  /// **'First picture'**
+  String get testStageFirstFrame;
+
+  /// Test step status.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting'**
+  String get testStatusPending;
+
+  /// Test step status.
+  ///
+  /// In en, this message translates to:
+  /// **'Running'**
+  String get testStatusRunning;
+
+  /// Test step status.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get testStatusPassed;
+
+  /// Test step status.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get testStatusFailed;
+
+  /// Test step status.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped'**
+  String get testStatusSkipped;
+
+  /// Time a test step took.
+  ///
+  /// In en, this message translates to:
+  /// **'{millis} ms'**
+  String testElapsed(int millis);
+
+  /// Pill that opens the troubleshooter after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Open troubleshooter'**
+  String get testOpenTroubleshooter;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the address for typing mistakes.'**
+  String get testSuggestCheckHostName;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Make sure this phone and the camera are on the same Wi-Fi.'**
+  String get testSuggestCheckWifi;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the port. Many cameras use 554 for RTSP.'**
+  String get testSuggestCheckPort;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on RTSP in the camera settings.'**
+  String get testSuggestEnableRtsp;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the username and password.'**
+  String get testSuggestCheckCredentials;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another path for this brand.'**
+  String get testSuggestTryBrandPaths;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Try the substream, which is lighter.'**
+  String get testSuggestTrySubstream;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Try an MJPEG address if the camera offers one.'**
+  String get testSuggestTryMjpeg;
+
+  /// Suggestion after a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the troubleshooter for more help.'**
+  String get testSuggestOpenTroubleshooter;
+
+  /// Title of the brand picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get brandTitle;
+
+  /// Hint of the brand search field.
+  ///
+  /// In en, this message translates to:
+  /// **'Search brands'**
+  String get brandSearch;
+
+  /// Title when a brand search finds nothing.
+  ///
+  /// In en, this message translates to:
+  /// **'No brand matches'**
+  String get brandNoResults;
+
+  /// Help when a brand search finds nothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Generic RTSP if your brand isn\'t listed.'**
+  String get brandNoResultsHint;
+
+  /// Badge on a brand whose paths were confirmed on a real camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get brandVerified;
+
+  /// Title of the discovery screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Find cameras'**
+  String get discoveryTitle;
+
+  /// Shown while discovery runs.
+  ///
+  /// In en, this message translates to:
+  /// **'Looking for cameras on your network…'**
+  String get discoveryScanning;
+
+  /// Number of cameras found.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 camera found} other{{count} cameras found}}'**
+  String discoveryFound(int count);
+
+  /// Button that repeats discovery.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan again'**
+  String get discoveryRescan;
+
+  /// Title when discovery finds nothing.
+  ///
+  /// In en, this message translates to:
+  /// **'No cameras found'**
+  String get discoveryNone;
+
+  /// Help when discovery finds nothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Check that this phone and the camera are on the same Wi-Fi, and that ONVIF is on in the camera.'**
+  String get discoveryNoneBody;
+
+  /// Button that opens the add-camera form.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a camera by hand'**
+  String get discoveryManual;
+
+  /// Badge: found by ONVIF; stays in Latin script.
+  ///
+  /// In en, this message translates to:
+  /// **'ONVIF'**
+  String get discoverySourceOnvif;
+
+  /// Badge: found by scanning addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Network scan'**
+  String get discoverySourceSweep;
+
+  /// Shown when the discovery kill switch is on.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera search is switched off for now.'**
+  String get discoveryDisabled;
+
+  /// Title when local network access is refused.
+  ///
+  /// In en, this message translates to:
+  /// **'Local network access is off'**
+  String get discoveryPermissionTitle;
+
+  /// Body when local network access is refused.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens needs local network access to find cameras. Turn it on in Settings.'**
+  String get discoveryPermissionBody;
+
+  /// Button that opens the phone settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get discoveryOpenSettings;
+
+  /// Title of the import and export screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Import and export'**
+  String get ioTitle;
+
+  /// Section header.
+  ///
+  /// In en, this message translates to:
+  /// **'Export'**
+  String get ioExportSection;
+
+  /// Row that shares the camera list.
+  ///
+  /// In en, this message translates to:
+  /// **'Export camera list'**
+  String get ioExportRow;
+
+  /// Summary under the export row.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No cameras to export} =1{1 camera, without its password} other{{count} cameras, without passwords}}'**
+  String ioExportBody(int count);
+
+  /// Section header.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get ioImportSection;
+
+  /// Row that picks a camera list file.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from a file'**
+  String get ioImportRow;
+
+  /// Help under the import row.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a camera list exported from Roehens. Passwords are not included; add them afterwards.'**
+  String get ioImportBody;
+
+  /// Section header over the import preview.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 camera in the file} other{{count} cameras in the file}}'**
+  String ioPreviewSection(int count);
+
+  /// Badge: the camera is not saved yet.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get ioItemNew;
+
+  /// Badge: a camera with this address exists.
+  ///
+  /// In en, this message translates to:
+  /// **'Already saved'**
+  String get ioItemExists;
+
+  /// Section header of the conflict choice.
+  ///
+  /// In en, this message translates to:
+  /// **'When a camera already exists'**
+  String get ioConflictSection;
+
+  /// Conflict choice: leave the saved camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get ioSkip;
+
+  /// Conflict choice: overwrite the saved camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get ioReplace;
+
+  /// Conflict choice: add a second camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep both'**
+  String get ioDuplicate;
+
+  /// Note about unreadable entries.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 entry could not be read and is left out} other{{count} entries could not be read and are left out}}'**
+  String ioInvalidEntries(int count);
+
+  /// Button that imports the previewed cameras.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get ioApply;
+
+  /// Result of an import.
+  ///
+  /// In en, this message translates to:
+  /// **'Added {added}, replaced {replaced}, skipped {skipped}, failed {failed}.'**
+  String ioDone(int added, int replaced, int skipped, int failed);
 }
 
 class _AppLocalizationsDelegate
