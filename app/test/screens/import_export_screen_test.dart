@@ -67,10 +67,10 @@ void main() {
 
     await tester.tap(find.text('Import from a file'));
     await settle(tester, milliseconds: 300);
-    expect(find.text('2 cameras in the file'), findsOneWidget);
+    expect(find.text('2 CAMERAS IN THE FILE'), findsOneWidget);
     expect(find.text('New'), findsNWidgets(2));
     // Nothing exists yet, so there is no conflict to decide.
-    expect(find.text('When a camera already exists'), findsNothing);
+    expect(find.text('WHEN A CAMERA ALREADY EXISTS'), findsNothing);
 
     await tester.tap(find.text('Import'));
     await settle(tester, milliseconds: 500);
@@ -104,7 +104,7 @@ void main() {
     await tester.tap(find.text('Import from a file'));
     await settle(tester, milliseconds: 300);
     expect(find.text('Already saved'), findsOneWidget);
-    expect(find.text('When a camera already exists'), findsOneWidget);
+    expect(find.text('WHEN A CAMERA ALREADY EXISTS'), findsOneWidget);
 
     // The default is to skip: importing changes nothing.
     await tester.tap(find.text('Import'));
