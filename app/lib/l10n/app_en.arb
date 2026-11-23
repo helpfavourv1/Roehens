@@ -394,5 +394,432 @@
   "ptzSpeed": "Speed",
   "@ptzSpeed": {
     "description": "Label of the pan and tilt speed slider."
+  },
+  "editAddTitle": "Add camera",
+  "@editAddTitle": {
+    "description": "Title of the add-camera screen."
+  },
+  "editEditTitle": "Edit camera",
+  "@editEditTitle": {
+    "description": "Title of the edit-camera screen."
+  },
+  "editSectionCamera": "Camera",
+  "@editSectionCamera": {
+    "description": "Section header."
+  },
+  "editSectionSignIn": "Sign-in",
+  "@editSectionSignIn": {
+    "description": "Section header for username and password."
+  },
+  "editSectionStreams": "Streams",
+  "@editSectionStreams": {
+    "description": "Section header for the stream paths."
+  },
+  "editSectionAdvanced": "Advanced",
+  "@editSectionAdvanced": {
+    "description": "Section header for transport and ONVIF."
+  },
+  "editStreamAddress": "Stream address",
+  "@editStreamAddress": {
+    "description": "Label of the field that takes a whole stream address."
+  },
+  "editStreamAddressHint": "rtsp://192.168.1.10/stream0",
+  "@editStreamAddressHint": {
+    "description": "Hint of the stream address field. An example address; keep it as is."
+  },
+  "editStreamAddressHelp": "Paste a full address to fill in the fields below. A password in it is moved to secure storage.",
+  "@editStreamAddressHelp": {
+    "description": "Help under the stream address field."
+  },
+  "editAddressNotUnderstood": "That address couldn't be read.",
+  "@editAddressNotUnderstood": {
+    "description": "Error under the stream address field."
+  },
+  "editName": "Name",
+  "@editName": {
+    "description": "Label of the camera name field."
+  },
+  "editNameHint": "Front door",
+  "@editNameHint": {
+    "description": "Hint of the camera name field."
+  },
+  "editNameRequired": "Give the camera a name.",
+  "@editNameRequired": {
+    "description": "Error when the name is empty."
+  },
+  "editProtocol": "Type",
+  "@editProtocol": {
+    "description": "Label of the stream type choice."
+  },
+  "editHost": "Address or host name",
+  "@editHost": {
+    "description": "Label of the host field."
+  },
+  "editHostHint": "192.168.1.10",
+  "@editHostHint": {
+    "description": "Hint of the host field. An example address; keep it as is."
+  },
+  "editHostInvalid": "Enter an IP address or host name, without spaces or slashes.",
+  "@editHostInvalid": {
+    "description": "Error when the host is not valid."
+  },
+  "editPort": "Port",
+  "@editPort": {
+    "description": "Label of the port field."
+  },
+  "editPortInvalid": "Enter a port from 1 to 65535.",
+  "@editPortInvalid": {
+    "description": "Error when a port is not valid."
+  },
+  "editUsername": "Username",
+  "@editUsername": {
+    "description": "Label of the username field."
+  },
+  "editPassword": "Password",
+  "@editPassword": {
+    "description": "Label of the password field."
+  },
+  "editShowPassword": "Show password",
+  "@editShowPassword": {
+    "description": "Spoken label of the show-password button."
+  },
+  "editHidePassword": "Hide password",
+  "@editHidePassword": {
+    "description": "Spoken label of the hide-password button."
+  },
+  "editMainPath": "Main stream path",
+  "@editMainPath": {
+    "description": "Label of the main stream path field."
+  },
+  "editSubPath": "Substream path (optional)",
+  "@editSubPath": {
+    "description": "Label of the substream path field."
+  },
+  "editTransport": "Transport",
+  "@editTransport": {
+    "description": "Label of the RTSP transport choice."
+  },
+  "transportAuto": "Automatic",
+  "@transportAuto": {
+    "description": "RTSP transport: let the app choose."
+  },
+  "transportTcp": "TCP",
+  "@transportTcp": {
+    "description": "RTSP transport; stays in Latin script."
+  },
+  "editOnvif": "Use ONVIF",
+  "@editOnvif": {
+    "description": "Label of the ONVIF switch."
+  },
+  "editOnvifHelp": "Needed for pan and tilt. Most cameras answer on port 80 or 8000.",
+  "@editOnvifHelp": {
+    "description": "Help under the ONVIF switch."
+  },
+  "editOnvifPort": "ONVIF port",
+  "@editOnvifPort": {
+    "description": "Label of the ONVIF port field."
+  },
+  "editBrand": "Brand",
+  "@editBrand": {
+    "description": "Label of the brand row."
+  },
+  "editBrandNone": "Choose a brand",
+  "@editBrandNone": {
+    "description": "Value of the brand row before a brand is chosen."
+  },
+  "editModel": "Model (optional)",
+  "@editModel": {
+    "description": "Label of the model field."
+  },
+  "editBrandPaths": "Other paths this brand uses",
+  "@editBrandPaths": {
+    "description": "Header over the chips of alternative stream paths."
+  },
+  "editSave": "Save",
+  "@editSave": {
+    "description": "Button that saves the camera."
+  },
+  "testRun": "Test connection",
+  "@testRun": {
+    "description": "Button that tests the connection."
+  },
+  "testRunAgain": "Test again",
+  "@testRunAgain": {
+    "description": "Button that repeats the connection test."
+  },
+  "testRunning": "Testing…",
+  "@testRunning": {
+    "description": "Shown while the connection test runs."
+  },
+  "testPassed": "The connection works.",
+  "@testPassed": {
+    "description": "Result when every step passed."
+  },
+  "testFailed": "The connection didn't work.",
+  "@testFailed": {
+    "description": "Result when a step failed."
+  },
+  "testStageDns": "Find the address",
+  "@testStageDns": {
+    "description": "Test step: name lookup."
+  },
+  "testStageTcp": "Connect",
+  "@testStageTcp": {
+    "description": "Test step: open the connection."
+  },
+  "testStageAuth": "Sign in",
+  "@testStageAuth": {
+    "description": "Test step: check the login."
+  },
+  "testStageDescribe": "Read the stream",
+  "@testStageDescribe": {
+    "description": "Test step: ask for the stream details."
+  },
+  "testStageFirstFrame": "First picture",
+  "@testStageFirstFrame": {
+    "description": "Test step: wait for a picture."
+  },
+  "testStatusPending": "Waiting",
+  "@testStatusPending": {
+    "description": "Test step status."
+  },
+  "testStatusRunning": "Running",
+  "@testStatusRunning": {
+    "description": "Test step status."
+  },
+  "testStatusPassed": "OK",
+  "@testStatusPassed": {
+    "description": "Test step status."
+  },
+  "testStatusFailed": "Failed",
+  "@testStatusFailed": {
+    "description": "Test step status."
+  },
+  "testStatusSkipped": "Skipped",
+  "@testStatusSkipped": {
+    "description": "Test step status."
+  },
+  "testElapsed": "{millis} ms",
+  "@testElapsed": {
+    "description": "Time a test step took.",
+    "placeholders": {
+      "millis": {
+        "type": "int"
+      }
+    }
+  },
+  "testOpenTroubleshooter": "Open troubleshooter",
+  "@testOpenTroubleshooter": {
+    "description": "Pill that opens the troubleshooter after a failed test."
+  },
+  "testSuggestCheckHostName": "Check the address for typing mistakes.",
+  "@testSuggestCheckHostName": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestCheckWifi": "Make sure this phone and the camera are on the same Wi-Fi.",
+  "@testSuggestCheckWifi": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestCheckPort": "Check the port. Many cameras use 554 for RTSP.",
+  "@testSuggestCheckPort": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestEnableRtsp": "Turn on RTSP in the camera settings.",
+  "@testSuggestEnableRtsp": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestCheckCredentials": "Check the username and password.",
+  "@testSuggestCheckCredentials": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestTryBrandPaths": "Try another path for this brand.",
+  "@testSuggestTryBrandPaths": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestTrySubstream": "Try the substream, which is lighter.",
+  "@testSuggestTrySubstream": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestTryMjpeg": "Try an MJPEG address if the camera offers one.",
+  "@testSuggestTryMjpeg": {
+    "description": "Suggestion after a failed test."
+  },
+  "testSuggestOpenTroubleshooter": "Open the troubleshooter for more help.",
+  "@testSuggestOpenTroubleshooter": {
+    "description": "Suggestion after a failed test."
+  },
+  "brandTitle": "Brand",
+  "@brandTitle": {
+    "description": "Title of the brand picker."
+  },
+  "brandSearch": "Search brands",
+  "@brandSearch": {
+    "description": "Hint of the brand search field."
+  },
+  "brandNoResults": "No brand matches",
+  "@brandNoResults": {
+    "description": "Title when a brand search finds nothing."
+  },
+  "brandNoResultsHint": "Choose Generic RTSP if your brand isn't listed.",
+  "@brandNoResultsHint": {
+    "description": "Help when a brand search finds nothing."
+  },
+  "brandVerified": "Verified",
+  "@brandVerified": {
+    "description": "Badge on a brand whose paths were confirmed on a real camera."
+  },
+  "discoveryTitle": "Find cameras",
+  "@discoveryTitle": {
+    "description": "Title of the discovery screen."
+  },
+  "discoveryScanning": "Looking for cameras on your network…",
+  "@discoveryScanning": {
+    "description": "Shown while discovery runs."
+  },
+  "discoveryFound": "{count, plural, =1{1 camera found} other{{count} cameras found}}",
+  "@discoveryFound": {
+    "description": "Number of cameras found.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "discoveryRescan": "Scan again",
+  "@discoveryRescan": {
+    "description": "Button that repeats discovery."
+  },
+  "discoveryNone": "No cameras found",
+  "@discoveryNone": {
+    "description": "Title when discovery finds nothing."
+  },
+  "discoveryNoneBody": "Check that this phone and the camera are on the same Wi-Fi, and that ONVIF is on in the camera.",
+  "@discoveryNoneBody": {
+    "description": "Help when discovery finds nothing."
+  },
+  "discoveryManual": "Add a camera by hand",
+  "@discoveryManual": {
+    "description": "Button that opens the add-camera form."
+  },
+  "discoverySourceOnvif": "ONVIF",
+  "@discoverySourceOnvif": {
+    "description": "Badge: found by ONVIF; stays in Latin script."
+  },
+  "discoverySourceSweep": "Network scan",
+  "@discoverySourceSweep": {
+    "description": "Badge: found by scanning addresses."
+  },
+  "discoveryDisabled": "Camera search is switched off for now.",
+  "@discoveryDisabled": {
+    "description": "Shown when the discovery kill switch is on."
+  },
+  "discoveryPermissionTitle": "Local network access is off",
+  "@discoveryPermissionTitle": {
+    "description": "Title when local network access is refused."
+  },
+  "discoveryPermissionBody": "Roehens needs local network access to find cameras. Turn it on in Settings.",
+  "@discoveryPermissionBody": {
+    "description": "Body when local network access is refused."
+  },
+  "discoveryOpenSettings": "Open Settings",
+  "@discoveryOpenSettings": {
+    "description": "Button that opens the phone settings."
+  },
+  "ioTitle": "Import and export",
+  "@ioTitle": {
+    "description": "Title of the import and export screen."
+  },
+  "ioExportSection": "Export",
+  "@ioExportSection": {
+    "description": "Section header."
+  },
+  "ioExportRow": "Export camera list",
+  "@ioExportRow": {
+    "description": "Row that shares the camera list."
+  },
+  "ioExportBody": "{count, plural, =0{No cameras to export} =1{1 camera, without its password} other{{count} cameras, without passwords}}",
+  "@ioExportBody": {
+    "description": "Summary under the export row.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ioImportSection": "Import",
+  "@ioImportSection": {
+    "description": "Section header."
+  },
+  "ioImportRow": "Import from a file",
+  "@ioImportRow": {
+    "description": "Row that picks a camera list file."
+  },
+  "ioImportBody": "Choose a camera list exported from Roehens. Passwords are not included; add them afterwards.",
+  "@ioImportBody": {
+    "description": "Help under the import row."
+  },
+  "ioPreviewSection": "{count, plural, =1{1 camera in the file} other{{count} cameras in the file}}",
+  "@ioPreviewSection": {
+    "description": "Section header over the import preview.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ioItemNew": "New",
+  "@ioItemNew": {
+    "description": "Badge: the camera is not saved yet."
+  },
+  "ioItemExists": "Already saved",
+  "@ioItemExists": {
+    "description": "Badge: a camera with this address exists."
+  },
+  "ioConflictSection": "When a camera already exists",
+  "@ioConflictSection": {
+    "description": "Section header of the conflict choice."
+  },
+  "ioSkip": "Skip",
+  "@ioSkip": {
+    "description": "Conflict choice: leave the saved camera."
+  },
+  "ioReplace": "Replace",
+  "@ioReplace": {
+    "description": "Conflict choice: overwrite the saved camera."
+  },
+  "ioDuplicate": "Keep both",
+  "@ioDuplicate": {
+    "description": "Conflict choice: add a second camera."
+  },
+  "ioInvalidEntries": "{count, plural, =1{1 entry could not be read and is left out} other{{count} entries could not be read and are left out}}",
+  "@ioInvalidEntries": {
+    "description": "Note about unreadable entries.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ioApply": "Import",
+  "@ioApply": {
+    "description": "Button that imports the previewed cameras."
+  },
+  "ioDone": "Added {added}, replaced {replaced}, skipped {skipped}, failed {failed}.",
+  "@ioDone": {
+    "description": "Result of an import.",
+    "placeholders": {
+      "added": {
+        "type": "int"
+      },
+      "replaced": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      },
+      "failed": {
+        "type": "int"
+      }
+    }
   }
 }

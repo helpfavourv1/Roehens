@@ -93,3 +93,31 @@ class AppSection extends StatelessWidget {
     );
   }
 }
+
+/// A section header with nothing grouped under it, for forms whose fields are
+/// separate inputs rather than rows of one card.
+class AppSectionTitle extends StatelessWidget {
+  const AppSectionTitle(this.text, {super.key});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(
+        start: AppSpacing.md,
+        end: AppSpacing.md,
+        bottom: AppSpacing.sm,
+      ),
+      child: Semantics(
+        header: true,
+        child: Text(
+          AppSection.overlineText(text),
+          style: context.type.overline.copyWith(
+            color: context.colors.textTertiary,
+          ),
+        ),
+      ),
+    );
+  }
+}
