@@ -8,6 +8,7 @@ import 'package:roehens/core/contracts/ad_contract.dart';
 import 'package:roehens/core/contracts/clock_contract.dart';
 import 'package:roehens/core/contracts/consent_contract.dart';
 import 'package:roehens/core/contracts/discovery_contract.dart';
+import 'package:roehens/core/contracts/file_transfer_contract.dart';
 import 'package:roehens/core/contracts/logger_contract.dart';
 import 'package:roehens/core/contracts/permission_contract.dart';
 import 'package:roehens/core/contracts/ptz_contract.dart';
@@ -99,6 +100,8 @@ class AppOverrides {
     this.sessionFactory,
     this.ptz,
     this.posterFetcher,
+    this.connectionTester,
+    this.fileTransfer,
   });
 
   final KeyValueStore? keyValueStore;
@@ -114,6 +117,8 @@ class AppOverrides {
   final SessionFactory? sessionFactory;
   final PtzContract? ptz;
   final PosterFetcher? posterFetcher;
+  final ConnectionTester? connectionTester;
+  final FileTransferContract? fileTransfer;
 }
 
 /// The composition root: every real service is built here with plain
@@ -189,7 +194,7 @@ class AppProviders {
   final TrackingAuthorizationContract tracking;
   final CameraExportService exporter;
   final CameraImportService importer;
-  final FileTransferService fileTransfer;
+  final FileTransferContract fileTransfer;
   final ReviewPromptPolicy reviewPolicy;
   final ReviewService review;
   final HapticsService haptics;
@@ -397,10 +402,12 @@ class AppProviders {
       tracking: AttService(logger: logger),
       exporter: CameraExportService(clock: clock, appVersion: appVersion),
       importer: CameraImportService(repository: repository),
-      fileTransfer: FileTransferService(
-        share: ShareService(logger: logger),
-        picker: FilePickerService(logger: logger),
-      ),
+      fileTransfer:
+          overrides.fileTransfer ??
+          FileTransferService(
+            share: ShareService(logger: logger),
+            picker: FilePickerService(logger: logger),
+          ),
       reviewPolicy: ReviewPromptPolicy(store: keyValue, clock: clock),
       review: ReviewService(config: storeConfig, logger: logger),
       haptics: HapticsService(isEnabled: () => settings.value.hapticsEnabled),
@@ -410,7 +417,9 @@ class AppProviders {
       ptz: overrides.ptz ?? PtzService(client: OnvifClient()),
       permission: permission,
       lan: lan,
-      connectionTester: ConnectionTester(probes: NetworkProbes()),
+      connectionTester:
+          overrides.connectionTester ??
+          ConnectionTester(probes: NetworkProbes()),
       profiles: profiles,
       diagnostics: const DiagnosticsService(),
       playerPool: pool,

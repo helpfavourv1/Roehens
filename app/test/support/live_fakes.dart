@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:roehens/core/contracts/file_transfer_contract.dart';
+import 'package:roehens/core/errors/app_error.dart';
 import 'package:roehens/core/contracts/ptz_contract.dart';
 import 'package:roehens/core/errors/result.dart';
 import 'package:roehens/core/models/camera.dart';
@@ -60,4 +63,34 @@ Widget fakeVideoView(
   Color? backdrop,
 }) {
   return const SizedBox.expand(key: ValueKey<String>('video'));
+}
+
+/// Share sheet and file picker without a phone: remembers what was shared and
+/// hands back a file chosen by the test.
+class FakeFileTransfer implements FileTransferContract {
+  final List<({Uint8List bytes, String fileName, String mimeType})> shared =
+      <({Uint8List bytes, String fileName, String mimeType})>[];
+  PickedFile? toPick;
+  AppError? failure;
+
+  @override
+  Future<Result<void>> shareBytes({
+    required Uint8List bytes,
+    required String fileName,
+    required String mimeType,
+  }) async {
+    if (failure != null) {
+      return Err<void>(failure!);
+    }
+    shared.add((bytes: bytes, fileName: fileName, mimeType: mimeType));
+    return const Ok<void>(null);
+  }
+
+  @override
+  Future<Result<PickedFile?>> pickJsonFile() async {
+    if (failure != null) {
+      return Err<PickedFile?>(failure!);
+    }
+    return Ok<PickedFile?>(toPick);
+  }
 }
