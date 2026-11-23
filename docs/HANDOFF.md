@@ -128,3 +128,10 @@ At the end of every batch: append a `DECISIONS.md` section (what changed from th
 - **Next: P5B** (camera edit, discovery, brand picker, import/export). The Live and Cameras screens already call `onAddCamera`, `onFindCameras` and `onEditCamera`; P5B builds the screens behind them and P6A wires the routes. Add each screen's strings to `app_en.arb` and read them as `AppLocalizations.of(context)`; the CI regenerates and commits the Dart files.
 - Screen tests use `test/support/screen_harness.dart` (`ScreenHarness.boot`) with `pumpApp(..., providers: h.app)` and `settle(tester)`.
 - Gate 2 for the P5A screens is still open (see `VISUAL_QA.md`).
+
+
+## Update after batch P5B
+
+- **P5B is done and green** (990 tests; analyze, guard, audit clean). Files: `lib/screens/{camera_edit,brand_picker,discovery,import_export}_screen.dart`, `lib/core/services/camera_form.dart`, `AppSectionTitle`, about 100 more strings in `app_en.arb` (183 now).
+- **Next: P5C** (settings, appearance, upgrade, onboarding, local-network rationale, about, licenses, fatal error, language). `MainShell` already takes a `settingsBuilder`; the Cameras and Live screens already take add, find and edit callbacks. P6A wires them: add = `openCameraEdit`, find = `openDiscovery` then `openCameraEdit(prefill:)`, edit = `openCameraEdit(camera:)`, Settings > Import/export = `openImportExport`.
+- Test pattern: `ScreenHarness.boot(tester, cameras:, permission:)` exposes `discovery`, `files`, `probes`, `ptz`, `sessions`. Section titles render upper-case.
