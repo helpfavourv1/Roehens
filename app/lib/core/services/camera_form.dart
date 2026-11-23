@@ -92,10 +92,7 @@ class CameraFormValues {
   }
 
   CameraCredentials get credentials {
-    return CameraCredentials(
-      username: username.trim(),
-      password: password,
-    );
+    return CameraCredentials(username: username.trim(), password: password);
   }
 }
 
@@ -247,7 +244,9 @@ class CameraForm {
 
     final String? previousMain = previous == null
         ? null
-        : _first(UrlBuilder.pathsFor(previous, kind: _mainKind(values.protocol)));
+        : _first(
+            UrlBuilder.pathsFor(previous, kind: _mainKind(values.protocol)),
+          );
     final String? previousSub = previous == null
         ? null
         : _first(UrlBuilder.pathsFor(previous, kind: PathKind.sub));

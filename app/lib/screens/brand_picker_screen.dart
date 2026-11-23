@@ -32,7 +32,9 @@ class BrandPickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
-    final List<CameraBrandProfile> brands = AppScope.of(context).profiles.brands;
+    final List<CameraBrandProfile> brands = AppScope.of(context)
+        .profiles
+        .brands;
     return AppScaffold(
       navBar: AppNavBar(
         title: l10n.brandTitle,

@@ -52,8 +52,9 @@ void main() {
     final CameraFormValues bad = good.copyWith(onvifPort: 'x');
     expect(CameraForm.validate(bad), isEmpty);
     expect(
-      CameraForm.validate(bad.copyWith(onvifEnabled: true))[CameraFormField
-          .onvifPort],
+      CameraForm.validate(
+        bad.copyWith(onvifEnabled: true),
+      )[CameraFormField.onvifPort],
       CameraFormIssue.portInvalid,
     );
     final Camera camera = CameraForm.build(

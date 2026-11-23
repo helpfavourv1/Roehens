@@ -87,8 +87,9 @@ class _CameraEditScreenState extends State<CameraEditScreen> {
   final TextEditingController _onvifPort = TextEditingController();
   final TextEditingController _model = TextEditingController();
 
-  final ValueNotifier<StreamProtocol> _protocol =
-      ValueNotifier<StreamProtocol>(StreamProtocol.rtsp);
+  final ValueNotifier<StreamProtocol> _protocol = ValueNotifier<StreamProtocol>(
+    StreamProtocol.rtsp,
+  );
   final ValueNotifier<StreamTransport> _transport =
       ValueNotifier<StreamTransport>(StreamTransport.auto);
   final ValueNotifier<bool> _onvif = ValueNotifier<bool>(false);
@@ -413,68 +414,79 @@ class _CameraEditScreenState extends State<CameraEditScreen> {
   Widget _cameraSection(AppLocalizations l10n) {
     return ValueListenableBuilder<Map<CameraFormField, CameraFormIssue>>(
       valueListenable: _issues,
-      builder: (BuildContext context, Map<CameraFormField, CameraFormIssue> issues, Widget? _) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            AppSectionTitle(l10n.editSectionCamera),
-            AppTextField(
-              controller: _name,
-              label: l10n.editName,
-              hint: l10n.editNameHint,
-              errorText: _issueText(l10n, issues, CameraFormField.name),
-              textInputAction: TextInputAction.next,
-            ),
-            _gap(),
-            Semantics(
-              label: l10n.editProtocol,
-              child: ValueListenableBuilder<StreamProtocol>(
-                valueListenable: _protocol,
-                builder: (BuildContext context, StreamProtocol protocol, Widget? _) {
-                  return AppSegmentedControl<StreamProtocol>(
-                    selected: protocol,
-                    onChanged: _setProtocol,
-                    segments: <AppSegment<StreamProtocol>>[
-                      for (final StreamProtocol p in StreamProtocol.values)
-                        AppSegment<StreamProtocol>(
-                          value: p,
-                          label: protocolLabel(l10n, p),
-                        ),
-                    ],
-                  );
-                },
-              ),
-            ),
-            _gap(),
-            AppTextField(
-              controller: _host,
-              label: l10n.editHost,
-              hint: l10n.editHostHint,
-              errorText: _issueText(l10n, issues, CameraFormField.host),
-              keyboardType: TextInputType.url,
-              textInputAction: TextInputAction.next,
-              forceLtr: true,
-              onChanged: (String _) => _clearTest(),
-            ),
-            _gap(),
-            AppTextField(
-              controller: _port,
-              label: l10n.editPort,
-              errorText: _issueText(l10n, issues, CameraFormField.port),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly,
+      builder:
+          (
+            BuildContext context,
+            Map<CameraFormField, CameraFormIssue> issues,
+            Widget? _,
+          ) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                AppSectionTitle(l10n.editSectionCamera),
+                AppTextField(
+                  controller: _name,
+                  label: l10n.editName,
+                  hint: l10n.editNameHint,
+                  errorText: _issueText(l10n, issues, CameraFormField.name),
+                  textInputAction: TextInputAction.next,
+                ),
+                _gap(),
+                Semantics(
+                  label: l10n.editProtocol,
+                  child: ValueListenableBuilder<StreamProtocol>(
+                    valueListenable: _protocol,
+                    builder:
+                        (
+                          BuildContext context,
+                          StreamProtocol protocol,
+                          Widget? _,
+                        ) {
+                          return AppSegmentedControl<StreamProtocol>(
+                            selected: protocol,
+                            onChanged: _setProtocol,
+                            segments: <AppSegment<StreamProtocol>>[
+                              for (final StreamProtocol p
+                                  in StreamProtocol.values)
+                                AppSegment<StreamProtocol>(
+                                  value: p,
+                                  label: protocolLabel(l10n, p),
+                                ),
+                            ],
+                          );
+                        },
+                  ),
+                ),
+                _gap(),
+                AppTextField(
+                  controller: _host,
+                  label: l10n.editHost,
+                  hint: l10n.editHostHint,
+                  errorText: _issueText(l10n, issues, CameraFormField.host),
+                  keyboardType: TextInputType.url,
+                  textInputAction: TextInputAction.next,
+                  forceLtr: true,
+                  onChanged: (String _) => _clearTest(),
+                ),
+                _gap(),
+                AppTextField(
+                  controller: _port,
+                  label: l10n.editPort,
+                  errorText: _issueText(l10n, issues, CameraFormField.port),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  textInputAction: TextInputAction.next,
+                  forceLtr: true,
+                  onChanged: (String _) => _clearTest(),
+                ),
+                _gap(),
+                _brandRow(l10n),
+                const SizedBox(height: AppSpacing.lg),
               ],
-              textInputAction: TextInputAction.next,
-              forceLtr: true,
-              onChanged: (String _) => _clearTest(),
-            ),
-            _gap(),
-            _brandRow(l10n),
-            const SizedBox(height: AppSpacing.lg),
-          ],
-        );
-      },
+            );
+          },
     );
   }
 
@@ -563,7 +575,11 @@ class _CameraEditScreenState extends State<CameraEditScreen> {
           onChanged: (String _) => _clearTest(),
         ),
         ListenableBuilder(
-          listenable: Listenable.merge(<Listenable>[_main, _brandId, _protocol]),
+          listenable: Listenable.merge(<Listenable>[
+            _main,
+            _brandId,
+            _protocol,
+          ]),
           builder: (BuildContext context, Widget? _) {
             final List<String> others = CameraForm.alternativeMainPaths(
               _collect(),
@@ -634,25 +650,26 @@ class _CameraEditScreenState extends State<CameraEditScreen> {
                 label: l10n.editTransport,
                 child: ValueListenableBuilder<StreamTransport>(
                   valueListenable: _transport,
-                  builder: (BuildContext context, StreamTransport value, Widget? _) {
-                    return AppSegmentedControl<StreamTransport>(
-                      selected: value,
-                      onChanged: (StreamTransport next) {
-                        _transport.value = next;
-                        _clearTest();
+                  builder:
+                      (BuildContext context, StreamTransport value, Widget? _) {
+                        return AppSegmentedControl<StreamTransport>(
+                          selected: value,
+                          onChanged: (StreamTransport next) {
+                            _transport.value = next;
+                            _clearTest();
+                          },
+                          segments: <AppSegment<StreamTransport>>[
+                            AppSegment<StreamTransport>(
+                              value: StreamTransport.auto,
+                              label: l10n.transportAuto,
+                            ),
+                            AppSegment<StreamTransport>(
+                              value: StreamTransport.tcp,
+                              label: l10n.transportTcp,
+                            ),
+                          ],
+                        );
                       },
-                      segments: <AppSegment<StreamTransport>>[
-                        AppSegment<StreamTransport>(
-                          value: StreamTransport.auto,
-                          label: l10n.transportAuto,
-                        ),
-                        AppSegment<StreamTransport>(
-                          value: StreamTransport.tcp,
-                          label: l10n.transportTcp,
-                        ),
-                      ],
-                    );
-                  },
                 ),
               ),
             );
@@ -683,22 +700,27 @@ class _CameraEditScreenState extends State<CameraEditScreen> {
                   _gap(),
                   ValueListenableBuilder<Map<CameraFormField, CameraFormIssue>>(
                     valueListenable: _issues,
-                    builder: (BuildContext context, Map<CameraFormField, CameraFormIssue> issues, Widget? _) {
-                      return AppTextField(
-                        controller: _onvifPort,
-                        label: l10n.editOnvifPort,
-                        errorText: _issueText(
-                          l10n,
-                          issues,
-                          CameraFormField.onvifPort,
-                        ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        forceLtr: true,
-                      );
-                    },
+                    builder:
+                        (
+                          BuildContext context,
+                          Map<CameraFormField, CameraFormIssue> issues,
+                          Widget? _,
+                        ) {
+                          return AppTextField(
+                            controller: _onvifPort,
+                            label: l10n.editOnvifPort,
+                            errorText: _issueText(
+                              l10n,
+                              issues,
+                              CameraFormField.onvifPort,
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            forceLtr: true,
+                          );
+                        },
                   ),
                 ],
               ],
