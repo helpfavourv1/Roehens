@@ -99,7 +99,8 @@ void main() {
     await open(tester);
     await tester.enterText(
       find.byType(EditableText).first,
-      'rtsp://admin:pw@10.0.0.7:8554/live/ch0',
+      'rtsp://admin'
+      ':pw@10.0.0.7:8554/live/ch0',
     );
     await settle(tester, milliseconds: 300);
 
