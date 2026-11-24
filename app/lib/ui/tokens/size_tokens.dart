@@ -56,6 +56,9 @@ class AppSizes {
   /// Video tiles are 16:9.
   static const double tileAspectRatio = 16 / 9;
 
+  /// Width over height of the small theme pictures on the Appearance screen.
+  static const double themePreviewAspect = 1.4;
+
   /// Diameter of one dot of the page indicator.
   static const double pageDot = 8;
 

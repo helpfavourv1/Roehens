@@ -821,5 +821,411 @@
         "type": "int"
       }
     }
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title of the settings screen."
+  },
+  "settingsGroupGeneral": "General",
+  "@settingsGroupGeneral": {
+    "description": "Settings group header."
+  },
+  "settingsGroupViewing": "Viewing",
+  "@settingsGroupViewing": {
+    "description": "Settings group header."
+  },
+  "settingsGroupCameras": "Cameras",
+  "@settingsGroupCameras": {
+    "description": "Settings group header."
+  },
+  "settingsGroupApp": "Roehens",
+  "@settingsGroupApp": {
+    "description": "Settings group header for store and feedback rows."
+  },
+  "settingsGroupData": "Data",
+  "@settingsGroupData": {
+    "description": "Settings group header."
+  },
+  "settingsAppearance": "Appearance",
+  "@settingsAppearance": {
+    "description": "Settings row."
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Settings row."
+  },
+  "settingsLanguageSystem": "System default",
+  "@settingsLanguageSystem": {
+    "description": "Language choice that follows the phone."
+  },
+  "settingsAutoCycle": "Auto-cycle",
+  "@settingsAutoCycle": {
+    "description": "Settings row: move through cameras on a timer."
+  },
+  "settingsAutoCycleInterval": "Auto-cycle interval",
+  "@settingsAutoCycleInterval": {
+    "description": "Header of the default auto-cycle interval choices."
+  },
+  "settingsTransport": "RTSP transport",
+  "@settingsTransport": {
+    "description": "Settings row for the default transport."
+  },
+  "settingsKeepAwake": "Keep the screen on while viewing",
+  "@settingsKeepAwake": {
+    "description": "Settings row."
+  },
+  "settingsHaptics": "Vibration feedback",
+  "@settingsHaptics": {
+    "description": "Settings row."
+  },
+  "settingsOverlayLabels": "Show camera names on tiles",
+  "@settingsOverlayLabels": {
+    "description": "Settings row."
+  },
+  "settingsGridSubstream": "Use the lighter stream in the grid",
+  "@settingsGridSubstream": {
+    "description": "Settings row."
+  },
+  "settingsGridSubstreamHelp": "The grid plays each camera's substream and fullscreen plays the main stream.",
+  "@settingsGridSubstreamHelp": {
+    "description": "Help under the substream row."
+  },
+  "settingsImportExport": "Import and export",
+  "@settingsImportExport": {
+    "description": "Settings row."
+  },
+  "settingsUpgrade": "Remove ads",
+  "@settingsUpgrade": {
+    "description": "Settings row that opens the purchase screen."
+  },
+  "settingsUpgradeOwned": "Ads are removed. Thank you.",
+  "@settingsUpgradeOwned": {
+    "description": "Settings row subtitle when the unlock is owned."
+  },
+  "settingsRestore": "Restore purchase",
+  "@settingsRestore": {
+    "description": "Settings row."
+  },
+  "settingsRestoreDone": "Purchase checked.",
+  "@settingsRestoreDone": {
+    "description": "Message after restoring."
+  },
+  "settingsRate": "Rate Roehens",
+  "@settingsRate": {
+    "description": "Settings row."
+  },
+  "settingsFeedback": "Send feedback",
+  "@settingsFeedback": {
+    "description": "Settings row that opens a mail to support."
+  },
+  "settingsLicenses": "Open-source licenses",
+  "@settingsLicenses": {
+    "description": "Settings row."
+  },
+  "settingsAbout": "About",
+  "@settingsAbout": {
+    "description": "Settings row."
+  },
+  "settingsDeleteAll": "Delete all local data",
+  "@settingsDeleteAll": {
+    "description": "Settings row."
+  },
+  "settingsDeleteAllHelp": "Removes cameras, saved passwords, settings and the log from this phone.",
+  "@settingsDeleteAllHelp": {
+    "description": "Help under the delete row."
+  },
+  "settingsDeleteConfirmTitle": "Delete everything on this phone?",
+  "@settingsDeleteConfirmTitle": {
+    "description": "Title of the confirmation dialog."
+  },
+  "settingsDeleteConfirmBody": "All cameras, saved passwords and settings will be removed. This cannot be undone.",
+  "@settingsDeleteConfirmBody": {
+    "description": "Body of the confirmation dialog."
+  },
+  "settingsDeleteConfirm": "Delete everything",
+  "@settingsDeleteConfirm": {
+    "description": "Confirm button."
+  },
+  "settingsDeleteCancel": "Cancel",
+  "@settingsDeleteCancel": {
+    "description": "Cancel button."
+  },
+  "settingsDeleted": "Everything was deleted.",
+  "@settingsDeleted": {
+    "description": "Message after deleting."
+  },
+  "settingsHelp": "Help",
+  "@settingsHelp": {
+    "description": "Settings row that opens the help section."
+  },
+  "appearanceTitle": "Appearance",
+  "@appearanceTitle": {
+    "description": "Title of the appearance screen."
+  },
+  "appearanceSystem": "System",
+  "@appearanceSystem": {
+    "description": "Theme choice that follows the phone."
+  },
+  "appearanceLight": "Light",
+  "@appearanceLight": {
+    "description": "Light theme."
+  },
+  "appearanceDark": "Dark",
+  "@appearanceDark": {
+    "description": "Dark theme."
+  },
+  "appearanceHelp": "Dark makes video stand out. System follows your phone.",
+  "@appearanceHelp": {
+    "description": "Help under the theme choices."
+  },
+  "languageTitle": "Language",
+  "@languageTitle": {
+    "description": "Title of the language screen."
+  },
+  "languageSearch": "Search languages",
+  "@languageSearch": {
+    "description": "Hint of the language search field."
+  },
+  "languageNoMatch": "No language matches",
+  "@languageNoMatch": {
+    "description": "Shown when a language search finds nothing."
+  },
+  "upgradeTitle": "Remove ads",
+  "@upgradeTitle": {
+    "description": "Title of the purchase screen."
+  },
+  "upgradeHeadline": "One purchase, no more ads",
+  "@upgradeHeadline": {
+    "description": "Headline of the purchase screen."
+  },
+  "upgradeBody": "Roehens shows one small banner on the Live screen. Buy once to remove it for good on this store account.",
+  "@upgradeBody": {
+    "description": "Body of the purchase screen."
+  },
+  "upgradeBenefitBanner": "No banner on the Live screen",
+  "@upgradeBenefitBanner": {
+    "description": "Benefit."
+  },
+  "upgradeBenefitOnce": "Paid once, not a subscription",
+  "@upgradeBenefitOnce": {
+    "description": "Benefit."
+  },
+  "upgradeBenefitSame": "Every feature stays free",
+  "@upgradeBenefitSame": {
+    "description": "Benefit."
+  },
+  "upgradeBuy": "Remove ads for {price}",
+  "@upgradeBuy": {
+    "description": "Buy button with the price.",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "upgradePriceUnavailable": "The price is not available right now.",
+  "@upgradePriceUnavailable": {
+    "description": "Shown when the store gives no price."
+  },
+  "upgradeOwned": "Ads are removed. Thank you for supporting Roehens.",
+  "@upgradeOwned": {
+    "description": "Shown when the unlock is owned."
+  },
+  "upgradeRestore": "Restore purchase",
+  "@upgradeRestore": {
+    "description": "Restore button."
+  },
+  "upgradeUnavailable": "Purchases are not available on this device.",
+  "@upgradeUnavailable": {
+    "description": "Shown when billing is unavailable."
+  },
+  "onboardingNext": "Next",
+  "@onboardingNext": {
+    "description": "Onboarding button."
+  },
+  "onboardingStart": "Get started",
+  "@onboardingStart": {
+    "description": "Onboarding final button."
+  },
+  "onboardingSkip": "Skip",
+  "@onboardingSkip": {
+    "description": "Onboarding skip pill."
+  },
+  "onboardingTagline": "Every camera on your network, one calm screen.",
+  "@onboardingTagline": {
+    "description": "Tagline on onboarding page 1."
+  },
+  "onboardingOneTitle": "All your cameras in one place",
+  "@onboardingOneTitle": {
+    "description": "Onboarding page 1 title."
+  },
+  "onboardingOneBody": "Watch IP cameras and recorders side by side, take snapshots, and steer cameras that can pan and tilt.",
+  "@onboardingOneBody": {
+    "description": "Onboarding page 1 body."
+  },
+  "onboardingOnePointOne": "RTSP and MJPEG, including H.265",
+  "@onboardingOnePointOne": {
+    "description": "Onboarding page 1 point."
+  },
+  "onboardingOnePointTwo": "Finds cameras on your Wi-Fi",
+  "@onboardingOnePointTwo": {
+    "description": "Onboarding page 1 point."
+  },
+  "onboardingTwoTitle": "Made for your home network",
+  "@onboardingTwoTitle": {
+    "description": "Onboarding page 2 title."
+  },
+  "onboardingTwoBody": "Roehens talks straight to your cameras. There is no account and no cloud, and your passwords stay on this phone.",
+  "@onboardingTwoBody": {
+    "description": "Onboarding page 2 body."
+  },
+  "onboardingTwoPointOne": "Works while Roehens is open on screen",
+  "@onboardingTwoPointOne": {
+    "description": "Onboarding page 2 point."
+  },
+  "onboardingTwoPointTwo": "Away from home, use your own VPN or port forward",
+  "@onboardingTwoPointTwo": {
+    "description": "Onboarding page 2 point."
+  },
+  "onboardingThreeTitle": "Ready when you are",
+  "@onboardingThreeTitle": {
+    "description": "Onboarding page 3 title."
+  },
+  "onboardingThreeBody": "Add a camera by hand, or let Roehens look for cameras on this network.",
+  "@onboardingThreeBody": {
+    "description": "Onboarding page 3 body."
+  },
+  "onboardingPageOf": "Step {current} of {total}",
+  "@onboardingPageOf": {
+    "description": "Spoken position in onboarding.",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "rationaleTitle": "Find cameras on your network",
+  "@rationaleTitle": {
+    "description": "Title of the local network explanation."
+  },
+  "rationaleBody": "To find your cameras and play their video, Roehens needs to talk to devices on your home Wi-Fi.",
+  "@rationaleBody": {
+    "description": "Body of the local network explanation."
+  },
+  "rationaleReasonOne": "Looks for cameras on this network",
+  "@rationaleReasonOne": {
+    "description": "Reason."
+  },
+  "rationaleReasonTwo": "Streams video from them to this phone",
+  "@rationaleReasonTwo": {
+    "description": "Reason."
+  },
+  "rationaleReasonThree": "Nothing leaves your network",
+  "@rationaleReasonThree": {
+    "description": "Reason."
+  },
+  "rationaleContinue": "Continue",
+  "@rationaleContinue": {
+    "description": "Button that shows the system permission prompt."
+  },
+  "rationaleNotNow": "Not now",
+  "@rationaleNotNow": {
+    "description": "Pill that skips the prompt."
+  },
+  "rationaleDeniedTitle": "Local network access is off",
+  "@rationaleDeniedTitle": {
+    "description": "Title when access was refused."
+  },
+  "rationaleDeniedBody": "Turn it on in Settings so Roehens can find and play your cameras.",
+  "@rationaleDeniedBody": {
+    "description": "Body when access was refused."
+  },
+  "rationaleOpenSettings": "Open Settings",
+  "@rationaleOpenSettings": {
+    "description": "Button."
+  },
+  "aboutTitle": "About",
+  "@aboutTitle": {
+    "description": "Title of the about screen."
+  },
+  "aboutVersion": "Version",
+  "@aboutVersion": {
+    "description": "Row label."
+  },
+  "aboutBuild": "Build",
+  "@aboutBuild": {
+    "description": "Row label."
+  },
+  "aboutSupport": "Support",
+  "@aboutSupport": {
+    "description": "Row label."
+  },
+  "aboutWhileOpen": "Roehens works while it is open on screen. It does not watch your cameras or send alerts when it is closed.",
+  "@aboutWhileOpen": {
+    "description": "Plain statement about foreground-only use."
+  },
+  "aboutNoMail": "No mail app could be opened.",
+  "@aboutNoMail": {
+    "description": "Message when mail could not be opened."
+  },
+  "feedbackSubject": "Roehens feedback",
+  "@feedbackSubject": {
+    "description": "Subject of the feedback mail."
+  },
+  "feedbackAttachTitle": "Attach diagnostics?",
+  "@feedbackAttachTitle": {
+    "description": "Title of the dialog before sending feedback."
+  },
+  "feedbackAttachBody": "Diagnostics list app and phone versions, settings, the kinds of cameras you have (never their addresses or passwords) and recent log lines. You see them in the mail before you send it.",
+  "@feedbackAttachBody": {
+    "description": "Body of the dialog."
+  },
+  "feedbackAttach": "Attach diagnostics",
+  "@feedbackAttach": {
+    "description": "Button."
+  },
+  "feedbackWithout": "Send without",
+  "@feedbackWithout": {
+    "description": "Button."
+  },
+  "licensesTitle": "Open-source licenses",
+  "@licensesTitle": {
+    "description": "Title of the licenses screen."
+  },
+  "licensesCount": "{count, plural, =1{1 license} other{{count} licenses}}",
+  "@licensesCount": {
+    "description": "Number of licenses of a package.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "licensesEmpty": "No license information is available.",
+  "@licensesEmpty": {
+    "description": "Shown when there are no licenses."
+  },
+  "fatalTitle": "Something went wrong",
+  "@fatalTitle": {
+    "description": "Title of the fatal error screen."
+  },
+  "fatalBody": "Roehens hit a problem it could not recover from. Your cameras and settings are safe.",
+  "@fatalBody": {
+    "description": "Body of the fatal error screen."
+  },
+  "fatalRetry": "Try again",
+  "@fatalRetry": {
+    "description": "Button."
+  },
+  "fatalReport": "Report this",
+  "@fatalReport": {
+    "description": "Button that opens a mail to support."
+  },
+  "fatalReportSubject": "Roehens problem report",
+  "@fatalReportSubject": {
+    "description": "Subject of the problem report mail."
   }
 }

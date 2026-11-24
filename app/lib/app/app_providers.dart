@@ -9,6 +9,9 @@ import 'package:roehens/core/contracts/clock_contract.dart';
 import 'package:roehens/core/contracts/consent_contract.dart';
 import 'package:roehens/core/contracts/discovery_contract.dart';
 import 'package:roehens/core/contracts/file_transfer_contract.dart';
+import 'package:roehens/core/contracts/link_contract.dart';
+import 'package:roehens/platform/system/link_service.dart';
+import 'package:roehens/core/constants/app_constants.dart';
 import 'package:roehens/core/contracts/logger_contract.dart';
 import 'package:roehens/core/contracts/permission_contract.dart';
 import 'package:roehens/core/contracts/ptz_contract.dart';
@@ -102,6 +105,7 @@ class AppOverrides {
     this.posterFetcher,
     this.connectionTester,
     this.fileTransfer,
+    this.links,
   });
 
   final KeyValueStore? keyValueStore;
@@ -119,6 +123,7 @@ class AppOverrides {
   final PosterFetcher? posterFetcher;
   final ConnectionTester? connectionTester;
   final FileTransferContract? fileTransfer;
+  final LinkContract? links;
 }
 
 /// The composition root: every real service is built here with plain
@@ -166,6 +171,9 @@ class AppProviders {
     required this.gridPlanner,
     required this.videoBuilder,
     required this.live,
+    required this.links,
+    required this.appVersion,
+    required this.buildNumber,
     required this.iosDiscoveryMode,
     required this._ownedResources,
   });
@@ -217,6 +225,13 @@ class AppProviders {
   /// Which cameras decode, and their sessions (Live and fullscreen).
   final LiveSessions live;
 
+  /// Opens the mail app for feedback.
+  final LinkContract links;
+
+  /// Shown on the About screen and in diagnostics; set by the bootstrap.
+  final String appVersion;
+  final String buildNumber;
+
   /// `subnet_sweep_only` or `ws_discovery` (D4), for diagnostics.
   final String iosDiscoveryMode;
   final List<Future<void> Function()> _ownedResources;
@@ -230,6 +245,7 @@ class AppProviders {
     StoreConfig? config,
     Uri? flagsUrl,
     String? appVersion,
+    String buildNumber = '',
     AppOverrides overrides = const AppOverrides(),
   }) async {
     final LoggerContract logger = LoggerService();
@@ -427,6 +443,9 @@ class AppProviders {
       gridPlanner: const GridPlanner(),
       videoBuilder: overrides.videoBuilder ?? buildVideoSurface,
       live: live,
+      links: overrides.links ?? LinkService(logger: logger),
+      appVersion: appVersion ?? '',
+      buildNumber: buildNumber,
       iosDiscoveryMode: iosMode,
       ownedResources: owned,
     );
@@ -511,6 +530,28 @@ class AppProviders {
   void onPause() {
     autoCycle.setForeground(foreground: false);
     live.setForeground(foreground: false);
+  }
+
+  /// The text a person may attach to a feedback mail: versions, settings,
+  /// camera counts by kind (never addresses) and the local log.
+  String diagnosticsText() {
+    return diagnostics.build(
+      DiagnosticsInput(
+        appName: AppConstants.appName,
+        version: appVersion,
+        buildNumber: buildNumber,
+        platform: defaultTargetPlatform.name,
+        osVersion: Platform.operatingSystemVersion,
+        deviceModel: 'not recorded',
+        localeCode: settings.value.localeCode ?? 'system',
+        settings: settings.value,
+        cameras: cameras.value.cameras,
+        logLines: logger.dump().split('\n'),
+        storageDegraded: persistence.hasIssue,
+        flags: flags.value,
+        generatedAt: clock.now().toUtc(),
+      ),
+    );
   }
 
   /// "Delete all local data" (A3): cameras, credentials, layouts, settings,
