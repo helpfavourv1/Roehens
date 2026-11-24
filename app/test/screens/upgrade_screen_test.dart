@@ -64,9 +64,7 @@ void main() {
     await pumpApp(tester, const UpgradeScreen(), providers: h.app);
     await settle(tester, milliseconds: 500);
 
-    h.purchase.failureController.add(
-      const AppError(ErrorClass.purchaseFailed),
-    );
+    h.purchase.failureController.add(const AppError(ErrorClass.purchaseFailed));
     await settle(tester, milliseconds: 300);
     expect(find.text("The purchase didn't go through"), findsOneWidget);
   });

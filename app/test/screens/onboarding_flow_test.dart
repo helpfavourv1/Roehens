@@ -29,10 +29,7 @@ void main() {
     await settle(tester, milliseconds: 500);
     expect(find.text('Made for your home network'), findsOneWidget);
     expect(find.text('Roehens'), findsNothing);
-    expect(
-      find.text('Works while Roehens is open on screen'),
-      findsOneWidget,
-    );
+    expect(find.text('Works while Roehens is open on screen'), findsOneWidget);
 
     await tester.tap(find.text('Next'));
     await settle(tester, milliseconds: 500);
