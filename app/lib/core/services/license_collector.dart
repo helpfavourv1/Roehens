@@ -34,13 +34,14 @@ class LicenseCollector {
         }
       }
     }
-    final List<PackageLicense> result = <PackageLicense>[
-      for (final MapEntry<String, List<String>> e in byPackage.entries)
-        PackageLicense(name: e.key, texts: e.value),
-    ]..sort(
-        (PackageLicense a, PackageLicense b) =>
-            a.name.toLowerCase().compareTo(b.name.toLowerCase()),
-      );
+    final List<PackageLicense> result =
+        <PackageLicense>[
+          for (final MapEntry<String, List<String>> e in byPackage.entries)
+            PackageLicense(name: e.key, texts: e.value),
+        ]..sort(
+          (PackageLicense a, PackageLicense b) =>
+              a.name.toLowerCase().compareTo(b.name.toLowerCase()),
+        );
     return result;
   }
 }

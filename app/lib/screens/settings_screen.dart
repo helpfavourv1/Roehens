@@ -124,7 +124,11 @@ class SettingsScreen extends StatelessWidget {
       title: title,
       leading: icon,
       showChevron: false,
-      trailing: AppSwitch(value: value, semanticLabel: title, onChanged: onChanged),
+      trailing: AppSwitch(
+        value: value,
+        semanticLabel: title,
+        onChanged: onChanged,
+      ),
       onTap: () => onChanged(!value),
     );
   }

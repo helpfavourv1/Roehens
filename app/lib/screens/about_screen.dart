@@ -59,7 +59,9 @@ class AboutScreen extends StatelessWidget {
               AppListRow(
                 title: l10n.aboutVersion,
                 showChevron: false,
-                trailing: LtrText(app.appVersion.isEmpty ? '-' : app.appVersion),
+                trailing: LtrText(
+                  app.appVersion.isEmpty ? '-' : app.appVersion,
+                ),
               ),
               AppListRow(
                 title: l10n.aboutBuild,

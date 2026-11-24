@@ -130,10 +130,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             if (entitlement.isAdFree)
-              AppBanner(
-                message: l10n.upgradeOwned,
-                tone: AppBannerTone.success,
-              )
+              AppBanner(message: l10n.upgradeOwned, tone: AppBannerTone.success)
             else ...<Widget>[
               if (failure != null) ...<Widget>[
                 AppBanner(
