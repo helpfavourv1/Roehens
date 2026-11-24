@@ -658,4 +658,324 @@ class AppLocalizationsEn extends AppLocalizations {
   String ioDone(int added, int replaced, int skipped, int failed) {
     return 'Added $added, replaced $replaced, skipped $skipped, failed $failed.';
   }
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsGroupGeneral => 'General';
+
+  @override
+  String get settingsGroupViewing => 'Viewing';
+
+  @override
+  String get settingsGroupCameras => 'Cameras';
+
+  @override
+  String get settingsGroupApp => 'Roehens';
+
+  @override
+  String get settingsGroupData => 'Data';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsLanguageSystem => 'System default';
+
+  @override
+  String get settingsAutoCycle => 'Auto-cycle';
+
+  @override
+  String get settingsAutoCycleInterval => 'Auto-cycle interval';
+
+  @override
+  String get settingsTransport => 'RTSP transport';
+
+  @override
+  String get settingsKeepAwake => 'Keep the screen on while viewing';
+
+  @override
+  String get settingsHaptics => 'Vibration feedback';
+
+  @override
+  String get settingsOverlayLabels => 'Show camera names on tiles';
+
+  @override
+  String get settingsGridSubstream => 'Use the lighter stream in the grid';
+
+  @override
+  String get settingsGridSubstreamHelp =>
+      'The grid plays each camera\'s substream and fullscreen plays the main stream.';
+
+  @override
+  String get settingsImportExport => 'Import and export';
+
+  @override
+  String get settingsUpgrade => 'Remove ads';
+
+  @override
+  String get settingsUpgradeOwned => 'Ads are removed. Thank you.';
+
+  @override
+  String get settingsRestore => 'Restore purchase';
+
+  @override
+  String get settingsRestoreDone => 'Purchase checked.';
+
+  @override
+  String get settingsRate => 'Rate Roehens';
+
+  @override
+  String get settingsFeedback => 'Send feedback';
+
+  @override
+  String get settingsLicenses => 'Open-source licenses';
+
+  @override
+  String get settingsAbout => 'About';
+
+  @override
+  String get settingsDeleteAll => 'Delete all local data';
+
+  @override
+  String get settingsDeleteAllHelp =>
+      'Removes cameras, saved passwords, settings and the log from this phone.';
+
+  @override
+  String get settingsDeleteConfirmTitle => 'Delete everything on this phone?';
+
+  @override
+  String get settingsDeleteConfirmBody =>
+      'All cameras, saved passwords and settings will be removed. This cannot be undone.';
+
+  @override
+  String get settingsDeleteConfirm => 'Delete everything';
+
+  @override
+  String get settingsDeleteCancel => 'Cancel';
+
+  @override
+  String get settingsDeleted => 'Everything was deleted.';
+
+  @override
+  String get settingsHelp => 'Help';
+
+  @override
+  String get appearanceTitle => 'Appearance';
+
+  @override
+  String get appearanceSystem => 'System';
+
+  @override
+  String get appearanceLight => 'Light';
+
+  @override
+  String get appearanceDark => 'Dark';
+
+  @override
+  String get appearanceHelp =>
+      'Dark makes video stand out. System follows your phone.';
+
+  @override
+  String get languageTitle => 'Language';
+
+  @override
+  String get languageSearch => 'Search languages';
+
+  @override
+  String get languageNoMatch => 'No language matches';
+
+  @override
+  String get upgradeTitle => 'Remove ads';
+
+  @override
+  String get upgradeHeadline => 'One purchase, no more ads';
+
+  @override
+  String get upgradeBody =>
+      'Roehens shows one small banner on the Live screen. Buy once to remove it for good on this store account.';
+
+  @override
+  String get upgradeBenefitBanner => 'No banner on the Live screen';
+
+  @override
+  String get upgradeBenefitOnce => 'Paid once, not a subscription';
+
+  @override
+  String get upgradeBenefitSame => 'Every feature stays free';
+
+  @override
+  String upgradeBuy(String price) {
+    return 'Remove ads for $price';
+  }
+
+  @override
+  String get upgradePriceUnavailable => 'The price is not available right now.';
+
+  @override
+  String get upgradeOwned =>
+      'Ads are removed. Thank you for supporting Roehens.';
+
+  @override
+  String get upgradeRestore => 'Restore purchase';
+
+  @override
+  String get upgradeUnavailable =>
+      'Purchases are not available on this device.';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingStart => 'Get started';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
+  String get onboardingTagline =>
+      'Every camera on your network, one calm screen.';
+
+  @override
+  String get onboardingOneTitle => 'All your cameras in one place';
+
+  @override
+  String get onboardingOneBody =>
+      'Watch IP cameras and recorders side by side, take snapshots, and steer cameras that can pan and tilt.';
+
+  @override
+  String get onboardingOnePointOne => 'RTSP and MJPEG, including H.265';
+
+  @override
+  String get onboardingOnePointTwo => 'Finds cameras on your Wi-Fi';
+
+  @override
+  String get onboardingTwoTitle => 'Made for your home network';
+
+  @override
+  String get onboardingTwoBody =>
+      'Roehens talks straight to your cameras. There is no account and no cloud, and your passwords stay on this phone.';
+
+  @override
+  String get onboardingTwoPointOne => 'Works while Roehens is open on screen';
+
+  @override
+  String get onboardingTwoPointTwo =>
+      'Away from home, use your own VPN or port forward';
+
+  @override
+  String get onboardingThreeTitle => 'Ready when you are';
+
+  @override
+  String get onboardingThreeBody =>
+      'Add a camera by hand, or let Roehens look for cameras on this network.';
+
+  @override
+  String onboardingPageOf(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get rationaleTitle => 'Find cameras on your network';
+
+  @override
+  String get rationaleBody =>
+      'To find your cameras and play their video, Roehens needs to talk to devices on your home Wi-Fi.';
+
+  @override
+  String get rationaleReasonOne => 'Looks for cameras on this network';
+
+  @override
+  String get rationaleReasonTwo => 'Streams video from them to this phone';
+
+  @override
+  String get rationaleReasonThree => 'Nothing leaves your network';
+
+  @override
+  String get rationaleContinue => 'Continue';
+
+  @override
+  String get rationaleNotNow => 'Not now';
+
+  @override
+  String get rationaleDeniedTitle => 'Local network access is off';
+
+  @override
+  String get rationaleDeniedBody =>
+      'Turn it on in Settings so Roehens can find and play your cameras.';
+
+  @override
+  String get rationaleOpenSettings => 'Open Settings';
+
+  @override
+  String get aboutTitle => 'About';
+
+  @override
+  String get aboutVersion => 'Version';
+
+  @override
+  String get aboutBuild => 'Build';
+
+  @override
+  String get aboutSupport => 'Support';
+
+  @override
+  String get aboutWhileOpen =>
+      'Roehens works while it is open on screen. It does not watch your cameras or send alerts when it is closed.';
+
+  @override
+  String get aboutNoMail => 'No mail app could be opened.';
+
+  @override
+  String get feedbackSubject => 'Roehens feedback';
+
+  @override
+  String get feedbackAttachTitle => 'Attach diagnostics?';
+
+  @override
+  String get feedbackAttachBody =>
+      'Diagnostics list app and phone versions, settings, the kinds of cameras you have (never their addresses or passwords) and recent log lines. You see them in the mail before you send it.';
+
+  @override
+  String get feedbackAttach => 'Attach diagnostics';
+
+  @override
+  String get feedbackWithout => 'Send without';
+
+  @override
+  String get licensesTitle => 'Open-source licenses';
+
+  @override
+  String licensesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count licenses',
+      one: '1 license',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get licensesEmpty => 'No license information is available.';
+
+  @override
+  String get fatalTitle => 'Something went wrong';
+
+  @override
+  String get fatalBody =>
+      'Roehens hit a problem it could not recover from. Your cameras and settings are safe.';
+
+  @override
+  String get fatalRetry => 'Try again';
+
+  @override
+  String get fatalReport => 'Report this';
+
+  @override
+  String get fatalReportSubject => 'Roehens problem report';
 }

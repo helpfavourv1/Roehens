@@ -1173,6 +1173,588 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Added {added}, replaced {replaced}, skipped {skipped}, failed {failed}.'**
   String ioDone(int added, int replaced, int skipped, int failed);
+
+  /// Title of the settings screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// Settings group header.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGroupGeneral;
+
+  /// Settings group header.
+  ///
+  /// In en, this message translates to:
+  /// **'Viewing'**
+  String get settingsGroupViewing;
+
+  /// Settings group header.
+  ///
+  /// In en, this message translates to:
+  /// **'Cameras'**
+  String get settingsGroupCameras;
+
+  /// Settings group header for store and feedback rows.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens'**
+  String get settingsGroupApp;
+
+  /// Settings group header.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get settingsGroupData;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearance;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguage;
+
+  /// Language choice that follows the phone.
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get settingsLanguageSystem;
+
+  /// Settings row: move through cameras on a timer.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-cycle'**
+  String get settingsAutoCycle;
+
+  /// Header of the default auto-cycle interval choices.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-cycle interval'**
+  String get settingsAutoCycleInterval;
+
+  /// Settings row for the default transport.
+  ///
+  /// In en, this message translates to:
+  /// **'RTSP transport'**
+  String get settingsTransport;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep the screen on while viewing'**
+  String get settingsKeepAwake;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Vibration feedback'**
+  String get settingsHaptics;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Show camera names on tiles'**
+  String get settingsOverlayLabels;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the lighter stream in the grid'**
+  String get settingsGridSubstream;
+
+  /// Help under the substream row.
+  ///
+  /// In en, this message translates to:
+  /// **'The grid plays each camera\'s substream and fullscreen plays the main stream.'**
+  String get settingsGridSubstreamHelp;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Import and export'**
+  String get settingsImportExport;
+
+  /// Settings row that opens the purchase screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove ads'**
+  String get settingsUpgrade;
+
+  /// Settings row subtitle when the unlock is owned.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads are removed. Thank you.'**
+  String get settingsUpgradeOwned;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchase'**
+  String get settingsRestore;
+
+  /// Message after restoring.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase checked.'**
+  String get settingsRestoreDone;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Roehens'**
+  String get settingsRate;
+
+  /// Settings row that opens a mail to support.
+  ///
+  /// In en, this message translates to:
+  /// **'Send feedback'**
+  String get settingsFeedback;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Open-source licenses'**
+  String get settingsLicenses;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAbout;
+
+  /// Settings row.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all local data'**
+  String get settingsDeleteAll;
+
+  /// Help under the delete row.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes cameras, saved passwords, settings and the log from this phone.'**
+  String get settingsDeleteAllHelp;
+
+  /// Title of the confirmation dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete everything on this phone?'**
+  String get settingsDeleteConfirmTitle;
+
+  /// Body of the confirmation dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'All cameras, saved passwords and settings will be removed. This cannot be undone.'**
+  String get settingsDeleteConfirmBody;
+
+  /// Confirm button.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete everything'**
+  String get settingsDeleteConfirm;
+
+  /// Cancel button.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get settingsDeleteCancel;
+
+  /// Message after deleting.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything was deleted.'**
+  String get settingsDeleted;
+
+  /// Settings row that opens the help section.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get settingsHelp;
+
+  /// Title of the appearance screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearanceTitle;
+
+  /// Theme choice that follows the phone.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get appearanceSystem;
+
+  /// Light theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get appearanceLight;
+
+  /// Dark theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get appearanceDark;
+
+  /// Help under the theme choices.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark makes video stand out. System follows your phone.'**
+  String get appearanceHelp;
+
+  /// Title of the language screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageTitle;
+
+  /// Hint of the language search field.
+  ///
+  /// In en, this message translates to:
+  /// **'Search languages'**
+  String get languageSearch;
+
+  /// Shown when a language search finds nothing.
+  ///
+  /// In en, this message translates to:
+  /// **'No language matches'**
+  String get languageNoMatch;
+
+  /// Title of the purchase screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove ads'**
+  String get upgradeTitle;
+
+  /// Headline of the purchase screen.
+  ///
+  /// In en, this message translates to:
+  /// **'One purchase, no more ads'**
+  String get upgradeHeadline;
+
+  /// Body of the purchase screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens shows one small banner on the Live screen. Buy once to remove it for good on this store account.'**
+  String get upgradeBody;
+
+  /// Benefit.
+  ///
+  /// In en, this message translates to:
+  /// **'No banner on the Live screen'**
+  String get upgradeBenefitBanner;
+
+  /// Benefit.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid once, not a subscription'**
+  String get upgradeBenefitOnce;
+
+  /// Benefit.
+  ///
+  /// In en, this message translates to:
+  /// **'Every feature stays free'**
+  String get upgradeBenefitSame;
+
+  /// Buy button with the price.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove ads for {price}'**
+  String upgradeBuy(String price);
+
+  /// Shown when the store gives no price.
+  ///
+  /// In en, this message translates to:
+  /// **'The price is not available right now.'**
+  String get upgradePriceUnavailable;
+
+  /// Shown when the unlock is owned.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads are removed. Thank you for supporting Roehens.'**
+  String get upgradeOwned;
+
+  /// Restore button.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchase'**
+  String get upgradeRestore;
+
+  /// Shown when billing is unavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases are not available on this device.'**
+  String get upgradeUnavailable;
+
+  /// Onboarding button.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// Onboarding final button.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get onboardingStart;
+
+  /// Onboarding skip pill.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardingSkip;
+
+  /// Tagline on onboarding page 1.
+  ///
+  /// In en, this message translates to:
+  /// **'Every camera on your network, one calm screen.'**
+  String get onboardingTagline;
+
+  /// Onboarding page 1 title.
+  ///
+  /// In en, this message translates to:
+  /// **'All your cameras in one place'**
+  String get onboardingOneTitle;
+
+  /// Onboarding page 1 body.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch IP cameras and recorders side by side, take snapshots, and steer cameras that can pan and tilt.'**
+  String get onboardingOneBody;
+
+  /// Onboarding page 1 point.
+  ///
+  /// In en, this message translates to:
+  /// **'RTSP and MJPEG, including H.265'**
+  String get onboardingOnePointOne;
+
+  /// Onboarding page 1 point.
+  ///
+  /// In en, this message translates to:
+  /// **'Finds cameras on your Wi-Fi'**
+  String get onboardingOnePointTwo;
+
+  /// Onboarding page 2 title.
+  ///
+  /// In en, this message translates to:
+  /// **'Made for your home network'**
+  String get onboardingTwoTitle;
+
+  /// Onboarding page 2 body.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens talks straight to your cameras. There is no account and no cloud, and your passwords stay on this phone.'**
+  String get onboardingTwoBody;
+
+  /// Onboarding page 2 point.
+  ///
+  /// In en, this message translates to:
+  /// **'Works while Roehens is open on screen'**
+  String get onboardingTwoPointOne;
+
+  /// Onboarding page 2 point.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from home, use your own VPN or port forward'**
+  String get onboardingTwoPointTwo;
+
+  /// Onboarding page 3 title.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready when you are'**
+  String get onboardingThreeTitle;
+
+  /// Onboarding page 3 body.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a camera by hand, or let Roehens look for cameras on this network.'**
+  String get onboardingThreeBody;
+
+  /// Spoken position in onboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String onboardingPageOf(int current, int total);
+
+  /// Title of the local network explanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Find cameras on your network'**
+  String get rationaleTitle;
+
+  /// Body of the local network explanation.
+  ///
+  /// In en, this message translates to:
+  /// **'To find your cameras and play their video, Roehens needs to talk to devices on your home Wi-Fi.'**
+  String get rationaleBody;
+
+  /// Reason.
+  ///
+  /// In en, this message translates to:
+  /// **'Looks for cameras on this network'**
+  String get rationaleReasonOne;
+
+  /// Reason.
+  ///
+  /// In en, this message translates to:
+  /// **'Streams video from them to this phone'**
+  String get rationaleReasonTwo;
+
+  /// Reason.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing leaves your network'**
+  String get rationaleReasonThree;
+
+  /// Button that shows the system permission prompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get rationaleContinue;
+
+  /// Pill that skips the prompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get rationaleNotNow;
+
+  /// Title when access was refused.
+  ///
+  /// In en, this message translates to:
+  /// **'Local network access is off'**
+  String get rationaleDeniedTitle;
+
+  /// Body when access was refused.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn it on in Settings so Roehens can find and play your cameras.'**
+  String get rationaleDeniedBody;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get rationaleOpenSettings;
+
+  /// Title of the about screen.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutTitle;
+
+  /// Row label.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get aboutVersion;
+
+  /// Row label.
+  ///
+  /// In en, this message translates to:
+  /// **'Build'**
+  String get aboutBuild;
+
+  /// Row label.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get aboutSupport;
+
+  /// Plain statement about foreground-only use.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens works while it is open on screen. It does not watch your cameras or send alerts when it is closed.'**
+  String get aboutWhileOpen;
+
+  /// Message when mail could not be opened.
+  ///
+  /// In en, this message translates to:
+  /// **'No mail app could be opened.'**
+  String get aboutNoMail;
+
+  /// Subject of the feedback mail.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens feedback'**
+  String get feedbackSubject;
+
+  /// Title of the dialog before sending feedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach diagnostics?'**
+  String get feedbackAttachTitle;
+
+  /// Body of the dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnostics list app and phone versions, settings, the kinds of cameras you have (never their addresses or passwords) and recent log lines. You see them in the mail before you send it.'**
+  String get feedbackAttachBody;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach diagnostics'**
+  String get feedbackAttach;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Send without'**
+  String get feedbackWithout;
+
+  /// Title of the licenses screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open-source licenses'**
+  String get licensesTitle;
+
+  /// Number of licenses of a package.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 license} other{{count} licenses}}'**
+  String licensesCount(int count);
+
+  /// Shown when there are no licenses.
+  ///
+  /// In en, this message translates to:
+  /// **'No license information is available.'**
+  String get licensesEmpty;
+
+  /// Title of the fatal error screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get fatalTitle;
+
+  /// Body of the fatal error screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens hit a problem it could not recover from. Your cameras and settings are safe.'**
+  String get fatalBody;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get fatalRetry;
+
+  /// Button that opens a mail to support.
+  ///
+  /// In en, this message translates to:
+  /// **'Report this'**
+  String get fatalReport;
+
+  /// Subject of the problem report mail.
+  ///
+  /// In en, this message translates to:
+  /// **'Roehens problem report'**
+  String get fatalReportSubject;
 }
 
 class _AppLocalizationsDelegate
