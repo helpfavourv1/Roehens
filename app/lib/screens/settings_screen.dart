@@ -26,7 +26,6 @@ import 'package:roehens/ui/components/app_switch.dart';
 import 'package:roehens/ui/components/app_toast.dart';
 import 'package:roehens/ui/icons/app_icons.dart';
 import 'package:roehens/ui/tokens/spacing_tokens.dart';
-import 'package:roehens/utils/context_extensions.dart';
 
 /// The Settings tab. Help appears only when the app wires the Help section
 /// in ([onOpenHelp]); a row that opens nothing is never drawn.

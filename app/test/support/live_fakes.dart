@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:roehens/core/contracts/file_transfer_contract.dart';
 import 'package:roehens/core/errors/app_error.dart';
+import 'package:roehens/core/contracts/link_contract.dart';
 import 'package:roehens/core/contracts/ptz_contract.dart';
 import 'package:roehens/core/errors/result.dart';
 import 'package:roehens/core/models/camera.dart';
@@ -92,5 +93,22 @@ class FakeFileTransfer implements FileTransferContract {
       return Err<PickedFile?>(failure!);
     }
     return Ok<PickedFile?>(toPick);
+  }
+}
+
+/// Records the mails the app asked to open.
+class FakeLinks implements LinkContract {
+  final List<({String to, String subject, String body})> mails =
+      <({String to, String subject, String body})>[];
+  bool canOpen = true;
+
+  @override
+  Future<bool> composeMail({
+    required String to,
+    required String subject,
+    String body = '',
+  }) async {
+    mails.add((to: to, subject: subject, body: body));
+    return canOpen;
   }
 }

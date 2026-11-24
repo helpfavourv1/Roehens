@@ -22,6 +22,9 @@ class ScreenHarness {
     this.discovery,
     this.files,
     this.probes,
+    this.purchase,
+    this.permissionFake,
+    this.links,
   );
 
   final AppProviders app;
@@ -33,12 +36,16 @@ class ScreenHarness {
   final FakeDiscovery discovery;
   final FakeFileTransfer files;
   final FakeProbes probes;
+  final FakePurchase purchase;
+  final FakePermission permissionFake;
+  final FakeLinks links;
 
   static Future<ScreenHarness> boot(
     WidgetTester tester, {
     List<Camera> cameras = const <Camera>[],
     bool ptzSupported = true,
     PermissionStatus permission = PermissionStatus.notRequired,
+    PermissionStatus? afterRequest,
   }) async {
     final List<FakePlayerSession> sessions = <FakePlayerSession>[];
     final FakePtz ptz = FakePtz(supported: ptzSupported);
@@ -46,6 +53,12 @@ class ScreenHarness {
     final FakeDiscovery discovery = FakeDiscovery();
     final FakeFileTransfer files = FakeFileTransfer();
     final FakeProbes probes = FakeProbes();
+    final FakePurchase purchase = FakePurchase();
+    final FakePermission permissionFake = FakePermission(
+      permission,
+      afterRequest: afterRequest,
+    );
+    final FakeLinks links = FakeLinks();
     for (final Camera c in cameras) {
       storage.cameras[c.id] = c;
     }
@@ -56,12 +69,13 @@ class ScreenHarness {
           keyValueStore: FakeKeyValueStore(),
           storage: storage,
           vault: FakeVault(),
-          purchase: FakePurchase(),
+          purchase: purchase,
           ad: FakeAd(),
           consent: FakeConsent(),
-          permission: FakePermission(permission),
+          permission: permissionFake,
           discovery: discovery,
           fileTransfer: files,
+          links: links,
           connectionTester: ConnectionTester(probes: probes),
           clock: FakeClock(),
           videoBuilder: fakeVideoView,

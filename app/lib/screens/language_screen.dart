@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:roehens/app/app_providers.dart';
 import 'package:roehens/app/app_scope.dart';
@@ -44,20 +45,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
     super.dispose();
   }
 
-  /// Languages whose own name or code contains the search text.
-  static List<AppLanguage> matching(String query) {
-    final String q = query.trim().toLowerCase();
-    if (q.isEmpty) {
-      return appLanguages;
-    }
-    return <AppLanguage>[
-      for (final AppLanguage l in appLanguages)
-        if (l.nativeName.toLowerCase().contains(q) ||
-            l.code.toLowerCase().contains(q))
-          l,
-    ];
-  }
-
   void _choose(AppProviders app, String? code) {
     unawaited(app.haptics.selection());
     unawaited(app.locale.setLanguage(code));
@@ -79,7 +66,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
         builder: (BuildContext context, Widget? _) {
           final String? current = app.settings.value.localeCode;
           final String query = _search.text;
-          final List<AppLanguage> shown = matching(query);
+          final List<AppLanguage> shown = LanguageScreenSearch.matching(query);
           final bool showSystem =
               query.trim().isEmpty ||
               l10n.settingsLanguageSystem.toLowerCase().contains(
@@ -143,5 +130,24 @@ class _LanguageScreenState extends State<LanguageScreen> {
         },
       ),
     );
+  }
+}
+
+/// The rule of the language search, apart from the screen.
+class LanguageScreenSearch {
+  LanguageScreenSearch._();
+
+  /// Languages whose own name or code contains the search text.
+  static List<AppLanguage> matching(String query) {
+    final String q = query.trim().toLowerCase();
+    if (q.isEmpty) {
+      return appLanguages;
+    }
+    return <AppLanguage>[
+      for (final AppLanguage l in appLanguages)
+        if (l.nativeName.toLowerCase().contains(q) ||
+            l.code.toLowerCase().contains(q))
+          l,
+    ];
   }
 }

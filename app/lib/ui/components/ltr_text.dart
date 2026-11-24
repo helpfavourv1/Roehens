@@ -31,7 +31,7 @@ class LtrText extends StatelessWidget {
   }
 }
 
-/// A block of selectable text that always reads left-to-right, for legal
+/// A block of text that always reads left-to-right, for legal
 /// notices and diagnostics that are English or technical whatever the app
 /// language is.
 class LtrBlock extends StatelessWidget {
@@ -44,7 +44,7 @@ class LtrBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: SelectableText(text, style: style),
+      child: Text(text, style: style),
     );
   }
 }

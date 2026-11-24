@@ -17,6 +17,13 @@ class LocalNetworkRationaleScreen extends StatefulWidget {
 
   final VoidCallback onDone;
 
+  /// Whether the person should see this screen for [status]: only where the
+  /// system asks (iOS) and has not yet said yes.
+  static bool isNeeded(PermissionStatus status) {
+    return status != PermissionStatus.granted &&
+        status != PermissionStatus.notRequired;
+  }
+
   @override
   State<LocalNetworkRationaleScreen> createState() =>
       _LocalNetworkRationaleScreenState();
@@ -27,13 +34,6 @@ class _LocalNetworkRationaleScreenState
   final ValueNotifier<bool> _denied = ValueNotifier<bool>(false);
   late AppProviders _app;
   bool _started = false;
-
-  /// Whether the person should see this screen for [status]: only where the
-  /// system asks (iOS) and has not yet said yes.
-  static bool isNeeded(PermissionStatus status) {
-    return status != PermissionStatus.granted &&
-        status != PermissionStatus.notRequired;
-  }
 
   @override
   void didChangeDependencies() {
