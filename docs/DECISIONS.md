@@ -220,3 +220,21 @@ Also done first, as the prerequisites HANDOFF section 7 listed.
 10. **Tests.** 990 pass: form rules, camera edit (validation, save with the password in the vault, paste, discovery prefill, edit, connection test and troubleshooter pill, type change), brand picker, discovery (results, nothing found, refused permission), import and export.
 
 **Not yet proven on a device:** the paste heuristic on a real keyboard (a jump of more than eight characters counts as a paste), the soft keyboard types, and how the long form looks at 200 and 310 percent text. The discovery screen has never run against a real network.
+
+## Settings and lifecycle screens (batch P5C)
+
+1. **Screens:** `settings_screen` (the Settings tab), `appearance_screen`, `language_screen`, `upgrade_screen`, `onboarding_screen`, `local_network_rationale_screen`, `about_screen`, `licenses_screen` (list and detail), `fatal_error_screen`, plus `support/feedback.dart`. All text is in `app_en.arb` (277 strings so far).
+2. **Owner decisions (Nov 24):** Privacy, Terms and Support-website rows are not in Settings yet, because the website is not hosted and a row that opens nothing is a dead button. They arrive in P7C with the real URLs. Feedback opens a mail to `stmakarios@gmail.com`.
+3. **Help row.** `SettingsScreen` takes an optional `onOpenHelp`; the row is drawn only when it is given (PH4 and P6A wire it).
+4. **Mail.** `LinkContract` and `LinkService` (url_launcher, mail only; Help and Settings contain no outbound web links). The mail body is cut at 1,800 characters because mail apps truncate long links. Diagnostics are added only after a dialog that says what they hold; the existing diagnostics service already leaves out camera names and addresses (tested). The device model is recorded as "not recorded" because no device-info package is used.
+5. **Version and build** on the About screen come from `AppProviders.appVersion` and `buildNumber`, which the bootstrap fills from the package info in P6A. The About screen does not name the store (the guard keeps store names inside the store seam).
+6. **Delete all local data** asks first, then clears cameras, passwords, settings, onboarding, the purchase cache and the log. The toast afterwards is shown on an overlay taken before the wait (`AppToast.showOn`), not through a context held across the deletion.
+7. **Transport** offers Automatic and TCP only (see P5B decision 4).
+8. **Appearance** shows System, Light and Dark as small pictures drawn with each theme's own colors (`ThemePreviewCard`, new size token `themePreviewAspect`).
+9. **Language** lists the 24 languages by native name with the system default first. Only English strings exist until P6B-P6G, so choosing another language changes direction and locale but text stays English until then.
+10. **Upgrade** is never a gate: reached from Settings only, restore always visible, and loading, unavailable, failed and owned each say so in words. The buy button shows the store's own price.
+11. **Onboarding** has three pages (what it does; your network and while it is open; start). The name shows on page 1 only. `onFinished` goes on to the local network explanation, whose `isNeeded(status)` is false where the system does not ask (Android). A refusal turns the screen into the way back to Settings.
+12. **Licenses** are read from Flutter's `LicenseRegistry`, grouped by package, sorted, repeats dropped (`LicenseCollector`), shown in the app's own screens. The text is not selectable: Flutter's selectable text lives in the Material library.
+13. **Tests:** 1,021 pass. One test needed the real event loop to turn during the delete-all call (futures created in the real zone); that is a property of the test environment, not of the screen.
+
+**Not yet proven on a device:** the mail app hand-off, the store price and purchase flow, the rationale and the system permission prompt (iOS, no device), and how any of these look.

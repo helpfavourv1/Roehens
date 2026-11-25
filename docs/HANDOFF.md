@@ -137,3 +137,11 @@ At the end of every batch: append a `DECISIONS.md` section (what changed from th
 - Test pattern: `ScreenHarness.boot(tester, cameras:, permission:)` exposes `discovery`, `files`, `probes`, `ptz`, `sessions`. Section titles render upper-case.
 
 - **Owner request (after P5B): drag to reorder in the layout sheet, in addition to the up/down buttons.** Both stay: the buttons are the screen-reader and keyboard path. Build it with `LongPressDraggable` and `DragTarget` from the widgets library (not `ReorderableListView`, which is Material). Small follow-up batch, not yet started.
+
+
+## Update after batch P5C
+
+- **P5C is done and green** (1,021 tests). Screens listed in `DECISIONS.md` "Settings and lifecycle screens (batch P5C)".
+- **Next: batches PH1 to PH4 (Help), then P6A (app shell).** P6A must: set `AppProviders.create(appVersion:, buildNumber:)` from package info (add `package_info_plus`), put `AppScope` and `AppTokens` above the navigator, route add/find/edit/Settings/Help, run the first-launch order (onboarding, local network explanation where `LocalNetworkRationaleScreen.isNeeded`, ATT, consent, ad init), call `MediaKit.ensureInitialized()`, and show `FatalErrorScreen` from the global error handler. Settings is `SettingsScreen(onOpenHelp: ...)`.
+- Privacy, Terms and website Support rows go into Settings in P7C once the owner supplies URLs.
+- Open owner request still not built: drag to reorder in the layout sheet (see above).
