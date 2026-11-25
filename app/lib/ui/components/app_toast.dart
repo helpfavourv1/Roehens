@@ -34,9 +34,31 @@ class AppToast {
     AppIconName? icon,
     double bottomOffset = AppSizes.bottomBarHeight + AppSpacing.md,
   }) {
+    showOn(
+      Overlay.maybeOf(context, rootOverlay: true),
+      message: message,
+      duration: duration,
+      actionLabel: actionLabel,
+      onAction: onAction,
+      icon: icon,
+      bottomOffset: bottomOffset,
+    );
+  }
+
+  /// Shows a toast on a known overlay. Lets a caller take the overlay before
+  /// a long wait and show the result afterwards without holding a
+  /// `BuildContext` across the wait.
+  static void showOn(
+    OverlayState? overlay, {
+    required String message,
+    Duration duration = const Duration(seconds: 4),
+    String? actionLabel,
+    VoidCallback? onAction,
+    AppIconName? icon,
+    double bottomOffset = AppSizes.bottomBarHeight + AppSpacing.md,
+  }) {
     dismiss(immediately: true);
-    final OverlayState? overlay = Overlay.maybeOf(context, rootOverlay: true);
-    if (overlay == null) {
+    if (overlay == null || !overlay.mounted) {
       return;
     }
     final ValueNotifier<bool> visible = ValueNotifier<bool>(false);

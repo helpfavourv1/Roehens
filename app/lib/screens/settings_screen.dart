@@ -359,9 +359,10 @@ class SettingsScreen extends StatelessWidget {
     if (yes != true) {
       return;
     }
+    // The overlay is taken now: the settings rows are rebuilt while the data
+    // is removed, and a context held across that wait may be gone.
+    final OverlayState? overlay = Overlay.maybeOf(context, rootOverlay: true);
     await app.deleteAllLocalData();
-    if (context.mounted) {
-      AppToast.show(context, message: l10n.settingsDeleted);
-    }
+    AppToast.showOn(overlay, message: l10n.settingsDeleted);
   }
 }
