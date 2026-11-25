@@ -141,6 +141,10 @@ void main() {
     await tester.tap(find.text('Delete all local data'));
     await settle(tester, milliseconds: 600);
     await tester.tap(find.text('Delete everything'));
+    // The delete runs on futures from the real zone; let the real loop turn.
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 300)),
+    );
     final StringBuffer timeline = StringBuffer();
     for (int i = 0; i < 25; i++) {
       await tester.pump(const Duration(milliseconds: 100));
