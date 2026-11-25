@@ -4,6 +4,7 @@ import 'package:roehens/core/models/app_settings.dart';
 import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/screens/settings_screen.dart';
+import 'package:roehens/ui/components/app_toast.dart';
 
 import '../support/live_fakes.dart';
 import '../support/pump_app.dart';
@@ -142,6 +143,7 @@ void main() {
       reason: 'onboarding reset',
     );
     expect(h.app.subscription.isAdFree, isFalse, reason: 'subscription reset');
+    expect(AppToast.isShowing, isTrue, reason: 'toast entry exists');
     // Find out how long the toast takes, so a real delay is not hidden.
     int waited = 0;
     while (find.text('Everything was deleted.').evaluate().isEmpty &&
