@@ -131,6 +131,11 @@ void main() {
     await settle(tester, milliseconds: 600);
     expect(h.app.cameras.value.cameras.length, 1);
 
+    // Give each provider something to forget, so the steps can be told apart.
+    await tester.runAsync(() async {
+      await h.app.onboarding.complete();
+      await h.app.settings.setKeepAwake(enabled: !const AppSettings().keepAwake);
+    });
     await tester.tap(find.text('Delete all local data'));
     await settle(tester, milliseconds: 600);
     await tester.tap(find.text('Delete everything'));
@@ -139,6 +144,8 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
       timeline.write(AppToast.isShowing ? 'T' : '.');
       timeline.write(h.app.cameras.value.cameras.isEmpty ? 'c' : '-');
+      timeline.write(h.app.settings.value.keepAwake == const AppSettings().keepAwake ? 's' : '-');
+      timeline.write(h.app.onboarding.needsOnboarding ? 'o' : '-');
       timeline.write(' ');
     }
     expect(h.app.cameras.value.cameras, isEmpty, reason: 'cameras');
