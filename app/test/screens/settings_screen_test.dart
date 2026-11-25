@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:roehens/core/models/app_settings.dart';
 import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/screens/settings_screen.dart';
@@ -133,8 +134,15 @@ void main() {
     await settle(tester, milliseconds: 600);
     await tester.tap(find.text('Delete everything'));
     await settle(tester, milliseconds: 2500);
-    expect(h.app.cameras.value.cameras, isEmpty);
-    expect(find.text('Everything was deleted.'), findsOneWidget);
+    expect(h.app.cameras.value.cameras, isEmpty, reason: 'cameras');
+    expect(h.app.settings.value.keepAwake, const AppSettings().keepAwake);
+    expect(h.app.onboarding.needsOnboarding, isTrue, reason: 'onboarding reset');
+    expect(h.app.subscription.isAdFree, isFalse, reason: 'subscription reset');
+    expect(
+      find.text('Everything was deleted.'),
+      findsOneWidget,
+      reason: 'toast after the data was removed',
+    );
 
     await tester.pumpWidget(const SizedBox.shrink());
     await settle(tester, milliseconds: 5000);
