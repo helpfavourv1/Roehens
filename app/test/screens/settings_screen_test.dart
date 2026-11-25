@@ -136,7 +136,11 @@ void main() {
     await settle(tester, milliseconds: 2500);
     expect(h.app.cameras.value.cameras, isEmpty, reason: 'cameras');
     expect(h.app.settings.value.keepAwake, const AppSettings().keepAwake);
-    expect(h.app.onboarding.needsOnboarding, isTrue, reason: 'onboarding reset');
+    expect(
+      h.app.onboarding.needsOnboarding,
+      isTrue,
+      reason: 'onboarding reset',
+    );
     expect(h.app.subscription.isAdFree, isFalse, reason: 'subscription reset');
     expect(
       find.text('Everything was deleted.'),
