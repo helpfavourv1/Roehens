@@ -142,10 +142,17 @@ void main() {
       reason: 'onboarding reset',
     );
     expect(h.app.subscription.isAdFree, isFalse, reason: 'subscription reset');
+    // Find out how long the toast takes, so a real delay is not hidden.
+    int waited = 0;
+    while (find.text('Everything was deleted.').evaluate().isEmpty &&
+        waited < 10000) {
+      await tester.pump(const Duration(milliseconds: 100));
+      waited += 100;
+    }
     expect(
       find.text('Everything was deleted.'),
       findsOneWidget,
-      reason: 'toast after the data was removed',
+      reason: 'toast not shown within ${waited + 2500} ms of the tap',
     );
 
     await tester.pumpWidget(const SizedBox.shrink());
