@@ -169,6 +169,19 @@ void main() {
     await settle(tester, milliseconds: 5000);
   });
 
+  testWidgets('delete-all data call completes on its own', (
+    WidgetTester tester,
+  ) async {
+    final ScreenHarness h = await ScreenHarness.boot(
+      tester,
+      cameras: <Camera>[cameraWithSub(id: 'a', name: 'Porch')],
+    );
+    await tester.runAsync(
+      () => h.app.deleteAllLocalData().timeout(const Duration(seconds: 3)),
+    );
+    expect(h.app.cameras.value.cameras, isEmpty);
+  });
+
   testWidgets('restore checks the purchase', (WidgetTester tester) async {
     final ScreenHarness h = await open(tester);
     await tester.tap(find.text('Restore purchase'));
