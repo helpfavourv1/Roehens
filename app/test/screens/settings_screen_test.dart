@@ -134,7 +134,13 @@ void main() {
     await tester.tap(find.text('Delete all local data'));
     await settle(tester, milliseconds: 600);
     await tester.tap(find.text('Delete everything'));
-    await settle(tester, milliseconds: 2500);
+    final StringBuffer timeline = StringBuffer();
+    for (int i = 0; i < 25; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+      timeline.write(AppToast.isShowing ? 'T' : '.');
+      timeline.write(h.app.cameras.value.cameras.isEmpty ? 'c' : '-');
+      timeline.write(' ');
+    }
     expect(h.app.cameras.value.cameras, isEmpty, reason: 'cameras');
     expect(h.app.settings.value.keepAwake, const AppSettings().keepAwake);
     expect(
@@ -143,7 +149,7 @@ void main() {
       reason: 'onboarding reset',
     );
     expect(h.app.subscription.isAdFree, isFalse, reason: 'subscription reset');
-    expect(AppToast.isShowing, isTrue, reason: 'toast entry exists');
+    expect(AppToast.isShowing, isTrue, reason: 'timeline: $timeline');
     // Find out how long the toast takes, so a real delay is not hidden.
     int waited = 0;
     while (find.text('Everything was deleted.').evaluate().isEmpty &&
