@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:roehens/core/models/app_settings.dart';
 import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/models/stream_protocol.dart';
 import 'package:roehens/screens/settings_screen.dart';

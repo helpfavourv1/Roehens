@@ -100,6 +100,9 @@ class ScreenHarness {
       discovery,
       files,
       probes,
+      purchase,
+      permissionFake,
+      links,
     );
   }
 }
