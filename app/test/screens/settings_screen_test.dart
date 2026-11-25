@@ -149,6 +149,8 @@ void main() {
       reason: 'onboarding reset',
     );
     expect(h.app.subscription.isAdFree, isFalse, reason: 'subscription reset');
+    expect(find.byType(SettingsScreen), findsOneWidget, reason: 'screen gone');
+    expect(tester.takeException(), isNull, reason: 'framework exception');
     expect(AppToast.isShowing, isTrue, reason: 'timeline: $timeline');
     // Find out how long the toast takes, so a real delay is not hidden.
     int waited = 0;
