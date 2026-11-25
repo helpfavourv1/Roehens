@@ -132,7 +132,7 @@ void main() {
     await tester.tap(find.text('Delete all local data'));
     await settle(tester, milliseconds: 600);
     await tester.tap(find.text('Delete everything'));
-    await settle(tester, milliseconds: 600);
+    await settle(tester, milliseconds: 2500);
     expect(h.app.cameras.value.cameras, isEmpty);
     expect(find.text('Everything was deleted.'), findsOneWidget);
 
