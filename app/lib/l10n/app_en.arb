@@ -1227,5 +1227,307 @@
   "fatalReportSubject": "Roehens problem report",
   "@fatalReportSubject": {
     "description": "Subject of the problem report mail."
+  },
+  "helpTitle": "Help",
+  "@helpTitle": {
+    "description": "Title of the Help hub."
+  },
+  "helpHubSameWifiTitle": "Same Wi-Fi",
+  "@helpHubSameWifiTitle": {
+    "description": "Hub card."
+  },
+  "helpHubSameWifiBody": "Set up a camera on your home network.",
+  "@helpHubSameWifiBody": {
+    "description": "Hub card text."
+  },
+  "helpHubAwayTitle": "Away from home",
+  "@helpHubAwayTitle": {
+    "description": "Hub card."
+  },
+  "helpHubAwayBody": "Reach your cameras from anywhere, step by step.",
+  "@helpHubAwayBody": {
+    "description": "Hub card text."
+  },
+  "helpHubTroubleTitle": "Troubleshoot",
+  "@helpHubTroubleTitle": {
+    "description": "Hub card."
+  },
+  "helpHubTroubleBody": "Answer a few questions to find the problem.",
+  "@helpHubTroubleBody": {
+    "description": "Hub card text."
+  },
+  "helpHubDiagnosticsTitle": "Diagnostics",
+  "@helpHubDiagnosticsTitle": {
+    "description": "Hub card."
+  },
+  "helpHubDiagnosticsBody": "Check this phone, a name or a port.",
+  "@helpHubDiagnosticsBody": {
+    "description": "Hub card text."
+  },
+  "helpArticlesSameWifi": "Same Wi-Fi",
+  "@helpArticlesSameWifi": {
+    "description": "Header of the list of articles for home use."
+  },
+  "helpArticlesAway": "Away from home",
+  "@helpArticlesAway": {
+    "description": "Header of the list of articles for remote access."
+  },
+  "helpDisabled": "Some help is switched off for now.",
+  "@helpDisabled": {
+    "description": "Shown when the Help kill switch is on."
+  },
+  "helpUnavailable": "Help couldn't be loaded.",
+  "@helpUnavailable": {
+    "description": "Shown when the Help content could not be read."
+  },
+  "helpCopy": "Copy",
+  "@helpCopy": {
+    "description": "Spoken label of the copy button."
+  },
+  "helpCopied": "Copied",
+  "@helpCopied": {
+    "description": "Message after copying a value."
+  },
+  "helpStepNumber": "Step {number}",
+  "@helpStepNumber": {
+    "description": "Spoken step number.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "helpTargetAddCamera": "Add a camera",
+  "@helpTargetAddCamera": {
+    "description": "Help button."
+  },
+  "helpTargetFindCameras": "Find cameras",
+  "@helpTargetFindCameras": {
+    "description": "Help button."
+  },
+  "helpTargetDiagnostics": "Open Diagnostics",
+  "@helpTargetDiagnostics": {
+    "description": "Help button."
+  },
+  "helpTargetTroubleshooter": "Open the troubleshooter",
+  "@helpTargetTroubleshooter": {
+    "description": "Help button."
+  },
+  "helpTargetPhoneSettings": "Open phone Settings",
+  "@helpTargetPhoneSettings": {
+    "description": "Help button."
+  },
+  "helpTargetArticle": "Read: {title}",
+  "@helpTargetArticle": {
+    "description": "Help button that opens another article.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "wizardTitle": "Away from home",
+  "@wizardTitle": {
+    "description": "Title of the remote access wizard."
+  },
+  "wizardChoosePath": "Choose a way to reach your cameras",
+  "@wizardChoosePath": {
+    "description": "Header over the wizard paths."
+  },
+  "wizardCameraSection": "Camera to test",
+  "@wizardCameraSection": {
+    "description": "Header of the wizard test target."
+  },
+  "wizardAddress": "Address to test",
+  "@wizardAddress": {
+    "description": "Label of the address field."
+  },
+  "wizardPort": "Port to test",
+  "@wizardPort": {
+    "description": "Label of the port field."
+  },
+  "wizardTestStep": "Test this step",
+  "@wizardTestStep": {
+    "description": "Button that runs the connection test."
+  },
+  "wizardTesting": "Testing…",
+  "@wizardTesting": {
+    "description": "Shown while the test runs."
+  },
+  "wizardTestPassed": "It works.",
+  "@wizardTestPassed": {
+    "description": "Result of a passed test."
+  },
+  "wizardTestFailed": "Not working yet.",
+  "@wizardTestFailed": {
+    "description": "Result of a failed test."
+  },
+  "wizardNoCameras": "Add a camera first so Help can test it.",
+  "@wizardNoCameras": {
+    "description": "Shown when no camera exists."
+  },
+  "wizardNext": "Next step",
+  "@wizardNext": {
+    "description": "Button."
+  },
+  "wizardPrevious": "Previous step",
+  "@wizardPrevious": {
+    "description": "Button."
+  },
+  "wizardStepOf": "Step {current} of {total}",
+  "@wizardStepOf": {
+    "description": "Position in the wizard.",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "wizardOtherPath": "Choose another way",
+  "@wizardOtherPath": {
+    "description": "Button that returns to the path list."
+  },
+  "troubleTitle": "Troubleshoot",
+  "@troubleTitle": {
+    "description": "Title of the troubleshooter."
+  },
+  "troubleBack": "Back",
+  "@troubleBack": {
+    "description": "Button."
+  },
+  "troubleRestart": "Start again",
+  "@troubleRestart": {
+    "description": "Button."
+  },
+  "troubleWhatToTry": "What to try",
+  "@troubleWhatToTry": {
+    "description": "Header of the troubleshooter result."
+  },
+  "troubleReadMore": "Read more",
+  "@troubleReadMore": {
+    "description": "Header over the suggested articles."
+  },
+  "diagTitle": "Diagnostics",
+  "@diagTitle": {
+    "description": "Title of the diagnostics screen."
+  },
+  "diagIntro": "Each check runs only when you press its button.",
+  "@diagIntro": {
+    "description": "Intro text."
+  },
+  "diagRun": "Run",
+  "@diagRun": {
+    "description": "Button."
+  },
+  "diagRunAgain": "Run again",
+  "@diagRunAgain": {
+    "description": "Button."
+  },
+  "diagRunning": "Running…",
+  "@diagRunning": {
+    "description": "Shown while a check runs."
+  },
+  "diagPassed": "Passed",
+  "@diagPassed": {
+    "description": "Check result."
+  },
+  "diagFailed": "Failed",
+  "@diagFailed": {
+    "description": "Check result."
+  },
+  "diagLocalTitle": "This phone on the network",
+  "@diagLocalTitle": {
+    "description": "Check title."
+  },
+  "diagLocalHelp": "Shows the address of this phone and of your router.",
+  "@diagLocalHelp": {
+    "description": "Check help."
+  },
+  "diagLocalAddress": "Phone address",
+  "@diagLocalAddress": {
+    "description": "Label."
+  },
+  "diagLocalGateway": "Router address",
+  "@diagLocalGateway": {
+    "description": "Label."
+  },
+  "diagLanTitle": "Camera on this network",
+  "@diagLanTitle": {
+    "description": "Check title."
+  },
+  "diagLanHelp": "Tests a saved camera the way the camera form does.",
+  "@diagLanHelp": {
+    "description": "Check help."
+  },
+  "diagLanNoCameras": "Add a camera to use this check.",
+  "@diagLanNoCameras": {
+    "description": "Shown when no camera exists."
+  },
+  "diagHostTitle": "Name lookup",
+  "@diagHostTitle": {
+    "description": "Check title."
+  },
+  "diagHostHelp": "Checks that a host name resolves to an address.",
+  "@diagHostHelp": {
+    "description": "Check help."
+  },
+  "diagHostField": "Host name or address",
+  "@diagHostField": {
+    "description": "Label."
+  },
+  "diagHostPortTitle": "Host and port",
+  "@diagHostPortTitle": {
+    "description": "Check title."
+  },
+  "diagHostPortHelp": "Checks that a host and port accept a connection. Run it on mobile data to test the way in from outside.",
+  "@diagHostPortHelp": {
+    "description": "Check help."
+  },
+  "diagPortField": "Port",
+  "@diagPortField": {
+    "description": "Label."
+  },
+  "diagPublicTitle": "Public address",
+  "@diagPublicTitle": {
+    "description": "Check title."
+  },
+  "diagPublicHelp": "Asks one public service which address the internet sees for this connection. Only that address is used; no camera or personal data is sent.",
+  "@diagPublicHelp": {
+    "description": "Check help and disclosure."
+  },
+  "diagPublicCompare": "Compare it with the internet address on your router's status page. If they differ, you are behind CGNAT.",
+  "@diagPublicCompare": {
+    "description": "Hint after the public address check."
+  },
+  "diagKindPublic": "This is a public address.",
+  "@diagKindPublic": {
+    "description": "Classification."
+  },
+  "diagKindPrivate": "This is a private address, not reachable from outside.",
+  "@diagKindPrivate": {
+    "description": "Classification."
+  },
+  "diagKindShared": "This address is shared by your provider (CGNAT). Port forwarding cannot work.",
+  "@diagKindShared": {
+    "description": "Classification."
+  },
+  "diagKindOther": "This address is not usable from outside.",
+  "@diagKindOther": {
+    "description": "Classification."
+  },
+  "diagTime": "Time",
+  "@diagTime": {
+    "description": "Label of the connection time."
+  },
+  "diagResolved": "Resolves to",
+  "@diagResolved": {
+    "description": "Label of resolved addresses."
+  },
+  "diagHostRequired": "Enter a host name or address.",
+  "@diagHostRequired": {
+    "description": "Error when the host field is empty."
   }
 }
