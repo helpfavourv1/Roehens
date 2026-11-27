@@ -8,6 +8,7 @@ import 'package:roehens/core/errors/result.dart';
 import 'package:roehens/core/models/camera.dart';
 import 'package:roehens/core/models/diagnostics_report.dart';
 import 'package:roehens/core/services/connection_tester.dart';
+import 'package:roehens/core/services/lan_selector.dart';
 import 'package:roehens/platform/network/lan_info.dart';
 import 'package:roehens/platform/network/multicast_lock_channel.dart';
 import 'package:roehens/platform/network/network_diagnostics_service.dart';

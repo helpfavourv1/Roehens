@@ -14,8 +14,8 @@ class HelpCatalog {
     required this.articles,
     required this.wizardPaths,
     required this.troubleshooterStart,
-    required Map<String, TroubleshootNode> nodes,
-  }) : _nodes = nodes;
+    required this._nodes,
+  });
 
   /// Reads `help_structure.json`. A structure with a broken reference (an
   /// edge to a missing node, an unknown target, an outcome article that does
@@ -33,17 +33,15 @@ class HelpCatalog {
       final List<WizardPath> paths = <WizardPath>[
         for (final Object? p in decoded['wizard']! as List<Object?>)
           WizardPath(
-            id: (p! as Map<String, Object?>)['id']! as String,
-            articleId: (p)['article']! as String,
+            id: _map(p)['id']! as String,
+            articleId: _map(p)['article']! as String,
           ),
       ];
       final Map<String, Object?> trouble =
           decoded['troubleshooter']! as Map<String, Object?>;
       final Map<String, TroubleshootNode> nodes = <String, TroubleshootNode>{
         for (final Object? n in trouble['nodes']! as List<Object?>)
-          (n! as Map<String, Object?>)['id']! as String: _node(
-            n as Map<String, Object?>,
-          ),
+          _map(n)['id']! as String: _node(_map(n)),
       };
       final HelpCatalog catalog = HelpCatalog._(
         articles: articles,
@@ -59,6 +57,10 @@ class HelpCatalog {
     } catch (error) {
       return _invalid('$error');
     }
+  }
+
+  static Map<String, Object?> _map(Object? value) {
+    return value! as Map<String, Object?>;
   }
 
   static Result<HelpCatalog> _invalid(String detail) {
@@ -84,8 +86,8 @@ class HelpCatalog {
       copyValues: <HelpCopyValue>[
         for (final Object? c in (json['copy'] as List<Object?>?) ?? <Object?>[])
           HelpCopyValue(
-            id: (c! as Map<String, Object?>)['id']! as String,
-            value: (c)['value']! as String,
+            id: _map(c)['id']! as String,
+            value: _map(c)['value']! as String,
           ),
       ],
     );
@@ -100,8 +102,8 @@ class HelpCatalog {
         for (final Object? e
             in (json['edges'] as List<Object?>?) ?? <Object?>[])
           TroubleshootEdge(
-            answerId: (e! as Map<String, Object?>)['answer']! as String,
-            to: (e)['to']! as String,
+            answerId: _map(e)['answer']! as String,
+            to: _map(e)['to']! as String,
           ),
       ],
       outcome: outcome == null
@@ -243,11 +245,7 @@ class HelpCatalog {
 /// The text of one language, with English behind it: a key missing from the
 /// language file is read from English, never shown as a key.
 class HelpStrings {
-  const HelpStrings({
-    required Map<String, String> primary,
-    required Map<String, String> fallback,
-  }) : _primary = primary,
-       _fallback = fallback;
+  const HelpStrings({required this._primary, required this._fallback});
 
   /// Reads a language file: a flat JSON object of key to text.
   static Map<String, String> parseFile(String source) {
