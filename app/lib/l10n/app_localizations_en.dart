@@ -978,4 +978,232 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fatalReportSubject => 'Roehens problem report';
+
+  @override
+  String get helpTitle => 'Help';
+
+  @override
+  String get helpHubSameWifiTitle => 'Same Wi-Fi';
+
+  @override
+  String get helpHubSameWifiBody => 'Set up a camera on your home network.';
+
+  @override
+  String get helpHubAwayTitle => 'Away from home';
+
+  @override
+  String get helpHubAwayBody =>
+      'Reach your cameras from anywhere, step by step.';
+
+  @override
+  String get helpHubTroubleTitle => 'Troubleshoot';
+
+  @override
+  String get helpHubTroubleBody =>
+      'Answer a few questions to find the problem.';
+
+  @override
+  String get helpHubDiagnosticsTitle => 'Diagnostics';
+
+  @override
+  String get helpHubDiagnosticsBody => 'Check this phone, a name or a port.';
+
+  @override
+  String get helpArticlesSameWifi => 'Same Wi-Fi';
+
+  @override
+  String get helpArticlesAway => 'Away from home';
+
+  @override
+  String get helpDisabled => 'Some help is switched off for now.';
+
+  @override
+  String get helpUnavailable => 'Help couldn\'t be loaded.';
+
+  @override
+  String get helpCopy => 'Copy';
+
+  @override
+  String get helpCopied => 'Copied';
+
+  @override
+  String helpStepNumber(int number) {
+    return 'Step $number';
+  }
+
+  @override
+  String get helpTargetAddCamera => 'Add a camera';
+
+  @override
+  String get helpTargetFindCameras => 'Find cameras';
+
+  @override
+  String get helpTargetDiagnostics => 'Open Diagnostics';
+
+  @override
+  String get helpTargetTroubleshooter => 'Open the troubleshooter';
+
+  @override
+  String get helpTargetPhoneSettings => 'Open phone Settings';
+
+  @override
+  String helpTargetArticle(String title) {
+    return 'Read: $title';
+  }
+
+  @override
+  String get wizardTitle => 'Away from home';
+
+  @override
+  String get wizardChoosePath => 'Choose a way to reach your cameras';
+
+  @override
+  String get wizardCameraSection => 'Camera to test';
+
+  @override
+  String get wizardAddress => 'Address to test';
+
+  @override
+  String get wizardPort => 'Port to test';
+
+  @override
+  String get wizardTestStep => 'Test this step';
+
+  @override
+  String get wizardTesting => 'Testing…';
+
+  @override
+  String get wizardTestPassed => 'It works.';
+
+  @override
+  String get wizardTestFailed => 'Not working yet.';
+
+  @override
+  String get wizardNoCameras => 'Add a camera first so Help can test it.';
+
+  @override
+  String get wizardNext => 'Next step';
+
+  @override
+  String get wizardPrevious => 'Previous step';
+
+  @override
+  String wizardStepOf(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get wizardOtherPath => 'Choose another way';
+
+  @override
+  String get troubleTitle => 'Troubleshoot';
+
+  @override
+  String get troubleBack => 'Back';
+
+  @override
+  String get troubleRestart => 'Start again';
+
+  @override
+  String get troubleWhatToTry => 'What to try';
+
+  @override
+  String get troubleReadMore => 'Read more';
+
+  @override
+  String get diagTitle => 'Diagnostics';
+
+  @override
+  String get diagIntro => 'Each check runs only when you press its button.';
+
+  @override
+  String get diagRun => 'Run';
+
+  @override
+  String get diagRunAgain => 'Run again';
+
+  @override
+  String get diagRunning => 'Running…';
+
+  @override
+  String get diagPassed => 'Passed';
+
+  @override
+  String get diagFailed => 'Failed';
+
+  @override
+  String get diagLocalTitle => 'This phone on the network';
+
+  @override
+  String get diagLocalHelp =>
+      'Shows the address of this phone and of your router.';
+
+  @override
+  String get diagLocalAddress => 'Phone address';
+
+  @override
+  String get diagLocalGateway => 'Router address';
+
+  @override
+  String get diagLanTitle => 'Camera on this network';
+
+  @override
+  String get diagLanHelp =>
+      'Tests a saved camera the way the camera form does.';
+
+  @override
+  String get diagLanNoCameras => 'Add a camera to use this check.';
+
+  @override
+  String get diagHostTitle => 'Name lookup';
+
+  @override
+  String get diagHostHelp => 'Checks that a host name resolves to an address.';
+
+  @override
+  String get diagHostField => 'Host name or address';
+
+  @override
+  String get diagHostPortTitle => 'Host and port';
+
+  @override
+  String get diagHostPortHelp =>
+      'Checks that a host and port accept a connection. Run it on mobile data to test the way in from outside.';
+
+  @override
+  String get diagPortField => 'Port';
+
+  @override
+  String get diagPublicTitle => 'Public address';
+
+  @override
+  String get diagPublicHelp =>
+      'Asks one public service which address the internet sees for this connection. Only that address is used; no camera or personal data is sent.';
+
+  @override
+  String get diagPublicCompare =>
+      'Compare it with the internet address on your router\'s status page. If they differ, you are behind CGNAT.';
+
+  @override
+  String get diagKindPublic => 'This is a public address.';
+
+  @override
+  String get diagKindPrivate =>
+      'This is a private address, not reachable from outside.';
+
+  @override
+  String get diagKindShared =>
+      'This address is shared by your provider (CGNAT). Port forwarding cannot work.';
+
+  @override
+  String get diagKindOther => 'This address is not usable from outside.';
+
+  @override
+  String get diagTime => 'Time';
+
+  @override
+  String get diagResolved => 'Resolves to';
+
+  @override
+  String get diagHostRequired => 'Enter a host name or address.';
 }

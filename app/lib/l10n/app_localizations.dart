@@ -1755,6 +1755,432 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Roehens problem report'**
   String get fatalReportSubject;
+
+  /// Title of the Help hub.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get helpTitle;
+
+  /// Hub card.
+  ///
+  /// In en, this message translates to:
+  /// **'Same Wi-Fi'**
+  String get helpHubSameWifiTitle;
+
+  /// Hub card text.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up a camera on your home network.'**
+  String get helpHubSameWifiBody;
+
+  /// Hub card.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from home'**
+  String get helpHubAwayTitle;
+
+  /// Hub card text.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach your cameras from anywhere, step by step.'**
+  String get helpHubAwayBody;
+
+  /// Hub card.
+  ///
+  /// In en, this message translates to:
+  /// **'Troubleshoot'**
+  String get helpHubTroubleTitle;
+
+  /// Hub card text.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer a few questions to find the problem.'**
+  String get helpHubTroubleBody;
+
+  /// Hub card.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnostics'**
+  String get helpHubDiagnosticsTitle;
+
+  /// Hub card text.
+  ///
+  /// In en, this message translates to:
+  /// **'Check this phone, a name or a port.'**
+  String get helpHubDiagnosticsBody;
+
+  /// Header of the list of articles for home use.
+  ///
+  /// In en, this message translates to:
+  /// **'Same Wi-Fi'**
+  String get helpArticlesSameWifi;
+
+  /// Header of the list of articles for remote access.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from home'**
+  String get helpArticlesAway;
+
+  /// Shown when the Help kill switch is on.
+  ///
+  /// In en, this message translates to:
+  /// **'Some help is switched off for now.'**
+  String get helpDisabled;
+
+  /// Shown when the Help content could not be read.
+  ///
+  /// In en, this message translates to:
+  /// **'Help couldn\'t be loaded.'**
+  String get helpUnavailable;
+
+  /// Spoken label of the copy button.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get helpCopy;
+
+  /// Message after copying a value.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get helpCopied;
+
+  /// Spoken step number.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {number}'**
+  String helpStepNumber(int number);
+
+  /// Help button.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a camera'**
+  String get helpTargetAddCamera;
+
+  /// Help button.
+  ///
+  /// In en, this message translates to:
+  /// **'Find cameras'**
+  String get helpTargetFindCameras;
+
+  /// Help button.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Diagnostics'**
+  String get helpTargetDiagnostics;
+
+  /// Help button.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the troubleshooter'**
+  String get helpTargetTroubleshooter;
+
+  /// Help button.
+  ///
+  /// In en, this message translates to:
+  /// **'Open phone Settings'**
+  String get helpTargetPhoneSettings;
+
+  /// Help button that opens another article.
+  ///
+  /// In en, this message translates to:
+  /// **'Read: {title}'**
+  String helpTargetArticle(String title);
+
+  /// Title of the remote access wizard.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from home'**
+  String get wizardTitle;
+
+  /// Header over the wizard paths.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a way to reach your cameras'**
+  String get wizardChoosePath;
+
+  /// Header of the wizard test target.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera to test'**
+  String get wizardCameraSection;
+
+  /// Label of the address field.
+  ///
+  /// In en, this message translates to:
+  /// **'Address to test'**
+  String get wizardAddress;
+
+  /// Label of the port field.
+  ///
+  /// In en, this message translates to:
+  /// **'Port to test'**
+  String get wizardPort;
+
+  /// Button that runs the connection test.
+  ///
+  /// In en, this message translates to:
+  /// **'Test this step'**
+  String get wizardTestStep;
+
+  /// Shown while the test runs.
+  ///
+  /// In en, this message translates to:
+  /// **'Testing…'**
+  String get wizardTesting;
+
+  /// Result of a passed test.
+  ///
+  /// In en, this message translates to:
+  /// **'It works.'**
+  String get wizardTestPassed;
+
+  /// Result of a failed test.
+  ///
+  /// In en, this message translates to:
+  /// **'Not working yet.'**
+  String get wizardTestFailed;
+
+  /// Shown when no camera exists.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a camera first so Help can test it.'**
+  String get wizardNoCameras;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Next step'**
+  String get wizardNext;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous step'**
+  String get wizardPrevious;
+
+  /// Position in the wizard.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String wizardStepOf(int current, int total);
+
+  /// Button that returns to the path list.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose another way'**
+  String get wizardOtherPath;
+
+  /// Title of the troubleshooter.
+  ///
+  /// In en, this message translates to:
+  /// **'Troubleshoot'**
+  String get troubleTitle;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get troubleBack;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Start again'**
+  String get troubleRestart;
+
+  /// Header of the troubleshooter result.
+  ///
+  /// In en, this message translates to:
+  /// **'What to try'**
+  String get troubleWhatToTry;
+
+  /// Header over the suggested articles.
+  ///
+  /// In en, this message translates to:
+  /// **'Read more'**
+  String get troubleReadMore;
+
+  /// Title of the diagnostics screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnostics'**
+  String get diagTitle;
+
+  /// Intro text.
+  ///
+  /// In en, this message translates to:
+  /// **'Each check runs only when you press its button.'**
+  String get diagIntro;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Run'**
+  String get diagRun;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Run again'**
+  String get diagRunAgain;
+
+  /// Shown while a check runs.
+  ///
+  /// In en, this message translates to:
+  /// **'Running…'**
+  String get diagRunning;
+
+  /// Check result.
+  ///
+  /// In en, this message translates to:
+  /// **'Passed'**
+  String get diagPassed;
+
+  /// Check result.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get diagFailed;
+
+  /// Check title.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone on the network'**
+  String get diagLocalTitle;
+
+  /// Check help.
+  ///
+  /// In en, this message translates to:
+  /// **'Shows the address of this phone and of your router.'**
+  String get diagLocalHelp;
+
+  /// Label.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone address'**
+  String get diagLocalAddress;
+
+  /// Label.
+  ///
+  /// In en, this message translates to:
+  /// **'Router address'**
+  String get diagLocalGateway;
+
+  /// Check title.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera on this network'**
+  String get diagLanTitle;
+
+  /// Check help.
+  ///
+  /// In en, this message translates to:
+  /// **'Tests a saved camera the way the camera form does.'**
+  String get diagLanHelp;
+
+  /// Shown when no camera exists.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a camera to use this check.'**
+  String get diagLanNoCameras;
+
+  /// Check title.
+  ///
+  /// In en, this message translates to:
+  /// **'Name lookup'**
+  String get diagHostTitle;
+
+  /// Check help.
+  ///
+  /// In en, this message translates to:
+  /// **'Checks that a host name resolves to an address.'**
+  String get diagHostHelp;
+
+  /// Label.
+  ///
+  /// In en, this message translates to:
+  /// **'Host name or address'**
+  String get diagHostField;
+
+  /// Check title.
+  ///
+  /// In en, this message translates to:
+  /// **'Host and port'**
+  String get diagHostPortTitle;
+
+  /// Check help.
+  ///
+  /// In en, this message translates to:
+  /// **'Checks that a host and port accept a connection. Run it on mobile data to test the way in from outside.'**
+  String get diagHostPortHelp;
+
+  /// Label.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get diagPortField;
+
+  /// Check title.
+  ///
+  /// In en, this message translates to:
+  /// **'Public address'**
+  String get diagPublicTitle;
+
+  /// Check help and disclosure.
+  ///
+  /// In en, this message translates to:
+  /// **'Asks one public service which address the internet sees for this connection. Only that address is used; no camera or personal data is sent.'**
+  String get diagPublicHelp;
+
+  /// Hint after the public address check.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare it with the internet address on your router\'s status page. If they differ, you are behind CGNAT.'**
+  String get diagPublicCompare;
+
+  /// Classification.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a public address.'**
+  String get diagKindPublic;
+
+  /// Classification.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a private address, not reachable from outside.'**
+  String get diagKindPrivate;
+
+  /// Classification.
+  ///
+  /// In en, this message translates to:
+  /// **'This address is shared by your provider (CGNAT). Port forwarding cannot work.'**
+  String get diagKindShared;
+
+  /// Classification.
+  ///
+  /// In en, this message translates to:
+  /// **'This address is not usable from outside.'**
+  String get diagKindOther;
+
+  /// Label of the connection time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get diagTime;
+
+  /// Label of resolved addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolves to'**
+  String get diagResolved;
+
+  /// Error when the host field is empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a host name or address.'**
+  String get diagHostRequired;
 }
 
 class _AppLocalizationsDelegate
