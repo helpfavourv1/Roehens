@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "articles": [
+    {
+      "id": "lan_setup",
+      "group": "same_wifi",
+      "steps": [
+        {
+          "id": "network"
+        },
+        {
+          "id": "find",
+          "target": "find_cameras"
+        },
+        {
+          "id": "reserve",
+          "callout": true
+        },
+        {
+          "id": "enable",
+          "copy": [
+            {
+              "id": "rtsp",
+              "value": "554"
+            },
+            {
+              "id": "onvif",
+              "value": "80"
+            }
+          ]
+        },
+        {
+          "id": "add",
+          "target": "add_camera"
+        },
+        {
+          "id": "check",
+          "target": "troubleshooter"
+        }
+      ]
+    },
+    {
+      "id": "vpn",
+      "group": "away",
+      "steps": [
+        {
+          "id": "why"
+        },
+        {
+          "id": "choose"
+        },
+        {
+          "id": "server",
+          "copy": [
+            {
+              "id": "wireguard",
+              "value": "51820"
+            },
+            {
+              "id": "openvpn",
+              "value": "1194"
+            }
+          ]
+        },
+        {
+          "id": "phone"
+        },
+        {
+          "id": "connect"
+        },
+        {
+          "id": "use",
+          "callout": true
+        }
+      ]
+    },
+    {
+      "id": "ddns_forward",
+      "group": "away",
+      "steps": [
+        {
+          "id": "warning",
+          "target": "article:port_security"
+        },
+        {
+          "id": "cgnat",
+          "target": "article:cgnat"
+        },
+        {
+          "id": "ddns"
+        },
+        {
+          "id": "forward",
+          "callout": true,
+          "copy": [
+            {
+              "id": "rtsp",
+              "value": "554"
+            }
+          ]
+        },
+        {
+          "id": "add",
+          "target": "add_camera"
+        },
+        {
+          "id": "test"
+        }
+      ]
+    },
+    {
+      "id": "static_ip_forward",
+      "group": "away",
+      "steps": [
+        {
+          "id": "warning",
+          "target": "article:port_security"
+        },
+        {
+          "id": "address",
+          "target": "diagnostics"
+        },
+        {
+          "id": "forward",
+          "callout": true,
+          "copy": [
+            {
+              "id": "rtsp",
+              "value": "554"
+            }
+          ]
+        },
+        {
+          "id": "add",
+          "target": "add_camera"
+        },
+        {
+          "id": "test"
+        }
+      ]
+    },
+    {
+      "id": "relay",
+      "group": "away",
+      "steps": [
+        {
+          "id": "what",
+          "callout": true
+        },
+        {
+          "id": "kinds"
+        },
+        {
+          "id": "setup"
+        },
+        {
+          "id": "add",
+          "target": "add_camera"
+        },
+        {
+          "id": "limits"
+        }
+      ]
+    },
+    {
+      "id": "cgnat",
+      "group": "away",
+      "steps": [
+        {
+          "id": "what"
+        },
+        {
+          "id": "check",
+          "copy": [
+            {
+              "id": "range",
+              "value": "100.64.0.0/10"
+            }
+          ],
+          "target": "diagnostics"
+        },
+        {
+          "id": "options",
+          "target": "article:vpn"
+        }
+      ]
+    },
+    {
+      "id": "port_selection",
+      "group": "away",
+      "steps": [
+        {
+          "id": "inside",
+          "copy": [
+            {
+              "id": "rtsp",
+              "value": "554"
+            },
+            {
+              "id": "http",
+              "value": "80"
+            },
+            {
+              "id": "onvif",
+              "value": "8000"
+            }
+          ]
+        },
+        {
+          "id": "outside",
+          "callout": true
+        },
+        {
+          "id": "unique"
+        }
+      ]
+    },
+    {
+      "id": "port_security",
+      "group": "away",
+      "steps": [
+        {
+          "id": "vpn",
+          "target": "article:vpn"
+        },
+        {
+          "id": "passwords"
+        },
+        {
+          "id": "scope"
+        },
+        {
+          "id": "updates"
+        },
+        {
+          "id": "watch",
+          "callout": true
+        }
+      ]
+    },
+    {
+      "id": "codecs_bandwidth",
+      "group": "same_wifi",
+      "steps": [
+        {
+          "id": "codecs"
+        },
+        {
+          "id": "substream"
+        },
+        {
+          "id": "speed",
+          "copy": [
+            {
+              "id": "four",
+              "value": "4 Mbit/s = about 1.8 GB per hour"
+            },
+            {
+              "id": "one",
+              "value": "1 Mbit/s = about 0.45 GB per hour"
+            }
+          ]
+        },
+        {
+          "id": "mobile"
+        }
+      ]
+    },
+    {
+      "id": "router_notes",
+      "group": "away",
+      "steps": [
+        {
+          "id": "names",
+          "callout": true
+        },
+        {
+          "id": "brands_a"
+        },
+        {
+          "id": "brands_b"
+        },
+        {
+          "id": "reserve"
+        }
+      ]
+    }
+  ],
+  "wizard": [
+    {
+      "id": "vpn",
+      "article": "vpn"
+    },
+    {
+      "id": "ddns_forward",
+      "article": "ddns_forward"
+    },
+    {
+      "id": "static_ip_forward",
+      "article": "static_ip_forward"
+    },
+    {
+      "id": "relay",
+      "article": "relay"
+    }
+  ],
+  "troubleshooter": {
+    "start": "wifi_works",
+    "nodes": [
+      {
+        "id": "wifi_works",
+        "edges": [
+          {
+            "answer": "yes",
+            "to": "away_fails"
+          },
+          {
+            "answer": "no",
+            "to": "home_kind"
+          }
+        ]
+      },
+      {
+        "id": "home_kind",
+        "edges": [
+          {
+            "answer": "unreachable",
+            "to": "out_unreachable"
+          },
+          {
+            "answer": "auth",
+            "to": "out_auth"
+          },
+          {
+            "answer": "path",
+            "to": "out_path"
+          },
+          {
+            "answer": "picture",
+            "to": "out_picture"
+          }
+        ]
+      },
+      {
+        "id": "out_unreachable",
+        "outcome": {
+          "articles": [
+            "lan_setup",
+            "port_selection"
+          ],
+          "targets": [
+            "find_cameras"
+          ]
+        }
+      },
+      {
+        "id": "out_auth",
+        "outcome": {
+          "articles": [],
+          "targets": [
+            "add_camera"
+          ]
+        }
+      },
+      {
+        "id": "out_path",
+        "outcome": {
+          "articles": [],
+          "targets": [
+            "add_camera"
+          ]
+        }
+      },
+      {
+        "id": "out_picture",
+        "outcome": {
+          "articles": [
+            "codecs_bandwidth"
+          ],
+          "targets": []
+        }
+      },
+      {
+        "id": "away_fails",
+        "edges": [
+          {
+            "answer": "yes",
+            "to": "uses_vpn"
+          },
+          {
+            "answer": "no",
+            "to": "out_slow"
+          }
+        ]
+      },
+      {
+        "id": "out_slow",
+        "outcome": {
+          "articles": [
+            "codecs_bandwidth"
+          ],
+          "targets": []
+        }
+      },
+      {
+        "id": "uses_vpn",
+        "edges": [
+          {
+            "answer": "yes",
+            "to": "out_vpn"
+          },
+          {
+            "answer": "no",
+            "to": "shared_address"
+          }
+        ]
+      },
+      {
+        "id": "out_vpn",
+        "outcome": {
+          "articles": [
+            "vpn"
+          ],
+          "targets": []
+        }
+      },
+      {
+        "id": "shared_address",
+        "edges": [
+          {
+            "answer": "same",
+            "to": "forwarded"
+          },
+          {
+            "answer": "different",
+            "to": "out_cgnat"
+          },
+          {
+            "answer": "unsure",
+            "to": "out_check"
+          }
+        ]
+      },
+      {
+        "id": "out_cgnat",
+        "outcome": {
+          "articles": [
+            "cgnat",
+            "vpn",
+            "relay"
+          ],
+          "targets": []
+        }
+      },
+      {
+        "id": "out_check",
+        "outcome": {
+          "articles": [
+            "cgnat"
+          ],
+          "targets": [
+            "diagnostics"
+          ]
+        }
+      },
+      {
+        "id": "forwarded",
+        "edges": [
+          {
+            "answer": "yes",
+            "to": "out_forward_check"
+          },
+          {
+            "answer": "no",
+            "to": "out_forward"
+          }
+        ]
+      },
+      {
+        "id": "out_forward_check",
+        "outcome": {
+          "articles": [
+            "port_selection",
+            "router_notes",
+            "port_security"
+          ],
+          "targets": [
+            "diagnostics"
+          ]
+        }
+      },
+      {
+        "id": "out_forward",
+        "outcome": {
+          "articles": [
+            "vpn",
+            "ddns_forward",
+            "static_ip_forward",
+            "router_notes"
+          ],
+          "targets": []
+        }
+      }
+    ]
+  }
+}

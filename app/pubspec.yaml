@@ -46,6 +46,8 @@ flutter:
   assets:
     - assets/fonts/LICENSE-phosphor.txt
     - assets/profiles/camera_profiles.json
+    - assets/help/help_structure.json
+    - assets/help/strings/
 
   fonts:
     - family: PhosphorBold

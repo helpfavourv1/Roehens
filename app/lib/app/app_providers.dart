@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -12,6 +13,10 @@ import 'package:roehens/core/contracts/file_transfer_contract.dart';
 import 'package:roehens/core/contracts/link_contract.dart';
 import 'package:roehens/platform/system/link_service.dart';
 import 'package:roehens/core/constants/app_constants.dart';
+import 'package:roehens/core/contracts/network_diagnostics_contract.dart';
+import 'package:roehens/core/providers/help_provider.dart';
+import 'package:roehens/platform/network/network_diagnostics_service.dart';
+import 'package:roehens/platform/network/public_ip_lookup.dart';
 import 'package:roehens/core/contracts/logger_contract.dart';
 import 'package:roehens/core/contracts/permission_contract.dart';
 import 'package:roehens/core/contracts/ptz_contract.dart';
@@ -106,6 +111,8 @@ class AppOverrides {
     this.connectionTester,
     this.fileTransfer,
     this.links,
+    this.networkChecks,
+    this.helpLoader,
   });
 
   final KeyValueStore? keyValueStore;
@@ -124,6 +131,8 @@ class AppOverrides {
   final ConnectionTester? connectionTester;
   final FileTransferContract? fileTransfer;
   final LinkContract? links;
+  final NetworkDiagnosticsContract? networkChecks;
+  final HelpAssetLoader? helpLoader;
 }
 
 /// The composition root: every real service is built here with plain
@@ -172,6 +181,8 @@ class AppProviders {
     required this.videoBuilder,
     required this.live,
     required this.links,
+    required this.help,
+    required this.networkChecks,
     required this.appVersion,
     required this.buildNumber,
     required this.iosDiscoveryMode,
@@ -227,6 +238,12 @@ class AppProviders {
 
   /// Opens the mail app for feedback.
   final LinkContract links;
+
+  /// The bundled Help content; read when a Help screen first opens.
+  final HelpProvider help;
+
+  /// The checks of the Diagnostics screen; each runs on its own button.
+  final NetworkDiagnosticsContract networkChecks;
 
   /// Shown on the About screen and in diagnostics; set by the bootstrap.
   final String appVersion;
@@ -330,6 +347,9 @@ class AppProviders {
 
     final MulticastLockChannel channel = MulticastLockChannel();
     final LanInfo lan = LanInfo(channel: channel);
+    final NetworkProbes probes = NetworkProbes();
+    final ConnectionTester tester =
+        overrides.connectionTester ?? ConnectionTester(probes: probes);
     final PermissionContract permission =
         overrides.permission ??
         LocalNetworkPermissionService(lan: lan, channel: channel);
@@ -433,9 +453,7 @@ class AppProviders {
       ptz: overrides.ptz ?? PtzService(client: OnvifClient()),
       permission: permission,
       lan: lan,
-      connectionTester:
-          overrides.connectionTester ??
-          ConnectionTester(probes: NetworkProbes()),
+      connectionTester: tester,
       profiles: profiles,
       diagnostics: const DiagnosticsService(),
       playerPool: pool,
@@ -444,6 +462,18 @@ class AppProviders {
       videoBuilder: overrides.videoBuilder ?? buildVideoSurface,
       live: live,
       links: overrides.links ?? LinkService(logger: logger),
+      help: HelpProvider(
+        loader: overrides.helpLoader ?? rootBundle.loadString,
+        logger: logger,
+      ),
+      networkChecks:
+          overrides.networkChecks ??
+          NetworkDiagnosticsService(
+            lan: lan,
+            probes: probes,
+            tester: tester,
+            lookup: PublicIpLookup(),
+          ),
       appVersion: appVersion ?? '',
       buildNumber: buildNumber,
       iosDiscoveryMode: iosMode,
@@ -532,6 +562,14 @@ class AppProviders {
     live.setForeground(foreground: false);
   }
 
+  /// Reads the Help content in the person's language the first time a Help
+  /// screen opens (and again if the language changed). Costs nothing at start.
+  Future<void> ensureHelp() {
+    final Locale effective =
+        locale.value ?? PlatformDispatcher.instance.locale;
+    return help.load(languageTag: HelpProvider.tagFor(effective));
+  }
+
   /// The text a person may attach to a feedback mail: versions, settings,
   /// camera counts by kind (never addresses) and the local log.
   String diagnosticsText() {
@@ -574,6 +612,7 @@ class AppProviders {
     }
     for (final ChangeNotifier notifier in <ChangeNotifier>[
       adState,
+      help,
       autoCycle,
       discovery,
       undo,
