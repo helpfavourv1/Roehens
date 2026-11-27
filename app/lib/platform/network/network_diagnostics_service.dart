@@ -67,9 +67,8 @@ class NetworkDiagnosticsService implements NetworkDiagnosticsContract {
   @override
   Future<CheckOutcome> hostResolution(String host) async {
     try {
-      final List<InternetAddress> found = await _resolver(
-        host,
-      ).timeout(resolveTimeout);
+      final List<InternetAddress> found = await _resolver(host)
+          .timeout(resolveTimeout);
       if (found.isEmpty) {
         return const CheckOutcome(
           check: DiagnosticCheck.hostResolution,

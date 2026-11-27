@@ -75,27 +75,39 @@ void main() {
 
   test('a name that does not resolve fails', () async {
     resolver = (String host) async => throw const SocketException('no host');
-    expect((await service().hostResolution('nope.invalid')).status, CheckStatus.failed);
+    expect(
+      (await service().hostResolution('nope.invalid')).status,
+      CheckStatus.failed,
+    );
     resolver = (String host) async => <InternetAddress>[];
-    expect((await service().hostResolution('empty.invalid')).status, CheckStatus.failed);
+    expect(
+      (await service().hostResolution('empty.invalid')).status,
+      CheckStatus.failed,
+    );
   });
 
   test('a slow resolver times out', () async {
     resolver = (String host) => Completer<List<InternetAddress>>().future;
-    expect((await service().hostResolution('slow.invalid')).status, CheckStatus.failed);
+    expect(
+      (await service().hostResolution('slow.invalid')).status,
+      CheckStatus.failed,
+    );
   });
 
-  test('host and port: connects, with the time; or fails with the reason', () async {
-    CheckOutcome out = await service().hostPort('home.example', 18554);
-    expect(out.status, CheckStatus.passed);
-    expect(out.detail, endsWith(' ms'));
-    expect(probes.calls, contains('tcp home.example:18554'));
+  test(
+    'host and port: connects, with the time; or fails with the reason',
+    () async {
+      CheckOutcome out = await service().hostPort('home.example', 18554);
+      expect(out.status, CheckStatus.passed);
+      expect(out.detail, endsWith(' ms'));
+      expect(probes.calls, contains('tcp home.example:18554'));
 
-    probes.tcp = const Err<void>(AppError(ErrorClass.networkUnreachable));
-    out = await service().hostPort('home.example', 18554);
-    expect(out.status, CheckStatus.failed);
-    expect(out.error!.errorClass, ErrorClass.networkUnreachable);
-  });
+      probes.tcp = const Err<void>(AppError(ErrorClass.networkUnreachable));
+      out = await service().hostPort('home.example', 18554);
+      expect(out.status, CheckStatus.failed);
+      expect(out.error!.errorClass, ErrorClass.networkUnreachable);
+    },
+  );
 
   test('LAN reachability uses the connection tester', () async {
     final Camera camera = cameraWithSub(id: 'a');

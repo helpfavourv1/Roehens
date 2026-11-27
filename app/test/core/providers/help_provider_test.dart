@@ -9,8 +9,10 @@ import 'package:roehens/core/services/help_catalog.dart';
 import '../../support/fakes.dart';
 
 void main() {
-  final String structure = File('assets/help/help_structure.json').readAsStringSync();
-  final String english = File('assets/help/strings/help_en.json').readAsStringSync();
+  final String structure = File('assets/help/help_structure.json')
+      .readAsStringSync();
+  final String english = File('assets/help/strings/help_en.json')
+      .readAsStringSync();
   late Map<String, String> files;
   late List<String> loaded;
   late HelpProvider provider;
@@ -51,17 +53,17 @@ void main() {
   test('English loads the structure and the text', () async {
     await provider.load();
     expect(provider.value.isReady, isTrue);
-    expect(
-      provider.value.strings!.text(HelpCatalog.titleKey('vpn')),
-      'VPN',
-    );
+    expect(provider.value.strings!.text(HelpCatalog.titleKey('vpn')), 'VPN');
   });
 
   test('a language without a file shows English', () async {
     await provider.load(languageTag: 'fr');
     expect(provider.value.isReady, isTrue);
     expect(provider.value.strings!.text(HelpCatalog.titleKey('vpn')), 'VPN');
-    expect(provider.value.strings!.isFallback(HelpCatalog.titleKey('vpn')), isTrue);
+    expect(
+      provider.value.strings!.isFallback(HelpCatalog.titleKey('vpn')),
+      isTrue,
+    );
   });
 
   test('a language file wins, and missing keys fall back', () async {
@@ -72,13 +74,22 @@ void main() {
     expect(s.text(HelpCatalog.titleKey('relay')), 'Third-party relay');
   });
 
-  test('the structure is read once and the same language twice does nothing', () async {
-    await provider.load();
-    await provider.load();
-    await provider.load(languageTag: 'fr');
-    expect(loaded.where((String p) => p == HelpProvider.structurePath).length, 1);
-    expect(loaded.where((String p) => p == HelpProvider.filePath('en')).length, 1);
-  });
+  test(
+    'the structure is read once and the same language twice does nothing',
+    () async {
+      await provider.load();
+      await provider.load();
+      await provider.load(languageTag: 'fr');
+      expect(
+        loaded.where((String p) => p == HelpProvider.structurePath).length,
+        1,
+      );
+      expect(
+        loaded.where((String p) => p == HelpProvider.filePath('en')).length,
+        1,
+      );
+    },
+  );
 
   test('a broken structure is reported, not shown', () async {
     files[HelpProvider.structurePath] = '{"articles": []}';
@@ -87,9 +98,12 @@ void main() {
     expect(provider.value.error!.errorClass, ErrorClass.invalidFile);
   });
 
-  test('a missing structure leaves the content unready without throwing', () async {
-    files.remove(HelpProvider.structurePath);
-    await provider.load();
-    expect(provider.value.isReady, isFalse);
-  });
+  test(
+    'a missing structure leaves the content unready without throwing',
+    () async {
+      files.remove(HelpProvider.structurePath);
+      await provider.load();
+      expect(provider.value.isReady, isFalse);
+    },
+  );
 }

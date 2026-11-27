@@ -565,8 +565,7 @@ class AppProviders {
   /// Reads the Help content in the person's language the first time a Help
   /// screen opens (and again if the language changed). Costs nothing at start.
   Future<void> ensureHelp() {
-    final Locale effective =
-        locale.value ?? PlatformDispatcher.instance.locale;
+    final Locale effective = locale.value ?? PlatformDispatcher.instance.locale;
     return help.load(languageTag: HelpProvider.tagFor(effective));
   }
 

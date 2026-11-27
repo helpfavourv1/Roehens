@@ -92,11 +92,13 @@ class HelpCatalog {
   }
 
   static TroubleshootNode _node(Map<String, Object?> json) {
-    final Map<String, Object?>? outcome = json['outcome'] as Map<String, Object?>?;
+    final Map<String, Object?>? outcome =
+        json['outcome'] as Map<String, Object?>?;
     return TroubleshootNode(
       id: json['id']! as String,
       edges: <TroubleshootEdge>[
-        for (final Object? e in (json['edges'] as List<Object?>?) ?? <Object?>[])
+        for (final Object? e
+            in (json['edges'] as List<Object?>?) ?? <Object?>[])
           TroubleshootEdge(
             answerId: (e! as Map<String, Object?>)['answer']! as String,
             to: (e)['to']! as String,

@@ -26,12 +26,15 @@ class CheckOutcome {
   final String? detail;
   final AppError? error;
 
-  CheckOutcome running() => CheckOutcome(check: check, status: CheckStatus.running);
+  CheckOutcome running() =>
+      CheckOutcome(check: check, status: CheckStatus.running);
 }
 
 /// All checks so far, by check.
 class DiagnosticsReport {
-  const DiagnosticsReport([this.outcomes = const <DiagnosticCheck, CheckOutcome>{}]);
+  const DiagnosticsReport([
+    this.outcomes = const <DiagnosticCheck, CheckOutcome>{},
+  ]);
 
   final Map<DiagnosticCheck, CheckOutcome> outcomes;
 

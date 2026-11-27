@@ -44,9 +44,9 @@ class PublicIpLookup {
       }
       final StringBuffer body = StringBuffer();
       await for (final String chunk
-          in response.transform(const SystemEncoding().decoder).timeout(
-            timeout,
-          )) {
+          in response
+              .transform(const SystemEncoding().decoder)
+              .timeout(timeout)) {
         body.write(chunk);
         if (body.length > 256) {
           break;
