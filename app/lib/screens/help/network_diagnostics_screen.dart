@@ -116,30 +116,31 @@ class _NetworkDiagnosticsScreenState extends State<NetworkDiagnosticsScreen> {
           }
           return ValueListenableBuilder<DiagnosticsReport>(
             valueListenable: _report,
-            builder: (BuildContext context, DiagnosticsReport report, Widget? _) {
-              return ListView(
-                physics: const ClampingScrollPhysics(),
-                padding: const EdgeInsets.all(AppSpacing.md),
-                children: <Widget>[
-                  Text(
-                    l10n.diagIntro,
-                    style: context.type.callout.copyWith(
-                      color: context.colors.textSecondary,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                  _local(context, l10n, report),
-                  const SizedBox(height: AppSpacing.md),
-                  _lan(context, l10n, report),
-                  const SizedBox(height: AppSpacing.md),
-                  _host_(context, l10n, report),
-                  const SizedBox(height: AppSpacing.md),
-                  _hostPort(context, l10n, report),
-                  const SizedBox(height: AppSpacing.md),
-                  _public(context, l10n, report),
-                ],
-              );
-            },
+            builder:
+                (BuildContext context, DiagnosticsReport report, Widget? _) {
+                  return ListView(
+                    physics: const ClampingScrollPhysics(),
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    children: <Widget>[
+                      Text(
+                        l10n.diagIntro,
+                        style: context.type.callout.copyWith(
+                          color: context.colors.textSecondary,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      _local(context, l10n, report),
+                      const SizedBox(height: AppSpacing.md),
+                      _lan(context, l10n, report),
+                      const SizedBox(height: AppSpacing.md),
+                      _host_(context, l10n, report),
+                      const SizedBox(height: AppSpacing.md),
+                      _hostPort(context, l10n, report),
+                      const SizedBox(height: AppSpacing.md),
+                      _public(context, l10n, report),
+                    ],
+                  );
+                },
           );
         },
       ),
@@ -232,14 +233,20 @@ class _NetworkDiagnosticsScreenState extends State<NetworkDiagnosticsScreen> {
           ),
           LtrBlock(
             value,
-            style: context.type.mono.copyWith(color: context.colors.textPrimary),
+            style: context.type.mono.copyWith(
+              color: context.colors.textPrimary,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _local(BuildContext context, AppLocalizations l10n, DiagnosticsReport r) {
+  Widget _local(
+    BuildContext context,
+    AppLocalizations l10n,
+    DiagnosticsReport r,
+  ) {
     final CheckOutcome out = r.of(DiagnosticCheck.localNetwork);
     final List<String> lines = (out.detail ?? '').split('\n');
     return _card(
@@ -260,7 +267,11 @@ class _NetworkDiagnosticsScreenState extends State<NetworkDiagnosticsScreen> {
     );
   }
 
-  Widget _lan(BuildContext context, AppLocalizations l10n, DiagnosticsReport r) {
+  Widget _lan(
+    BuildContext context,
+    AppLocalizations l10n,
+    DiagnosticsReport r,
+  ) {
     final List<Camera> cameras = _app.cameras.value.cameras;
     return ValueListenableBuilder<String?>(
       valueListenable: _cameraId,
@@ -323,7 +334,11 @@ class _NetworkDiagnosticsScreenState extends State<NetworkDiagnosticsScreen> {
     );
   }
 
-  Widget _host_(BuildContext context, AppLocalizations l10n, DiagnosticsReport r) {
+  Widget _host_(
+    BuildContext context,
+    AppLocalizations l10n,
+    DiagnosticsReport r,
+  ) {
     final CheckOutcome out = r.of(DiagnosticCheck.hostResolution);
     return _card(
       context: context,
@@ -349,7 +364,11 @@ class _NetworkDiagnosticsScreenState extends State<NetworkDiagnosticsScreen> {
     );
   }
 
-  Widget _hostPort(BuildContext context, AppLocalizations l10n, DiagnosticsReport r) {
+  Widget _hostPort(
+    BuildContext context,
+    AppLocalizations l10n,
+    DiagnosticsReport r,
+  ) {
     final CheckOutcome out = r.of(DiagnosticCheck.hostPort);
     return _card(
       context: context,
@@ -396,9 +415,15 @@ class _NetworkDiagnosticsScreenState extends State<NetworkDiagnosticsScreen> {
     };
   }
 
-  Widget _public(BuildContext context, AppLocalizations l10n, DiagnosticsReport r) {
+  Widget _public(
+    BuildContext context,
+    AppLocalizations l10n,
+    DiagnosticsReport r,
+  ) {
     final CheckOutcome out = r.of(DiagnosticCheck.publicAddress);
-    final String? address = out.status == CheckStatus.passed ? out.detail : null;
+    final String? address = out.status == CheckStatus.passed
+        ? out.detail
+        : null;
     return _card(
       context: context,
       l10n: l10n,
@@ -414,7 +439,9 @@ class _NetworkDiagnosticsScreenState extends State<NetworkDiagnosticsScreen> {
           const SizedBox(height: AppSpacing.sm),
           Text(
             _kindText(l10n, PublicAddress.classify(address)),
-            style: context.type.body.copyWith(color: context.colors.textPrimary),
+            style: context.type.body.copyWith(
+              color: context.colors.textPrimary,
+            ),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(

@@ -146,21 +146,22 @@ class _RemoteAccessWizardScreenState extends State<RemoteAccessWizardScreen> {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     return HelpContent(
-      builder: (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
-        return ListenableBuilder(
-          listenable: Listenable.merge(<Listenable>[_path, _app.flags]),
-          builder: (BuildContext context, Widget? _) {
-            return AppScaffold(
-              navBar: AppNavBar(
-                title: l10n.wizardTitle,
-                onBack: () => Navigator.of(context).maybePop(),
-                backLabel: l10n.actionBack,
-              ),
-              body: _body(context, l10n, catalog, strings),
+      builder:
+          (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
+            return ListenableBuilder(
+              listenable: Listenable.merge(<Listenable>[_path, _app.flags]),
+              builder: (BuildContext context, Widget? _) {
+                return AppScaffold(
+                  navBar: AppNavBar(
+                    title: l10n.wizardTitle,
+                    onBack: () => Navigator.of(context).maybePop(),
+                    backLabel: l10n.actionBack,
+                  ),
+                  body: _body(context, l10n, catalog, strings),
+                );
+              },
             );
           },
-        );
-      },
     );
   }
 
@@ -205,7 +206,9 @@ class _RemoteAccessWizardScreenState extends State<RemoteAccessWizardScreen> {
       );
     }
     final HelpArticle article = catalog.article(
-      catalog.wizardPaths.firstWhere((WizardPath p) => p.id == pathId).articleId,
+      catalog.wizardPaths
+          .firstWhere((WizardPath p) => p.id == pathId)
+          .articleId,
     )!;
     return _steps(context, l10n, strings, article);
   }
@@ -217,7 +220,12 @@ class _RemoteAccessWizardScreenState extends State<RemoteAccessWizardScreen> {
     HelpArticle article,
   ) {
     return ListenableBuilder(
-      listenable: Listenable.merge(<Listenable>[_step, _test, _cameraId, _failure]),
+      listenable: Listenable.merge(<Listenable>[
+        _step,
+        _test,
+        _cameraId,
+        _failure,
+      ]),
       builder: (BuildContext context, Widget? _) {
         final int index = _step.value;
         final HelpStep step = article.steps[index];
@@ -232,7 +240,9 @@ class _RemoteAccessWizardScreenState extends State<RemoteAccessWizardScreen> {
           children: <Widget>[
             Text(
               strings.text(HelpCatalog.titleKey(article.id)),
-              style: context.type.title1.copyWith(color: context.colors.textPrimary),
+              style: context.type.title1.copyWith(
+                color: context.colors.textPrimary,
+              ),
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(

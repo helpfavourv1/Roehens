@@ -54,57 +54,71 @@ class _TroubleshooterScreenState extends State<TroubleshooterScreen> {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     return HelpContent(
-      builder: (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
-        final TroubleshooterEngine engine = TroubleshooterEngine(catalog);
-        return ValueListenableBuilder<TroubleshootSession?>(
-          valueListenable: _session,
-          builder: (BuildContext context, TroubleshootSession? stored, Widget? _) {
-            final TroubleshootSession session = stored ?? engine.start();
-            final TroubleshootNode node = engine.current(session);
-            return AppScaffold(
-              navBar: AppNavBar(
-                title: l10n.troubleTitle,
-                onBack: () => Navigator.of(context).maybePop(),
-                backLabel: l10n.actionBack,
-              ),
-              body: ListView(
-                physics: const ClampingScrollPhysics(),
-                padding: const EdgeInsets.all(AppSpacing.md),
-                children: <Widget>[
-                  if (node.isOutcome)
-                    ..._outcome(context, l10n, strings, node)
-                  else
-                    ..._question(context, strings, engine, session, node),
-                  const SizedBox(height: AppSpacing.lg),
-                  Row(
-                    children: <Widget>[
-                      if (session.canGoBack)
-                        Expanded(
-                          child: AppButton(
-                            label: l10n.troubleBack,
-                            kind: AppButtonKind.secondary,
-                            onPressed: () =>
-                                _session.value = engine.back(session),
+      builder:
+          (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
+            final TroubleshooterEngine engine = TroubleshooterEngine(catalog);
+            return ValueListenableBuilder<TroubleshootSession?>(
+              valueListenable: _session,
+              builder:
+                  (
+                    BuildContext context,
+                    TroubleshootSession? stored,
+                    Widget? _,
+                  ) {
+                    final TroubleshootSession session =
+                        stored ?? engine.start();
+                    final TroubleshootNode node = engine.current(session);
+                    return AppScaffold(
+                      navBar: AppNavBar(
+                        title: l10n.troubleTitle,
+                        onBack: () => Navigator.of(context).maybePop(),
+                        backLabel: l10n.actionBack,
+                      ),
+                      body: ListView(
+                        physics: const ClampingScrollPhysics(),
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        children: <Widget>[
+                          if (node.isOutcome)
+                            ..._outcome(context, l10n, strings, node)
+                          else
+                            ..._question(
+                              context,
+                              strings,
+                              engine,
+                              session,
+                              node,
+                            ),
+                          const SizedBox(height: AppSpacing.lg),
+                          Row(
+                            children: <Widget>[
+                              if (session.canGoBack)
+                                Expanded(
+                                  child: AppButton(
+                                    label: l10n.troubleBack,
+                                    kind: AppButtonKind.secondary,
+                                    onPressed: () =>
+                                        _session.value = engine.back(session),
+                                  ),
+                                ),
+                              if (session.canGoBack)
+                                const SizedBox(width: AppSpacing.sm),
+                              if (session.canGoBack)
+                                Expanded(
+                                  child: AppButton(
+                                    label: l10n.troubleRestart,
+                                    kind: AppButtonKind.secondary,
+                                    onPressed: () => _session.value = engine
+                                        .restart(session),
+                                  ),
+                                ),
+                            ],
                           ),
-                        ),
-                      if (session.canGoBack) const SizedBox(width: AppSpacing.sm),
-                      if (session.canGoBack)
-                        Expanded(
-                          child: AppButton(
-                            label: l10n.troubleRestart,
-                            kind: AppButtonKind.secondary,
-                            onPressed: () =>
-                                _session.value = engine.restart(session),
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
+                        ],
+                      ),
+                    );
+                  },
             );
           },
-        );
-      },
     );
   }
 

@@ -41,7 +41,9 @@ class HelpStepCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             text,
-            style: context.type.body.copyWith(color: context.colors.textPrimary),
+            style: context.type.body.copyWith(
+              color: context.colors.textPrimary,
+            ),
           ),
           for (final Widget child in children) ...<Widget>[
             const SizedBox(height: AppSpacing.md),

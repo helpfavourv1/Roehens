@@ -43,80 +43,84 @@ class HelpHubScreen extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final app = AppScope.of(context);
     return HelpContent(
-      builder: (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
-        return ListenableBuilder(
-          listenable: app.flags,
-          builder: (BuildContext context, Widget? _) {
-            final bool full = app.flags.isEnabled('helpContent');
-            return AppScaffold(
-              navBar: AppNavBar(
-                title: l10n.helpTitle,
-                onBack: () => Navigator.of(context).maybePop(),
-                backLabel: l10n.actionBack,
-              ),
-              body: ListView(
-                physics: const ClampingScrollPhysics(),
-                padding: const EdgeInsets.all(AppSpacing.md),
-                children: <Widget>[
-                  if (!full) ...<Widget>[
-                    AppBanner(message: l10n.helpDisabled),
-                    const SizedBox(height: AppSpacing.md),
-                  ],
-                  HelpChoiceCard(
-                    icon: AppIconName.wifi,
-                    title: l10n.helpHubSameWifiTitle,
-                    body: l10n.helpHubSameWifiBody,
-                    onTap: () => unawaited(
-                      openHelpArticle(context, 'lan_setup', actions),
-                    ),
+      builder:
+          (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
+            return ListenableBuilder(
+              listenable: app.flags,
+              builder: (BuildContext context, Widget? _) {
+                final bool full = app.flags.isEnabled('helpContent');
+                return AppScaffold(
+                  navBar: AppNavBar(
+                    title: l10n.helpTitle,
+                    onBack: () => Navigator.of(context).maybePop(),
+                    backLabel: l10n.actionBack,
                   ),
-                  if (full) ...<Widget>[
-                    const SizedBox(height: AppSpacing.sm),
-                    HelpChoiceCard(
-                      icon: AppIconName.globeNetwork,
-                      title: l10n.helpHubAwayTitle,
-                      body: l10n.helpHubAwayBody,
-                      onTap: () =>
-                          unawaited(openRemoteAccessWizard(context, actions)),
-                    ),
-                  ],
-                  const SizedBox(height: AppSpacing.sm),
-                  HelpChoiceCard(
-                    icon: AppIconName.route,
-                    title: l10n.helpHubTroubleTitle,
-                    body: l10n.helpHubTroubleBody,
-                    onTap: () => unawaited(openTroubleshooter(context, actions)),
+                  body: ListView(
+                    physics: const ClampingScrollPhysics(),
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    children: <Widget>[
+                      if (!full) ...<Widget>[
+                        AppBanner(message: l10n.helpDisabled),
+                        const SizedBox(height: AppSpacing.md),
+                      ],
+                      HelpChoiceCard(
+                        icon: AppIconName.wifi,
+                        title: l10n.helpHubSameWifiTitle,
+                        body: l10n.helpHubSameWifiBody,
+                        onTap: () => unawaited(
+                          openHelpArticle(context, 'lan_setup', actions),
+                        ),
+                      ),
+                      if (full) ...<Widget>[
+                        const SizedBox(height: AppSpacing.sm),
+                        HelpChoiceCard(
+                          icon: AppIconName.globeNetwork,
+                          title: l10n.helpHubAwayTitle,
+                          body: l10n.helpHubAwayBody,
+                          onTap: () => unawaited(
+                            openRemoteAccessWizard(context, actions),
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: AppSpacing.sm),
+                      HelpChoiceCard(
+                        icon: AppIconName.route,
+                        title: l10n.helpHubTroubleTitle,
+                        body: l10n.helpHubTroubleBody,
+                        onTap: () =>
+                            unawaited(openTroubleshooter(context, actions)),
+                      ),
+                      if (full) ...<Widget>[
+                        const SizedBox(height: AppSpacing.sm),
+                        HelpChoiceCard(
+                          icon: AppIconName.network,
+                          title: l10n.helpHubDiagnosticsTitle,
+                          body: l10n.helpHubDiagnosticsBody,
+                          onTap: () => unawaited(
+                            openNetworkDiagnostics(context, actions),
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: AppSpacing.lg),
+                      _articles(
+                        context,
+                        l10n.helpArticlesSameWifi,
+                        catalog.inGroup(HelpGroup.sameWifi),
+                        strings,
+                      ),
+                      const SizedBox(height: AppSpacing.lg),
+                      _articles(
+                        context,
+                        l10n.helpArticlesAway,
+                        catalog.inGroup(HelpGroup.away),
+                        strings,
+                      ),
+                    ],
                   ),
-                  if (full) ...<Widget>[
-                    const SizedBox(height: AppSpacing.sm),
-                    HelpChoiceCard(
-                      icon: AppIconName.network,
-                      title: l10n.helpHubDiagnosticsTitle,
-                      body: l10n.helpHubDiagnosticsBody,
-                      onTap: () =>
-                          unawaited(openNetworkDiagnostics(context, actions)),
-                    ),
-                  ],
-                  const SizedBox(height: AppSpacing.lg),
-                  _articles(
-                    context,
-                    l10n.helpArticlesSameWifi,
-                    catalog.inGroup(HelpGroup.sameWifi),
-                    strings,
-                  ),
-                  const SizedBox(height: AppSpacing.lg),
-                  _articles(
-                    context,
-                    l10n.helpArticlesAway,
-                    catalog.inGroup(HelpGroup.away),
-                    strings,
-                  ),
-                ],
-              ),
+                );
+              },
             );
           },
-        );
-      },
     );
   }
 

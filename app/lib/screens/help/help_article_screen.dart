@@ -49,24 +49,25 @@ class HelpArticleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     return HelpContent(
-      builder: (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
-        final HelpArticle? article = catalog.article(articleId);
-        return AppScaffold(
-          navBar: AppNavBar(
-            title: article == null
-                ? l10n.helpTitle
-                : strings.text(HelpCatalog.titleKey(article.id)),
-            onBack: () => Navigator.of(context).maybePop(),
-            backLabel: l10n.actionBack,
-          ),
-          body: article == null
-              ? AppEmptyState(
-                  icon: AppIconName.book,
-                  title: l10n.helpUnavailable,
-                )
-              : _steps(context, l10n, strings, article),
-        );
-      },
+      builder:
+          (BuildContext context, HelpCatalog catalog, HelpStrings strings) {
+            final HelpArticle? article = catalog.article(articleId);
+            return AppScaffold(
+              navBar: AppNavBar(
+                title: article == null
+                    ? l10n.helpTitle
+                    : strings.text(HelpCatalog.titleKey(article.id)),
+                onBack: () => Navigator.of(context).maybePop(),
+                backLabel: l10n.actionBack,
+              ),
+              body: article == null
+                  ? AppEmptyState(
+                      icon: AppIconName.book,
+                      title: l10n.helpUnavailable,
+                    )
+                  : _steps(context, l10n, strings, article),
+            );
+          },
     );
   }
 
@@ -91,8 +92,16 @@ class HelpArticleScreen extends StatelessWidget {
           HelpStepCard(
             number: i + 1,
             numberLabel: l10n.helpStepNumber(i + 1),
-            text: strings.text(HelpCatalog.stepKey(article.id, article.steps[i].id)),
-            children: stepParts(context, l10n, strings, article, article.steps[i]),
+            text: strings.text(
+              HelpCatalog.stepKey(article.id, article.steps[i].id),
+            ),
+            children: stepParts(
+              context,
+              l10n,
+              strings,
+              article,
+              article.steps[i],
+            ),
           ),
           const SizedBox(height: AppSpacing.md),
         ],
@@ -114,7 +123,9 @@ class HelpArticleScreen extends StatelessWidget {
       for (final HelpCopyValue copy in step.copyValues)
         HelpCodeBlock(
           value: copy.value,
-          caption: strings.text(HelpCatalog.copyKey(article.id, step.id, copy.id)),
+          caption: strings.text(
+            HelpCatalog.copyKey(article.id, step.id, copy.id),
+          ),
           copyLabel: l10n.helpCopy,
           onCopied: () => AppToast.show(context, message: l10n.helpCopied),
         ),
